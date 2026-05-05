@@ -1,0 +1,248 @@
+root@401dc61de13e:/opt/mars/Detector# cd /opt/mars/Extractor
+python3 main.py --project Lakes --url https://github.com/Microservice-API-Patterns/LakesideMutual/tree/bdc6d30135149563c057dd30f21b7df68608c500
+Thank you, excluding folders from analysis...
+Folders excluded, building meta-model...
+Excluded folders :
+.github
+.mvn
+activemq-data
+kubernetes
+customer-core
+eureka-server
+Extracting system wide dependencies
+Dependencies extracted, writing to meta-model
+Writing done
+Extracting root configuration files
+
+Writing done
+Extracting http for ../../projects/Lakes/docker-compose.yml
+Extracting http for ../../projects/Lakes/docker-compose-eureka.yml
+Extracting http for ../../projects/Lakes/docker-compose.prod.yml
+Writing done
+Extracting microservices
+../../projects/Lakes
+../../projects/Lakes/policy-management-frontend/
+../../projects/Lakes/kubernetes/
+../../projects/Lakes/customer-self-service-backend/
+../../projects/Lakes/customer-management-frontend/
+../../projects/Lakes/activemq-data/
+../../projects/Lakes/customer-self-service-frontend/
+../../projects/Lakes/eureka-server/
+../../projects/Lakes/risk-management-server/
+../../projects/Lakes/risk-management-client/
+../../projects/Lakes/customer-management-backend/
+../../projects/Lakes/policy-management-backend/
+../../projects/Lakes/spring-boot-admin/
+../../projects/Lakes/customer-core/
+microservices extracted, reading information
+Writing microservices info into meta-model
+Writing done
+root@401dc61de13e:/opt/mars/Extractor# cd /opt/mars/Detector
+python3 main.py --project_name Lakes --metamodel /opt/projects/Lakes/metamodel.json | tee /opt/projects/Lakes/output.txt
+
+
+====================================================================
+Extracting antipatterns from metamodel complete. Printing results...
+====================================================================
+
+
+System information :
+=====================
+Number of microservices : 9
+Total lines of code : 87975
+Total number of files : 382
+Avg LOCs per service : 9775
+Avg Files per service : 42
+
+
+Detection summary :
+===========================
+
+
+Wrong cuts :
+-------------
+Wrong Cut was detected
+
+policy-management-frontend
+customer-management-frontend
+customer-self-service-frontend
+
+
+Circular Dependencies :
+------------------------
+Circular Depenencies was not detected
+
+
+
+Mega services :
+----------------
+Number of mega services found : 0
+
+
+
+Nano services :
+----------------
+Number of nano services found : 0
+
+
+
+Shared Dependencies :
+----------------------
+Number of shared libs found : 0
+
+
+
+Hardcoded Endpoints :
+----------------------
+Only count the ones which has not a discoveryTool : 1
+
+- system
+        - Has service discovery tool : True
+        - Found URLs in microservice :
+                - http://spring-boot-admin:9000
+                - http://customer-core:8110
+                - http://spring-boot-admin:9000
+                - http://customer-core:8110
+                - http://spring-boot-admin:9000
+                - http://customer-core:8110
+                - http://spring-boot-admin:9000
+                - http://eureka-server:8761/eureka
+                - http://eureka-server:8761/eureka
+                - http://customer-management-backend:8100
+                - http://eureka-server:8761/eureka
+                - http://customer-self-service-backend:8080
+                - http://policy-management-backend:8090
+                - http://customer-management-backend:8100
+                - http://eureka-server:8761/eureka
+                - http://policy-management-backend:8090
+                - http://eureka-server:8761/eureka
+                - http://spring-boot-admin:9000
+                - http://customer-core:8110
+                - http://spring-boot-admin:9000
+                - http://customer-core:8110
+                - http://spring-boot-admin:9000
+                - http://customer-core:8110
+                - http://spring-boot-admin:9000
+
+
+Manual configuration :
+-----------------------
+The antipattern is detected if all configuration listed have not a configuration tool
+
+- policy-management-frontend
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - nginx.vh.default.conf
+- customer-self-service-backend
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.properties
+                - application-default.properties
+                - application-eureka.properties
+- customer-management-frontend
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - nginx.vh.default.conf
+- customer-self-service-frontend
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - nginx.vh.default.conf
+- customer-management-backend
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.properties
+                - application-default.properties
+                - application-eureka.properties
+- policy-management-backend
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.properties
+                - application-default.properties
+                - application-eureka.properties
+                - quartz.properties
+- spring-boot-admin
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.properties
+                - application-default.properties
+                - application-eureka.properties
+- system
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - docker-compose.yml
+                - docker-compose-eureka.yml
+                - docker-compose.prod.yml
+
+
+No CI/CD :
+-----------
+Antipattern detected
+
+
+No API Gateway :
+-----------------
+The antipattern was detected
+
+- policy-management-frontend has no API Gateway tools
+- customer-self-service-backend has no API Gateway tools
+- customer-management-frontend has no API Gateway tools
+- customer-self-service-frontend has no API Gateway tools
+- risk-management-server has no API Gateway tools
+- risk-management-client has no API Gateway tools
+- customer-management-backend has no API Gateway tools
+- policy-management-backend has no API Gateway tools
+- spring-boot-admin has no API Gateway tools
+- system has no API Gateway tools
+
+
+Timeouts :
+-----------------
+The antipattern was not detected
+
+
+
+Multiple instances per host :
+--------------------------
+**The application has not the antipattern multiple instance per host. However, the following microservices do not have any dockerfile.***
+- docker_directory has no DockerFile
+- risk-management-client has no DockerFile
+- system has no DockerFile
+
+
+Shared Databases :
+-----------------
+Number of shared databases found : 0
+
+
+
+No API Versioning :
+-----------------
+Antipattern was not detected. However those services have not a API versionning
+- policy-management-frontend has no API versioning
+- customer-self-service-backend has no API versioning
+- customer-management-frontend has no API versioning
+- customer-self-service-frontend has no API versioning
+- customer-management-backend has no API versioning
+- policy-management-backend has no API versioning
+- spring-boot-admin has no API versioning
+
+
+No HealthCheck :
+-----------------
+If you only see system on this list or nothing below it's ok
+ In pratica se c'è qualche microservizio l'AP è TRUE
+- policy-management-frontend has no healthcheck library
+- system has no healthcheck library
+
+
+Local logging :
+----------------
+The antipattern was detected
+
+
+
+Insufficient monitoring :
+--------------------------
+The antipattern was detected
+
+root@401dc61de13e:/opt/mars/Detector#

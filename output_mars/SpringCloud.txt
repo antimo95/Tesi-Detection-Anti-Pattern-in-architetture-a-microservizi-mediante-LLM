@@ -1,0 +1,231 @@
+root@401dc61de13e:/opt/mars/Detector# python3 main.py --project_name sping-cloud-example --metamodel /opt/projects/sping-cloud-example/metamodel.json | tee /opt/projects/sping-cloud-example/output.txt^C
+root@401dc61de13e:/opt/mars/Detector# cd /opt/mars/Extractor
+python3 main.py --project sping-cloud-example --url https://github.com/zpng/spring-cloud-microservice-examples
+Thank you, excluding folders from analysis...
+Folders excluded, building meta-model...
+Excluded folders :
+.github
+.mvn
+doc
+docs
+scripts
+examples
+docker
+cloud-eureka-server
+cloud-config-server
+cloud-zipkin
+cloud-hystrix-dashboard
+cloud-hystrix-turbine
+cloud-api-gateway
+cloud-simple-service
+cloud-simple-serviceB
+cloud-simple-ui
+Extracting system wide dependencies
+Dependencies extracted, writing to meta-model
+Writing done
+Extracting root configuration files
+
+Writing done
+Writing done
+Extracting microservices
+../../projects/sping-cloud-example
+../../projects/sping-cloud-example/docker/
+../../projects/sping-cloud-example/cloud-thrift-server/
+../../projects/sping-cloud-example/cloud-api-gateway/
+../../projects/sping-cloud-example/cloud-uaa-service/
+../../projects/sping-cloud-example/cloud-config-server/
+../../projects/sping-cloud-example/cloud-eureka-server/
+../../projects/sping-cloud-example/cloud-finagle-thrift-api/
+../../projects/sping-cloud-example/cloud-simple-ui/
+../../projects/sping-cloud-example/cloud-finagle-thrift-client/
+../../projects/sping-cloud-example/cloud-thrift-client/
+../../projects/sping-cloud-example/cloud-finagle-thrift-server/
+../../projects/sping-cloud-example/cloud-finagle-commons-thrift/
+../../projects/sping-cloud-example/cloud-hystrix-dashboard/
+../../projects/sping-cloud-example/cloud-hystrix-turbine/
+../../projects/sping-cloud-example/cloud-zipkin/
+../../projects/sping-cloud-example/cloud-dummy-service/
+../../projects/sping-cloud-example/cloud-simple-service/
+../../projects/sping-cloud-example/cloud-thrift-interface/
+../../projects/sping-cloud-example/cloud-simple-serviceB/
+microservices extracted, reading information
+Writing microservices info into meta-model
+Writing done
+root@401dc61de13e:/opt/mars/Extractor# cd /opt/mars/Detector
+python3 main.py --project_name sping-cloud-example --metamodel /opt/projects/sping-cloud-example/metamodel.json | tee /opt/projects/sping-cloud-example/output.txt
+
+
+====================================================================
+Extracting antipatterns from metamodel complete. Printing results...
+====================================================================
+
+
+System information :
+=====================
+Number of microservices : 9
+Total lines of code : 4662
+Total number of files : 44
+Avg LOCs per service : 518
+Avg Files per service : 4
+
+
+Detection summary :
+===========================
+
+
+Wrong cuts :
+-------------
+Wrong Cut was not detected
+
+
+
+Circular Dependencies :
+------------------------
+Circular Depenencies was not detected
+
+
+
+Mega services :
+----------------
+Number of mega services found : 0
+
+
+
+Nano services :
+----------------
+Number of nano services found : 0
+
+
+
+Shared Dependencies :
+----------------------
+Number of shared libs found : 0
+
+
+
+Hardcoded Endpoints :
+----------------------
+Only count the ones which has not a discoveryTool : 4
+
+- cloud-thrift-server
+        - Has service discovery tool : False
+        - Found URLs in microservice :
+                - http://localhost:9966
+- cloud-finagle-thrift-client
+        - Has service discovery tool : False
+        - Found URLs in microservice :
+                - http://localhost:9966
+- cloud-thrift-client
+        - Has service discovery tool : False
+        - Found URLs in microservice :
+                - http://localhost:9966
+- cloud-finagle-thrift-server
+        - Has service discovery tool : False
+        - Found URLs in microservice :
+                - http://localhost:9966
+
+
+Manual configuration :
+-----------------------
+The antipattern is detected if all configuration listed have not a configuration tool
+
+- cloud-thrift-server
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.yaml
+- cloud-uaa-service
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.yml
+                - application.yml
+- cloud-finagle-thrift-client
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.yaml
+- cloud-thrift-client
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.yaml
+- cloud-finagle-thrift-server
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.yaml
+- cloud-dummy-service
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.yml
+                - application.yml
+
+
+No CI/CD :
+-----------
+Antipattern detected
+
+
+No API Gateway :
+-----------------
+The antipattern was detected
+
+- cloud-thrift-server has no API Gateway tools
+- cloud-uaa-service has no API Gateway tools
+- cloud-finagle-thrift-api has no API Gateway tools
+- cloud-finagle-thrift-client has no API Gateway tools
+- cloud-thrift-client has no API Gateway tools
+- cloud-finagle-thrift-server has no API Gateway tools
+- cloud-finagle-commons-thrift has no API Gateway tools
+- cloud-dummy-service has no API Gateway tools
+- cloud-thrift-interface has no API Gateway tools
+- system has no API Gateway tools
+
+
+Timeouts :
+-----------------
+The antipattern was not detected
+
+
+
+Multiple instances per host :
+--------------------------
+The antipattern was detected
+
+
+
+Shared Databases :
+-----------------
+Number of shared databases found : 0
+
+
+
+No API Versioning :
+-----------------
+Antipattern was not detected. However those services have not a API versionning
+- cloud-thrift-server has no API versioning
+- cloud-uaa-service has no API versioning
+- cloud-finagle-thrift-client has no API versioning
+- cloud-thrift-client has no API versioning
+- cloud-finagle-thrift-server has no API versioning
+- cloud-dummy-service has no API versioning
+
+
+No HealthCheck :
+-----------------
+If you only see system on this list or nothing below it's ok
+ In pratica se c'è qualche microservizio l'AP è TRUE
+- system has no healthcheck library
+
+
+Local logging :
+----------------
+A logging tool was detected but it's possible some has not
+
+- system has no logging tools
+
+
+Insufficient monitoring :
+--------------------------
+The application has a monitoring service but some don't have
+
+- system has no monitoring tools
+
+
+root@401dc61de13e:/opt/mars/Detector#

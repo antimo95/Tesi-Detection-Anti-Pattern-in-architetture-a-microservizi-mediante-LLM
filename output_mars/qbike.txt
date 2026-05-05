@@ -1,0 +1,207 @@
+root@401dc61de13e:/opt/mars/Detector# cd /opt/mars/Extractor
+python3 main.py --project qbike --url https://github.com/JoeCao/qbike
+Thank you, excluding folders from analysis...
+Folders excluded, building meta-model...
+Excluded folders :
+.github
+.mvn
+doc
+docs
+scripts
+examples
+zipkin-server
+microservice-discovery-eureka
+mysql
+testclient
+zipkin-server
+Extracting system wide dependencies
+Dependencies extracted, writing to meta-model
+Writing done
+Extracting root configuration files
+
+Writing done
+Extracting http for ../../projects/qbike/docker-compose.yml
+Writing done
+Extracting microservices
+../../projects/qbike
+../../projects/qbike/testclient/
+../../projects/qbike/uc/
+../../projects/qbike/api-gateway/
+../../projects/qbike/mysql/
+../../projects/qbike/intention/
+../../projects/qbike/position/
+../../projects/qbike/microservice-discovery-eureka/
+../../projects/qbike/zipkin-server/
+../../projects/qbike/order/
+microservices extracted, reading information
+Writing microservices info into meta-model
+Writing done
+root@401dc61de13e:/opt/mars/Extractor# cd /opt/mars/Detector
+python3 main.py --project_name qbike --metamodel /opt/projects/qbike/metamodel.json | tee /opt/projects/qbike/output.txt
+
+
+====================================================================
+Extracting antipatterns from metamodel complete. Printing results...
+====================================================================
+
+
+System information :
+=====================
+Number of microservices : 5
+Total lines of code : 3064
+Total number of files : 90
+Avg LOCs per service : 612
+Avg Files per service : 18
+
+
+Detection summary :
+===========================
+
+
+Wrong cuts :
+-------------
+Wrong Cut was not detected
+
+
+
+Circular Dependencies :
+------------------------
+Circular Depenencies was not detected
+
+
+
+Mega services :
+----------------
+Number of mega services found : 0
+
+
+
+Nano services :
+----------------
+Number of nano services found : 0
+
+
+
+Shared Dependencies :
+----------------------
+Number of shared libs found : 0
+
+
+
+Hardcoded Endpoints :
+----------------------
+Only count the ones which has not a discoveryTool : 0
+
+
+
+Manual configuration :
+-----------------------
+The antipattern is detected if all configuration listed have not a configuration tool
+
+- uc
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.yml
+                - application-docker.yml
+- api-gateway
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.yml
+                - application-docker.yml
+- intention
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.yml
+                - application-docker.yml
+- position
+        - Has configuration tool : True
+        - Found config files in microservice :
+                - application.yml
+                - application-docker.yml
+- order
+        - Has configuration tool : True
+        - Found config files in microservice :
+                - messages.properties
+                - application.yml
+                - application-docker.yml
+- system
+        - Has configuration tool : True
+        - Found config files in microservice :
+                - docker-compose.yml
+
+
+No CI/CD :
+-----------
+Antipattern detected
+
+
+No API Gateway :
+-----------------
+Some API Gateway were detected however, those services do not :
+
+- uc has no API Gateway tools
+- system has no API Gateway tools
+
+
+Timeouts :
+-----------------
+The antipattern was not detected
+
+
+
+Multiple instances per host :
+--------------------------
+**The application has not the antipattern multiple instance per host. However, the following microservices do not have any dockerfile.***
+- docker_directory has no DockerFile
+- uc has no DockerFile
+- api-gateway has no DockerFile
+- intention has no DockerFile
+- position has no DockerFile
+- order has no DockerFile
+- system has no DockerFile
+
+
+Shared Databases :
+-----------------
+Number of shared databases found : 2 (è 1)
+
+127.0.0.1:3306/qbike?useUnicode=true&characterEncoding=utf8:
+uc
+intention
+position
+order
+
+${DB_HOST}:3306/${DB_SCHEMA}?useUnicode=true&characterEncoding=utf8:
+uc
+intention
+position
+order
+
+
+
+No API Versioning :
+-----------------
+Antipattern detected
+
+
+No HealthCheck :
+-----------------
+If you only see system on this list or nothing below it's ok
+ In pratica se c'è qualche microservizio l'AP è TRUE
+- uc has no healthcheck library
+- api-gateway has no healthcheck library
+- system has no healthcheck library
+
+
+Local logging :
+----------------
+A logging tool was detected but it's possible some has not
+
+- system has no logging tools
+
+
+Insufficient monitoring :
+--------------------------
+The application has a monitoring service but some don't have
+
+- system has no monitoring tools

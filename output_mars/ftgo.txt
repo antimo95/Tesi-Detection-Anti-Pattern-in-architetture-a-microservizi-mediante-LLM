@@ -1,0 +1,316 @@
+root@401dc61de13e:/opt/mars/Detector# cd /opt/mars/Extractor
+python3 main.py --project ftgo --url https://github.com/microservices-patterns/ftgo-application/tree/c028190295d64b5fad8993e2f3a6dd88270e9bf2
+Thank you, excluding folders from analysis...
+Folders excluded, building meta-model...
+Excluded folders :
+.circleci
+buildSrc
+common-swagger
+deployment
+dynamodblocal
+dynamodblocal-init
+ftgo-accounting-service-api
+ftgo-accounting-service-api-spec
+ftgo-accounting-service-contracts
+ftgo-common
+ftgo-common-jpa
+ftgo-consumer-service-api
+ftgo-consumer-service-api-spec
+ftgo-consumer-service-contracts
+ftgo-delivery-service-api
+ftgo-end-to-end-tests
+ftgo-kitchen-service-api
+ftgo-kitchen-service-contracts
+ftgo-order-service-api
+ftgo-order-service-contracts
+ftgo-restaurant-service-api
+ftgo-restaurant-service-api-spec
+ftgo-api-gateway-graphql
+ftgo-restaurant-service-contracts
+ftgo-test-util
+ftgo-test-util-json-schema
+gradle
+mysql
+Extracting system wide dependencies
+Dependencies extracted, writing to meta-model
+Writing done
+Extracting root configuration files
+
+Writing done
+Extracting http for ../../projects/ftgo/gradle.properties
+Extracting http for ../../projects/ftgo/docker-compose-api-gateway-graphql.yml
+Extracting http for ../../projects/ftgo/docker-compose.yml
+Extracting http for ../../projects/ftgo/skaffold.yaml
+Writing done
+Extracting microservices
+../../projects/ftgo
+../../projects/ftgo/ftgo-order-history-service/
+../../projects/ftgo/ftgo-restaurant-service-aws-lambda/
+../../projects/ftgo/ftgo-kitchen-service-contracts/
+../../projects/ftgo/ftgo-consumer-service-api-spec/
+../../projects/ftgo/ftgo-order-service/
+../../projects/ftgo/ftgo-consumer-service-contracts/
+../../projects/ftgo/ftgo-api-gateway/
+../../projects/ftgo/ftgo-consumer-service-api/
+../../projects/ftgo/ftgo-delivery-service-api/
+../../projects/ftgo/common-swagger/
+../../projects/ftgo/ftgo-accounting-service-api/
+../../projects/ftgo/ftgo-common/
+../../projects/ftgo/ftgo-end-to-end-tests/
+../../projects/ftgo/deployment/
+../../projects/ftgo/ftgo-restaurant-service-api-spec/
+../../projects/ftgo/buildSrc/
+../../projects/ftgo/ftgo-order-service-api/
+../../projects/ftgo/dynamodblocal/
+../../projects/ftgo/dynamodblocal-init/
+../../projects/ftgo/ftgo-kitchen-service-api/
+../../projects/ftgo/mysql/
+../../projects/ftgo/ftgo-common-jpa/
+../../projects/ftgo/ftgo-delivery-service/
+../../projects/ftgo/ftgo-test-util/
+../../projects/ftgo/ftgo-kitchen-service/
+../../projects/ftgo/ftgo-accounting-service/
+../../projects/ftgo/gradle/
+../../projects/ftgo/ftgo-accounting-service-contracts/
+../../projects/ftgo/ftgo-accounting-service-api-spec/
+../../projects/ftgo/ftgo-restaurant-service-contracts/
+../../projects/ftgo/ftgo-consumer-service/
+../../projects/ftgo/ftgo-restaurant-service/
+../../projects/ftgo/ftgo-test-util-json-schema/
+../../projects/ftgo/ftgo-restaurant-service-api/
+../../projects/ftgo/ftgo-order-service-contracts/
+../../projects/ftgo/ftgo-api-gateway-graphql/
+microservices extracted, reading information
+Writing microservices info into meta-model
+Writing done
+root@401dc61de13e:/opt/mars/Extractor# cd /opt/mars/Detector
+python3 main.py --project_name ftgo --metamodel /opt/projects/ftgo/metamodel.json | tee /opt/projects/ftgo/output.txt
+
+
+====================================================================
+Extracting antipatterns from metamodel complete. Printing results...
+====================================================================
+
+
+System information :
+=====================
+Number of microservices : 9
+Total lines of code : 10181
+Total number of files : 320
+Avg LOCs per service : 1131
+Avg Files per service : 35
+
+
+Detection summary :
+===========================
+
+
+Wrong cuts :
+-------------
+Wrong Cut was not detected
+
+
+
+Circular Dependencies :
+------------------------
+Circular Depenencies was not detected
+
+
+
+Mega services :
+----------------
+Number of mega services found : 0
+
+
+
+Nano services :
+----------------
+Number of nano services found : 0
+
+
+
+Shared Dependencies :
+----------------------
+Number of shared libs found : 0
+
+
+
+Hardcoded Endpoints :
+----------------------
+Only count the ones which has not a discoveryTool : 3
+
+- ftgo-order-history-service
+        - Has service discovery tool : False
+        - Found URLs in microservice :
+                - http://ftgo-dynamodb-local:8000
+- ftgo-api-gateway
+        - Has service discovery tool : False
+        - Found URLs in microservice :
+                - http://ftgo-order-service:8080
+                - http://ftgo-order-history-service:8080
+                - http://ftgo-consumer-service:8080
+- system
+        - Has service discovery tool : False
+        - Found URLs in microservice :
+                - http://ftgo-order-history-service:8080
+                - http://ftgo-consumer-service:8080
+                - http://ftgo-restaurant-service:8080
+                - http://zipkin:9411/
+                - http://zipkin:9411/
+                - http://dynamodblocal:8000
+                - http://ftgo-order-service:8080
+                - http://ftgo-order-history-service:8080
+                - http://ftgo-consumer-service:8080
+                - http://zipkin:9411/
+                - http://dynamodblocal:8000
+
+
+Manual configuration :
+-----------------------
+The antipattern is detected if all configuration listed have not a configuration tool
+
+- ftgo-order-history-service
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.properties
+                - ftgo-order-history-service.yml
+- ftgo-restaurant-service-aws-lambda
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.properties
+                - serverless.yml
+- ftgo-order-service
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.properties
+                - ftgo-order-service.yml
+                - prometheus.yml
+                - rbac.yml
+- ftgo-api-gateway
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.properties
+                - ftgo-api-gateway.yml
+                - ftgo-api-gateway-NodePort.yml
+- ftgo-delivery-service
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.properties
+- ftgo-kitchen-service
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.properties
+                - ftgo-kitchen-service.yml
+- ftgo-accounting-service
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.properties
+                - ftgo-accounting-service.yml
+- ftgo-consumer-service
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.properties
+                - ftgo-consumer-service.yml
+- ftgo-restaurant-service
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.properties
+                - ftgo-restaurant-service.yml
+- system
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - gradle.properties
+                - docker-compose-api-gateway-graphql.yml
+                - docker-compose.yml
+                - skaffold.yaml
+
+
+No CI/CD :
+-----------
+CI/CD information were detected
+*** System has CI/CD information, however, the following microservices do not.***
+- ftgo-order-history-service has no CI/CD information
+- ftgo-restaurant-service-aws-lambda has no CI/CD information
+- ftgo-order-service has no CI/CD information
+- ftgo-api-gateway has no CI/CD information
+- ftgo-delivery-service has no CI/CD information
+- ftgo-kitchen-service has no CI/CD information
+- ftgo-accounting-service has no CI/CD information
+- ftgo-consumer-service has no CI/CD information
+- ftgo-restaurant-service has no CI/CD information
+
+
+No API Gateway :
+-----------------
+Some API Gateway were detected however, those services do not :
+
+- ftgo-order-history-service has no API Gateway tools
+- ftgo-restaurant-service-aws-lambda has no API Gateway tools
+- ftgo-order-service has no API Gateway tools
+- system has no API Gateway tools
+
+
+Timeouts :
+-----------------
+Timeout antipattern was detected
+
+- ftgo-accounting-service has possible timeout antipattern:
+        - Has Circuit Breaker Tool : False
+        - Has Timeout methods : False
+        - Has Timeout imports : True
+        - Has Fallback methods : False
+
+
+Multiple instances per host :
+--------------------------
+**The application has not the antipattern multiple instance per host. However, the following microservices do not have any dockerfile.***
+- docker_directory has no DockerFile
+- ftgo-restaurant-service-aws-lambda has no DockerFile
+- system has no DockerFile
+
+
+Shared Databases :
+-----------------
+Number of shared databases found : 1
+
+ftgo-mysql/eventuate:
+ftgo-order-history-service
+ftgo-order-service
+ftgo-kitchen-service
+ftgo-accounting-service
+ftgo-restaurant-service
+
+
+
+No API Versioning :
+-----------------
+Antipattern detected
+
+
+No HealthCheck :
+-----------------
+If you only see system on this list or nothing below it's ok
+ In pratica se c'è qualche microservizio l'AP è TRUE
+- system has no healthcheck library
+
+
+Local logging :
+----------------
+A logging tool was detected but it's possible some has not
+
+- ftgo-order-history-service has no logging tools
+- ftgo-restaurant-service-aws-lambda has no logging tools
+- ftgo-order-service has no logging tools
+- system has no logging tools
+
+
+Insufficient monitoring :
+--------------------------
+The application has a monitoring service but some don't have
+
+- system has no monitoring tools
+- ftgo-order-history-service has no monitoring tools
+- ftgo-restaurant-service-aws-lambda has no monitoring tools
+
+
+root@401dc61de13e:/opt/mars/Detector#

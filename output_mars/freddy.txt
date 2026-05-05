@@ -1,0 +1,220 @@
+root@401dc61de13e:/opt/mars/Detector# cd /opt/mars/Extractor
+python3 main.py --project freddy --url https://github.com/william-tran/freddys-bbq
+Thank you, excluding folders from analysis...
+Folders excluded, building meta-model...
+Excluded folders :
+.github
+.mvn
+doc
+docs
+scripts
+examples
+readme.md
+deploy
+deployment
+buildSrc
+uaa
+microsec-test
+microsec-eureka-server
+microsec-hystrix-dashboard
+Extracting system wide dependencies
+Dependencies extracted, writing to meta-model
+Writing done
+Extracting root configuration files
+
+Writing done
+Extracting http for ../../projects/freddy/manifest.yml
+Writing done
+Extracting microservices
+../../projects/freddy
+../../projects/freddy/microsec-menu-service/
+../../projects/freddy/uaa/
+../../projects/freddy/microsec-admin-portal/
+../../projects/freddy/microsec-common/
+../../projects/freddy/microsec-order-service/
+../../projects/freddy/microsec-hystrix-dashboard/
+../../projects/freddy/microsec-eureka-server/
+../../projects/freddy/docs/
+../../projects/freddy/microsec-custom-registry/
+../../projects/freddy/microsec-customer-portal/
+../../projects/freddy/microsec-test/
+microservices extracted, reading information
+Writing microservices info into meta-model
+Writing done
+root@401dc61de13e:/opt/mars/Extractor# cd /opt/mars/Detector
+python3 main.py --project_name freddy --metamodel /opt/projects/freddy/metamodel.json | tee /opt/projects/freddy/output.txt
+
+
+====================================================================
+Extracting antipatterns from metamodel complete. Printing results...
+====================================================================
+
+
+System information :
+=====================
+Number of microservices : 6
+Total lines of code : 18673
+Total number of files : 68
+Avg LOCs per service : 3112
+Avg Files per service : 11
+
+
+Detection summary :
+===========================
+
+
+Wrong cuts :
+-------------
+Wrong Cut was not detected
+
+
+
+Circular Dependencies :
+------------------------
+Circular Depenencies was not detected
+
+
+
+Mega services :
+----------------
+Number of mega services found : 1
+
+- microsec-custom-registry: 16858 Locs, 28 Files.
+
+
+Nano services :
+----------------
+Number of nano services found : 0
+
+
+
+Shared Dependencies :
+----------------------
+Number of shared libs found : 0
+
+
+
+Hardcoded Endpoints :
+----------------------
+Only count the ones which has not a discoveryTool : 3
+
+- microsec-common
+        - Has service discovery tool : False
+        - Found URLs in microservice :
+                - http://localhost:8080/uaa
+- microsec-custom-registry
+        - Has service discovery tool : False
+        - Found URLs in microservice :
+                - http://localhost:8081/oauth/token
+- microsec-customer-portal
+        - Has service discovery tool : False
+        - Found URLs in microservice :
+                - http://localhost:8080/uaa/oauth/token
+                - http://localhost:8080/uaa/oauth/authorize
+                - http://localhost:8080/uaa/token_key
+
+
+Manual configuration :
+-----------------------
+The antipattern is detected if all configuration listed have not a configuration tool
+
+- microsec-menu-service
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.yml
+- microsec-admin-portal
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.yml
+- microsec-common
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.yml
+- microsec-order-service
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.yml
+- microsec-custom-registry
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.yml
+- microsec-customer-portal
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.yml
+- system
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - manifest.yml
+
+
+No CI/CD :
+-----------
+Antipattern detected
+
+
+No API Gateway :
+-----------------
+The antipattern was detected
+
+- microsec-menu-service has no API Gateway tools
+- microsec-admin-portal has no API Gateway tools
+- microsec-common has no API Gateway tools
+- microsec-order-service has no API Gateway tools
+- microsec-custom-registry has no API Gateway tools
+- microsec-customer-portal has no API Gateway tools
+- system has no API Gateway tools
+
+
+Timeouts :
+-----------------
+The antipattern was not detected
+
+
+
+Multiple instances per host :
+--------------------------
+**The application has not the antipattern multiple instance per host. However, the following microservices do not have any dockerfile.***
+- docker_directory has no DockerFile
+- microsec-menu-service has no DockerFile
+- microsec-admin-portal has no DockerFile
+- microsec-common has no DockerFile
+- microsec-order-service has no DockerFile
+- microsec-custom-registry has no DockerFile
+- microsec-customer-portal has no DockerFile
+- system has no DockerFile
+
+
+Shared Databases :
+-----------------
+Number of shared databases found : 0
+
+
+
+No API Versioning :
+-----------------
+Antipattern detected
+
+
+No HealthCheck :
+-----------------
+If you only see system on this list or nothing below it's ok
+ In pratica se c'è qualche microservizio l'AP è TRUE
+- microsec-menu-service has no healthcheck library
+- microsec-admin-portal has no healthcheck library
+- microsec-common has no healthcheck library
+- microsec-order-service has no healthcheck library
+- microsec-custom-registry has no healthcheck library
+- microsec-customer-portal has no healthcheck library
+- system has no healthcheck library
+
+
+Local logging :
+----------------
+The antipattern was detected
+
+
+
+Insufficient monitoring :
+--------------------------
+The antipattern was detected

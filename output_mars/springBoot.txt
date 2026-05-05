@@ -1,0 +1,155 @@
+root@401dc61de13e:/opt/mars# cd /opt/mars/Extractor
+python3 main.py --project spring-boot --url https://github.com/oktadev/spring-boot-microservices-example.git
+Thank you, excluding folders from analysis...
+Folders excluded, building meta-model...
+Excluded folders :
+.github
+.mvn
+doc
+docs
+scripts
+examples
+eureka-service
+edge-service
+Extracting system wide dependencies
+Dependencies extracted, writing to meta-model
+Writing done
+Extracting root configuration files
+
+Writing done
+Writing done
+Extracting microservices
+../../projects/spring-boot
+../../projects/spring-boot/beer-catalog-service/
+../../projects/spring-boot/client/
+../../projects/spring-boot/edge-service/
+../../projects/spring-boot/eureka-service/
+microservices extracted, reading information
+Writing microservices info into meta-model
+Writing done
+root@401dc61de13e:/opt/mars/Extractor# cd /opt/mars/Detector
+python3 main.py --project_name spring-boot --metamodel /opt/projects/spring-boot/metamodel.json | tee /opt/projects/spring-boot/output.txt
+
+
+====================================================================
+Extracting antipatterns from metamodel complete. Printing results...
+====================================================================
+
+
+System information :
+=====================
+Number of microservices : 2
+Total lines of code : 14647
+Total number of files : 45
+Avg LOCs per service : 7323
+Avg Files per service : 22
+
+
+Detection summary :
+===========================
+
+
+Wrong cuts :
+-------------
+Wrong Cut was not detected
+
+
+
+Circular Dependencies :
+------------------------
+Circular Depenencies was not detected
+
+
+
+Mega services :
+----------------
+Number of mega services found : 1
+
+- client: 14235 Locs, 37 Files.
+
+
+Nano services :
+----------------
+Number of nano services found : 1
+
+- beer-catalog-service: 412 Locs, 8 Files.
+
+
+Shared Dependencies :
+----------------------
+Number of shared libs found : 0
+
+
+
+Hardcoded Endpoints :
+----------------------
+Only count the ones which has not a discoveryTool : 0
+
+
+
+Manual configuration :
+-----------------------
+The antipattern is detected if all configuration listed have not a configuration tool
+
+- beer-catalog-service
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.properties
+                - application-cloud.properties
+
+
+No CI/CD :
+-----------
+Antipattern detected
+
+
+No API Gateway :
+-----------------
+The antipattern was detected
+
+- beer-catalog-service has no API Gateway tools
+- client has no API Gateway tools
+- system has no API Gateway tools
+
+
+Timeouts :
+-----------------
+The antipattern was not detected
+
+
+
+Multiple instances per host :
+--------------------------
+**The application has not the antipattern multiple instance per host. However, the following microservices do not have any dockerfile.***
+- docker_directory has no DockerFile
+- system has no DockerFile
+
+
+Shared Databases :
+-----------------
+Number of shared databases found : 0
+
+
+
+No API Versioning :
+-----------------
+Antipattern detected
+
+
+No HealthCheck :
+-----------------
+If you only see system on this list or nothing below it's ok
+ In pratica se c'è qualche microservizio l'AP è TRUE
+
+
+Local logging :
+----------------
+The antipattern was detected
+
+
+
+Insufficient monitoring :
+--------------------------
+The antipattern was detected
+
+root@401dc61de13e:/opt/mars/Detector#

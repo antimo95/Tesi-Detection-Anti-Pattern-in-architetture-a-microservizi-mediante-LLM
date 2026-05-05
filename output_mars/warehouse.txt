@@ -1,0 +1,204 @@
+root@401dc61de13e:/opt/mars/Detector# cd /opt/mars/Extractor
+python3 main.py --project warehouse-microservice-master --url https://github.com/HieJulia/warehouse-microservice
+Thank you, excluding folders from analysis...
+Folders excluded, building meta-model...
+Excluded folders :
+.github
+.mvn
+doc
+docs
+scripts
+examples
+config-server
+eureka-server
+product-catalog-management-website
+spring-boot-admin
+turbine-server
+website
+zipkin-server
+Extracting system wide dependencies
+Dependencies extracted, writing to meta-model
+Writing done
+Extracting root configuration files
+
+Writing done
+Writing done
+Extracting microservices
+../../projects/warehouse-microservice-master
+../../projects/warehouse-microservice-master/authentication-server/
+../../projects/warehouse-microservice-master/product-catalog-service/
+../../projects/warehouse-microservice-master/eureka-server/
+../../projects/warehouse-microservice-master/order-service/
+../../projects/warehouse-microservice-master/account-service/
+../../projects/warehouse-microservice-master/turbine-server/
+../../projects/warehouse-microservice-master/purchase-order-service/
+../../projects/warehouse-microservice-master/api-gateway/
+../../projects/warehouse-microservice-master/config-server/
+../../projects/warehouse-microservice-master/product-catalog-management-website/
+../../projects/warehouse-microservice-master/spring-boot-admin/
+../../projects/warehouse-microservice-master/website/
+../../projects/warehouse-microservice-master/zipkin-server/
+microservices extracted, reading information
+Writing microservices info into meta-model
+Writing done
+root@401dc61de13e:/opt/mars/Extractor# cd /opt/mars/Detector
+python3 main.py --project_name warehouse-microservice-master --metamodel /opt/projects/warehouse-microservice-master/metamodel.json | tee /opt/projects/warehouse-microservice-master/output.txt
+
+
+====================================================================
+Extracting antipatterns from metamodel complete. Printing results...
+====================================================================
+
+
+System information :
+=====================
+Number of microservices : 6
+Total lines of code : 5851
+Total number of files : 208
+Avg LOCs per service : 975
+Avg Files per service : 34
+
+
+Detection summary :
+===========================
+
+
+Wrong cuts :
+-------------
+Wrong Cut was not detected
+
+
+
+Circular Dependencies :
+------------------------
+Circular Depenencies was not detected
+
+
+
+Mega services :
+----------------
+Number of mega services found : 0
+
+
+
+Nano services :
+----------------
+Number of nano services found : 1
+
+- purchase-order-service: 299 Locs, 3 Files.
+
+
+Shared Dependencies :
+----------------------
+Number of shared libs found : 0
+
+
+
+Hardcoded Endpoints :
+----------------------
+Only count the ones which has not a discoveryTool : 0
+
+
+
+Manual configuration :
+-----------------------
+The antipattern is detected if all configuration listed have not a configuration tool
+
+- authentication-server
+        - Has configuration tool : True
+        - Found config files in microservice :
+                - application.properties
+                - messages_fi.properties
+                - messages_en.properties
+                - messages.properties
+                - bootstrap.yml
+- product-catalog-service
+        - Has configuration tool : True
+        - Found config files in microservice :
+                - application.properties
+                - messages_en.properties
+                - messages.properties
+                - application.yml
+                - bootstrap.yml
+- order-service
+        - Has configuration tool : True
+        - Found config files in microservice :
+                - application.properties
+                - bootstrap.yml
+- account-service
+        - Has configuration tool : True
+        - Found config files in microservice :
+                - application.properties
+                - bootstrap.yml
+- api-gateway
+        - Has configuration tool : True
+        - Found config files in microservice :
+                - application.properties
+                - bootstrap.yml
+
+
+No CI/CD :
+-----------
+Antipattern detected
+
+
+No API Gateway :
+-----------------
+The antipattern was detected
+
+- authentication-server has no API Gateway tools
+- product-catalog-service has no API Gateway tools
+- order-service has no API Gateway tools
+- account-service has no API Gateway tools
+- purchase-order-service has no API Gateway tools
+- system has no API Gateway tools
+
+
+Timeouts :
+-----------------
+The antipattern was not detected
+
+
+
+Multiple instances per host :
+--------------------------
+**The application has not the antipattern multiple instance per host. However, the following microservices do not have any dockerfile.***
+- docker_directory has no DockerFile
+- system has no DockerFile
+
+
+Shared Databases :
+-----------------
+Number of shared databases found : 0
+
+
+
+No API Versioning :
+-----------------
+Antipattern detected
+
+
+No HealthCheck :
+-----------------
+If you only see system on this list or nothing below it's ok
+ In pratica se c'è qualche microservizio l'AP è TRUE
+- system has no healthcheck library
+
+
+Local logging :
+----------------
+A logging tool was detected but it's possible some has not
+
+- authentication-server has no logging tools
+- system has no logging tools
+
+
+Insufficient monitoring :
+--------------------------
+The application has a monitoring service but some don't have
+
+- system has no monitoring tools
+- authentication-server has no monitoring tools
+
+
+root@401dc61de13e:/opt/mars/Detector#

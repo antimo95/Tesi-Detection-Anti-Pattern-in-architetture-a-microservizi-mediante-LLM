@@ -1,0 +1,302 @@
+root@401dc61de13e:/opt/mars/Detector# cd /opt/mars/Extractor
+python3 main.py --project microcompany --url https://github.com/idugalic/micro-company/tree/8f4a2189403c13af66a964d31d7dc5228e489a0b
+Thank you, excluding folders from analysis...
+Folders excluded, building meta-model...
+Excluded folders :
+.github
+.mvn
+circuit-breaker
+docker
+documentation
+style
+Extracting system wide dependencies
+Dependencies extracted, writing to meta-model
+Writing done
+Extracting root configuration files
+
+Writing done
+Extracting http for ../../projects/microcompany/_config.yml
+Writing done
+Extracting microservices
+../../projects/microcompany
+../../projects/microcompany/common/
+../../projects/microcompany/docker/
+../../projects/microcompany/query-side-blog/
+../../projects/microcompany/configserver/
+../../projects/microcompany/circuit-breaker/
+../../projects/microcompany/authserver/
+../../projects/microcompany/style/
+../../projects/microcompany/monolithic/
+../../projects/microcompany/documentation/
+../../projects/microcompany/query-side-project-service/
+../../projects/microcompany/command-side-project-service/
+../../projects/microcompany/command-side-blog/
+../../projects/microcompany/api-gateway/
+../../projects/microcompany/common-blog/
+../../projects/microcompany/command-side-blog-service/
+../../projects/microcompany/query-side-blog-service/
+../../projects/microcompany/adminserver/
+../../projects/microcompany/common-project/
+../../projects/microcompany/query-side-project/
+../../projects/microcompany/registry/
+../../projects/microcompany/command-side-project/
+microservices extracted, reading information
+Writing microservices info into meta-model
+Writing done
+root@401dc61de13e:/opt/mars/Extractor# cd /opt/mars/Detector
+python3 main.py --project_name microcompany --metamodel /opt/projects/microcompany/metamodel.json | tee /opt/projects/microcompany/output.txt
+
+
+====================================================================
+Extracting antipatterns from metamodel complete. Printing results...
+====================================================================
+
+
+System information :
+=====================
+Number of microservices : 17
+Total lines of code : 90537
+Total number of files : 269
+Avg LOCs per service : 5325
+Avg Files per service : 15
+
+
+Detection summary :
+===========================
+
+
+Wrong cuts :
+-------------
+Wrong Cut was not detected
+
+
+
+Circular Dependencies :
+------------------------
+Circular Depenencies was not detected
+
+
+
+Mega services :
+----------------
+Number of mega services found : 1
+
+- monolithic: 79879 Locs, 92 Files.
+
+
+Nano services :
+----------------
+Number of nano services found : 1
+
+- common-project: 352 Locs, 6 Files.
+
+
+Shared Dependencies :
+----------------------
+Number of shared libs found : 0
+
+
+
+Hardcoded Endpoints :
+----------------------
+Only count the ones which has not a discoveryTool : 2
+
+- authserver
+        - Has service discovery tool : False
+        - Found URLs in microservice :
+                - http://localhost:8888
+                - http://configserver:8888
+- monolithic
+        - Has service discovery tool : False
+        - Found URLs in microservice :
+                - http://127.0.0.1:
+
+
+Manual configuration :
+-----------------------
+The antipattern is detected if all configuration listed have not a configuration tool
+
+- common
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.properties
+- configserver
+        - Has configuration tool : True
+        - Found config files in microservice :
+                - manifest.yml
+                - application.yml
+                - bootstrap.yml
+- authserver
+        - Has configuration tool : True
+        - Found config files in microservice :
+                - wro.properties
+                - manifest.yml
+                - application.yml
+                - bootstrap.yml
+- monolithic
+        - Has configuration tool : True
+        - Found config files in microservice :
+                - application.yml
+                - bootstrap.yml
+- query-side-project-service
+        - Has configuration tool : True
+        - Found config files in microservice :
+                - manifest.yml
+                - application.yml
+                - bootstrap.yml
+- command-side-project-service
+        - Has configuration tool : True
+        - Found config files in microservice :
+                - manifest.yml
+                - application.yml
+                - bootstrap.yml
+- api-gateway
+        - Has configuration tool : True
+        - Found config files in microservice :
+                - manifest.yml
+                - application.yml
+                - bootstrap.yml
+- common-blog
+        - Has configuration tool : True
+        - Found config files in microservice :
+                - application.properties
+- command-side-blog-service
+        - Has configuration tool : True
+        - Found config files in microservice :
+                - manifest.yml
+                - application.yml
+                - bootstrap.yml
+- query-side-blog-service
+        - Has configuration tool : True
+        - Found config files in microservice :
+                - manifest.yml
+                - application.yml
+                - bootstrap.yml
+- adminserver
+        - Has configuration tool : True
+        - Found config files in microservice :
+                - manifest.yml
+                - application.yml
+                - bootstrap.yml
+- registry
+        - Has configuration tool : True
+        - Found config files in microservice :
+                - manifest.yml
+                - application.yml
+                - bootstrap.yml
+- system
+        - Has configuration tool : True
+        - Found config files in microservice :
+                - _config.yml
+
+
+No CI/CD :
+-----------
+CI/CD information were detected
+*** System has CI/CD information, however, the following microservices do not.***
+- common has no CI/CD information
+- query-side-blog has no CI/CD information
+- configserver has no CI/CD information
+- authserver has no CI/CD information
+- monolithic has no CI/CD information
+- query-side-project-service has no CI/CD information
+- command-side-project-service has no CI/CD information
+- command-side-blog has no CI/CD information
+- api-gateway has no CI/CD information
+- common-blog has no CI/CD information
+- command-side-blog-service has no CI/CD information
+- query-side-blog-service has no CI/CD information
+- adminserver has no CI/CD information
+- common-project has no CI/CD information
+- query-side-project has no CI/CD information
+- registry has no CI/CD information
+- command-side-project has no CI/CD information
+
+
+No API Gateway :
+-----------------
+Some API Gateway were detected however, those services do not :
+
+- common has no API Gateway tools
+- query-side-blog has no API Gateway tools
+- configserver has no API Gateway tools
+- authserver has no API Gateway tools
+- monolithic has no API Gateway tools
+- query-side-project-service has no API Gateway tools
+- command-side-project-service has no API Gateway tools
+- command-side-blog has no API Gateway tools
+- system has no API Gateway tools
+
+
+Timeouts :
+-----------------
+The antipattern was not detected
+
+
+
+Multiple instances per host :
+--------------------------
+**The application has not the antipattern multiple instance per host. However, the following microservices do not have any dockerfile.***
+- docker_directory has no DockerFile
+- common has no DockerFile
+- query-side-blog has no DockerFile
+- command-side-blog has no DockerFile
+- common-blog has no DockerFile
+- common-project has no DockerFile
+- query-side-project has no DockerFile
+- command-side-project has no DockerFile
+- system has no DockerFile
+
+
+Shared Databases :
+-----------------
+Number of shared databases found : 0
+
+
+
+No API Versioning :
+-----------------
+Antipattern was not detected. However those services have not a API versionning
+- common has no API versioning
+- configserver has no API versioning
+- authserver has no API versioning
+- monolithic has no API versioning
+- query-side-project-service has no API versioning
+- command-side-project-service has no API versioning
+- api-gateway has no API versioning
+- common-blog has no API versioning
+- command-side-blog-service has no API versioning
+- query-side-blog-service has no API versioning
+- adminserver has no API versioning
+- registry has no API versioning
+
+
+No HealthCheck :
+-----------------
+If you only see system on this list or nothing below it's ok
+ In pratica se c'è qualche microservizio l'AP è TRUE
+- common has no healthcheck library
+- query-side-blog has no healthcheck library
+- configserver has no healthcheck library
+- system has no healthcheck library
+
+
+Local logging :
+----------------
+The antipattern was detected
+
+
+
+Insufficient monitoring :
+--------------------------
+The application has a monitoring service but some don't have
+
+- system has no monitoring tools
+- common has no monitoring tools
+- query-side-blog has no monitoring tools
+- configserver has no monitoring tools
+- authserver has no monitoring tools
+- monolithic has no monitoring tools
+
+
+root@401dc61de13e:/opt/mars/Detector#

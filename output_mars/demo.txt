@@ -1,0 +1,162 @@
+root@401dc61de13e:/opt/mars/Detector# cd /opt/mars/Extractor
+python3 main.py --project demo --url https://github.com/ewolff/microservice/tree/master/microservice-demo
+Thank you, excluding folders from analysis...
+Folders excluded, building meta-model...
+Excluded folders :
+.github
+.mvn
+microservice-demo-turbine-server
+microservice-demo-zuul-server
+microservice-demo-eureka-server
+Extracting system wide dependencies
+Dependencies extracted, writing to meta-model
+Writing done
+Extracting root configuration files
+
+Writing done
+Writing done
+Extracting microservices
+../../projects/demo
+../../projects/demo/microservice-demo-catalog/
+../../projects/demo/microservice-demo-customer/
+../../projects/demo/microservice-demo-order/
+../../projects/demo/microservice-demo-turbine-server/
+../../projects/demo/microservice-demo-zuul-server/
+../../projects/demo/microservice-demo-eureka-server/
+microservices extracted, reading information
+Writing microservices info into meta-model
+Writing done
+root@401dc61de13e:/opt/mars/Extractor# cd /opt/mars/Detector
+python3 main.py --project_name demo --metamodel /opt/projects/demo/metamodel.json | tee /opt/projects/demo/output.txt
+
+
+====================================================================
+Extracting antipatterns from metamodel complete. Printing results...
+====================================================================
+
+
+System information :
+=====================
+Number of microservices : 3
+Total lines of code : 2543
+Total number of files : 68
+Avg LOCs per service : 847
+Avg Files per service : 22
+
+
+Detection summary :
+===========================
+
+
+Wrong cuts :
+-------------
+Wrong Cut was not detected
+
+
+
+Circular Dependencies :
+------------------------
+Circular Depenencies was not detected
+
+
+
+Mega services :
+----------------
+Number of mega services found : 0
+
+
+
+Nano services :
+----------------
+Number of nano services found : 0
+
+
+
+Shared Dependencies :
+----------------------
+Number of shared libs found : 0
+
+
+
+Hardcoded Endpoints :
+----------------------
+Only count the ones which has not a discoveryTool : 0
+
+
+
+Manual configuration :
+-----------------------
+The antipattern is detected if all configuration listed have not a configuration tool
+
+- microservice-demo-catalog
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.properties
+                - bootstrap.properties
+- microservice-demo-customer
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.properties
+                - bootstrap.properties
+- microservice-demo-order
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.properties
+                - bootstrap.properties
+
+
+No CI/CD :
+-----------
+Antipattern detected
+
+
+No API Gateway :
+-----------------
+The antipattern was detected
+
+- microservice-demo-catalog has no API Gateway tools
+- microservice-demo-customer has no API Gateway tools
+- microservice-demo-order has no API Gateway tools
+- system has no API Gateway tools
+
+
+Timeouts :
+-----------------
+The antipattern was not detected
+
+
+
+Multiple instances per host :
+--------------------------
+**The application has not the antipattern multiple instance per host. However, the following microservices do not have any dockerfile.***
+- docker_directory has no DockerFile
+- system has no DockerFile
+
+
+Shared Databases :
+-----------------
+Number of shared databases found : 0
+
+
+
+No API Versioning :
+-----------------
+Antipattern detected
+
+
+No HealthCheck :
+-----------------
+If you only see system on this list or nothing below it's ok
+ In pratica se c'è qualche microservizio l'AP è TRUE
+- system has no healthcheck library
+
+
+Local logging :
+----------------
+The antipattern was detected
+
+
+
+Insufficient monitoring :
+--------------------------
+The antipattern was detected

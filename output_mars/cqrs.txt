@@ -1,0 +1,181 @@
+root@401dc61de13e:/opt/mars/Detector# cd /opt/mars/Extractor
+python3 main.py --project cqrs --url https://github.com/benwilcock/cqrs-microservice-sampler
+Thank you, excluding folders from analysis...
+Folders excluded, building meta-model...
+Excluded folders :
+.github
+.mvn
+gradle
+integration-test
+slides
+discovery-service
+config-service
+gateway-service
+Extracting system wide dependencies
+Dependencies extracted, writing to meta-model
+Writing done
+Extracting root configuration files
+
+Writing done
+Extracting http for ../../projects/cqrs/dev.yml
+Extracting http for ../../projects/cqrs/docker-compose.yml
+Extracting http for ../../projects/cqrs/wip.yml
+Writing done
+Extracting microservices
+../../projects/cqrs
+../../projects/cqrs/integration-test/
+../../projects/cqrs/gateway-service/
+../../projects/cqrs/discovery-service/
+../../projects/cqrs/command-side/
+../../projects/cqrs/config-service/
+../../projects/cqrs/gradle/
+../../projects/cqrs/query-side/
+../../projects/cqrs/common-things/
+../../projects/cqrs/slides/
+microservices extracted, reading information
+Writing microservices info into meta-model
+Writing done
+root@401dc61de13e:/opt/mars/Extractor# cd /opt/mars/Detector
+python3 main.py --project_name cqrs --metamodel /opt/projects/cqrs/metamodel.json | tee /opt/projects/cqrs/output.txt
+
+
+====================================================================
+Extracting antipatterns from metamodel complete. Printing results...
+====================================================================
+
+
+System information :
+=====================
+Number of microservices : 3
+Total lines of code : 1802
+Total number of files : 46
+Avg LOCs per service : 600
+Avg Files per service : 15
+
+
+Detection summary :
+===========================
+
+
+Wrong cuts :
+-------------
+Wrong Cut was not detected
+
+
+
+Circular Dependencies :
+------------------------
+Circular Depenencies was not detected
+
+
+
+Mega services :
+----------------
+Number of mega services found : 0
+
+
+
+Nano services :
+----------------
+Number of nano services found : 0
+
+
+
+Shared Dependencies :
+----------------------
+Number of shared libs found : 0
+
+
+
+Hardcoded Endpoints :
+----------------------
+Only count the ones which has not a discoveryTool : 0
+
+
+
+Manual configuration :
+-----------------------
+The antipattern is detected if all configuration listed have not a configuration tool
+
+- command-side
+        - Has configuration tool : True
+        - Found config files in microservice :
+                - gradle-wrapper.properties
+                - bootstrap-production.yml
+                - bootstrap.yml
+- query-side
+        - Has configuration tool : True
+        - Found config files in microservice :
+                - gradle-wrapper.properties
+                - bootstrap-production.yml
+                - bootstrap.yml
+- common-things
+        - Has configuration tool : True
+        - Found config files in microservice :
+                - gradle-wrapper.properties
+- system
+        - Has configuration tool : True
+        - Found config files in microservice :
+                - dev.yml
+                - docker-compose.yml
+                - wip.yml
+
+
+No CI/CD :
+-----------
+Antipattern detected
+
+
+No API Gateway :
+-----------------
+The antipattern was detected
+
+- command-side has no API Gateway tools
+- query-side has no API Gateway tools
+- common-things has no API Gateway tools
+- system has no API Gateway tools
+
+
+Timeouts :
+-----------------
+The antipattern was not detected
+
+
+
+Multiple instances per host :
+--------------------------
+**The application has not the antipattern multiple instance per host. However, the following microservices do not have any dockerfile.***
+- docker_directory has no DockerFile
+- common-things has no DockerFile
+- system has no DockerFile
+
+
+Shared Databases :
+-----------------
+Number of shared databases found : 0
+
+
+
+No API Versioning :
+-----------------
+Antipattern detected
+
+
+No HealthCheck :
+-----------------
+If you only see system on this list or nothing below it's ok
+ In pratica se c'è qualche microservizio l'AP è TRUE
+- system has no healthcheck library
+
+
+Local logging :
+----------------
+The antipattern was detected
+
+
+
+Insufficient monitoring :
+--------------------------
+The antipattern was detected
+
+root@401dc61de13e:/opt/mars/Detector#

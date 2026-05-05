@@ -1,0 +1,189 @@
+root@401dc61de13e:/opt/mars/Extractor# cd /opt/mars/Extractor
+python3 main.py --project piggymetrics --url https://github.com/sqshq/piggymetrics/tree/fd5ee3c555ea9cd6067eacf3f2a3e8b85fe4fe77
+Thank you, excluding folders from analysis...
+Folders excluded, building meta-model...
+Excluded folders :
+.github
+config
+mongodb
+monitoring
+registry
+turbine-stream-service
+Extracting system wide dependencies
+Dependencies extracted, writing to meta-model
+Writing done
+Extracting root configuration files
+
+Writing done
+Extracting http for ../../projects/piggymetrics/docker-compose.yml
+Extracting http for ../../projects/piggymetrics/docker-compose.dev.yml
+Writing done
+Extracting microservices
+../../projects/piggymetrics
+../../projects/piggymetrics/statistics-service/
+../../projects/piggymetrics/turbine-stream-service/
+../../projects/piggymetrics/account-service/
+../../projects/piggymetrics/notification-service/
+../../projects/piggymetrics/gateway/
+../../projects/piggymetrics/auth-service/
+../../projects/piggymetrics/monitoring/
+../../projects/piggymetrics/registry/
+../../projects/piggymetrics/mongodb/
+../../projects/piggymetrics/config/
+microservices extracted, reading information
+Writing microservices info into meta-model
+Writing done
+root@401dc61de13e:/opt/mars/Extractor# cd /opt/mars/Detector
+python3 main.py --project_name piggymetrics --metamodel /opt/projects/piggymetrics/metamodel.json | tee /opt/projects/piggymetrics/output.txt
+
+
+====================================================================
+Extracting antipatterns from metamodel complete. Printing results...
+====================================================================
+
+
+System information :
+=====================
+Number of microservices : 5
+Total lines of code : 18851
+Total number of files : 129
+Avg LOCs per service : 3770
+Avg Files per service : 25
+
+
+Detection summary :
+===========================
+
+
+Wrong cuts :
+-------------
+Wrong Cut was not detected
+
+
+
+Circular Dependencies :
+------------------------
+Circular Depenencies was not detected
+
+
+
+Mega services :
+----------------
+Number of mega services found : 1
+
+- gateway: 15127 Locs, 21 Files.
+
+
+Nano services :
+----------------
+Number of nano services found : 0
+
+
+
+Shared Dependencies :
+----------------------
+Number of shared libs found : 0
+
+
+
+Hardcoded Endpoints :
+----------------------
+Only count the ones which has not a discoveryTool : 0
+
+
+
+Manual configuration :
+-----------------------
+The antipattern is detected if all configuration listed have not a configuration tool
+
+- statistics-service
+        - Has configuration tool : True
+        - Found config files in microservice :
+                - bootstrap.yml
+- account-service
+        - Has configuration tool : True
+        - Found config files in microservice :
+                - bootstrap.yml
+- notification-service
+        - Has configuration tool : True
+        - Found config files in microservice :
+                - bootstrap.yml
+- gateway
+        - Has configuration tool : True
+        - Found config files in microservice :
+                - bootstrap.yml
+- auth-service
+        - Has configuration tool : True
+        - Found config files in microservice :
+                - bootstrap.yml
+- system
+        - Has configuration tool : True
+        - Found config files in microservice :
+                - docker-compose.yml
+                - docker-compose.dev.yml
+
+
+No CI/CD :
+-----------
+CI/CD information were detected
+*** System has CI/CD information, however, the following microservices do not.***
+- statistics-service has no CI/CD information
+- account-service has no CI/CD information
+- notification-service has no CI/CD information
+- gateway has no CI/CD information
+- auth-service has no CI/CD information
+
+
+No API Gateway :
+-----------------
+Some API Gateway were detected however, those services do not :
+
+- statistics-service has no API Gateway tools
+- account-service has no API Gateway tools
+- notification-service has no API Gateway tools
+- system has no API Gateway tools
+
+
+Timeouts :
+-----------------
+The antipattern was not detected
+
+
+
+Multiple instances per host :
+--------------------------
+**The application has not the antipattern multiple instance per host. However, the following microservices do not have any dockerfile.***
+- docker_directory has no DockerFile
+- system has no DockerFile
+
+
+Shared Databases :
+-----------------
+Number of shared databases found : 0
+
+
+
+No API Versioning :
+-----------------
+Antipattern detected
+
+
+No HealthCheck :
+-----------------
+If you only see system on this list or nothing below it's ok
+ In pratica se c'è qualche microservizio l'AP è TRUE
+- system has no healthcheck library
+
+
+Local logging :
+----------------
+A logging tool was detected but it's possible some has not
+
+- system has no logging tools
+
+
+Insufficient monitoring :
+--------------------------
+The antipattern was detected
+
+root@401dc61de13e:/opt/mars/Detector#

@@ -1,0 +1,265 @@
+root@401dc61de13e:/opt/mars/Detector# cd /opt/mars/Extractor
+python3 main.py --project apollo --url https://github.com/apolloconfig/apollo/tree/de05540e6c9a18cdf370ae95ca5e544d7b8d04bf
+Thank you, excluding folders from analysis...
+Folders excluded, building meta-model...
+Excluded folders :
+.github
+.mvn
+doc
+docs
+scripts
+apollo-adminservice
+apollo-buildtools
+apollo-configservice
+Extracting system wide dependencies
+Dependencies extracted, writing to meta-model
+Writing done
+Extracting root configuration files
+
+Writing done
+Writing done
+Extracting microservices
+../../projects/apollo
+../../projects/apollo/scripts/
+../../projects/apollo/apollo-assembly/
+../../projects/apollo/apollo-core/
+../../projects/apollo/apollo-demo/
+../../projects/apollo/apollo-biz/
+../../projects/apollo/apollo-buildtools/
+../../projects/apollo/apollo-mockserver/
+../../projects/apollo/apollo-client/
+../../projects/apollo/apollo-configservice/
+../../projects/apollo/doc/
+../../projects/apollo/apollo-adminservice/
+../../projects/apollo/apollo-portal/
+../../projects/apollo/docs/
+../../projects/apollo/apollo-openapi/
+../../projects/apollo/apollo-common/
+microservices extracted, reading information
+Writing microservices info into meta-model
+Writing done
+root@401dc61de13e:/opt/mars/Extractor# cd /opt/mars/Detector
+python3 main.py --project_name apollo --metamodel /opt/projects/apollo/metamodel.json | tee /opt/projects/apollo/output.txt
+
+
+====================================================================
+Extracting antipatterns from metamodel complete. Printing results...
+====================================================================
+
+
+System information :
+=====================
+Number of microservices : 9
+Total lines of code : 71978
+Total number of files : 891
+Avg LOCs per service : 7997
+Avg Files per service : 99
+
+
+Detection summary :
+===========================
+
+
+Wrong cuts :
+-------------
+Wrong Cut was not detected
+
+
+
+Circular Dependencies :
+------------------------
+Circular Depenencies was not detected
+
+
+
+Mega services :
+----------------
+Number of mega services found : 1
+
+- apollo-portal: 43713 Locs, 405 Files.
+
+
+Nano services :
+----------------
+Number of nano services found : 2
+
+- apollo-assembly: 206 Locs, 9 Files.
+- apollo-demo: 547 Locs, 16 Files.
+
+
+Shared Dependencies :
+----------------------
+Number of shared libs found : 2
+
+com.ctrip.framework.apollo:apollo-client:
+apollo-demo
+apollo-mockserver
+
+com.ctrip.framework.apollo:apollo-core:
+apollo-client
+apollo-openapi
+apollo-common
+
+
+
+Hardcoded Endpoints :
+----------------------
+Only count the ones which has not a discoveryTool : 1
+
+- apollo-core
+        - Has service discovery tool : False
+        - Found URLs in microservice :
+                - http://1.2.3.4:8080
+                - http://2.3.4.5:8080
+                - http://1.2.3.4:8080
+                - http://2.3.4.5:8080.
+
+
+Manual configuration :
+-----------------------
+The antipattern is detected if all configuration listed have not a configuration tool
+
+- apollo-assembly
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - app.properties
+                - application.yml
+- apollo-demo
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - app.properties
+                - application.yml
+- apollo-portal
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - apollo-env.properties
+                - app.properties
+                - app.properties
+                - application-github.properties
+                - apollo-portal.conf
+                - application.yml
+                - application-ctrip.yml
+                - application-ldap-openldap-sample.yml
+                - application-ldap-activedirectory-sample.yml
+                - application-oidc-sample.yml
+                - application-ldap-apacheds-sample.yml
+- apollo-common
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - application.properties
+                - application-ctrip.properties
+                - application-github.properties
+
+
+No CI/CD :
+-----------
+CI/CD information were detected
+*** System has CI/CD information, however, the following microservices do not.***
+- apollo-assembly has no CI/CD information
+- apollo-core has no CI/CD information
+- apollo-demo has no CI/CD information
+- apollo-biz has no CI/CD information
+- apollo-mockserver has no CI/CD information
+- apollo-client has no CI/CD information
+- apollo-portal has no CI/CD information
+- apollo-openapi has no CI/CD information
+- apollo-common has no CI/CD information
+
+
+No API Gateway :
+-----------------
+The antipattern was detected
+
+- apollo-assembly has no API Gateway tools
+- apollo-core has no API Gateway tools
+- apollo-demo has no API Gateway tools
+- apollo-biz has no API Gateway tools
+- apollo-mockserver has no API Gateway tools
+- apollo-client has no API Gateway tools
+- apollo-portal has no API Gateway tools
+- apollo-openapi has no API Gateway tools
+- apollo-common has no API Gateway tools
+- system has no API Gateway tools
+
+
+Timeouts :
+-----------------
+Timeout antipattern was detected
+
+- apollo-demo has possible timeout antipattern:
+        - Has Circuit Breaker Tool : False
+        - Has Timeout methods : True
+        - Has Timeout imports : False
+        - Has Fallback methods : False
+- apollo-biz has possible timeout antipattern:
+        - Has Circuit Breaker Tool : False
+        - Has Timeout methods : True
+        - Has Timeout imports : False
+        - Has Fallback methods : False
+- apollo-client has possible timeout antipattern:
+        - Has Circuit Breaker Tool : False
+        - Has Timeout methods : True
+        - Has Timeout imports : False
+        - Has Fallback methods : False
+- apollo-portal has possible timeout antipattern:
+        - Has Circuit Breaker Tool : False
+        - Has Timeout methods : True
+        - Has Timeout imports : True
+        - Has Fallback methods : False
+- apollo-openapi has possible timeout antipattern:
+        - Has Circuit Breaker Tool : False
+        - Has Timeout methods : True
+        - Has Timeout imports : False
+        - Has Fallback methods : False
+
+
+Multiple instances per host :
+--------------------------
+**The application has not the antipattern multiple instance per host. However, the following microservices do not have any dockerfile.***
+- docker_directory has no DockerFile
+- system has no DockerFile
+
+
+Shared Databases :
+-----------------
+Number of shared databases found : 0
+
+
+
+No API Versioning :
+-----------------
+Antipattern was not detected. However those services have not a API versionning
+- apollo-assembly has no API versioning
+- apollo-demo has no API versioning
+- apollo-portal has no API versioning
+- apollo-common has no API versioning
+
+
+No HealthCheck :
+-----------------
+If you only see system on this list or nothing below it's ok
+
+- apollo-assembly has no healthcheck library
+- apollo-core has no healthcheck library
+- apollo-demo has no healthcheck library
+- apollo-biz has no healthcheck library
+- apollo-mockserver has no healthcheck library
+- apollo-client has no healthcheck library
+- apollo-portal has no healthcheck library
+- apollo-openapi has no healthcheck library
+- system has no healthcheck library
+
+
+Local logging :
+----------------
+A logging tool was detected but it's possible some has not
+
+- apollo-assembly has no logging tools
+- system has no logging tools
+
+
+Insufficient monitoring :
+--------------------------
+The antipattern was detected
+
+root@401dc61de13e:/opt/mars/Detector#

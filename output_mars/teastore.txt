@@ -1,0 +1,175 @@
+root@401dc61de13e:/opt/mars/Detector# cd /opt/mars/Extractor
+python3 main.py --project TeaStore --url https://github.com/DescartesResearch/TeaStore/tree/e93bca736abe5bf92267d0bc61e95fc9198e6014
+Thank you, excluding folders from analysis...
+Folders excluded, building meta-model...
+Excluded folders :
+.github
+.mvn
+doc
+docs
+scripts
+examples
+Extracting system wide dependencies
+Dependencies extracted, writing to meta-model
+Writing done
+Extracting root configuration files
+
+Writing done
+Writing done
+Extracting microservices
+../../projects/TeaStore
+../../projects/TeaStore/services/
+../../projects/TeaStore/examples/
+../../projects/TeaStore/interfaces/
+../../projects/TeaStore/utilities/
+microservices extracted, reading information
+Writing microservices info into meta-model
+Writing done
+root@401dc61de13e:/opt/mars/Extractor# cd /opt/mars/Detector
+python3 main.py --project_name TeaStore --metamodel /opt/projects/TeaStore/metamodel.json | tee /opt/projects/TeaStore/output.txt
+
+
+====================================================================
+Extracting antipatterns from metamodel complete. Printing results...
+====================================================================
+
+
+System information :
+=====================
+Number of microservices : 3
+Total lines of code : 30315
+Total number of files : 394
+Avg LOCs per service : 10105
+Avg Files per service : 131
+
+
+Detection summary :
+===========================
+
+
+Wrong cuts :
+-------------
+Wrong Cut was not detected
+
+
+
+Circular Dependencies :
+------------------------
+Circular Depenencies was not detected
+
+
+
+Mega services :
+----------------
+Number of mega services found : 1
+
+- services: 25126 Locs, 267 Files.
+
+
+Nano services :
+----------------
+Number of nano services found : 0
+
+
+
+Shared Dependencies :
+----------------------
+Number of shared libs found : 0
+
+
+
+Hardcoded Endpoints :
+----------------------
+Only count the ones which has not a discoveryTool : 1
+
+- utilities
+        - Has service discovery tool : False
+        - Found URLs in microservice :
+                - http://localhost:
+
+
+Manual configuration :
+-----------------------
+The antipattern is detected if all configuration listed have not a configuration tool
+
+- utilities
+        - Has configuration tool : False
+        - Found config files in microservice :
+                - kieker.monitoring.properties
+                - setupData.sql
+                - setup.sql
+
+
+No CI/CD :
+-----------
+CI/CD information were detected
+*** System has CI/CD information, however, the following microservices do not.***
+- services has no CI/CD information
+- interfaces has no CI/CD information
+- utilities has no CI/CD information
+
+
+No API Gateway :
+-----------------
+The antipattern was detected
+
+- services has no API Gateway tools
+- interfaces has no API Gateway tools
+- utilities has no API Gateway tools
+- system has no API Gateway tools
+
+
+Timeouts :
+-----------------
+Timeout antipattern was detected
+
+- services has possible timeout antipattern:
+        - Has Circuit Breaker Tool : False
+        - Has Timeout methods : False
+        - Has Timeout imports : True
+        - Has Fallback methods : False
+- utilities has possible timeout antipattern:
+        - Has Circuit Breaker Tool : False
+        - Has Timeout methods : True
+        - Has Timeout imports : True
+        - Has Fallback methods : False
+
+
+Multiple instances per host :
+--------------------------
+**The application has not the antipattern multiple instance per host. However, the following microservices do not have any dockerfile.***
+- docker_directory has no DockerFile
+- system has no DockerFile
+
+
+Shared Databases :
+-----------------
+Number of shared databases found : 0
+
+
+
+No API Versioning :
+-----------------
+Antipattern was not detected. However those services have not a API versionning
+- utilities has no API versioning
+
+
+No HealthCheck :
+-----------------
+If you only see system on this list or nothing below it's ok
+
+- services has no healthcheck library
+- interfaces has no healthcheck library
+- system has no healthcheck library
+
+
+Local logging :
+----------------
+A logging tool was detected but it's possible some has not
+
+- system has no logging tools
+
+
+Insufficient monitoring :
+--------------------------
+The antipattern was detected
