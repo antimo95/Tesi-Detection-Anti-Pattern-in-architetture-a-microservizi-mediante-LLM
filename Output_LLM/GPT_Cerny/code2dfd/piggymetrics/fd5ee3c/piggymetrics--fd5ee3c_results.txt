@@ -1,0 +1,59 @@
+Microservices:
+
+{'name': 'statistics-service', 'type': 'service', 'stereotype_instances': ['pre_authorized_endpoints', 'local_logging', 'resource_server', 'internal'], 'tagged_values': [('Port', 7000), ('Endpoints', "['/{accountName}', '/latest', '/current']"), ('Pre-authorized Endpoints', "['/{accountName}']")]}
+{'name': 'turbine-stream-service', 'type': 'service', 'stereotype_instances': ['monitoring_server', 'infrastructural'], 'tagged_values': [('Port', 8989), ('Monitoring Server', 'Turbine')]}
+{'name': 'account-service', 'type': 'service', 'stereotype_instances': ['resource_server', 'circuit_breaker', 'pre_authorized_endpoints', 'local_logging', 'internal'], 'tagged_values': [('Endpoints', "['/{name}', '/', '/current', '/statistics/{accountName}', '/uaa/users']"), ('Pre-authorized Endpoints', "['/{name}']"), ('Circuit Breaker', 'Hystrix'), ('Port', 6000)]}
+{'name': 'notification-service', 'type': 'service', 'stereotype_instances': ['local_logging', 'resource_server', 'internal'], 'tagged_values': [('Endpoints', "['/recipients', '/recipients/current', '/accounts/{accountName}']"), ('Port', 8000)]}
+{'name': 'gateway', 'type': 'service', 'stereotype_instances': ['gateway', 'infrastructural', 'load_balancer'], 'tagged_values': [('Load Balancer', 'Ribbon'), ('Port', 4000), ('Gateway', 'Zuul')]}
+{'name': 'auth-service', 'type': 'service', 'stereotype_instances': ['csrf_disabled', 'resource_server', 'infrastructural', 'token_server', 'pre_authorized_endpoints', 'local_logging', 'authentication_scope_all_requests', 'authorization_server', 'encryption'], 'tagged_values': [('Endpoints', "['/users', '/users/current']"), ('Port', 5000), ('Authorization Server', 'Spring OAuth2')]}
+{'name': 'monitoring', 'type': 'service', 'stereotype_instances': ['monitoring_dashboard', 'infrastructural'], 'tagged_values': [('Port', 8080), ('Monitoring Dashboard', 'Hystrix')]}
+{'name': 'registry', 'type': 'service', 'stereotype_instances': ['infrastructural', 'service_discovery'], 'tagged_values': [('Service Discovery', 'Eureka'), ('Port', 8761)]}
+{'name': 'config', 'type': 'service', 'stereotype_instances': ['basic_authentication', 'csrf_disabled', 'infrastructural', 'configuration_server'], 'tagged_values': [('Port', 8888), ('Configuration Server', 'Spring Cloud Config')]}
+{'name': 'account-mongodb', 'type': 'database_component', 'stereotype_instances': ['plaintext_credentials', 'database'], 'tagged_values': [('Password', 'password'), ('Username', 'user'), ('Password', 'password\n')]}
+{'name': 'notification-mongodb', 'type': 'database_component', 'stereotype_instances': ['plaintext_credentials', 'database'], 'tagged_values': [('Password', 'password'), ('Username', 'user'), ('Password', 'password\n')]}
+{'name': 'auth-mongodb', 'type': 'database_component', 'stereotype_instances': ['plaintext_credentials', 'database'], 'tagged_values': [('Password', 'password'), ('Username', 'user'), ('Password', 'password\n')]}
+{'name': 'statistics-mongodb', 'type': 'database_component', 'stereotype_instances': ['plaintext_credentials', 'database'], 'tagged_values': [('Password', 'password'), ('Username', 'user'), ('Password', 'password\n')]}
+{'name': 'rabbitmq', 'type': 'service', 'stereotype_instances': ['message_broker', 'infrastructural'], 'tagged_values': [('Port', 15672), ('Message Broker', 'RabbitMQ')]}
+
+Information Flows:
+
+{'sender': 'config', 'receiver': 'statistics-service', 'stereotype_instances': ['plaintext_credentials_link', 'restful_http']}
+{'sender': 'config', 'receiver': 'turbine-stream-service', 'stereotype_instances': ['plaintext_credentials_link', 'restful_http']}
+{'sender': 'config', 'receiver': 'account-service', 'stereotype_instances': ['plaintext_credentials_link', 'restful_http']}
+{'sender': 'config', 'receiver': 'notification-service', 'stereotype_instances': ['plaintext_credentials_link', 'restful_http']}
+{'sender': 'config', 'receiver': 'gateway', 'stereotype_instances': ['plaintext_credentials_link', 'restful_http']}
+{'sender': 'config', 'receiver': 'auth-service', 'stereotype_instances': ['plaintext_credentials_link', 'restful_http']}
+{'sender': 'config', 'receiver': 'monitoring', 'stereotype_instances': ['plaintext_credentials_link', 'restful_http']}
+{'sender': 'config', 'receiver': 'registry', 'stereotype_instances': ['plaintext_credentials_link', 'restful_http']}
+{'sender': 'statistics-mongodb', 'receiver': 'statistics-service', 'stereotype_instances': ['plaintext_credentials_link', 'jdbc'], 'tagged_values': [('Password', 'password'), ('Username', 'user')]}
+{'sender': 'account-mongodb', 'receiver': 'account-service', 'stereotype_instances': ['plaintext_credentials_link', 'jdbc'], 'tagged_values': [('Password', 'password'), ('Username', 'user')]}
+{'sender': 'notification-mongodb', 'receiver': 'notification-service', 'stereotype_instances': ['plaintext_credentials_link', 'jdbc'], 'tagged_values': [('Password', 'password'), ('Username', 'user')]}
+{'sender': 'auth-mongodb', 'receiver': 'auth-service', 'stereotype_instances': ['plaintext_credentials_link', 'jdbc'], 'tagged_values': [('Password', 'password'), ('Username', 'user')]}
+{'sender': 'auth-service', 'receiver': 'registry', 'stereotype_instances': ['restful_http']}
+{'sender': 'notification-service', 'receiver': 'registry', 'stereotype_instances': ['restful_http']}
+{'sender': 'turbine-stream-service', 'receiver': 'registry', 'stereotype_instances': ['restful_http']}
+{'sender': 'statistics-service', 'receiver': 'registry', 'stereotype_instances': ['restful_http']}
+{'sender': 'account-service', 'receiver': 'registry', 'stereotype_instances': ['circuit_breaker_link', 'restful_http'], 'tagged_values': [('Circuit Breaker', 'Hystrix')]}
+{'sender': 'registry', 'receiver': 'gateway', 'stereotype_instances': ['restful_http']}
+{'sender': 'user', 'receiver': 'gateway', 'stereotype_instances': ['restful_http']}
+{'sender': 'gateway', 'receiver': 'user', 'stereotype_instances': ['restful_http']}
+{'sender': 'gateway', 'receiver': 'notification-service', 'stereotype_instances': ['circuit_breaker_link', 'load_balanced_link', 'restful_http'], 'tagged_values': [('Load Balancer', 'Ribbon'), ('Circuit Breaker', 'Hystrix')]}
+{'sender': 'gateway', 'receiver': 'statistics-service', 'stereotype_instances': ['circuit_breaker_link', 'load_balanced_link', 'restful_http'], 'tagged_values': [('Load Balancer', 'Ribbon'), ('Circuit Breaker', 'Hystrix')]}
+{'sender': 'gateway', 'receiver': 'account-service', 'stereotype_instances': ['circuit_breaker_link', 'load_balanced_link', 'restful_http'], 'tagged_values': [('Load Balancer', 'Ribbon'), ('Circuit Breaker', 'Hystrix')]}
+{'sender': 'gateway', 'receiver': 'auth-service', 'stereotype_instances': ['circuit_breaker_link', 'load_balanced_link', 'restful_http'], 'tagged_values': [('Load Balancer', 'Ribbon'), ('Circuit Breaker', 'Hystrix')]}
+{'sender': 'auth-service', 'receiver': 'statistics-service', 'stereotype_instances': ['authentication_with_plaintext_credentials', 'plaintext_credentials_link', 'auth_provider', 'restful_http'], 'tagged_values': [('Password', 'password\n')]}
+{'sender': 'auth-service', 'receiver': 'account-service', 'stereotype_instances': ['authentication_with_plaintext_credentials', 'plaintext_credentials_link', 'auth_provider', 'restful_http'], 'tagged_values': [('Password', 'password\n')]}
+{'sender': 'auth-service', 'receiver': 'notification-service', 'stereotype_instances': ['authentication_with_plaintext_credentials', 'plaintext_credentials_link', 'auth_provider', 'restful_http'], 'tagged_values': [('Password', 'password\n')]}
+{'sender': 'turbine-stream-service', 'receiver': 'monitoring', 'stereotype_instances': ['restful_http']}
+{'sender': 'rabbitmq', 'receiver': 'turbine-stream-service', 'stereotype_instances': ['restful_http']}
+{'sender': 'statistics-service', 'receiver': 'rabbitmq', 'stereotype_instances': ['restful_http']}
+{'sender': 'account-service', 'receiver': 'rabbitmq', 'stereotype_instances': ['circuit_breaker_link', 'restful_http'], 'tagged_values': [('Circuit Breaker', 'Hystrix')]}
+{'sender': 'notification-service', 'receiver': 'rabbitmq', 'stereotype_instances': ['restful_http']}
+{'sender': 'external-website', 'receiver': 'statistics-service', 'stereotype_instances': ['restful_http']}
+{'sender': 'notification-service', 'receiver': 'mail-server', 'stereotype_instances': ['plaintext_credentials_link', 'restful_http']}
+
+External Components:
+
+{'name': 'user', 'type': 'external_component', 'stereotype_instances': ['exitpoint', 'entrypoint', 'user_stereotype']}
+{'name': 'external-website', 'stereotype_instances': ['entrypoint', 'exitpoint', 'external_website'], 'tagged_values': [('URL', 'https://api.exchangeratesapi.io')]}
+{'name': 'mail-server', 'stereotype_instances': ['plaintext_credentials', 'entrypoint', 'mail_server', 'exitpoint'], 'tagged_values': [('Host', 'smtp.gmail.com'), ('Password', 'dev-password'), ('Username', 'dev-user')]}

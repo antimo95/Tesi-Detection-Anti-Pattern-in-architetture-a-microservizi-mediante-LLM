@@ -1,0 +1,76 @@
+{
+    "edges": [
+        {
+            "sender": "github-repository",
+            "receiver": "config-server"
+        },
+        {
+            "sender": "turbine-server",
+            "receiver": "eureka-server"
+        },
+        {
+            "sender": "eureka-server",
+            "receiver": "product-catalog-management-website"
+        },
+        {
+            "sender": "eureka-server",
+            "receiver": "website"
+        },
+        {
+            "sender": "eureka-server",
+            "receiver": "api-gateway"
+        },
+        {
+            "sender": "zipkin-server",
+            "receiver": "eureka-server"
+        },
+        {
+            "sender": "account-service",
+            "receiver": "eureka-server"
+        },
+        {
+            "sender": "authentacation-server",
+            "receiver": "eureka-server"
+        },
+        {
+            "sender": "product-catalog-service",
+            "receiver": "eureka-server"
+        },
+        {
+            "sender": "config-server",
+            "receiver": "eureka-server"
+        },
+        {
+            "sender": "order-service",
+            "receiver": "eureka-server"
+        },
+        {
+            "sender": "spring-boot-admin",
+            "receiver": "eureka-server"
+        },
+        {
+            "sender": "user",
+            "receiver": "api-gateway"
+        },
+        {
+            "sender": "api-gateway",
+            "receiver": "user"
+        },
+        {
+            "sender": "user",
+            "receiver": "product-catalog-management-website"
+        },
+        {
+            "sender": "product-catalog-management-website",
+            "receiver": "user"
+        },
+        {
+            "sender": "user",
+            "receiver": "website"
+        },
+        {
+            "sender": "website",
+            "receiver": "user"
+        }
+    ]
+}

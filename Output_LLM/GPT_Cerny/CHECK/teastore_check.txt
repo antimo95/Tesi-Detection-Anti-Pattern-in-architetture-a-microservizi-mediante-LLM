@@ -1,0 +1,47 @@
+Shared Library
+
+Risposta CHAT GPT 5.2:
+Capisco l’obiezione, ma dai file che mi hai fornito la situazione corrisponde comunque alla definizione di SHARED LIBRARIES (librerie runtime condivise con logica/concetti di dominio), anche se il GT non la etichetta così.
+
+Perché:
+
+C’è una libreria JAR condivisa di dominio: il modulo interfaces/tools.descartes.teastore.entities è un jar (entities) e contiene classi di dominio TeaStore (es. Category, Product, Order, User). Questo è esattamente “source code che contiene business/domain functionality” condiviso tra servizi.
+
+C’è una libreria JAR condivisa usata da più servizi: utilities/tools.descartes.teastore.registryclient è un jar (registryclient) e viene incluso come dipendenza in più servizi (auth, recommender, persistence, image).
+
+La libreria condivisa trascina anche il dominio: registryclient dipende da entities, quindi servizi che usano registryclient finiscono indirettamente accoppiati al modello di dominio comune. 
+
+Quindi: anche se il GT non “riporta” shared library, l’evidenza nei pom.xml e nel contenuto del modulo entities mostra runtime libraries condivise con contenuto domain-specific, che è precisamente ciò che il pattern vieta.
+
+---------------------------------
+NO API GATEWAY 
+
+So technically there is no API gateway component?
+No dedicated “API gateway” component is visible in the provided artifacts (there’s no service/module named or configured as an API gateway).
+However, the system does expose a single public entry point (webui) to external clients (Docker Compose publishes only webui on 8080:8080 while the other services are only exposed internally). That means clients are not shown (in these artifacts) to be calling multiple microservices directly—the key condition for the NO API GATEWAY anti-pattern as defined.
+==> Quindi non esiste un API GATEWAY però abbiamo comunque un unico ENTRY POINT verso l'esterno che sarebbe webui
+---------------------------------
+
+NO HEALTH CHECK 
+SUMMARY (1–2 lines):
+Dagli artifact risulta che almeno alcuni microservizi espongono endpoint HTTP espliciti per verificare la “readiness” (es. /ready/isready), quindi non è vero che nessun microservizio implementa health check come richiesto dalla definizione/esempio.
+
+RATIONALE (max 4 bullets):
+
+La definizione/esempio richiede che non ci siano endpoint esposti per controllare lo stato di salute; qui sono presenti endpoint dedicati alla readiness.
+
+Poiché esiste almeno un microservizio con health/readiness check, la condizione “none of the microservices implement health checks” non è soddisfatta ⇒ anti-pattern non rilevabile.
+---------------------------------
+
+Insufficient Monitoring
+Cosa ho visto nei file che mi hai dato?
+Ho trovato invece segnali opposti: ci sono strumenti di monitoring/tracing già integrati, quindi non è “monitoraggio insufficiente” secondo la definizione.
+
+Kieker è abilitato e configurato (enabled=true e writer configurati). 
+Esiste un componente dedicato tipo “kieker-rabbitmq” per raccogliere/trasportare i dati di monitoring. 
+C’è tracing distribuito con Jaeger/OpenTracing inizializzato. 
+
+Nei servizi c’è un filter che registra metadati di monitoring/tracing sulle richieste.
+
+Quindi perché ABSENT?
+Perché, nei tuoi artefatti, non vedo la situazione descritta dall’anti-pattern (niente tracking + solo log): vedo invece un’impostazione di monitoring/tracing centralizzato.

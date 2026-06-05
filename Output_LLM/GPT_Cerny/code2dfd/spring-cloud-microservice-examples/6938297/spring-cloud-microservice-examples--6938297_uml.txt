@@ -1,0 +1,50 @@
+
+@startuml
+skinparam monochrome true
+skinparam ClassBackgroundColor White
+skinparam defaultFontName Arial
+skinparam defaultFontSize 11
+
+
+digraph dfd2{
+    node[shape=record]
+        cloud_thrift_server [label = "{Service: cloud_thrift_server | --internal--\n'Port': 8071\n}" shape = Mrecord];
+        gateway [label = "{Service: gateway | --local_logging--\n--load_balancer--\n--infrastructural--\n--gateway--\n'Load Balancer': 'Ribbon'\n'Gateway': 'Zuul'\n}" shape = Mrecord];
+        uaa_service [label = "{Service: uaa_service | --authorization_server--\n--infrastructural--\n'Authorization Server': 'Spring OAuth2'\n'Port': 8769\n}" shape = Mrecord];
+        cloud_config_server [label = "{Service: cloud_config_server | --infrastructural--\n--configuration_server--\n'Configuration Server': 'Spring Cloud Config'\n'Port': 8888\n}" shape = Mrecord];
+        cloud_eureka_server [label = "{Service: cloud_eureka_server | --infrastructural--\n--service_discovery--\n'Service Discovery': 'Eureka'\n'Port': 8761\n}" shape = Mrecord];
+        cloud_finagle_thrift_api [label = "{Service: cloud_finagle_thrift_api | --internal--\n}" shape = Mrecord];
+        cloud_simple_ui [label = "{Service: cloud_simple_ui | --circuit_breaker--\n--load_balancer--\n--internal--\n'Endpoints': ['/users']\n'Port': 8090\n'Load Balancer': 'Spring Cloud'\n}" shape = Mrecord];
+        cloud_finagle_thrift_client [label = "{Service: cloud_finagle_thrift_client | --internal--\n}" shape = Mrecord];
+        cloud_thrift_client [label = "{Service: cloud_thrift_client | --internal--\n'Port': 8070\n'Endpoints': ['/hello']\n}" shape = Mrecord];
+        cloud_finagle_thrift_server [label = "{Service: cloud_finagle_thrift_server | --internal--\n}" shape = Mrecord];
+        cloud_finagle_commons_thrift [label = "{Service: cloud_finagle_commons_thrift | --internal--\n}" shape = Mrecord];
+        hystrix_dashboard [label = "{Service: hystrix_dashboard | --monitoring_dashboard--\n--infrastructural--\n'Port': 8022\n'Monitoring Dashboard': 'Hystrix'\n'Endpoints': ['/']\n}" shape = Mrecord];
+        cloud_hystrix_turbine [label = "{Service: cloud_hystrix_turbine | --infrastructural--\n--monitoring_server--\n'Monitoring Server': 'Turbine'\n'Port': 8989\n}" shape = Mrecord];
+        zipkin [label = "{Service: zipkin | --internal--\n'Port': 9411\n}" shape = Mrecord];
+        cloud_dummy_service [label = "{Service: cloud_dummy_service | --resource_server--\n--internal--\n'Endpoints': ['/']\n}" shape = Mrecord];
+        cloud_simple_service [label = "{Service: cloud_simple_service | --local_logging--\n--internal--\n'Port': 8081\n'Endpoints': ['/user']\n}" shape = Mrecord];
+        cloud_thrift_interface [label = "{Service: cloud_thrift_interface | --local_logging--\n--internal--\n}" shape = Mrecord];
+        cloud_simple_serviceb [label = "{Service: cloud_simple_serviceb | --internal--\n'Endpoints': ['/user']\n'Port': 8091\n}" shape = Mrecord];
+        user [label = "{External Entity: user | --exitpoint--\n--user_stereotype--\n--entrypoint--\n}"];
+        cloud_config_server -> cloud_hystrix_turbine [label = " --restful_http--\n"]
+        hystrix -> gateway [label = " --restful_http--\n"]
+        turbine -> gateway [label = " --restful_http--\n"]
+        gateway -> zipkin [label = " --restful_http--\n"]
+        simple_service -> zipkin [label = " --restful_http--\n"]
+        simple_service2 -> zipkin [label = " --restful_http--\n"]
+        simple_serviceb -> zipkin [label = " --restful_http--\n"]
+        simple_ui -> zipkin [label = " --restful_http--\n"]
+        cloud_simple_serviceb -> cloud_eureka_server [label = " --restful_http--\n"]
+        uaa_service -> cloud_eureka_server [label = " --restful_http--\n"]
+        cloud_simple_ui -> cloud_eureka_server [label = " --restful_http--\n--circuit_breaker_link--\n--load_balanced_link--\n'Load Balancer': 'Spring Cloud'\n"]
+        cloud_dummy_service -> cloud_eureka_server [label = " --restful_http--\n"]
+        cloud_hystrix_turbine -> cloud_eureka_server [label = " --restful_http--\n"]
+        cloud_config_server -> cloud_eureka_server [label = " --restful_http--\n"]
+        cloud_simple_service -> cloud_eureka_server [label = " --restful_http--\n"]
+        user -> gateway [label = " --restful_http--\n"]
+        gateway -> user [label = " --restful_http--\n"]
+        cloud_hystrix_turbine -> hystrix_dashboard [label = " --restful_http--\n"]
+
+}
+@enduml

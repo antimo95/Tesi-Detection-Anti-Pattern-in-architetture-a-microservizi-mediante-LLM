@@ -1,0 +1,528 @@
+{
+    "microservices": [
+        {
+            "name": "testclient",
+            "type": "service",
+            "stereotype_instances": [
+                "internal"
+            ],
+            "tagged_values": []
+        },
+        {
+            "name": "qbike-uc",
+            "type": "service",
+            "stereotype_instances": [
+                "internal"
+            ],
+            "tagged_values": [
+                [
+                    "Endpoints",
+                    "['/\"users']"
+                ],
+                [
+                    "Port",
+                    8000
+                ]
+            ]
+        },
+        {
+            "name": "microservice-api-gateway",
+            "type": "service",
+            "stereotype_instances": [
+                "load_balancer",
+                "infrastructural",
+                "gateway"
+            ],
+            "tagged_values": [
+                [
+                    "Port",
+                    8050
+                ],
+                [
+                    "Gateway",
+                    "Zuul"
+                ],
+                [
+                    "Load Balancer",
+                    "Ribbon"
+                ]
+            ]
+        },
+        {
+            "name": "qbike-intention",
+            "type": "service",
+            "stereotype_instances": [
+                "circuit_breaker",
+                "local_logging",
+                "internal",
+                "load_balancer"
+            ],
+            "tagged_values": [
+                [
+                    "Load Balancer",
+                    "Spring Cloud"
+                ],
+                [
+                    "Circuit Breaker",
+                    "Hystrix"
+                ],
+                [
+                    "Port",
+                    8001
+                ]
+            ]
+        },
+        {
+            "name": "qbike-trip",
+            "type": "service",
+            "stereotype_instances": [
+                "circuit_breaker",
+                "local_logging",
+                "internal",
+                "load_balancer"
+            ],
+            "tagged_values": [
+                [
+                    "Load Balancer",
+                    "Spring Cloud"
+                ],
+                [
+                    "Circuit Breaker",
+                    "Hystrix"
+                ],
+                [
+                    "Port",
+                    8003
+                ]
+            ]
+        },
+        {
+            "name": "eureka",
+            "type": "service",
+            "stereotype_instances": [
+                "service_discovery",
+                "infrastructural"
+            ],
+            "tagged_values": [
+                [
+                    "Service Discovery",
+                    "Eureka"
+                ],
+                [
+                    "Port",
+                    8761
+                ]
+            ]
+        },
+        {
+            "name": "qbike-order",
+            "type": "service",
+            "stereotype_instances": [
+                "circuit_breaker",
+                "local_logging",
+                "internal",
+                "load_balancer"
+            ],
+            "tagged_values": [
+                [
+                    "Load Balancer",
+                    "Spring Cloud"
+                ],
+                [
+                    "Circuit Breaker",
+                    "Hystrix"
+                ],
+                [
+                    "Port",
+                    8002
+                ]
+            ]
+        },
+        {
+            "name": "rabbit",
+            "type": "service",
+            "stereotype_instances": [
+                "infrastructural",
+                "message_broker"
+            ],
+            "tagged_values": [
+                [
+                    "Message Broker",
+                    "RabbitMQ"
+                ],
+                [
+                    "Port",
+                    15672
+                ]
+            ]
+        },
+        {
+            "name": "mysql",
+            "type": "service",
+            "stereotype_instances": [
+                "internal"
+            ],
+            "tagged_values": [
+                [
+                    "Port",
+                    13306
+                ]
+            ]
+        },
+        {
+            "name": "zipkin",
+            "type": "service",
+            "stereotype_instances": [
+                "tracing_server",
+                "infrastructural"
+            ],
+            "tagged_values": [
+                [
+                    "Port",
+                    9411
+                ],
+                [
+                    "Tracing Server",
+                    "Zipkin"
+                ]
+            ]
+        }
+    ],
+    "information_flows": [
+        {
+            "sender": "rabbit",
+            "receiver": "qbike-order",
+            "stereotype_instances": [
+                "message_consumer_rabbitmq",
+                "restful_http"
+            ],
+            "tagged_values": [
+                [
+                    "Queue",
+                    "intention"
+                ]
+            ]
+        },
+        {
+            "sender": "qbike-intention",
+            "receiver": "qbike-trip",
+            "stereotype_instances": [
+                "circuit_breaker_link",
+                "restful_http",
+                "load_balanced_link"
+            ],
+            "tagged_values": [
+                [
+                    "Load Balancer",
+                    "Spring Cloud"
+                ],
+                [
+                    "Circuit Breaker",
+                    "Hystrix"
+                ]
+            ]
+        },
+        {
+            "sender": "database-qbike-uc",
+            "receiver": "qbike-uc",
+            "stereotype_instances": [
+                "jdbc",
+                "plaintext_credentials_link"
+            ],
+            "tagged_values": [
+                [
+                    "Username",
+                    "root"
+                ]
+            ]
+        },
+        {
+            "sender": "database-qbike-intention",
+            "receiver": "qbike-intention",
+            "stereotype_instances": [
+                "jdbc",
+                "plaintext_credentials_link"
+            ],
+            "tagged_values": [
+                [
+                    "Username",
+                    "root"
+                ]
+            ]
+        },
+        {
+            "sender": "database-qbike-trip",
+            "receiver": "qbike-trip",
+            "stereotype_instances": [
+                "jdbc",
+                "plaintext_credentials_link"
+            ],
+            "tagged_values": [
+                [
+                    "Username",
+                    "root"
+                ]
+            ]
+        },
+        {
+            "sender": "database-qbike-order",
+            "receiver": "qbike-order",
+            "stereotype_instances": [
+                "jdbc",
+                "plaintext_credentials_link"
+            ],
+            "tagged_values": [
+                [
+                    "Username",
+                    "root"
+                ]
+            ]
+        },
+        {
+            "sender": "uc",
+            "receiver": "mysql",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "uc",
+            "receiver": "rabbit",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "intention",
+            "receiver": "mysql",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "intention",
+            "receiver": "rabbit",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "position",
+            "receiver": "mysql",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "position",
+            "receiver": "rabbit",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "order",
+            "receiver": "mysql",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "order",
+            "receiver": "rabbit",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "api-gateway",
+            "receiver": "rabbit",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "zipkin",
+            "receiver": "rabbit",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "qbike-uc",
+            "receiver": "eureka",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "qbike-trip",
+            "receiver": "eureka",
+            "stereotype_instances": [
+                "circuit_breaker_link",
+                "restful_http",
+                "load_balanced_link"
+            ],
+            "tagged_values": [
+                [
+                    "Load Balancer",
+                    "Spring Cloud"
+                ],
+                [
+                    "Circuit Breaker",
+                    "Hystrix"
+                ]
+            ]
+        },
+        {
+            "sender": "eureka",
+            "receiver": "microservice-api-gateway",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "qbike-intention",
+            "receiver": "eureka",
+            "stereotype_instances": [
+                "circuit_breaker_link",
+                "restful_http",
+                "load_balanced_link"
+            ],
+            "tagged_values": [
+                [
+                    "Load Balancer",
+                    "Spring Cloud"
+                ],
+                [
+                    "Circuit Breaker",
+                    "Hystrix"
+                ]
+            ]
+        },
+        {
+            "sender": "qbike-order",
+            "receiver": "eureka",
+            "stereotype_instances": [
+                "circuit_breaker_link",
+                "restful_http",
+                "load_balanced_link"
+            ],
+            "tagged_values": [
+                [
+                    "Load Balancer",
+                    "Spring Cloud"
+                ],
+                [
+                    "Circuit Breaker",
+                    "Hystrix"
+                ]
+            ]
+        },
+        {
+            "sender": "user",
+            "receiver": "microservice-api-gateway",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "microservice-api-gateway",
+            "receiver": "user",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        }
+    ],
+    "external_components": [
+        {
+            "name": "database-qbike-uc",
+            "type": "external_component",
+            "stereotype_instances": [
+                "entrypoint",
+                "plaintext_credentials",
+                "external_database",
+                "exitpoint"
+            ],
+            "tagged_values": [
+                [
+                    "Database",
+                    "MySQL"
+                ],
+                [
+                    "Username",
+                    "root"
+                ]
+            ]
+        },
+        {
+            "name": "database-qbike-intention",
+            "type": "external_component",
+            "stereotype_instances": [
+                "entrypoint",
+                "plaintext_credentials",
+                "external_database",
+                "exitpoint"
+            ],
+            "tagged_values": [
+                [
+                    "Database",
+                    "MySQL"
+                ],
+                [
+                    "Username",
+                    "root"
+                ]
+            ]
+        },
+        {
+            "name": "database-qbike-trip",
+            "type": "external_component",
+            "stereotype_instances": [
+                "entrypoint",
+                "plaintext_credentials",
+                "external_database",
+                "exitpoint"
+            ],
+            "tagged_values": [
+                [
+                    "Database",
+                    "MySQL"
+                ],
+                [
+                    "Username",
+                    "root"
+                ]
+            ]
+        },
+        {
+            "name": "database-qbike-order",
+            "type": "external_component",
+            "stereotype_instances": [
+                "entrypoint",
+                "plaintext_credentials",
+                "external_database",
+                "exitpoint"
+            ],
+            "tagged_values": [
+                [
+                    "Database",
+                    "MySQL"
+                ],
+                [
+                    "Username",
+                    "root"
+                ]
+            ]
+        },
+        {
+            "name": "user",
+            "type": "external_component",
+            "stereotype_instances": [
+                "entrypoint",
+                "user_stereotype",
+                "exitpoint"
+            ]
+        }
+    ]
+}

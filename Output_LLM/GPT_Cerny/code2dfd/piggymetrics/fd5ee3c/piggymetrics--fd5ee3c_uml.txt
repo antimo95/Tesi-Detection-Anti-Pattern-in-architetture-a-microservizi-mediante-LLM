@@ -1,0 +1,64 @@
+
+@startuml
+skinparam monochrome true
+skinparam ClassBackgroundColor White
+skinparam defaultFontName Arial
+skinparam defaultFontSize 11
+
+
+digraph dfd2{
+    node[shape=record]
+        statistics_service [label = "{Service: statistics_service | --pre_authorized_endpoints--\n--local_logging--\n--resource_server--\n--internal--\n'Port': 7000\n'Endpoints': ['/\n}" shape = Mrecord];
+        turbine_stream_service [label = "{Service: turbine_stream_service | --monitoring_server--\n--infrastructural--\n'Port': 8989\n'Monitoring Server': 'Turbine'\n}" shape = Mrecord];
+        account_service [label = "{Service: account_service | --resource_server--\n--circuit_breaker--\n--pre_authorized_endpoints--\n--local_logging--\n--internal--\n'Endpoints': ['/\n}" shape = Mrecord];
+        notification_service [label = "{Service: notification_service | --local_logging--\n--resource_server--\n--internal--\n'Endpoints': ['/recipients'\n}" shape = Mrecord];
+        gateway [label = "{Service: gateway | --gateway--\n--load_balancer--\n--infrastructural--\n'Load Balancer': 'Ribbon'\n'Port': 4000\n'Gateway': 'Zuul'\n}" shape = Mrecord];
+        auth_service [label = "{Service: auth_service | --csrf_disabled--\n--resource_server--\n--infrastructural--\n--token_server--\n--pre_authorized_endpoints--\n--local_logging--\n--authentication_scope_all_requests--\n--authorization_server--\n--encryption--\n'Endpoints': ['/users'\n'Port': 5000\n'Authorization Server': 'Spring OAuth2'\n}" shape = Mrecord];
+        monitoring [label = "{Service: monitoring | --monitoring_dashboard--\n--infrastructural--\n'Port': 8080\n'Monitoring Dashboard': 'Hystrix'\n}" shape = Mrecord];
+        registry [label = "{Service: registry | --service_discovery--\n--infrastructural--\n'Service Discovery': 'Eureka'\n'Port': 8761\n}" shape = Mrecord];
+        config [label = "{Service: config | --basic_authentication--\n--configuration_server--\n--infrastructural--\n--csrf_disabled--\n'Port': 8888\n'Configuration Server': 'Spring Cloud Config'\n}" shape = Mrecord];
+        account_mongodb [label = "{Service: account_mongodb | --plaintext_credentials--\n--database--\n'Password': 'password\n'\n'Username': 'user'\n}" shape = Mrecord];
+        notification_mongodb [label = "{Service: notification_mongodb | --plaintext_credentials--\n--database--\n'Password': 'password\n'\n'Username': 'user'\n}" shape = Mrecord];
+        auth_mongodb [label = "{Service: auth_mongodb | --plaintext_credentials--\n--database--\n'Password': 'password\n'\n'Username': 'user'\n}" shape = Mrecord];
+        statistics_mongodb [label = "{Service: statistics_mongodb | --plaintext_credentials--\n--database--\n'Password': 'password\n'\n'Username': 'user'\n}" shape = Mrecord];
+        rabbitmq [label = "{Service: rabbitmq | --message_broker--\n--infrastructural--\n'Port': 15672\n'Message Broker': 'RabbitMQ'\n}" shape = Mrecord];
+        user [label = "{External Entity: user | --user_stereotype--\n--entrypoint--\n--exitpoint--\n}"];
+        external_website [label = "{External Entity: external_website | --entrypoint--\n--exitpoint--\n--external_website--\n'URL': 'https\n}"];
+        mail_server [label = "{External Entity: mail_server | --plaintext_credentials--\n--mail_server--\n--entrypoint--\n--exitpoint--\n'Host': 'smtp.gmail.com'\n'Password': 'dev-password'\n'Username': 'dev-user'\n}"];
+        config -> statistics_service [label = " --plaintext_credentials_link--\n--restful_http--\n"]
+        config -> turbine_stream_service [label = " --plaintext_credentials_link--\n--restful_http--\n"]
+        config -> account_service [label = " --plaintext_credentials_link--\n--restful_http--\n"]
+        config -> notification_service [label = " --plaintext_credentials_link--\n--restful_http--\n"]
+        config -> gateway [label = " --plaintext_credentials_link--\n--restful_http--\n"]
+        config -> auth_service [label = " --plaintext_credentials_link--\n--restful_http--\n"]
+        config -> monitoring [label = " --plaintext_credentials_link--\n--restful_http--\n"]
+        config -> registry [label = " --plaintext_credentials_link--\n--restful_http--\n"]
+        statistics_mongodb -> statistics_service [label = " --plaintext_credentials_link--\n--jdbc--\n'Password': 'password'\n 'Username': 'user'\n"]
+        account_mongodb -> account_service [label = " --plaintext_credentials_link--\n--jdbc--\n'Password': 'password'\n 'Username': 'user'\n"]
+        notification_mongodb -> notification_service [label = " --plaintext_credentials_link--\n--jdbc--\n'Password': 'password'\n 'Username': 'user'\n"]
+        auth_mongodb -> auth_service [label = " --plaintext_credentials_link--\n--jdbc--\n'Password': 'password'\n 'Username': 'user'\n"]
+        auth_service -> registry [label = " --restful_http--\n"]
+        notification_service -> registry [label = " --restful_http--\n"]
+        turbine_stream_service -> registry [label = " --restful_http--\n"]
+        statistics_service -> registry [label = " --restful_http--\n"]
+        account_service -> registry [label = " --circuit_breaker_link--\n--restful_http--\n'Circuit Breaker': 'Hystrix'\n"]
+        registry -> gateway [label = " --restful_http--\n"]
+        user -> gateway [label = " --restful_http--\n"]
+        gateway -> user [label = " --restful_http--\n"]
+        gateway -> notification_service [label = " --circuit_breaker_link--\n--load_balanced_link--\n--restful_http--\n'Load Balancer': 'Ribbon'\n 'Circuit Breaker': 'Hystrix'\n"]
+        gateway -> statistics_service [label = " --circuit_breaker_link--\n--load_balanced_link--\n--restful_http--\n'Load Balancer': 'Ribbon'\n 'Circuit Breaker': 'Hystrix'\n"]
+        gateway -> account_service [label = " --circuit_breaker_link--\n--load_balanced_link--\n--restful_http--\n'Load Balancer': 'Ribbon'\n 'Circuit Breaker': 'Hystrix'\n"]
+        gateway -> auth_service [label = " --circuit_breaker_link--\n--load_balanced_link--\n--restful_http--\n'Load Balancer': 'Ribbon'\n 'Circuit Breaker': 'Hystrix'\n"]
+        auth_service -> statistics_service [label = " --authentication_with_plaintext_credentials--\n--plaintext_credentials_link--\n--auth_provider--\n--restful_http--\n'Password': 'password\n'\n"]
+        auth_service -> account_service [label = " --authentication_with_plaintext_credentials--\n--plaintext_credentials_link--\n--auth_provider--\n--restful_http--\n'Password': 'password\n'\n"]
+        auth_service -> notification_service [label = " --authentication_with_plaintext_credentials--\n--plaintext_credentials_link--\n--auth_provider--\n--restful_http--\n'Password': 'password\n'\n"]
+        turbine_stream_service -> monitoring [label = " --restful_http--\n"]
+        rabbitmq -> turbine_stream_service [label = " --restful_http--\n"]
+        statistics_service -> rabbitmq [label = " --restful_http--\n"]
+        account_service -> rabbitmq [label = " --circuit_breaker_link--\n--restful_http--\n'Circuit Breaker': 'Hystrix'\n"]
+        notification_service -> rabbitmq [label = " --restful_http--\n"]
+        external_website -> statistics_service [label = " --restful_http--\n"]
+        notification_service -> mail_server [label = " --plaintext_credentials_link--\n--restful_http--\n"]
+
+}
+@enduml

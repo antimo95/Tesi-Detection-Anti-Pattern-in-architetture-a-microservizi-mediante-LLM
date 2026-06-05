@@ -1,0 +1,27 @@
+
+@startuml
+skinparam monochrome true
+skinparam ClassBackgroundColor White
+skinparam defaultFontName Arial
+skinparam defaultFontSize 11
+
+
+digraph dfd2{
+    node[shape=record]
+        menu_service [label = "{Service: menu_service | --internal--\n--resource_server--\n'Port': 8083\n}" shape = Mrecord];
+        microsec_uaa [label = "{Service: microsec_uaa | --internal--\n}" shape = Mrecord];
+        admin_portal [label = "{Service: admin_portal | --internal--\n--circuit_breaker--\n--load_balancer--\n'Port': 8084\n'Endpoints': ['/menuItems'\n}" shape = Mrecord];
+        microsec_common [label = "{Service: microsec_common | --internal--\n'Endpoints': ['/dump_token']\n}" shape = Mrecord];
+        order_service [label = "{Service: order_service | --internal--\n--pre_authorized_endpoints--\n--resource_server--\n--load_balancer--\n'Pre-authorized Endpoints': ['/myorders']\n'Port': 8085\n'Load Balancer': 'Spring Cloud'\n'Endpoints': ['/myorders']\n}" shape = Mrecord];
+        microsec_hystrix_dashboard [label = "{Service: microsec_hystrix_dashboard | --infrastructural--\n--monitoring_dashboard--\n'Monitoring Dashboard': 'Hystrix'\n'Port': 9999\n}" shape = Mrecord];
+        microsec_eureka_server [label = "{Service: microsec_eureka_server | --infrastructural--\n--service_discovery--\n'Service Discovery': 'Eureka'\n'Port': 8761\n}" shape = Mrecord];
+        microsec_custom_registry [label = "{Service: microsec_custom_registry | --infrastructural--\n--authorization_server--\n--csrf_disabled--\n'Endpoints': ['/'\n'Authorization Server': 'Spring OAuth2'\n}" shape = Mrecord];
+        customer_portal [label = "{Service: customer_portal | --internal--\n--circuit_breaker--\n--load_balancer--\n'Endpoints': ['/'\n'Load Balancer': 'Spring Cloud'\n'Port': 8082\n}" shape = Mrecord];
+        microsec_test [label = "{Service: microsec_test | --internal--\n}" shape = Mrecord];
+        menu_service -> microsec_eureka_server [label = " --restful_http--\n"]
+        order_service -> microsec_eureka_server [label = " --restful_http--\n--load_balanced_link--\n'Load Balancer': 'Spring Cloud'\n"]
+        customer_portal -> microsec_eureka_server [label = " --restful_http--\n--load_balanced_link--\n--circuit_breaker_link--\n'Load Balancer': 'Spring Cloud'\n"]
+        admin_portal -> microsec_eureka_server [label = " --restful_http--\n--load_balanced_link--\n--circuit_breaker_link--\n'Load Balancer': 'Spring Cloud'\n"]
+
+}
+@enduml

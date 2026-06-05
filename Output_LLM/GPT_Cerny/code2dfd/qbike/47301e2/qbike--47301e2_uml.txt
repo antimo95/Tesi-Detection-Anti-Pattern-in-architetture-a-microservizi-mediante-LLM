@@ -1,0 +1,51 @@
+
+@startuml
+skinparam monochrome true
+skinparam ClassBackgroundColor White
+skinparam defaultFontName Arial
+skinparam defaultFontSize 11
+
+
+digraph dfd2{
+    node[shape=record]
+        testclient [label = "{Service: testclient | --internal--\n}" shape = Mrecord];
+        qbike_uc [label = "{Service: qbike_uc | --internal--\n'Endpoints': '[\'/"users\']'\n'Port': 8000\n}" shape = Mrecord];
+        microservice_api_gateway [label = "{Service: microservice_api_gateway | --load_balancer--\n--infrastructural--\n--gateway--\n'Port': 8050\n'Gateway': 'Zuul'\n'Load Balancer': 'Ribbon'\n}" shape = Mrecord];
+        qbike_intention [label = "{Service: qbike_intention | --load_balancer--\n--internal--\n--circuit_breaker--\n--local_logging--\n'Load Balancer': 'Spring Cloud'\n'Circuit Breaker': 'Hystrix'\n'Port': 8001\n}" shape = Mrecord];
+        qbike_trip [label = "{Service: qbike_trip | --load_balancer--\n--internal--\n--circuit_breaker--\n--local_logging--\n'Load Balancer': 'Spring Cloud'\n'Circuit Breaker': 'Hystrix'\n'Port': 8003\n}" shape = Mrecord];
+        eureka [label = "{Service: eureka | --service_discovery--\n--infrastructural--\n'Service Discovery': 'Eureka'\n'Port': 8761\n}" shape = Mrecord];
+        qbike_order [label = "{Service: qbike_order | --load_balancer--\n--internal--\n--circuit_breaker--\n--local_logging--\n'Load Balancer': 'Spring Cloud'\n'Circuit Breaker': 'Hystrix'\n'Port': 8002\n}" shape = Mrecord];
+        rabbit [label = "{Service: rabbit | --infrastructural--\n--message_broker--\n'Message Broker': 'RabbitMQ'\n'Port': 15672\n}" shape = Mrecord];
+        mysql [label = "{Service: mysql | --internal--\n'Port': 13306\n}" shape = Mrecord];
+        zipkin [label = "{Service: zipkin | --tracing_server--\n--infrastructural--\n'Port': 9411\n'Tracing Server': 'Zipkin'\n}" shape = Mrecord];
+        database_qbike_uc [label = "{External Entity: database_qbike_uc | --entrypoint--\n--plaintext_credentials--\n--external_database--\n--exitpoint--\n'Database': 'MySQL'\n'Username': 'root'\n}"];
+        database_qbike_intention [label = "{External Entity: database_qbike_intention | --entrypoint--\n--plaintext_credentials--\n--external_database--\n--exitpoint--\n'Database': 'MySQL'\n'Username': 'root'\n}"];
+        database_qbike_trip [label = "{External Entity: database_qbike_trip | --entrypoint--\n--plaintext_credentials--\n--external_database--\n--exitpoint--\n'Database': 'MySQL'\n'Username': 'root'\n}"];
+        database_qbike_order [label = "{External Entity: database_qbike_order | --entrypoint--\n--plaintext_credentials--\n--external_database--\n--exitpoint--\n'Database': 'MySQL'\n'Username': 'root'\n}"];
+        user [label = "{External Entity: user | --entrypoint--\n--user_stereotype--\n--exitpoint--\n}"];
+        rabbit -> qbike_order [label = " --message_consumer_rabbitmq--\n--restful_http--\n'Queue': 'intention'\n"]
+        qbike_intention -> qbike_trip [label = " --circuit_breaker_link--\n--restful_http--\n--load_balanced_link--\n'Load Balancer': 'Spring Cloud'\n 'Circuit Breaker': 'Hystrix'\n"]
+        database_qbike_uc -> qbike_uc [label = " --jdbc--\n--plaintext_credentials_link--\n'Username': 'root'\n"]
+        database_qbike_intention -> qbike_intention [label = " --jdbc--\n--plaintext_credentials_link--\n'Username': 'root'\n"]
+        database_qbike_trip -> qbike_trip [label = " --jdbc--\n--plaintext_credentials_link--\n'Username': 'root'\n"]
+        database_qbike_order -> qbike_order [label = " --jdbc--\n--plaintext_credentials_link--\n'Username': 'root'\n"]
+        uc -> mysql [label = " --restful_http--\n"]
+        uc -> rabbit [label = " --restful_http--\n"]
+        intention -> mysql [label = " --restful_http--\n"]
+        intention -> rabbit [label = " --restful_http--\n"]
+        position -> mysql [label = " --restful_http--\n"]
+        position -> rabbit [label = " --restful_http--\n"]
+        order -> mysql [label = " --restful_http--\n"]
+        order -> rabbit [label = " --restful_http--\n"]
+        api_gateway -> rabbit [label = " --restful_http--\n"]
+        zipkin -> rabbit [label = " --restful_http--\n"]
+        qbike_uc -> eureka [label = " --restful_http--\n"]
+        qbike_trip -> eureka [label = " --circuit_breaker_link--\n--restful_http--\n--load_balanced_link--\n'Load Balancer': 'Spring Cloud'\n 'Circuit Breaker': 'Hystrix'\n"]
+        eureka -> microservice_api_gateway [label = " --restful_http--\n"]
+        qbike_intention -> eureka [label = " --circuit_breaker_link--\n--restful_http--\n--load_balanced_link--\n'Load Balancer': 'Spring Cloud'\n 'Circuit Breaker': 'Hystrix'\n"]
+        qbike_order -> eureka [label = " --circuit_breaker_link--\n--restful_http--\n--load_balanced_link--\n'Load Balancer': 'Spring Cloud'\n 'Circuit Breaker': 'Hystrix'\n"]
+        user -> microservice_api_gateway [label = " --restful_http--\n"]
+        microservice_api_gateway -> user [label = " --restful_http--\n"]
+
+}
+@enduml

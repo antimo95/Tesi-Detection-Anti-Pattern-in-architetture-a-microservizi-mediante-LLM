@@ -1,0 +1,230 @@
+{
+    "microservices": [
+        {
+            "name": "menu-service",
+            "type": "service",
+            "stereotype_instances": [
+                "internal",
+                "resource_server"
+            ],
+            "tagged_values": [
+                [
+                    "Port",
+                    8083
+                ]
+            ]
+        },
+        {
+            "name": "microsec-uaa",
+            "type": "service",
+            "stereotype_instances": [
+                "internal"
+            ],
+            "tagged_values": []
+        },
+        {
+            "name": "admin-portal",
+            "type": "service",
+            "stereotype_instances": [
+                "internal",
+                "circuit_breaker",
+                "load_balancer"
+            ],
+            "tagged_values": [
+                [
+                    "Port",
+                    8084
+                ],
+                [
+                    "Endpoints",
+                    "['/menuItems', '/menuItems/{id}/delete', '/orders', '/orders/{id}/delete', '/', '/menuItems/new', '/menuItems/{id}']"
+                ],
+                [
+                    "Load Balancer",
+                    "Spring Cloud"
+                ]
+            ]
+        },
+        {
+            "name": "microsec-common",
+            "type": "service",
+            "stereotype_instances": [
+                "internal"
+            ],
+            "tagged_values": [
+                [
+                    "Endpoints",
+                    "['/dump_token']"
+                ]
+            ]
+        },
+        {
+            "name": "order-service",
+            "type": "service",
+            "stereotype_instances": [
+                "internal",
+                "pre_authorized_endpoints",
+                "resource_server",
+                "load_balancer"
+            ],
+            "tagged_values": [
+                [
+                    "Pre-authorized Endpoints",
+                    "['/myorders']"
+                ],
+                [
+                    "Port",
+                    8085
+                ],
+                [
+                    "Load Balancer",
+                    "Spring Cloud"
+                ],
+                [
+                    "Endpoints",
+                    "['/myorders']"
+                ]
+            ]
+        },
+        {
+            "name": "microsec-hystrix-dashboard",
+            "type": "service",
+            "stereotype_instances": [
+                "infrastructural",
+                "monitoring_dashboard"
+            ],
+            "tagged_values": [
+                [
+                    "Monitoring Dashboard",
+                    "Hystrix"
+                ],
+                [
+                    "Port",
+                    9999
+                ]
+            ]
+        },
+        {
+            "name": "microsec-eureka-server",
+            "type": "service",
+            "stereotype_instances": [
+                "infrastructural",
+                "service_discovery"
+            ],
+            "tagged_values": [
+                [
+                    "Service Discovery",
+                    "Eureka"
+                ],
+                [
+                    "Port",
+                    8761
+                ]
+            ]
+        },
+        {
+            "name": "microsec-custom-registry",
+            "type": "service",
+            "stereotype_instances": [
+                "infrastructural",
+                "authorization_server",
+                "csrf_disabled"
+            ],
+            "tagged_values": [
+                [
+                    "Endpoints",
+                    "['/', '/login']"
+                ],
+                [
+                    "Authorization Server",
+                    "Spring OAuth2"
+                ]
+            ]
+        },
+        {
+            "name": "customer-portal",
+            "type": "service",
+            "stereotype_instances": [
+                "internal",
+                "circuit_breaker",
+                "load_balancer"
+            ],
+            "tagged_values": [
+                [
+                    "Endpoints",
+                    "['/', '/menu', '/myorders']"
+                ],
+                [
+                    "Load Balancer",
+                    "Spring Cloud"
+                ],
+                [
+                    "Port",
+                    8082
+                ]
+            ]
+        },
+        {
+            "name": "microsec-test",
+            "type": "service",
+            "stereotype_instances": [
+                "internal"
+            ],
+            "tagged_values": []
+        }
+    ],
+    "information_flows": [
+        {
+            "sender": "menu-service",
+            "receiver": "microsec-eureka-server",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "order-service",
+            "receiver": "microsec-eureka-server",
+            "stereotype_instances": [
+                "restful_http",
+                "load_balanced_link"
+            ],
+            "tagged_values": [
+                [
+                    "Load Balancer",
+                    "Spring Cloud"
+                ]
+            ]
+        },
+        {
+            "sender": "customer-portal",
+            "receiver": "microsec-eureka-server",
+            "stereotype_instances": [
+                "restful_http",
+                "load_balanced_link",
+                "circuit_breaker_link"
+            ],
+            "tagged_values": [
+                [
+                    "Load Balancer",
+                    "Spring Cloud"
+                ]
+            ]
+        },
+        {
+            "sender": "admin-portal",
+            "receiver": "microsec-eureka-server",
+            "stereotype_instances": [
+                "restful_http",
+                "load_balanced_link",
+                "circuit_breaker_link"
+            ],
+            "tagged_values": [
+                [
+                    "Load Balancer",
+                    "Spring Cloud"
+                ]
+            ]
+        }
+    ],
+    "external_components": []
+}

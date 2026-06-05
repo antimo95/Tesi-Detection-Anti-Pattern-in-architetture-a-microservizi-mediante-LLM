@@ -1,0 +1,179 @@
+{
+    "nodes": {
+        "tools.descartes.teastore.recommender": {
+            "file": "services/tools.descartes.teastore.recommender/pom.xml",
+            "line": 81,
+            "span": "[13:49]",
+            "sub_items": {
+                "local_logging": {
+                    "file": "services/tools.descartes.teastore.recommender/src/main/java/tools/descartes/teastore/recommender/algorithm/RecommenderSelector.java",
+                    "line": "24",
+                    "span": "(17, 30)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "tools.descartes.teastore.registry": {
+            "file": "services/tools.descartes.teastore.registry/pom.xml",
+            "line": 114,
+            "span": "[13:46]",
+            "sub_items": {
+                "local_logging": {
+                    "file": "services/tools.descartes.teastore.registry/src/main/java/tools/descartes/teastore/registry/rest/Registry.java",
+                    "line": "26",
+                    "span": "(17, 30)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "tools.descartes.teastore.webui": {
+            "file": "services/tools.descartes.teastore.webui/pom.xml",
+            "line": 96,
+            "span": "[13:43]",
+            "sub_items": {
+                "local_logging": {
+                    "file": "services/tools.descartes.teastore.webui/src/main/java/tools/descartes/teastore/webui/servlet/DataBaseActionServlet.java",
+                    "line": "29",
+                    "span": "(17, 30)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "tools.descartes.teastore.image": {
+            "file": "services/tools.descartes.teastore.image/pom.xml",
+            "line": 78,
+            "span": "[13:43]",
+            "sub_items": {
+                "local_logging": {
+                    "file": "services/tools.descartes.teastore.image/src/main/java/tools/descartes/teastore/image/ImageScaler.java",
+                    "line": "21",
+                    "span": "(17, 30)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "tools.descartes.teastore.auth": {
+            "file": "services/tools.descartes.teastore.auth/pom.xml",
+            "line": 78,
+            "span": "[13:42]",
+            "sub_items": {
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "tools.descartes.teastore.persistence": {
+            "file": "services/tools.descartes.teastore.persistence/pom.xml",
+            "line": 91,
+            "span": "[13:49]",
+            "sub_items": {
+                "local_logging": {
+                    "file": "services/tools.descartes.teastore.persistence/src/main/java/tools/descartes/teastore/persistence/daemons/InitialDataGenerationDaemon.java",
+                    "line": "22",
+                    "span": "(17, 30)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "tools.descartes.teastore.entities": {
+            "file": "interfaces/tools.descartes.teastore.entities/pom.xml",
+            "line": 33,
+            "span": "[13:46]",
+            "sub_items": {
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "tools.descartes.teastore.kieker.probes": {
+            "file": "utilities/tools.descartes.teastore.kieker.probes/pom.xml",
+            "line": 13,
+            "span": "[13:51]",
+            "sub_items": {
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "tools.descartes.teastore.dockerbase": {
+            "file": "utilities/tools.descartes.teastore.dockerbase/pom.xml",
+            "line": 45,
+            "span": "[13:48]",
+            "sub_items": {
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "dockermemoryconfigurator": {
+            "file": "utilities/tools.descartes.teastore.dockermemoryconfigurator/pom.xml",
+            "line": 31,
+            "span": "[13:37]",
+            "sub_items": {
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "kieker.rabbitmq": {
+            "file": "utilities/tools.descartes.teastore.kieker.rabbitmq/pom.xml",
+            "line": 3,
+            "span": "[13:28]",
+            "sub_items": {
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "tools.descartes.teastore.registryclient": {
+            "file": "utilities/tools.descartes.teastore.registryclient/pom.xml",
+            "line": 117,
+            "span": "[13:52]",
+            "sub_items": {
+                "local_logging": {
+                    "file": "utilities/tools.descartes.teastore.registryclient/src/main/java/tools/descartes/teastore/registryclient/RegistryClient.java",
+                    "line": "37",
+                    "span": "(17, 30)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        }
+    },
+    "edges": {}
+}

@@ -1,0 +1,226 @@
+{
+    "nodes": {
+        "menu-service": {
+            "file": "/opt/code2DFD/analysed_repositories/freddys-bbq/microsec-menu-service/src/main/resources/application.yml",
+            "line": 1,
+            "span": "(25:37)",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/freddys-bbq/microsec-menu-service/src/main/resources/application.yml",
+                    "line": 3,
+                    "span": "(13, 17)"
+                },
+                "resource_server": {
+                    "file": "microsec-menu-service/src/main/java/microsec/freddysbbq/menu/MenuApplication.java",
+                    "line": "27",
+                    "span": "(0, 21)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "microsec-uaa": {
+            "file": "uaa/pom.xml",
+            "line": 6,
+            "span": "[14:26]",
+            "sub_items": {
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "admin-portal": {
+            "file": "/opt/code2DFD/analysed_repositories/freddys-bbq/microsec-admin-portal/src/main/resources/application.yml",
+            "line": 1,
+            "span": "(25:37)",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/freddys-bbq/microsec-admin-portal/src/main/resources/application.yml",
+                    "line": 3,
+                    "span": "(13, 17)"
+                },
+                "load_balancer": {
+                    "file": "microsec-admin-portal/src/main/java/microsec/freddysbbq/admin_app/AdminApplication.java",
+                    "line": "75",
+                    "span": "(4, 17)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "microsec-common": {
+            "file": "microsec-common/pom.xml",
+            "line": 5,
+            "span": "[14:29]",
+            "sub_items": {
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "order-service": {
+            "file": "/opt/code2DFD/analysed_repositories/freddys-bbq/microsec-order-service/src/main/resources/application.yml",
+            "line": 1,
+            "span": "(25:38)",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/freddys-bbq/microsec-order-service/src/main/resources/application.yml",
+                    "line": 3,
+                    "span": "(13, 17)"
+                },
+                "resource_server": {
+                    "file": "microsec-order-service/src/main/java/microsec/freddysbbq/order/OrderApplication.java",
+                    "line": "25",
+                    "span": "(0, 21)"
+                },
+                "pre_authorized_endpoints": {
+                    "file": "microsec-order-service/src/main/java/microsec/freddysbbq/order/CustomerOrderController.java",
+                    "line": "52",
+                    "span": "(4, 17)"
+                },
+                "load_balancer": {
+                    "file": "microsec-order-service/src/main/java/microsec/freddysbbq/order/OrderApplication.java",
+                    "line": "60",
+                    "span": "(4, 17)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "microsec-hystrix-dashboard": {
+            "file": "microsec-hystrix-dashboard/pom.xml",
+            "line": 5,
+            "span": "[14:40]",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/freddys-bbq/microsec-hystrix-dashboard/src/main/resources/application.yml",
+                    "line": 2,
+                    "span": "(8, 20)"
+                },
+                "monitoring_dashboard": {
+                    "file": "microsec-hystrix-dashboard/src/main/java/microsec/freddysbbq/hystrix_dashboard/HystrixDashboard.java",
+                    "line": "8",
+                    "span": "(0, 23)"
+                },
+                "infrastructural": {
+                    "file": "heuristic, based on stereotype monitoring_dashboard",
+                    "line": "heuristic, based on stereotype monitoring_dashboard",
+                    "span": "heuristic, based on stereotype monitoring_dashboard"
+                }
+            }
+        },
+        "microsec-eureka-server": {
+            "file": "microsec-eureka-server/pom.xml",
+            "line": 5,
+            "span": "[14:36]",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/freddys-bbq/microsec-eureka-server/src/main/resources/application.yml",
+                    "line": 2,
+                    "span": "(8, 20)"
+                },
+                "service_discovery": {
+                    "file": "microsec-eureka-server/src/main/java/microsec/freddysbbq/eureka_server/EurekaServer.java",
+                    "line": "8",
+                    "span": "(0, 19)"
+                },
+                "infrastructural": {
+                    "file": "heuristic, based on stereotype service_discovery",
+                    "line": "heuristic, based on stereotype service_discovery",
+                    "span": "heuristic, based on stereotype service_discovery"
+                }
+            }
+        },
+        "microsec-custom-registry": {
+            "file": "microsec-custom-registry/pom.xml",
+            "line": 6,
+            "span": "[13:37]",
+            "sub_items": {
+                "csrf_disabled": {
+                    "file": "microsec-custom-registry/src/main/java/microsec/freddysbbq/customregistry/SecurityConfig.java",
+                    "line": "8",
+                    "span": "(67, 79)"
+                },
+                "authorization_server": {
+                    "file": "microsec-custom-registry/src/main/java/microsec/freddysbbq/customregistry/CustomRegistryApplication.java",
+                    "line": "9",
+                    "span": "(0, 26)"
+                },
+                "infrastructural": {
+                    "file": "heuristic, based on stereotype authorization_server",
+                    "line": "heuristic, based on stereotype authorization_server",
+                    "span": "heuristic, based on stereotype authorization_server"
+                }
+            }
+        },
+        "customer-portal": {
+            "file": "/opt/code2DFD/analysed_repositories/freddys-bbq/microsec-customer-portal/src/main/resources/application.yml",
+            "line": 1,
+            "span": "(25:40)",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/freddys-bbq/microsec-customer-portal/src/main/resources/application.yml",
+                    "line": 3,
+                    "span": "(13, 17)"
+                },
+                "load_balancer": {
+                    "file": "microsec-customer-portal/src/main/java/microsec/freddysbbq/customer_app/CustomerApplication.java",
+                    "line": "63",
+                    "span": "(4, 17)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "microsec-test": {
+            "file": "microsec-test/pom.xml",
+            "line": 5,
+            "span": "[14:27]",
+            "sub_items": {
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        }
+    },
+    "edges": {
+        "menu-service -> microsec-eureka-server": {
+            "file": "microsec-menu-service/src/main/java/microsec/freddysbbq/menu/MenuApplication.java",
+            "line": "10",
+            "span": "(50, 71)"
+        },
+        "order-service -> microsec-eureka-server": {
+            "file": "microsec-order-service/src/main/java/microsec/freddysbbq/order/OrderApplication.java",
+            "line": "7",
+            "span": "(50, 71)"
+        },
+        "customer-portal -> microsec-eureka-server": {
+            "file": "microsec-customer-portal/src/main/java/microsec/freddysbbq/customer_app/CustomerApplication.java",
+            "line": "11",
+            "span": "(50, 71)"
+        },
+        "admin-portal -> microsec-eureka-server": {
+            "file": "microsec-admin-portal/src/main/java/microsec/freddysbbq/admin_app/AdminApplication.java",
+            "line": "12",
+            "span": "(50, 71)"
+        }
+    }
+}

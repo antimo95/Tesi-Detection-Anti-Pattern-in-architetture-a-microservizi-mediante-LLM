@@ -1,0 +1,284 @@
+{
+    "microservices": [
+        {
+            "name": "apollo-assembly",
+            "type": "service",
+            "stereotype_instances": [
+                "internal",
+                "local_logging"
+            ],
+            "tagged_values": []
+        },
+        {
+            "name": "apollo-core",
+            "type": "service",
+            "stereotype_instances": [
+                "internal",
+                "local_logging"
+            ],
+            "tagged_values": []
+        },
+        {
+            "name": "apollo-demo",
+            "type": "service",
+            "stereotype_instances": [
+                "internal",
+                "local_logging"
+            ],
+            "tagged_values": []
+        },
+        {
+            "name": "apollo-biz",
+            "type": "service",
+            "stereotype_instances": [
+                "internal",
+                "local_logging",
+                "basic_authentication"
+            ],
+            "tagged_values": []
+        },
+        {
+            "name": "apollo-buildtools",
+            "type": "service",
+            "stereotype_instances": [
+                "internal"
+            ],
+            "tagged_values": []
+        },
+        {
+            "name": "apollo-mockserver",
+            "type": "service",
+            "stereotype_instances": [
+                "internal",
+                "local_logging"
+            ],
+            "tagged_values": []
+        },
+        {
+            "name": "apollo-client",
+            "type": "service",
+            "stereotype_instances": [
+                "internal",
+                "local_logging"
+            ],
+            "tagged_values": []
+        },
+        {
+            "name": "apollo-configservice",
+            "type": "service",
+            "stereotype_instances": [
+                "service_discovery",
+                "infrastructural",
+                "local_logging"
+            ],
+            "tagged_values": [
+                [
+                    "Endpoints",
+                    "['/services/admin', '/services/meta', '/configfiles/{appId}/{clusterName}/{namespace:.+}', '/configs/{appId}/{clusterName}/{namespace:.+}', '/configfiles/json/{appId}/{clusterName}/{namespace:.+}', '/notifications/v2', '/configfiles', '/services/config', '/configs', '/services', '/notifications']"
+                ],
+                [
+                    "Port",
+                    "$server_port"
+                ],
+                [
+                    "Port",
+                    8080
+                ],
+                [
+                    "Service Discovery",
+                    "Eureka"
+                ]
+            ]
+        },
+        {
+            "name": "apollo-adminservice",
+            "type": "service",
+            "stereotype_instances": [
+                "internal",
+                "local_logging"
+            ],
+            "tagged_values": [
+                [
+                    "Endpoints",
+                    "['/instances', '/instances/by-namespace/count', '/', '/instances/by-namespace', '/instances/by-release', '/instances/by-namespace-and-releases-not-in']"
+                ],
+                [
+                    "Port",
+                    "$server_port"
+                ],
+                [
+                    "Port",
+                    8090
+                ]
+            ]
+        },
+        {
+            "name": "apollo-portal",
+            "type": "service",
+            "stereotype_instances": [
+                "pre_authorized_endpoints",
+                "internal",
+                "local_logging",
+                "csrf_disabled",
+                "encryption",
+                "basic_authentication"
+            ],
+            "tagged_values": [
+                [
+                    "Pre-authorized Endpoints",
+                    "['/apps/{appId}/envs/{env}/clusters/{clusterName}/namespaces/{namespaceName:.+}', '/apps/{appId}/appnamespaces', '/apps/{appId}/namespaces', '/apps/{appId}/appnamespaces/{namespaceName:.+}']"
+                ],
+                [
+                    "Port",
+                    "$server_port"
+                ],
+                [
+                    "Pre-authorized Endpoints",
+                    "['/apps/{appId}/clusters/{clusterName}/namespaces/{namespaceName}/branches/{branchName}/gray-del-releases', '/apps/{appId}/clusters/{clusterName}/namespaces/{namespaceName}/branches/{branchName}/releases', '/apps/{appId}/clusters/{clusterName}/namespaces/{namespaceName}/branches/{branchName}/merge', '/apps/{appId}/clusters/{clusterName}/namespaces/{namespaceName}/releases']"
+                ],
+                [
+                    "Pre-authorized Endpoints",
+                    "['/apps/{appId}/envs/{env}/clusters/{clusterName}/namespaces/{namespaceName}/branches/{branchName}/rules', '/apps/{appId}/envs/{env}/clusters/{clusterName}/namespaces/{namespaceName}/branches/{branchName}/merge', '/apps/{appId}/envs/{env}/clusters/{clusterName}/namespaces/{namespaceName}/branches']"
+                ],
+                [
+                    "Pre-authorized Endpoints",
+                    "['/health']"
+                ],
+                [
+                    "Pre-authorized Endpoints",
+                    "['/{appId:.+}']"
+                ],
+                [
+                    "Pre-authorized Endpoints",
+                    "['/apps/{appId}/envs/{env}/clusters/{clusterName}/namespaces/{namespaceName}/items/import']"
+                ],
+                [
+                    "Port",
+                    8070
+                ],
+                [
+                    "Pre-authorized Endpoints",
+                    "['/apps/{appId}/clusters/{clusterName}/namespaces/{namespaceName}/branches/{branchName}', '/apps/{appId}/clusters/{clusterName}/namespaces/{namespaceName}/branches/{branchName}/rules', '/apps/{appId}/clusters/{clusterName}/namespaces/{namespaceName}/branches']"
+                ],
+                [
+                    "Pre-authorized Endpoints",
+                    "['apps/{appId}/clusters']"
+                ],
+                [
+                    "Pre-authorized Endpoints",
+                    "['/apps/{appId}/roles/{roleType}', '/apps/{appId}/envs/{env}/namespaces/{namespaceName}/roles/{roleType}', '/apps/{appId}/namespaces/{namespaceName}/roles/{roleType}', '/system/role/createApplication/{userId}', '/system/role/createApplication', '/apps/{appId}/system/master/{userId}']"
+                ],
+                [
+                    "Endpoints",
+                    "['/apps/by-owner', '/openapi/v1/envs/{env}/apps/{appId}/clusters/{clusterName}/namespaces/{namespaceName}/items', '/apps/envs/{env}', '/openapi/v1/envs/{env}/apps/{appId}/clusters/{clusterName}/namespaces/{namespaceName}/items/{key:.+}', '/openapi/v1/envs/{env}/apps/{appId}/clusters/{clusterName}/namespaces/{namespaceName}/branches/{branchName}', '/system-info/health', '/openapi/v1/envs/{env}apps/{appId}/clusters/{clusterName:.+}', '/openapi/v1/envs/{env}/apps/{appId}/clusters/{clusterName}/namespaces/{namespaceName}/branches/{branchName}/releases', '/apps/{appId}/miss_envs', '/openapi/v1/apps', '/openapi/v1/envs/{env}apps/{appId}/clusters', '/openapi/v1/envs/{env}/apps/{appId}/clusters/{clusterName}/namespaces/{namespaceName}/branches/{branchName}/gray-del-releases', '/openapi/v1/envs/{env}', '/envs', '/openapi/v1/envs/{env}/apps/{appId}/clusters/{clusterName}/namespaces/{namespaceName}/releases/latest', '/openapi/v1/envs/{env}/releases/{releaseId}/rollback', '/apps', '/openapi/v1/envs/{env}/apps/{appId}/clusters/{clusterName}/namespaces/{namespaceName}/branches', '/organizations', '/system-info', '/apps/search/by-appid-or-name', '/sso_heartbeat', '/openapi/v1/envs/{env}/apps/{appId}/clusters/{clusterName}/namespaces/{namespaceName}/branches/{branchName}/merge', '/openapi/v1', '/apps/{appId:.+}', '/openapi/v1/envs/{env}/apps/{appId}/clusters/{clusterName}/namespaces/{namespaceName}/branches/{branchName}/rules', '/apps/{appId}/navtree', '/openapi/v1/envs/{env}/apps/{appId}/clusters/{clusterName}/namespaces/{namespaceName}/releases', '/openapi/v1/apps/{appId}/envclusters']"
+                ],
+                [
+                    "Pre-authorized Endpoints",
+                    "['/openapi/v1/apps/{appId}/appnamespaces']"
+                ],
+                [
+                    "Pre-authorized Endpoints",
+                    "['/consumers', '/consumers/{token}/assign-role']"
+                ],
+                [
+                    "Pre-authorized Endpoints",
+                    "['/apps/{appId}/envs/{env}/clusters/{clusterName}/namespaces/{namespaceName}/branches/{branchName}/releases', '/apps/{appId}/envs/{env}/clusters/{clusterName}/namespaces/{namespaceName}/releases']"
+                ],
+                [
+                    "Pre-authorized Endpoints",
+                    "['apps/{appId}/envs/{env}/clusters', 'apps/{appId}/envs/{env}/clusters/{clusterName:.+}']"
+                ],
+                [
+                    "Pre-authorized Endpoints",
+                    "['/apps/{appId}/envs/{env}/accesskeys', '/apps/{appId}/envs/{env}/accesskeys/{id}/disable', '/apps/{appId}/envs/{env}/accesskeys/{id}/enable', '/apps/{appId}/envs/{env}/accesskeys/{id}']"
+                ],
+                [
+                    "Pre-authorized Endpoints",
+                    "['/server/config/{key:.+}', '/server/config']"
+                ],
+                [
+                    "Pre-authorized Endpoints",
+                    "['/apps/{appId}/envs/{env}/clusters/{clusterName}/namespaces/{namespaceName}/items', '/apps/{appId}/envs/{env}/clusters/{clusterName}/namespaces/{namespaceName}/items/{itemId}', '/apps/{appId}/envs/{env}/clusters/{clusterName}/namespaces/{namespaceName}/revoke-items', '/apps/{appId}/envs/{env}/clusters/{clusterName}/namespaces/{namespaceName}/item', '/apps/{appId}/envs/{env}/clusters/{clusterName}/namespaces/{namespaceName}/syntax-check']"
+                ],
+                [
+                    "Pre-authorized Endpoints",
+                    "['/apps/{appId}/clusters/{clusterName}/namespaces/{namespaceName}/items', '/apps/{appId}/clusters/{clusterName}/namespaces/{namespaceName}/items/{key:.+}']"
+                ],
+                [
+                    "Pre-authorized Endpoints",
+                    "['/users']"
+                ],
+                [
+                    "Pre-authorized Endpoints",
+                    "['/apps/{appId}/envs/{env}/clusters/{clusterName}/namespaces/{namespaceName}/items/export']"
+                ]
+            ]
+        },
+        {
+            "name": "apollo-openapi",
+            "type": "service",
+            "stereotype_instances": [
+                "internal"
+            ],
+            "tagged_values": []
+        },
+        {
+            "name": "apollo-common",
+            "type": "service",
+            "stereotype_instances": [
+                "internal",
+                "local_logging"
+            ],
+            "tagged_values": [
+                [
+                    "Endpoints",
+                    "['/apollo']"
+                ]
+            ]
+        },
+        {
+            "name": "apollo-db",
+            "type": "service",
+            "stereotype_instances": [
+                "internal"
+            ],
+            "tagged_values": [
+                [
+                    "Port",
+                    13306
+                ]
+            ]
+        }
+    ],
+    "information_flows": [
+        {
+            "sender": "apollo-quick-start",
+            "receiver": "apollo-db",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "apollo-biz",
+            "receiver": "apollo-configservice",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "apollo-assembly",
+            "receiver": "apollo-configservice",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "apollo-adminservice",
+            "receiver": "apollo-configservice",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        }
+    ],
+    "external_components": []
+}

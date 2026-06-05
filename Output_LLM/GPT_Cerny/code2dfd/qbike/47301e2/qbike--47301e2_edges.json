@@ -1,0 +1,96 @@
+{
+    "edges": [
+        {
+            "sender": "rabbit",
+            "receiver": "qbike-order"
+        },
+        {
+            "sender": "qbike-intention",
+            "receiver": "qbike-trip"
+        },
+        {
+            "sender": "database-qbike-uc",
+            "receiver": "qbike-uc"
+        },
+        {
+            "sender": "database-qbike-intention",
+            "receiver": "qbike-intention"
+        },
+        {
+            "sender": "database-qbike-trip",
+            "receiver": "qbike-trip"
+        },
+        {
+            "sender": "database-qbike-order",
+            "receiver": "qbike-order"
+        },
+        {
+            "sender": "uc",
+            "receiver": "mysql"
+        },
+        {
+            "sender": "uc",
+            "receiver": "rabbit"
+        },
+        {
+            "sender": "intention",
+            "receiver": "mysql"
+        },
+        {
+            "sender": "intention",
+            "receiver": "rabbit"
+        },
+        {
+            "sender": "position",
+            "receiver": "mysql"
+        },
+        {
+            "sender": "position",
+            "receiver": "rabbit"
+        },
+        {
+            "sender": "order",
+            "receiver": "mysql"
+        },
+        {
+            "sender": "order",
+            "receiver": "rabbit"
+        },
+        {
+            "sender": "api-gateway",
+            "receiver": "rabbit"
+        },
+        {
+            "sender": "zipkin",
+            "receiver": "rabbit"
+        },
+        {
+            "sender": "qbike-uc",
+            "receiver": "eureka"
+        },
+        {
+            "sender": "qbike-trip",
+            "receiver": "eureka"
+        },
+        {
+            "sender": "eureka",
+            "receiver": "microservice-api-gateway"
+        },
+        {
+            "sender": "qbike-intention",
+            "receiver": "eureka"
+        },
+        {
+            "sender": "qbike-order",
+            "receiver": "eureka"
+        },
+        {
+            "sender": "user",
+            "receiver": "microservice-api-gateway"
+        },
+        {
+            "sender": "microservice-api-gateway",
+            "receiver": "user"
+        }
+    ]
+}

@@ -1,0 +1,380 @@
+{
+    "nodes": {
+        "cloud-thrift-server": {
+            "file": "cloud-thrift-server/pom.xml",
+            "line": 11,
+            "span": "[16:35]",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/spring-cloud-microservice-examples/cloud-thrift-server/src/main/resources/application.yaml",
+                    "line": 12,
+                    "span": "(8, 12)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "cloud-api-gateway": {
+            "file": "cloud-api-gateway/pom.xml",
+            "line": 11,
+            "span": "[16:33]"
+        },
+        "uaa-service": {
+            "file": "/opt/code2DFD/analysed_repositories/spring-cloud-microservice-examples/cloud-uaa-service/target/classes/application.yml",
+            "line": 3,
+            "span": "(10:21)",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/spring-cloud-microservice-examples/cloud-uaa-service/src/main/resources/application.yml",
+                    "line": 7,
+                    "span": "(8, 12)"
+                },
+                "authorization_server": {
+                    "file": "cloud-uaa-service/src/main/java/cloud/uaa/service/CloudUaaService.java",
+                    "line": "85",
+                    "span": "(4, 30)"
+                },
+                "infrastructural": {
+                    "file": "heuristic, based on stereotype authorization_server",
+                    "line": "heuristic, based on stereotype authorization_server",
+                    "span": "heuristic, based on stereotype authorization_server"
+                }
+            }
+        },
+        "cloud-config-server": {
+            "file": "/opt/code2DFD/analysed_repositories/spring-cloud-microservice-examples/cloud-config-server/src/main/resources/application.yaml",
+            "line": 5,
+            "span": "(25:44)",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/spring-cloud-microservice-examples/cloud-config-server/src/main/resources/application.yaml",
+                    "line": 1,
+                    "span": "(13, 17)"
+                },
+                "configuration_server": {
+                    "file": "cloud-config-server/src/main/java/cloud/config/server/ConfigServerApplication.java",
+                    "line": "18",
+                    "span": "(0, 19)"
+                },
+                "infrastructural": {
+                    "file": "heuristic, based on stereotype configuration_server",
+                    "line": "heuristic, based on stereotype configuration_server",
+                    "span": "heuristic, based on stereotype configuration_server"
+                }
+            }
+        },
+        "cloud-eureka-server": {
+            "file": "/opt/code2DFD/analysed_repositories/spring-cloud-microservice-examples/cloud-eureka-server/src/main/resources/application.yaml",
+            "line": 6,
+            "span": "(25:44)",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/spring-cloud-microservice-examples/cloud-eureka-server/src/main/resources/application.yaml",
+                    "line": 1,
+                    "span": "(13, 17)"
+                },
+                "service_discovery": {
+                    "file": "cloud-eureka-server/src/main/java/cloud/eureka/server/EurekaServer.java",
+                    "line": "17",
+                    "span": "(0, 19)"
+                },
+                "infrastructural": {
+                    "file": "heuristic, based on stereotype service_discovery",
+                    "line": "heuristic, based on stereotype service_discovery",
+                    "span": "heuristic, based on stereotype service_discovery"
+                }
+            }
+        },
+        "cloud-finagle-thrift-api": {
+            "file": "cloud-finagle-thrift-api/pom.xml",
+            "line": 11,
+            "span": "[16:40]",
+            "sub_items": {
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "cloud-simple-ui": {
+            "file": "/opt/code2DFD/analysed_repositories/spring-cloud-microservice-examples/cloud-simple-ui/src/main/resources/bootstrap.yaml",
+            "line": 6,
+            "span": "(25:40)",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/spring-cloud-microservice-examples/cloud-simple-ui/src/main/resources/bootstrap.yaml",
+                    "line": 10,
+                    "span": "(13, 17)"
+                },
+                "load_balancer": {
+                    "file": "cloud-simple-ui/src/main/java/cloud/simple/WebApplication.java",
+                    "line": "30",
+                    "span": "(4, 17)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "cloud-finagle-thrift-client": {
+            "file": "cloud-finagle-thrift-client/pom.xml",
+            "line": 11,
+            "span": "[16:43]",
+            "sub_items": {
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "cloud-thrift-client": {
+            "file": "cloud-thrift-client/pom.xml",
+            "line": 11,
+            "span": "[16:35]",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/spring-cloud-microservice-examples/cloud-thrift-client/src/main/resources/application.yaml",
+                    "line": 11,
+                    "span": "(8, 12)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "cloud-finagle-thrift-server": {
+            "file": "cloud-finagle-thrift-server/pom.xml",
+            "line": 11,
+            "span": "[16:43]",
+            "sub_items": {
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "cloud-finagle-commons-thrift": {
+            "file": "cloud-finagle-commons-thrift/pom.xml",
+            "line": 11,
+            "span": "[16:44]",
+            "sub_items": {
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "hystrix-dashboard": {
+            "file": "/opt/code2DFD/analysed_repositories/spring-cloud-microservice-examples/cloud-hystrix-dashboard/src/main/resources/bootstrap.yaml",
+            "line": 7,
+            "span": "(25:42)",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/spring-cloud-microservice-examples/cloud-hystrix-dashboard/src/main/resources/bootstrap.yaml",
+                    "line": 5,
+                    "span": "(13, 17)"
+                },
+                "monitoring_dashboard": {
+                    "file": "cloud-hystrix-dashboard/src/main/java/cloud/hystrix/dashboard/HystrixDashboard.java",
+                    "line": "19",
+                    "span": "(0, 23)"
+                },
+                "infrastructural": {
+                    "file": "heuristic, based on stereotype monitoring_dashboard",
+                    "line": "heuristic, based on stereotype monitoring_dashboard",
+                    "span": "heuristic, based on stereotype monitoring_dashboard"
+                }
+            }
+        },
+        "cloud-hystrix-turbine": {
+            "file": "/opt/code2DFD/analysed_repositories/spring-cloud-microservice-examples/cloud-hystrix-turbine/src/main/resources/bootstrap.yaml",
+            "line": 9,
+            "span": "(10:31)",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/spring-cloud-microservice-examples/cloud-hystrix-turbine/src/main/resources/bootstrap.yaml",
+                    "line": 5,
+                    "span": "(8, 12)"
+                },
+                "monitoring_server": {
+                    "file": "cloud-hystrix-turbine/src/main/java/cloud/hystrix/turbine/HystrixTurbine.java",
+                    "line": "13",
+                    "span": "(56, 75)"
+                },
+                "infrastructural": {
+                    "file": "heuristic, based on stereotype monitoring_server",
+                    "line": "heuristic, based on stereotype monitoring_server",
+                    "span": "heuristic, based on stereotype monitoring_server"
+                }
+            }
+        },
+        "cloud-zipkin": {
+            "file": "cloud-zipkin/pom.xml",
+            "line": 11,
+            "span": "[16:28]"
+        },
+        "cloud-dummy-service": {
+            "file": "cloud-dummy-service/pom.xml",
+            "line": 11,
+            "span": "[16:35]",
+            "sub_items": {
+                "resource_server": {
+                    "file": "cloud-dummy-service/src/main/java/cloud/dummy/service/CloudDummyService.java",
+                    "line": "23",
+                    "span": "(0, 21)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "cloud-simple-service": {
+            "file": "/opt/code2DFD/analysed_repositories/spring-cloud-microservice-examples/cloud-simple-service/src/main/resources/bootstrap.yaml",
+            "line": 7,
+            "span": "(25:45)",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/spring-cloud-microservice-examples/cloud-simple-service/src/main/resources/bootstrap.yaml",
+                    "line": 8,
+                    "span": "(13, 17)"
+                },
+                "local_logging": {
+                    "file": "cloud-simple-service/src/main/java/cloud/simple/service/web/UserController.java",
+                    "line": "12",
+                    "span": "(17, 30)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "cloud-thrift-interface": {
+            "file": "cloud-thrift-interface/pom.xml",
+            "line": 11,
+            "span": "[16:38]",
+            "sub_items": {
+                "local_logging": {
+                    "file": "cloud-thrift-interface/src/main/java/cloud/thrift/UserService.java",
+                    "line": "34",
+                    "span": "(17, 30)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "cloud-simple-serviceB": {
+            "file": "/opt/code2DFD/analysed_repositories/spring-cloud-microservice-examples/cloud-simple-serviceB/src/main/resources/bootstrap.yaml",
+            "line": 7,
+            "span": "(25:46)",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/spring-cloud-microservice-examples/cloud-simple-serviceB/src/main/resources/bootstrap.yaml",
+                    "line": 8,
+                    "span": "(13, 17)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "user": {
+            "file": "implicit",
+            "line": "implicit",
+            "span": "implicit",
+            "sub_items": {
+                "user_stereotype": {
+                    "file": "implicit",
+                    "line": "implicit",
+                    "span": "implicit"
+                },
+                "entrypoint": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                },
+                "exitpoint": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        }
+    },
+    "edges": {
+        "cloud-config-server -> cloud-hystrix-turbine": {
+            "file": "/opt/code2DFD/analysed_repositories/spring-cloud-microservice-examples/cloud-hystrix-turbine/src/main/resources/bootstrap.yaml",
+            "line": 13,
+            "span": "(12, 33)"
+        },
+        "cloud-simple-serviceB -> cloud-eureka-server": {
+            "file": "cloud-simple-serviceB/src/main/java/cloud/simple/serviceB/SimpleServiceB.java",
+            "line": "11",
+            "span": "(50, 71)"
+        },
+        "uaa-service -> cloud-eureka-server": {
+            "file": "/opt/code2DFD/analysed_repositories/spring-cloud-microservice-examples/cloud-uaa-service/target/classes/application.yml",
+            "line": 19,
+            "span": "(20, 86)"
+        },
+        "cloud-simple-ui -> cloud-eureka-server": {
+            "file": "cloud-simple-ui/src/main/java/cloud/simple/WebApplication.java",
+            "line": "12",
+            "span": "(50, 71)"
+        },
+        "cloud-dummy-service -> cloud-eureka-server": {
+            "file": "cloud-dummy-service/src/main/java/cloud/dummy/service/CloudDummyService.java",
+            "line": "11",
+            "span": "(50, 71)"
+        },
+        "cloud-hystrix-turbine -> cloud-eureka-server": {
+            "file": "cloud-hystrix-turbine/src/main/java/cloud/hystrix/turbine/HystrixTurbine.java",
+            "line": "11",
+            "span": "(50, 71)"
+        },
+        "cloud-config-server -> cloud-eureka-server": {
+            "file": "cloud-config-server/src/main/java/cloud/config/server/ConfigServerApplication.java",
+            "line": "11",
+            "span": "(50, 71)"
+        },
+        "cloud-simple-service -> cloud-eureka-server": {
+            "file": "cloud-simple-service/src/main/java/cloud/simple/service/SimpleService.java",
+            "line": "11",
+            "span": "(50, 71)"
+        },
+        "user -> gateway": {
+            "file": "implicit",
+            "line": "implicit",
+            "span": "implicit"
+        },
+        "gateway -> user": {
+            "file": "implicit",
+            "line": "implicit",
+            "span": "implicit"
+        },
+        "cloud-hystrix-turbine -> hystrix-dashboard": {
+            "file": "cloud-hystrix-turbine/src/main/java/cloud/hystrix/turbine/HystrixTurbine.java",
+            "line": "13",
+            "span": "(56, 75)"
+        }
+    }
+}

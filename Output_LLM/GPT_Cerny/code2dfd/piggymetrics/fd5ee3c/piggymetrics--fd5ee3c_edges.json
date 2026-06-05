@@ -1,0 +1,140 @@
+{
+    "edges": [
+        {
+            "sender": "config",
+            "receiver": "statistics-service"
+        },
+        {
+            "sender": "config",
+            "receiver": "turbine-stream-service"
+        },
+        {
+            "sender": "config",
+            "receiver": "account-service"
+        },
+        {
+            "sender": "config",
+            "receiver": "notification-service"
+        },
+        {
+            "sender": "config",
+            "receiver": "gateway"
+        },
+        {
+            "sender": "config",
+            "receiver": "auth-service"
+        },
+        {
+            "sender": "config",
+            "receiver": "monitoring"
+        },
+        {
+            "sender": "config",
+            "receiver": "registry"
+        },
+        {
+            "sender": "statistics-mongodb",
+            "receiver": "statistics-service"
+        },
+        {
+            "sender": "account-mongodb",
+            "receiver": "account-service"
+        },
+        {
+            "sender": "notification-mongodb",
+            "receiver": "notification-service"
+        },
+        {
+            "sender": "auth-mongodb",
+            "receiver": "auth-service"
+        },
+        {
+            "sender": "auth-service",
+            "receiver": "registry"
+        },
+        {
+            "sender": "notification-service",
+            "receiver": "registry"
+        },
+        {
+            "sender": "turbine-stream-service",
+            "receiver": "registry"
+        },
+        {
+            "sender": "statistics-service",
+            "receiver": "registry"
+        },
+        {
+            "sender": "account-service",
+            "receiver": "registry"
+        },
+        {
+            "sender": "registry",
+            "receiver": "gateway"
+        },
+        {
+            "sender": "user",
+            "receiver": "gateway"
+        },
+        {
+            "sender": "gateway",
+            "receiver": "user"
+        },
+        {
+            "sender": "gateway",
+            "receiver": "notification-service"
+        },
+        {
+            "sender": "gateway",
+            "receiver": "statistics-service"
+        },
+        {
+            "sender": "gateway",
+            "receiver": "account-service"
+        },
+        {
+            "sender": "gateway",
+            "receiver": "auth-service"
+        },
+        {
+            "sender": "auth-service",
+            "receiver": "statistics-service"
+        },
+        {
+            "sender": "auth-service",
+            "receiver": "account-service"
+        },
+        {
+            "sender": "auth-service",
+            "receiver": "notification-service"
+        },
+        {
+            "sender": "turbine-stream-service",
+            "receiver": "monitoring"
+        },
+        {
+            "sender": "rabbitmq",
+            "receiver": "turbine-stream-service"
+        },
+        {
+            "sender": "statistics-service",
+            "receiver": "rabbitmq"
+        },
+        {
+            "sender": "account-service",
+            "receiver": "rabbitmq"
+        },
+        {
+            "sender": "notification-service",
+            "receiver": "rabbitmq"
+        },
+        {
+            "sender": "external-website",
+            "receiver": "statistics-service"
+        },
+        {
+            "sender": "notification-service",
+            "receiver": "mail-server"
+        }
+    ]
+}

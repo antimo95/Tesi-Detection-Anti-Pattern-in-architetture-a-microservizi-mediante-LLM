@@ -1,0 +1,25 @@
+
+@startuml
+skinparam monochrome true
+skinparam ClassBackgroundColor White
+skinparam defaultFontName Arial
+skinparam defaultFontSize 11
+
+
+digraph dfd2{
+    node[shape=record]
+        tools.descartes.teastore.recommender [label = "{Service: tools.descartes.teastore.recommender | --internal--\n--local_logging--\n}" shape = Mrecord];
+        tools.descartes.teastore.registry [label = "{Service: tools.descartes.teastore.registry | --internal--\n--local_logging--\n}" shape = Mrecord];
+        tools.descartes.teastore.webui [label = "{Service: tools.descartes.teastore.webui | --internal--\n--local_logging--\n}" shape = Mrecord];
+        tools.descartes.teastore.image [label = "{Service: tools.descartes.teastore.image | --internal--\n--local_logging--\n}" shape = Mrecord];
+        tools.descartes.teastore.auth [label = "{Service: tools.descartes.teastore.auth | --internal--\n}" shape = Mrecord];
+        tools.descartes.teastore.persistence [label = "{Service: tools.descartes.teastore.persistence | --internal--\n--local_logging--\n}" shape = Mrecord];
+        tools.descartes.teastore.entities [label = "{Service: tools.descartes.teastore.entities | --internal--\n}" shape = Mrecord];
+        tools.descartes.teastore.kieker.probes [label = "{Service: tools.descartes.teastore.kieker.probes | --internal--\n}" shape = Mrecord];
+        tools.descartes.teastore.dockerbase [label = "{Service: tools.descartes.teastore.dockerbase | --internal--\n'Port': 8080\n}" shape = Mrecord];
+        dockermemoryconfigurator [label = "{Service: dockermemoryconfigurator | --internal--\n}" shape = Mrecord];
+        kieker.rabbitmq [label = "{Service: kieker.rabbitmq | --internal--\n'Port': 8080\n}" shape = Mrecord];
+        tools.descartes.teastore.registryclient [label = "{Service: tools.descartes.teastore.registryclient | --internal--\n--local_logging--\n}" shape = Mrecord];
+
+}
+@enduml

@@ -1,0 +1,20 @@
+{
+    "edges": [
+        {
+            "sender": "apollo-quick-start",
+            "receiver": "apollo-db"
+        },
+        {
+            "sender": "apollo-biz",
+            "receiver": "apollo-configservice"
+        },
+        {
+            "sender": "apollo-assembly",
+            "receiver": "apollo-configservice"
+        },
+        {
+            "sender": "apollo-adminservice",
+            "receiver": "apollo-configservice"
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+
+@startuml
+skinparam monochrome true
+skinparam ClassBackgroundColor White
+skinparam defaultFontName Arial
+skinparam defaultFontSize 11
+
+
+digraph dfd2{
+    node[shape=record]
+        apollo_assembly [label = "{Service: apollo_assembly | --internal--\n--local_logging--\n}" shape = Mrecord];
+        apollo_core [label = "{Service: apollo_core | --internal--\n--local_logging--\n}" shape = Mrecord];
+        apollo_demo [label = "{Service: apollo_demo | --internal--\n--local_logging--\n}" shape = Mrecord];
+        apollo_biz [label = "{Service: apollo_biz | --basic_authentication--\n--internal--\n--local_logging--\n}" shape = Mrecord];
+        apollo_buildtools [label = "{Service: apollo_buildtools | --internal--\n}" shape = Mrecord];
+        apollo_mockserver [label = "{Service: apollo_mockserver | --internal--\n--local_logging--\n}" shape = Mrecord];
+        apollo_client [label = "{Service: apollo_client | --internal--\n--local_logging--\n}" shape = Mrecord];
+        apollo_configservice [label = "{Service: apollo_configservice | --service_discovery--\n--local_logging--\n--infrastructural--\n'Endpoints': ['/services/admin'\n}" shape = Mrecord];
+        apollo_adminservice [label = "{Service: apollo_adminservice | --internal--\n--local_logging--\n'Endpoints': ['/instances'\n'Port': 8090\n}" shape = Mrecord];
+        apollo_portal [label = "{Service: apollo_portal | --internal--\n--pre_authorized_endpoints--\n--local_logging--\n--csrf_disabled--\n--encryption--\n--basic_authentication--\n'Pre-authorized Endpoints': ['/apps/\n}" shape = Mrecord];
+        apollo_openapi [label = "{Service: apollo_openapi | --internal--\n}" shape = Mrecord];
+        apollo_common [label = "{Service: apollo_common | --internal--\n--local_logging--\n'Endpoints': ['/apollo']\n}" shape = Mrecord];
+        apollo_db [label = "{Service: apollo_db | --internal--\n'Port': 13306\n}" shape = Mrecord];
+        apollo_quick_start -> apollo_db [label = " --restful_http--\n"]
+        apollo_biz -> apollo_configservice [label = " --restful_http--\n"]
+        apollo_assembly -> apollo_configservice [label = " --restful_http--\n"]
+        apollo_adminservice -> apollo_configservice [label = " --restful_http--\n"]
+
+}
+@enduml

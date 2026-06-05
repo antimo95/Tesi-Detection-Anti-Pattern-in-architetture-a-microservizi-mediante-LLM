@@ -1,0 +1,267 @@
+{
+    "nodes": {
+        "apollo-assembly": {
+            "file": "apollo-assembly/pom.xml",
+            "line": 10,
+            "span": "[13:28]",
+            "sub_items": {
+                "local_logging": {
+                    "file": "apollo-assembly/src/main/java/com/ctrip/framework/apollo/assembly/ApolloApplication.java",
+                    "line": "8",
+                    "span": "(17, 30)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "apollo-core": {
+            "file": "apollo-core/pom.xml",
+            "line": 10,
+            "span": "[13:24]",
+            "sub_items": {
+                "local_logging": {
+                    "file": "apollo-core/src/main/java/com/ctrip/framework/foundation/Foundation.java",
+                    "line": "10",
+                    "span": "(17, 30)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "apollo-demo": {
+            "file": "apollo-demo/pom.xml",
+            "line": 9,
+            "span": "[13:24]",
+            "sub_items": {
+                "local_logging": {
+                    "file": "apollo-demo/src/main/java/com/ctrip/framework/apollo/demo/spring/springBootDemo/config/SampleRedisConfig.java",
+                    "line": "8",
+                    "span": "(17, 30)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "apollo-biz": {
+            "file": "apollo-biz/pom.xml",
+            "line": 9,
+            "span": "[13:23]",
+            "sub_items": {
+                "basic_authentication": {
+                    "file": "apollo-biz/src/main/java/com/ctrip/framework/apollo/biz/auth/WebSecurityConfig.java",
+                    "line": "9",
+                    "span": "(67, 79)"
+                },
+                "local_logging": {
+                    "file": "apollo-biz/src/main/java/com/ctrip/framework/apollo/biz/message/DatabaseMessageSender.java",
+                    "line": "10",
+                    "span": "(17, 30)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "apollo-buildtools": {
+            "file": "apollo-buildtools/pom.xml",
+            "line": 10,
+            "span": "[13:30]",
+            "sub_items": {
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "apollo-mockserver": {
+            "file": "apollo-mockserver/pom.xml",
+            "line": 11,
+            "span": "[14:31]",
+            "sub_items": {
+                "local_logging": {
+                    "file": "apollo-mockserver/src/main/java/com/ctrip/framework/apollo/mockserver/EmbeddedApollo.java",
+                    "line": "25",
+                    "span": "(17, 30)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "apollo-client": {
+            "file": "apollo-client/pom.xml",
+            "line": 10,
+            "span": "[13:26]",
+            "sub_items": {
+                "local_logging": {
+                    "file": "apollo-client/src/main/java/com/ctrip/framework/apollo/util/ConfigUtil.java",
+                    "line": "10",
+                    "span": "(17, 30)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "apollo-configservice": {
+            "file": "/opt/code2DFD/analysed_repositories/apollo/apollo-configservice/src/main/resources/application.yml",
+            "line": 3,
+            "span": "(10:30)",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/apollo/apollo-configservice/src/main/resources/application.yml",
+                    "line": 32,
+                    "span": "(54, 58)"
+                },
+                "service_discovery": {
+                    "file": "apollo-configservice/src/main/java/com/ctrip/framework/apollo/configservice/ConfigServerEurekaServerConfigure.java",
+                    "line": "13",
+                    "span": "(0, 19)"
+                },
+                "local_logging": {
+                    "file": "apollo-configservice/src/main/java/com/ctrip/framework/apollo/configservice/service/config/ConfigServiceWithCache.java",
+                    "line": "24",
+                    "span": "(17, 30)"
+                },
+                "infrastructural": {
+                    "file": "heuristic, based on stereotype service_discovery",
+                    "line": "heuristic, based on stereotype service_discovery",
+                    "span": "heuristic, based on stereotype service_discovery"
+                }
+            }
+        },
+        "apollo-adminservice": {
+            "file": "/opt/code2DFD/analysed_repositories/apollo/apollo-adminservice/src/main/resources/application.yml",
+            "line": 3,
+            "span": "(10:29)",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/apollo/apollo-adminservice/src/main/resources/application.yml",
+                    "line": 14,
+                    "span": "(8, 12)"
+                },
+                "local_logging": {
+                    "file": "apollo-adminservice/src/main/java/com/ctrip/framework/apollo/adminservice/aop/NamespaceAcquireLockAspect.java",
+                    "line": "18",
+                    "span": "(17, 30)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "apollo-portal": {
+            "file": "/opt/code2DFD/analysed_repositories/apollo/apollo-portal/src/main/resources/application.yml",
+            "line": 3,
+            "span": "(10:23)",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/apollo/apollo-portal/src/main/resources/application.yml",
+                    "line": 13,
+                    "span": "(8, 12)"
+                },
+                "csrf_disabled": {
+                    "file": "apollo-portal/src/main/java/com/ctrip/framework/apollo/portal/spi/configuration/AuthConfiguration.java",
+                    "line": "47",
+                    "span": "(67, 79)"
+                },
+                "basic_authentication": {
+                    "file": "apollo-portal/src/main/java/com/ctrip/framework/apollo/portal/spi/configuration/AuthConfiguration.java",
+                    "line": "47",
+                    "span": "(67, 79)"
+                },
+                "pre_authorized_endpoints": {
+                    "file": "apollo-portal/src/main/java/com/ctrip/framework/apollo/portal/controller/ConfigsExportController.java",
+                    "line": "58",
+                    "span": "(2, 15)"
+                },
+                "local_logging": {
+                    "file": "apollo-portal/src/main/java/com/ctrip/framework/apollo/portal/component/config/PortalConfig.java",
+                    "line": "16",
+                    "span": "(17, 30)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "apollo-openapi": {
+            "file": "apollo-openapi/pom.xml",
+            "line": 11,
+            "span": "[14:28]",
+            "sub_items": {
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "apollo-common": {
+            "file": "apollo-common/pom.xml",
+            "line": 10,
+            "span": "[16:29]",
+            "sub_items": {
+                "local_logging": {
+                    "file": "apollo-common/src/main/java/com/ctrip/framework/apollo/common/config/RefreshableConfig.java",
+                    "line": "10",
+                    "span": "(17, 30)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "apollo-db": {
+            "file": "scripts/docker-quick-start/docker-compose.yml",
+            "line": 16,
+            "span": "[2:11]",
+            "sub_items": {
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        }
+    },
+    "edges": {
+        "apollo-biz -> apollo-configservice": {
+            "file": "apollo-biz/pom.xml",
+            "line": "24",
+            "span": "(15, 57)"
+        },
+        "apollo-assembly -> apollo-configservice": {
+            "file": "/opt/code2DFD/analysed_repositories/apollo/apollo-assembly/src/main/resources/application.yml",
+            "line": 32,
+            "span": "(20, 67)"
+        },
+        "apollo-adminservice -> apollo-configservice": {
+            "file": "/opt/code2DFD/analysed_repositories/apollo/apollo-adminservice/src/main/resources/application.yml",
+            "line": 30,
+            "span": "(20, 67)"
+        }
+    }
+}

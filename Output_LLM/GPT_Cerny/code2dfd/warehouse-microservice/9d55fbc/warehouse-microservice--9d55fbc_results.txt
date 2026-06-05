@@ -1,0 +1,40 @@
+Microservices:
+
+{'name': 'authentacation-server', 'type': 'service', 'stereotype_instances': ['csrf_disabled', 'resource_server', 'authorization_server', 'infrastructural'], 'tagged_values': [('Authorization Server', 'Spring OAuth2'), ('Endpoints', "['/account', '/account/userInfo']")]}
+{'name': 'product-catalog-service', 'type': 'service', 'stereotype_instances': ['circuit_breaker', 'basic_authentication', 'internal', 'local_logging', 'resource_server', 'pre_authorized_endpoints'], 'tagged_values': [('Logging Technology', 'Lombok'), ('Pre-authorized Endpoints', "['/{idGoods}/category-attribute']"), ('Endpoints', "['/products/{idGoods}/category-attribute', '/price-list/{idPriceList}', '/price-list/{idPriceList}/goods/{idGoods}', '/products/{idGoods}', '/price-list/{idPriceList}/goods', '/products', '/price-list']"), ('Pre-authorized Endpoints', "['/{idPriceList}/goods/{idGoods}']"), ('Circuit Breaker', 'Hystrix')]}
+{'name': 'eureka-server', 'type': 'service', 'stereotype_instances': ['service_discovery', 'infrastructural'], 'tagged_values': [('Port', 8761), ('Service Discovery', 'Eureka')]}
+{'name': 'order-service', 'type': 'service', 'stereotype_instances': ['circuit_breaker', 'internal', 'local_logging', 'ssl_enabled', 'load_balancer', 'pre_authorized_endpoints'], 'tagged_values': [('Port', 8080), ('Logging Technology', 'Lombok'), ('Load Balancer', 'Spring Cloud'), ('Endpoints', "['/purchase-order', '/purchase-order/{orderNumber}/customer']"), ('Load Balancer', 'Ribbon'), ('Circuit Breaker', 'Hystrix')]}
+{'name': 'account-service', 'type': 'service', 'stereotype_instances': ['local_logging', 'circuit_breaker', 'pre_authorized_endpoints', 'internal'], 'tagged_values': [('Circuit Breaker', 'Hystrix'), ('Endpoints', "['/account', '/account/{userName}']"), ('Logging Technology', 'Lombok')]}
+{'name': 'turbine-server', 'type': 'service', 'stereotype_instances': ['monitoring_server', 'infrastructural'], 'tagged_values': [('Monitoring Server', 'Turbine')]}
+{'name': 'api-gateway', 'type': 'service', 'stereotype_instances': ['load_balancer', 'circuit_breaker', 'gateway', 'infrastructural'], 'tagged_values': [('Gateway', 'Zuul'), ('Circuit Breaker', 'Hystrix'), ('Load Balancer', 'Ribbon')]}
+{'name': 'config-server', 'type': 'service', 'stereotype_instances': ['infrastructural', 'configuration_server'], 'tagged_values': [('Configuration Server', 'Spring Cloud Config'), ('Port', 8888)]}
+{'name': 'product-catalog-management-website', 'type': 'service', 'stereotype_instances': ['circuit_breaker', 'load_balancer', 'csrf_disabled', 'gateway', 'infrastructural'], 'tagged_values': [('Gateway', 'Zuul'), ('Circuit Breaker', 'Hystrix'), ('Load Balancer', 'Spring Cloud'), ('Load Balancer', 'Ribbon')]}
+{'name': 'spring-boot-admin', 'type': 'service', 'stereotype_instances': ['administration_server', 'infrastructural'], 'tagged_values': [('Administration Server', 'Spring Boot Admin')]}
+{'name': 'website', 'type': 'service', 'stereotype_instances': ['circuit_breaker', 'load_balancer', 'csrf_disabled', 'gateway', 'infrastructural'], 'tagged_values': [('Gateway', 'Zuul'), ('Circuit Breaker', 'Hystrix'), ('Load Balancer', 'Ribbon')]}
+{'name': 'zipkin-server', 'type': 'service', 'stereotype_instances': ['internal'], 'tagged_values': []}
+
+Information Flows:
+
+{'sender': 'github-repository', 'receiver': 'config-server', 'stereotype_instances': ['restful_http']}
+{'sender': 'turbine-server', 'receiver': 'eureka-server', 'stereotype_instances': ['restful_http']}
+{'sender': 'eureka-server', 'receiver': 'product-catalog-management-website', 'stereotype_instances': ['restful_http']}
+{'sender': 'eureka-server', 'receiver': 'website', 'stereotype_instances': ['restful_http']}
+{'sender': 'eureka-server', 'receiver': 'api-gateway', 'stereotype_instances': ['restful_http']}
+{'sender': 'zipkin-server', 'receiver': 'eureka-server', 'stereotype_instances': ['restful_http']}
+{'sender': 'account-service', 'receiver': 'eureka-server', 'stereotype_instances': ['restful_http']}
+{'sender': 'authentacation-server', 'receiver': 'eureka-server', 'stereotype_instances': ['restful_http']}
+{'sender': 'product-catalog-service', 'receiver': 'eureka-server', 'stereotype_instances': ['restful_http']}
+{'sender': 'config-server', 'receiver': 'eureka-server', 'stereotype_instances': ['restful_http']}
+{'sender': 'order-service', 'receiver': 'eureka-server', 'stereotype_instances': ['load_balanced_link', 'restful_http'], 'tagged_values': [('Load Balancer', 'Spring Cloud')]}
+{'sender': 'spring-boot-admin', 'receiver': 'eureka-server', 'stereotype_instances': ['restful_http']}
+{'sender': 'user', 'receiver': 'api-gateway', 'stereotype_instances': ['restful_http']}
+{'sender': 'api-gateway', 'receiver': 'user', 'stereotype_instances': ['restful_http']}
+{'sender': 'user', 'receiver': 'product-catalog-management-website', 'stereotype_instances': ['restful_http']}
+{'sender': 'product-catalog-management-website', 'receiver': 'user', 'stereotype_instances': ['load_balanced_link', 'restful_http'], 'tagged_values': [('Load Balancer', 'Spring Cloud')]}
+{'sender': 'user', 'receiver': 'website', 'stereotype_instances': ['restful_http']}
+{'sender': 'website', 'receiver': 'user', 'stereotype_instances': ['restful_http']}
+
+External Components:
+
+{'name': 'github-repository', 'type': 'external_component', 'stereotype_instances': ['github_repository', 'entrypoint'], 'tagged_values': [('URL', 'https://github.com/HienNguyen711/warehouse-microservice')]}
+{'name': 'user', 'type': 'external_component', 'stereotype_instances': ['exitpoint', 'user_stereotype', 'entrypoint']}

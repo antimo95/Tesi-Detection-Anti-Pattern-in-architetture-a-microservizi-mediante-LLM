@@ -1,0 +1,32 @@
+{
+    "edges": [
+        {
+            "sender": "database-ftgo-order-service",
+            "receiver": "ftgo-order-service"
+        },
+        {
+            "sender": "database-ftgo-kitchen-service",
+            "receiver": "ftgo-kitchen-service"
+        },
+        {
+            "sender": "database-ftgo-accounting-service",
+            "receiver": "ftgo-accounting-service"
+        },
+        {
+            "sender": "database-ftgo-consumer-service",
+            "receiver": "ftgo-consumer-service"
+        },
+        {
+            "sender": "database-ftgo-restaurant-service",
+            "receiver": "ftgo-restaurant-service"
+        },
+        {
+            "sender": "user",
+            "receiver": "ftgo-api-gateway"
+        },
+        {
+            "sender": "ftgo-api-gateway",
+            "receiver": "user"
+        }
+    ]
+}

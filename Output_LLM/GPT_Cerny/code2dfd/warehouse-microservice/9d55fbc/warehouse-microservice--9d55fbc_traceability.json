@@ -1,0 +1,422 @@
+{
+    "nodes": {
+        "authentacation-server": {
+            "file": "/opt/code2DFD/analysed_repositories/warehouse-microservice/authentication-server/src/main/resources/bootstrap.yml",
+            "line": 4,
+            "span": "(10:31)",
+            "sub_items": {
+                "csrf_disabled": {
+                    "file": "authentication-server/src/main/java/com/project/warehouse/security/LoginConfig.java",
+                    "line": "9",
+                    "span": "(67, 79)"
+                },
+                "authorization_server": {
+                    "file": "authentication-server/src/main/java/com/project/warehouse/security/SecurityOAuth2AutorizationServerConfig.java",
+                    "line": "20",
+                    "span": "(0, 26)"
+                },
+                "resource_server": {
+                    "file": "authentication-server/src/main/java/com/project/warehouse/security/SecurityOAuth2ResourceServerConfig.java",
+                    "line": "11",
+                    "span": "(0, 21)"
+                },
+                "infrastructural": {
+                    "file": "heuristic, based on stereotype authorization_server",
+                    "line": "heuristic, based on stereotype authorization_server",
+                    "span": "heuristic, based on stereotype authorization_server"
+                }
+            }
+        },
+        "product-catalog-service": {
+            "file": "/opt/code2DFD/analysed_repositories/warehouse-microservice/product-catalog-service/src/main/resources/bootstrap.yml",
+            "line": 3,
+            "span": "(10:33)",
+            "sub_items": {
+                "basic_authentication": {
+                    "file": "product-catalog-service/src/main/java/com/project/warehouse/security/SecurityOAuth2ResourceServerConfig.java",
+                    "line": "5",
+                    "span": "(67, 79)"
+                },
+                "resource_server": {
+                    "file": "product-catalog-service/src/main/java/com/project/warehouse/security/SecurityOAuth2ResourceServerConfig.java",
+                    "line": "12",
+                    "span": "(0, 21)"
+                },
+                "pre_authorized_endpoints": {
+                    "file": "product-catalog-service/src/main/java/com/project/warehouse/rest/ProductsRestController.java",
+                    "line": "44",
+                    "span": "(4, 17)"
+                },
+                "local_logging": {
+                    "file": "product-catalog-service/src/main/java/com/project/warehouse/security/SecurityUtils.java",
+                    "line": "3",
+                    "span": "(27, 32)"
+                },
+                "circuit_breaker": {
+                    "file": "product-catalog-service/src/main/java/com/project/warehouse/WarehouseApplication.java",
+                    "line": "17",
+                    "span": "(0, 14)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "eureka-server": {
+            "file": "/opt/code2DFD/analysed_repositories/warehouse-microservice/eureka-server/src/main/resources/bootstrap.yml",
+            "line": 11,
+            "span": "(10:23)",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/warehouse-microservice/eureka-server/src/main/resources/bootstrap.yml",
+                    "line": 3,
+                    "span": "(8, 12)"
+                },
+                "service_discovery": {
+                    "file": "eureka-server/src/main/java/com/project/warehouse/WarehouseApplication.java",
+                    "line": "8",
+                    "span": "(0, 19)"
+                },
+                "infrastructural": {
+                    "file": "heuristic, based on stereotype service_discovery",
+                    "line": "heuristic, based on stereotype service_discovery",
+                    "span": "heuristic, based on stereotype service_discovery"
+                }
+            }
+        },
+        "order-service": {
+            "file": "/opt/code2DFD/analysed_repositories/warehouse-microservice/order-service/src/main/resources/bootstrap.yml",
+            "line": 3,
+            "span": "(10:23)",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/warehouse-microservice/order-service/src/main/resources/application.properties",
+                    "line": 14,
+                    "span": "(1, 12)"
+                },
+                "pre_authorized_endpoints": {
+                    "file": "order-service/src/main/java/com/project/warehouse/rest/rest/CustomerRestController.java",
+                    "line": "25",
+                    "span": "(4, 17)"
+                },
+                "local_logging": {
+                    "file": "order-service/src/main/java/com/project/warehouse/anticorruptation/account/AccountToCustomerAntiCorruptionLayerServiceHalJsonStrategy.java",
+                    "line": "8",
+                    "span": "(27, 32)"
+                },
+                "load_balancer": {
+                    "file": "order-service/src/main/java/com/project/warehouse/config/ProductCatalogIntegrationServiceConfig.java",
+                    "line": "20",
+                    "span": "(4, 17)"
+                },
+                "circuit_breaker": {
+                    "file": "order-service/src/main/java/com/project/warehouse/WarehouseApplication.java",
+                    "line": "10",
+                    "span": "(0, 14)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "account-service": {
+            "file": "/opt/code2DFD/analysed_repositories/warehouse-microservice/account-service/src/main/resources/bootstrap.yml",
+            "line": 4,
+            "span": "(10:25)",
+            "sub_items": {
+                "pre_authorized_endpoints": {
+                    "file": "account-service/src/main/java/com/project/warehouse/rest/AccountRestController.java",
+                    "line": "44",
+                    "span": "(4, 17)"
+                },
+                "local_logging": {
+                    "file": "account-service/src/main/java/com/project/warehouse/security/integration/UserDetailsProcessorChannelHandler.java",
+                    "line": "7",
+                    "span": "(27, 32)"
+                },
+                "circuit_breaker": {
+                    "file": "account-service/src/main/java/com/project/warehouse/WarehouseApplication.java",
+                    "line": "20",
+                    "span": "(0, 14)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "turbine-server": {
+            "file": "/opt/code2DFD/analysed_repositories/warehouse-microservice/turbine-server/src/main/resources/bootstrap.yml",
+            "line": 3,
+            "span": "(9:23)",
+            "sub_items": {
+                "monitoring_server": {
+                    "file": "turbine-server/src/main/java/com/project/warehouse/WarehouseApplication.java",
+                    "line": "10",
+                    "span": "(56, 75)"
+                },
+                "infrastructural": {
+                    "file": "heuristic, based on stereotype monitoring_server",
+                    "line": "heuristic, based on stereotype monitoring_server",
+                    "span": "heuristic, based on stereotype monitoring_server"
+                }
+            }
+        },
+        "api-gateway": {
+            "file": "/opt/code2DFD/analysed_repositories/warehouse-microservice/api-gateway/src/main/resources/bootstrap.yml",
+            "line": 3,
+            "span": "(10:21)",
+            "sub_items": {
+                "gateway": {
+                    "file": "api-gateway/src/main/java/com/project/warehouse/WarehouseApplication.java",
+                    "line": "10",
+                    "span": "(0, 16)"
+                },
+                "circuit_breaker": {
+                    "file": "api-gateway/src/main/java/com/project/warehouse/WarehouseApplication.java",
+                    "line": "9",
+                    "span": "(0, 14)"
+                },
+                "infrastructural": {
+                    "file": "heuristic, based on stereotype gateway",
+                    "line": "heuristic, based on stereotype gateway",
+                    "span": "heuristic, based on stereotype gateway"
+                }
+            }
+        },
+        "config-server": {
+            "file": "/opt/code2DFD/analysed_repositories/warehouse-microservice/config-server/src/main/resources/application.yml",
+            "line": 11,
+            "span": "(10:23)",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/warehouse-microservice/config-server/src/main/resources/application.yml",
+                    "line": 3,
+                    "span": "(8, 12)"
+                },
+                "configuration_server": {
+                    "file": "config-server/src/main/java/com/project/configserver/ConfigServerApplication.java",
+                    "line": "10",
+                    "span": "(0, 19)"
+                },
+                "infrastructural": {
+                    "file": "heuristic, based on stereotype configuration_server",
+                    "line": "heuristic, based on stereotype configuration_server",
+                    "span": "heuristic, based on stereotype configuration_server"
+                }
+            }
+        },
+        "product-catalog-management-website": {
+            "file": "/opt/code2DFD/analysed_repositories/warehouse-microservice/product-catalog-management-website/src/main/resources/bootstrap.yml",
+            "line": 3,
+            "span": "(10:44)",
+            "sub_items": {
+                "csrf_disabled": {
+                    "file": "product-catalog-management-website/src/main/java/com/project/warehouse/config/OAuth2SecurityConfig.java",
+                    "line": "6",
+                    "span": "(67, 79)"
+                },
+                "gateway": {
+                    "file": "product-catalog-management-website/src/main/java/com/project/warehouse/WarehouseApplication.java",
+                    "line": "14",
+                    "span": "(0, 16)"
+                },
+                "load_balancer": {
+                    "file": "product-catalog-management-website/src/main/java/com/project/warehouse/config/OAuth2ClientConfig.java",
+                    "line": "18",
+                    "span": "(4, 17)"
+                },
+                "circuit_breaker": {
+                    "file": "product-catalog-management-website/src/main/java/com/project/warehouse/WarehouseApplication.java",
+                    "line": "13",
+                    "span": "(0, 14)"
+                },
+                "infrastructural": {
+                    "file": "heuristic, based on stereotype gateway",
+                    "line": "heuristic, based on stereotype gateway",
+                    "span": "heuristic, based on stereotype gateway"
+                }
+            }
+        },
+        "spring-boot-admin": {
+            "file": "/opt/code2DFD/analysed_repositories/warehouse-microservice/spring-boot-admin/src/main/resources/bootstrap.yml",
+            "line": 4,
+            "span": "(9:26)",
+            "sub_items": {
+                "administration_server": {
+                    "file": "spring-boot-admin/src/main/java/com/project/warehouse/WarehouseApplication.java",
+                    "line": "8",
+                    "span": "(0, 18)"
+                },
+                "infrastructural": {
+                    "file": "heuristic, based on stereotype administration_server",
+                    "line": "heuristic, based on stereotype administration_server",
+                    "span": "heuristic, based on stereotype administration_server"
+                }
+            }
+        },
+        "website": {
+            "file": "/opt/code2DFD/analysed_repositories/warehouse-microservice/website/src/main/resources/bootstrap.yml",
+            "line": 4,
+            "span": "(10:17)",
+            "sub_items": {
+                "csrf_disabled": {
+                    "file": "website/src/main/java/com/project/website/config/OAuth2SecurityConfig.java",
+                    "line": "5",
+                    "span": "(67, 79)"
+                },
+                "gateway": {
+                    "file": "website/src/main/java/com/project/website/WebsiteApplication.java",
+                    "line": "14",
+                    "span": "(0, 16)"
+                },
+                "circuit_breaker": {
+                    "file": "website/src/main/java/com/project/website/WebsiteApplication.java",
+                    "line": "13",
+                    "span": "(0, 14)"
+                },
+                "infrastructural": {
+                    "file": "heuristic, based on stereotype gateway",
+                    "line": "heuristic, based on stereotype gateway",
+                    "span": "heuristic, based on stereotype gateway"
+                }
+            }
+        },
+        "zipkin-server": {
+            "file": "/opt/code2DFD/analysed_repositories/warehouse-microservice/zipkin-server/src/main/resources/bootstrap.yml",
+            "line": 3,
+            "span": "(10:23)",
+            "sub_items": {
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "github-repository": {
+            "file": "/opt/code2DFD/analysed_repositories/warehouse-microservice/config-server/src/main/resources/application.yml",
+            "line": 19,
+            "span": "(17, 72)"
+        },
+        "user": {
+            "file": "implicit",
+            "line": "implicit",
+            "span": "implicit",
+            "sub_items": {
+                "user_stereotype": {
+                    "file": "implicit",
+                    "line": "implicit",
+                    "span": "implicit"
+                },
+                "entrypoint": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                },
+                "exitpoint": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        }
+    },
+    "edges": {
+        "github-repository -> config-server": {
+            "file": "/opt/code2DFD/analysed_repositories/warehouse-microservice/config-server/src/main/resources/application.yml",
+            "line": 19,
+            "span": "(17, 72)"
+        },
+        "turbine-server -> eureka-server": {
+            "file": "turbine-server/src/main/java/com/project/warehouse/WarehouseApplication.java",
+            "line": "14",
+            "span": "(3, 24)"
+        },
+        "zipkin-server -> eureka-server": {
+            "file": "zipkin-server/src/main/java/com/project/warehouse/WarehouseApplication.java",
+            "line": "5",
+            "span": "(48, 66)"
+        },
+        "account-service -> eureka-server": {
+            "file": "account-service/src/main/java/com/project/warehouse/WarehouseApplication.java",
+            "line": "13",
+            "span": "(48, 66)"
+        },
+        "authentacation-server -> eureka-server": {
+            "file": "authentication-server/src/main/java/com/project/warehouse/WarehouseApplication.java",
+            "line": "9",
+            "span": "(48, 66)"
+        },
+        "product-catalog-service -> eureka-server": {
+            "file": "product-catalog-service/src/main/java/com/project/warehouse/WarehouseApplication.java",
+            "line": "12",
+            "span": "(48, 66)"
+        },
+        "config-server -> eureka-server": {
+            "file": "config-server/src/main/java/com/project/configserver/ConfigServerApplication.java",
+            "line": "5",
+            "span": "(50, 71)"
+        },
+        "order-service -> eureka-server": {
+            "file": "order-service/src/main/java/com/project/warehouse/WarehouseApplication.java",
+            "line": "5",
+            "span": "(48, 66)"
+        },
+        "spring-boot-admin -> eureka-server": {
+            "file": "spring-boot-admin/src/main/java/com/project/warehouse/WarehouseApplication.java",
+            "line": "6",
+            "span": "(50, 71)"
+        },
+        "eureka-server -> api-gateway": {
+            "file": "api-gateway/src/main/java/com/project/warehouse/WarehouseApplication.java",
+            "line": "5",
+            "span": "(48, 66)"
+        },
+        "user -> api-gateway": {
+            "file": "implicit",
+            "line": "implicit",
+            "span": "implicit"
+        },
+        "api-gateway -> user": {
+            "file": "implicit",
+            "line": "implicit",
+            "span": "implicit"
+        },
+        "eureka-server -> product-catalog-management-website": {
+            "file": "product-catalog-management-website/src/main/java/com/project/warehouse/WarehouseApplication.java",
+            "line": "9",
+            "span": "(48, 66)"
+        },
+        "user -> product-catalog-management-website": {
+            "file": "implicit",
+            "line": "implicit",
+            "span": "implicit"
+        },
+        "product-catalog-management-website -> user": {
+            "file": "implicit",
+            "line": "implicit",
+            "span": "implicit"
+        },
+        "eureka-server -> website": {
+            "file": "website/src/main/java/com/project/website/WebsiteApplication.java",
+            "line": "9",
+            "span": "(48, 66)"
+        },
+        "user -> website": {
+            "file": "implicit",
+            "line": "implicit",
+            "span": "implicit"
+        },
+        "website -> user": {
+            "file": "implicit",
+            "line": "implicit",
+            "span": "implicit"
+        }
+    }
+}

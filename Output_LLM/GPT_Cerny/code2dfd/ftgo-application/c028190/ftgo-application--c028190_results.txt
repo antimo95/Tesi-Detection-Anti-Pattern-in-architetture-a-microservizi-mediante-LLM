@@ -1,0 +1,32 @@
+Microservices:
+
+{'name': 'ftgo-order-history-service', 'type': 'service', 'gradle_path': 'ftgo-order-history-service/build.gradle', 'stereotype_instances': ['internal', 'local_logging'], 'tagged_values': []}
+{'name': 'ftgo-order-service', 'type': 'service', 'gradle_path': None, 'stereotype_instances': ['internal', 'local_logging'], 'tagged_values': []}
+{'name': 'ftgo-api-gateway', 'type': 'service', 'gradle_path': 'ftgo-api-gateway/build.gradle', 'stereotype_instances': ['infrastructural', 'gateway'], 'tagged_values': [('Gateway', 'Spring Cloud Gateway')]}
+{'name': 'ftgo-kitchen-service', 'type': 'service', 'gradle_path': 'ftgo-kitchen-service/build.gradle', 'stereotype_instances': ['internal'], 'tagged_values': []}
+{'name': 'ftgo-accounting-service', 'type': 'service', 'gradle_path': 'ftgo-accounting-service/build.gradle', 'stereotype_instances': ['internal'], 'tagged_values': []}
+{'name': 'ftgo-consumer-service', 'type': 'service', 'gradle_path': 'ftgo-consumer-service/build.gradle', 'stereotype_instances': ['internal'], 'tagged_values': []}
+{'name': 'ftgo-restaurant-service', 'type': 'service', 'gradle_path': 'ftgo-restaurant-service/build.gradle', 'stereotype_instances': ['internal'], 'tagged_values': []}
+{'name': 'zookeeper', 'type': 'service', 'stereotype_instances': ['internal'], 'tagged_values': [('Port', 2181)]}
+{'name': 'kafka', 'type': 'service', 'stereotype_instances': ['infrastructural', 'message_broker'], 'tagged_values': [('Port', 9092), ('Message Broker', 'Kafka')]}
+{'name': 'zipkin', 'type': 'service', 'stereotype_instances': ['infrastructural', 'tracing_server'], 'tagged_values': [('Port', 9411), ('Tracing Server', 'Zipkin')]}
+{'name': 'mysql', 'type': 'service', 'stereotype_instances': ['internal'], 'tagged_values': [('Port', 3306)]}
+
+Information Flows:
+
+{'sender': 'database-ftgo-order-service', 'receiver': 'ftgo-order-service', 'stereotype_instances': ['jdbc', 'plaintext_credentials_link'], 'tagged_values': [('Password', 'ftgo_delivery_service_password'), ('Username', 'ftgo_delivery_service_user'), ('Password', 'ftgo_order_service_password'), ('Username', 'ftgo_order_service_user')]}
+{'sender': 'database-ftgo-kitchen-service', 'receiver': 'ftgo-kitchen-service', 'stereotype_instances': ['jdbc', 'plaintext_credentials_link'], 'tagged_values': [('Username', 'ftgo_kitchen_service_user'), ('Password', 'ftgo_kitchen_service_password')]}
+{'sender': 'database-ftgo-accounting-service', 'receiver': 'ftgo-accounting-service', 'stereotype_instances': ['jdbc', 'plaintext_credentials_link'], 'tagged_values': [('Password', 'ftgo_accounting_service_password'), ('Username', 'ftgo_accounting_service_user')]}
+{'sender': 'database-ftgo-consumer-service', 'receiver': 'ftgo-consumer-service', 'stereotype_instances': ['jdbc', 'plaintext_credentials_link'], 'tagged_values': [('Password', 'ftgo_consumer_service_password'), ('Username', 'ftgo_consumer_service_user')]}
+{'sender': 'database-ftgo-restaurant-service', 'receiver': 'ftgo-restaurant-service', 'stereotype_instances': ['jdbc', 'plaintext_credentials_link'], 'tagged_values': [('Username', 'ftgo_restaurant_service_user'), ('Password', 'ftgo_restaurant_service_password')]}
+{'sender': 'user', 'receiver': 'ftgo-api-gateway', 'stereotype_instances': ['restful_http']}
+{'sender': 'ftgo-api-gateway', 'receiver': 'user', 'stereotype_instances': ['restful_http']}
+
+External Components:
+
+{'name': 'database-ftgo-order-service', 'type': 'external_component', 'stereotype_instances': ['exitpoint', 'entrypoint', 'plaintext_credentials', 'external_database'], 'tagged_values': [('Password', 'ftgo_order_service_password'), ('Username', 'ftgo_order_service_user'), ('Password', 'ftgo_delivery_service_password'), ('Database', 'MySQL'), ('Username', 'ftgo_delivery_service_user')]}
+{'name': 'database-ftgo-kitchen-service', 'type': 'external_component', 'stereotype_instances': ['exitpoint', 'entrypoint', 'plaintext_credentials', 'external_database'], 'tagged_values': [('Database', 'MySQL'), ('Username', 'ftgo_kitchen_service_user'), ('Password', 'ftgo_kitchen_service_password')]}
+{'name': 'database-ftgo-accounting-service', 'type': 'external_component', 'stereotype_instances': ['exitpoint', 'entrypoint', 'plaintext_credentials', 'external_database'], 'tagged_values': [('Database', 'MySQL'), ('Username', 'ftgo_accounting_service_user'), ('Password', 'ftgo_accounting_service_password')]}
+{'name': 'database-ftgo-consumer-service', 'type': 'external_component', 'stereotype_instances': ['exitpoint', 'entrypoint', 'plaintext_credentials', 'external_database'], 'tagged_values': [('Database', 'MySQL'), ('Password', 'ftgo_consumer_service_password'), ('Username', 'ftgo_consumer_service_user')]}
+{'name': 'database-ftgo-restaurant-service', 'type': 'external_component', 'stereotype_instances': ['exitpoint', 'entrypoint', 'plaintext_credentials', 'external_database'], 'tagged_values': [('Database', 'MySQL'), ('Username', 'ftgo_restaurant_service_user'), ('Password', 'ftgo_restaurant_service_password')]}
+{'name': 'user', 'type': 'external_component', 'stereotype_instances': ['exitpoint', 'user_stereotype', 'entrypoint']}

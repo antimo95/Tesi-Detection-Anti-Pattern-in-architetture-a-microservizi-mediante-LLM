@@ -1,0 +1,291 @@
+{
+    "nodes": {
+        "testclient": {
+            "file": "testclient/pom.xml",
+            "line": 5,
+            "span": "[16:26]",
+            "sub_items": {
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "qbike-uc": {
+            "file": "/opt/code2DFD/analysed_repositories/qbike/uc/src/main/resources/application.yml",
+            "line": 5,
+            "span": "(10:18)",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/qbike/uc/src/main/resources/application.yml",
+                    "line": 2,
+                    "span": "(8, 12)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "microservice-api-gateway": {
+            "file": "/opt/code2DFD/analysed_repositories/qbike/api-gateway/src/main/resources/application.yml",
+            "line": 3,
+            "span": "(10:34)",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/qbike/api-gateway/src/main/resources/application.yml",
+                    "line": 17,
+                    "span": "(8, 12)"
+                },
+                "gateway": {
+                    "file": "api-gateway/src/main/java/club/newtech/qbick/gateway/ZuulGateway.java",
+                    "line": "8",
+                    "span": "(0, 16)"
+                },
+                "infrastructural": {
+                    "file": "heuristic, based on stereotype gateway",
+                    "line": "heuristic, based on stereotype gateway",
+                    "span": "heuristic, based on stereotype gateway"
+                }
+            }
+        },
+        "qbike-intention": {
+            "file": "/opt/code2DFD/analysed_repositories/qbike/intention/src/main/resources/application.yml",
+            "line": 5,
+            "span": "(10:25)",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/qbike/intention/src/main/resources/application.yml",
+                    "line": 2,
+                    "span": "(8, 12)"
+                },
+                "local_logging": {
+                    "file": "intention/src/main/java/club/newtech/qbike/intention/domain/service/IntentionService.java",
+                    "line": "14",
+                    "span": "(17, 30)"
+                },
+                "load_balancer": {
+                    "file": "intention/src/main/java/club/newtech/qbike/intention/IntentionApplication.java",
+                    "line": "21",
+                    "span": "(25, 38)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "qbike-trip": {
+            "file": "/opt/code2DFD/analysed_repositories/qbike/position/src/main/resources/application.yml",
+            "line": 5,
+            "span": "(10:20)",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/qbike/position/src/main/resources/application.yml",
+                    "line": 2,
+                    "span": "(8, 12)"
+                },
+                "local_logging": {
+                    "file": "position/src/main/java/club/newtech/qbike/trip/domain/service/PositionService.java",
+                    "line": "11",
+                    "span": "(17, 30)"
+                },
+                "load_balancer": {
+                    "file": "position/src/main/java/club/newtech/qbike/trip/PositionApplication.java",
+                    "line": "20",
+                    "span": "(25, 38)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "microservice-discovery-eureka": {
+            "file": "microservice-discovery-eureka/pom.xml",
+            "line": 5,
+            "span": "[16:45]"
+        },
+        "qbike-order": {
+            "file": "/opt/code2DFD/analysed_repositories/qbike/order/src/main/resources/application.yml",
+            "line": 5,
+            "span": "(10:21)",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/qbike/order/src/main/resources/application.yml",
+                    "line": 2,
+                    "span": "(8, 12)"
+                },
+                "local_logging": {
+                    "file": "order/src/main/java/club/newtech/qbike/order/domain/service/FsmService.java",
+                    "line": "10",
+                    "span": "(17, 30)"
+                },
+                "load_balancer": {
+                    "file": "order/src/main/java/club/newtech/qbike/order/OrderApplication.java",
+                    "line": "59",
+                    "span": "(25, 38)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "rabbit": {
+            "file": "docker-compose.yml",
+            "line": 3,
+            "span": "[2:8]",
+            "sub_items": {
+                "message_broker": {
+                    "file": "heuristic, based on image in Docker Compose",
+                    "line": "heuristic, based on image in Docker Compose",
+                    "span": "heuristic, based on image in Docker Compose"
+                },
+                "infrastructural": {
+                    "file": "heuristic, based on stereotype message_broker",
+                    "line": "heuristic, based on stereotype message_broker",
+                    "span": "heuristic, based on stereotype message_broker"
+                }
+            }
+        },
+        "mysql": {
+            "file": "docker-compose.yml",
+            "line": 22,
+            "span": "[2:7]",
+            "sub_items": {
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "zipkin": {
+            "file": "docker-compose.yml",
+            "line": 111,
+            "span": "[2:8]",
+            "sub_items": {
+                "infrastructural": {
+                    "file": "heuristic, based on stereotype tracing_server",
+                    "line": "heuristic, based on stereotype tracing_server",
+                    "span": "heuristic, based on stereotype tracing_server"
+                }
+            }
+        },
+        "database-qbike-uc": {
+            "file": "/opt/code2DFD/analysed_repositories/qbike/uc/src/main/resources/application.yml",
+            "line": 13,
+            "span": "(10, 82)"
+        },
+        "database-qbike-intention": {
+            "file": "/opt/code2DFD/analysed_repositories/qbike/intention/src/main/resources/application.yml",
+            "line": 13,
+            "span": "(10, 82)"
+        },
+        "database-qbike-trip": {
+            "file": "/opt/code2DFD/analysed_repositories/qbike/position/src/main/resources/application.yml",
+            "line": 13,
+            "span": "(10, 82)"
+        },
+        "database-qbike-order": {
+            "file": "/opt/code2DFD/analysed_repositories/qbike/order/src/main/resources/application.yml",
+            "line": 13,
+            "span": "(10, 82)"
+        },
+        "user": {
+            "file": "implicit",
+            "line": "implicit",
+            "span": "implicit",
+            "sub_items": {
+                "user_stereotype": {
+                    "file": "implicit",
+                    "line": "implicit",
+                    "span": "implicit"
+                },
+                "entrypoint": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                },
+                "exitpoint": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        }
+    },
+    "edges": {
+        "rabbit -> qbike-order": {
+            "file": "Receiver.java",
+            "line": 12,
+            "span": "<re.Match object; span=(0, 15), match='@RabbitListener'>"
+        },
+        "qbike-intention -> qbike-trip": {
+            "file": "intention/src/main/java/club/newtech/qbike/intention/infrastructure/PositionApi.java",
+            "line": "26",
+            "span": "(16, 37)"
+        },
+        "database-qbike-uc -> qbike-uc": {
+            "file": "/opt/code2DFD/analysed_repositories/qbike/uc/src/main/resources/application.yml",
+            "line": 13,
+            "span": "(10, 82)"
+        },
+        "database-qbike-intention -> qbike-intention": {
+            "file": "/opt/code2DFD/analysed_repositories/qbike/intention/src/main/resources/application.yml",
+            "line": 13,
+            "span": "(10, 82)"
+        },
+        "database-qbike-trip -> qbike-trip": {
+            "file": "/opt/code2DFD/analysed_repositories/qbike/position/src/main/resources/application.yml",
+            "line": 13,
+            "span": "(10, 82)"
+        },
+        "database-qbike-order -> qbike-order": {
+            "file": "/opt/code2DFD/analysed_repositories/qbike/order/src/main/resources/application.yml",
+            "line": 13,
+            "span": "(10, 82)"
+        },
+        "qbike-uc -> eureka": {
+            "file": "uc/pom.xml",
+            "line": "30",
+            "span": "(24, 66)"
+        },
+        "qbike-trip -> eureka": {
+            "file": "position/pom.xml",
+            "line": "21",
+            "span": "(24, 66)"
+        },
+        "qbike-intention -> eureka": {
+            "file": "intention/src/main/java/club/newtech/qbike/intention/IntentionApplication.java",
+            "line": "7",
+            "span": "(50, 71)"
+        },
+        "qbike-order -> eureka": {
+            "file": "/opt/code2DFD/analysed_repositories/qbike/order/src/main/resources/application.yml",
+            "line": 53,
+            "span": "(20, 49)"
+        },
+        "eureka -> microservice-api-gateway": {
+            "file": "api-gateway/pom.xml",
+            "line": "25",
+            "span": "(24, 66)"
+        },
+        "user -> microservice-api-gateway": {
+            "file": "implicit",
+            "line": "implicit",
+            "span": "implicit"
+        },
+        "microservice-api-gateway -> user": {
+            "file": "implicit",
+            "line": "implicit",
+            "span": "implicit"
+        }
+    }
+}

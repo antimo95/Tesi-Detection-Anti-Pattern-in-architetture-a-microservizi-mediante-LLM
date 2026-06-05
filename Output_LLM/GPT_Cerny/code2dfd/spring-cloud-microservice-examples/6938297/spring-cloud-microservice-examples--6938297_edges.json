@@ -1,0 +1,76 @@
+{
+    "edges": [
+        {
+            "sender": "cloud-config-server",
+            "receiver": "cloud-hystrix-turbine"
+        },
+        {
+            "sender": "hystrix",
+            "receiver": "gateway"
+        },
+        {
+            "sender": "turbine",
+            "receiver": "gateway"
+        },
+        {
+            "sender": "gateway",
+            "receiver": "zipkin"
+        },
+        {
+            "sender": "simple-service",
+            "receiver": "zipkin"
+        },
+        {
+            "sender": "simple-service2",
+            "receiver": "zipkin"
+        },
+        {
+            "sender": "simple-serviceb",
+            "receiver": "zipkin"
+        },
+        {
+            "sender": "simple-ui",
+            "receiver": "zipkin"
+        },
+        {
+            "sender": "cloud-simple-serviceb",
+            "receiver": "cloud-eureka-server"
+        },
+        {
+            "sender": "uaa-service",
+            "receiver": "cloud-eureka-server"
+        },
+        {
+            "sender": "cloud-simple-ui",
+            "receiver": "cloud-eureka-server"
+        },
+        {
+            "sender": "cloud-dummy-service",
+            "receiver": "cloud-eureka-server"
+        },
+        {
+            "sender": "cloud-hystrix-turbine",
+            "receiver": "cloud-eureka-server"
+        },
+        {
+            "sender": "cloud-config-server",
+            "receiver": "cloud-eureka-server"
+        },
+        {
+            "sender": "cloud-simple-service",
+            "receiver": "cloud-eureka-server"
+        },
+        {
+            "sender": "user",
+            "receiver": "gateway"
+        },
+        {
+            "sender": "gateway",
+            "receiver": "user"
+        },
+        {
+            "sender": "cloud-hystrix-turbine",
+            "receiver": "hystrix-dashboard"
+        }
+    ]
+}

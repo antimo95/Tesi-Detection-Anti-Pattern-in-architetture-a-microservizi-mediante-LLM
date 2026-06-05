@@ -1,0 +1,45 @@
+
+@startuml
+skinparam monochrome true
+skinparam ClassBackgroundColor White
+skinparam defaultFontName Arial
+skinparam defaultFontSize 11
+
+
+digraph dfd2{
+    node[shape=record]
+        authentacation_server [label = "{Service: authentacation_server | --csrf_disabled--\n--authorization_server--\n--resource_server--\n--infrastructural--\n'Authorization Server': 'Spring OAuth2'\n'Endpoints': ['/account'\n}" shape = Mrecord];
+        product_catalog_service [label = "{Service: product_catalog_service | --circuit_breaker--\n--basic_authentication--\n--internal--\n--local_logging--\n--resource_server--\n--pre_authorized_endpoints--\n'Logging Technology': 'Lombok'\n'Pre-authorized Endpoints': ['/\n}" shape = Mrecord];
+        eureka_server [label = "{Service: eureka_server | --service_discovery--\n--infrastructural--\n'Port': 8761\n'Service Discovery': 'Eureka'\n}" shape = Mrecord];
+        order_service [label = "{Service: order_service | --circuit_breaker--\n--internal--\n--local_logging--\n--ssl_enabled--\n--load_balancer--\n--pre_authorized_endpoints--\n'Port': 8080\n'Logging Technology': 'Lombok'\n'Load Balancer': 'Ribbon'\n'Endpoints': ['/purchase-order'\n}" shape = Mrecord];
+        account_service [label = "{Service: account_service | --circuit_breaker--\n--local_logging--\n--internal--\n--pre_authorized_endpoints--\n'Circuit Breaker': 'Hystrix'\n'Endpoints': ['/account'\n}" shape = Mrecord];
+        turbine_server [label = "{Service: turbine_server | --monitoring_server--\n--infrastructural--\n'Monitoring Server': 'Turbine'\n}" shape = Mrecord];
+        api_gateway [label = "{Service: api_gateway | --load_balancer--\n--circuit_breaker--\n--gateway--\n--infrastructural--\n'Gateway': 'Zuul'\n'Circuit Breaker': 'Hystrix'\n'Load Balancer': 'Ribbon'\n}" shape = Mrecord];
+        config_server [label = "{Service: config_server | --infrastructural--\n--configuration_server--\n'Configuration Server': 'Spring Cloud Config'\n'Port': 8888\n}" shape = Mrecord];
+        product_catalog_management_website [label = "{Service: product_catalog_management_website | --circuit_breaker--\n--load_balancer--\n--csrf_disabled--\n--gateway--\n--infrastructural--\n'Gateway': 'Zuul'\n'Circuit Breaker': 'Hystrix'\n'Load Balancer': 'Ribbon'\n}" shape = Mrecord];
+        spring_boot_admin [label = "{Service: spring_boot_admin | --administration_server--\n--infrastructural--\n'Administration Server': 'Spring Boot Admin'\n}" shape = Mrecord];
+        website [label = "{Service: website | --circuit_breaker--\n--load_balancer--\n--csrf_disabled--\n--gateway--\n--infrastructural--\n'Gateway': 'Zuul'\n'Circuit Breaker': 'Hystrix'\n'Load Balancer': 'Ribbon'\n}" shape = Mrecord];
+        zipkin_server [label = "{Service: zipkin_server | --internal--\n}" shape = Mrecord];
+        github_repository [label = "{External Entity: github_repository | --github_repository--\n--entrypoint--\n'URL': 'https\n}"];
+        user [label = "{External Entity: user | --exitpoint--\n--user_stereotype--\n--entrypoint--\n}"];
+        github_repository -> config_server [label = " --restful_http--\n"]
+        turbine_server -> eureka_server [label = " --restful_http--\n"]
+        eureka_server -> product_catalog_management_website [label = " --restful_http--\n"]
+        eureka_server -> website [label = " --restful_http--\n"]
+        eureka_server -> api_gateway [label = " --restful_http--\n"]
+        zipkin_server -> eureka_server [label = " --restful_http--\n"]
+        account_service -> eureka_server [label = " --restful_http--\n"]
+        authentacation_server -> eureka_server [label = " --restful_http--\n"]
+        product_catalog_service -> eureka_server [label = " --restful_http--\n"]
+        config_server -> eureka_server [label = " --restful_http--\n"]
+        order_service -> eureka_server [label = " --load_balanced_link--\n--restful_http--\n'Load Balancer': 'Spring Cloud'\n"]
+        spring_boot_admin -> eureka_server [label = " --restful_http--\n"]
+        user -> api_gateway [label = " --restful_http--\n"]
+        api_gateway -> user [label = " --restful_http--\n"]
+        user -> product_catalog_management_website [label = " --restful_http--\n"]
+        product_catalog_management_website -> user [label = " --load_balanced_link--\n--restful_http--\n'Load Balancer': 'Spring Cloud'\n"]
+        user -> website [label = " --restful_http--\n"]
+        website -> user [label = " --restful_http--\n"]
+
+}
+@enduml

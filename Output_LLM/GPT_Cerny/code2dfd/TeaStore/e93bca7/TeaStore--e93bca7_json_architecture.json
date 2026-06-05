@@ -1,0 +1,118 @@
+{
+    "microservices": [
+        {
+            "name": "tools.descartes.teastore.recommender",
+            "type": "service",
+            "stereotype_instances": [
+                "internal",
+                "local_logging"
+            ],
+            "tagged_values": []
+        },
+        {
+            "name": "tools.descartes.teastore.registry",
+            "type": "service",
+            "stereotype_instances": [
+                "internal",
+                "local_logging"
+            ],
+            "tagged_values": []
+        },
+        {
+            "name": "tools.descartes.teastore.webui",
+            "type": "service",
+            "stereotype_instances": [
+                "internal",
+                "local_logging"
+            ],
+            "tagged_values": []
+        },
+        {
+            "name": "tools.descartes.teastore.image",
+            "type": "service",
+            "stereotype_instances": [
+                "internal",
+                "local_logging"
+            ],
+            "tagged_values": []
+        },
+        {
+            "name": "tools.descartes.teastore.auth",
+            "type": "service",
+            "stereotype_instances": [
+                "internal"
+            ],
+            "tagged_values": []
+        },
+        {
+            "name": "tools.descartes.teastore.persistence",
+            "type": "service",
+            "stereotype_instances": [
+                "internal",
+                "local_logging"
+            ],
+            "tagged_values": []
+        },
+        {
+            "name": "tools.descartes.teastore.entities",
+            "type": "service",
+            "stereotype_instances": [
+                "internal"
+            ],
+            "tagged_values": []
+        },
+        {
+            "name": "tools.descartes.teastore.kieker.probes",
+            "type": "service",
+            "stereotype_instances": [
+                "internal"
+            ],
+            "tagged_values": []
+        },
+        {
+            "name": "tools.descartes.teastore.dockerbase",
+            "type": "service",
+            "stereotype_instances": [
+                "internal"
+            ],
+            "tagged_values": [
+                [
+                    "Port",
+                    8080
+                ]
+            ]
+        },
+        {
+            "name": "dockermemoryconfigurator",
+            "type": "service",
+            "stereotype_instances": [
+                "internal"
+            ],
+            "tagged_values": []
+        },
+        {
+            "name": "kieker.rabbitmq",
+            "type": "service",
+            "stereotype_instances": [
+                "internal"
+            ],
+            "tagged_values": [
+                [
+                    "Port",
+                    8080
+                ]
+            ]
+        },
+        {
+            "name": "tools.descartes.teastore.registryclient",
+            "type": "service",
+            "stereotype_instances": [
+                "internal",
+                "local_logging"
+            ],
+            "tagged_values": []
+        }
+    ],
+    "information_flows": [],
+    "external_components": []
+}

@@ -1,0 +1,24 @@
+Manual Configuration
+Non concordo: se “GT” (ground truth) indica ABSENT, allora secondo gli artefatti che ho analizzato quella etichetta non è coerente con la definizione data.
+
+Perché:
+
+Nei file di configurazione di più servizi ci sono porte e URL/host di infrastruttura hard-coded (Eureka/Zipkin/config-server su localhost e porte fisse). Questo implica che, se cambia un endpoint/porta, devi modificare manualmente più config per servizio.
+
+In almeno un caso c’è anche host/porta hard-coded nel codice (es. ZooKeeper su localhost:2181), che richiede intervento manuale (addirittura ricompilazione) per cambiare.
+
+Quindi, rispetto alla definizione/esempio forniti, io resterei su PRESENT. Se la GT dice ABSENT, allora manca/contraddice qualche informazione nel materiale che mi hai dato (oppure la GT sta usando criteri diversi da quelli specificati nella traccia).
+
+SUPPORTING INDICATORS (only if PRESENT):
+
+cloud-api-gateway/src/main/resources/application.yaml:2,17,39 hard-codes server.port: 8765, eureka.client.serviceUrl.defaultZone: http://localhost:8761/eureka/, and spring.zipkin.baseUrl: http://localhost:9411. 
+
+cloud-dummy-service/src/main/resources/application.yml:5,8–12 hard-codes server.port: 8870 and Eureka hostname/port as localhost:8761. 
+
+cloud-simple-service/src/main/resources/bootstrap.yaml:1,4,6 hard-codes config-server URI http://127.0.0.1:${config.port:8888}, Eureka URL http://localhost:8761/eureka/, and server.port: 8081. 
+
+cloud-finagle-commons-thrift/src/main/java/cloud/finagle/commons/ClusterFactory.java:19–21 hard-codes ZooKeeper node new InetSocketAddress("localhost", 2181)
+
+Volendo considerare dummy service come un qualcosa che magari potremmo ''escludere'' comunque ritroviamo indicatori in simple-service o api-gateway
+
+-------------------

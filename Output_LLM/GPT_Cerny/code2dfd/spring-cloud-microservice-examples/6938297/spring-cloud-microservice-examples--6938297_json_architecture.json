@@ -1,0 +1,421 @@
+{
+    "microservices": [
+        {
+            "name": "cloud-thrift-server",
+            "type": "service",
+            "stereotype_instances": [
+                "internal"
+            ],
+            "tagged_values": [
+                [
+                    "Port",
+                    8071
+                ]
+            ]
+        },
+        {
+            "name": "gateway",
+            "type": "service",
+            "stereotype_instances": [
+                "local_logging",
+                "load_balancer",
+                "infrastructural",
+                "gateway"
+            ],
+            "tagged_values": [
+                [
+                    "Load Balancer",
+                    "Ribbon"
+                ],
+                [
+                    "Gateway",
+                    "Zuul"
+                ]
+            ]
+        },
+        {
+            "name": "uaa-service",
+            "type": "service",
+            "stereotype_instances": [
+                "authorization_server",
+                "infrastructural"
+            ],
+            "tagged_values": [
+                [
+                    "Authorization Server",
+                    "Spring OAuth2"
+                ],
+                [
+                    "Port",
+                    8769
+                ]
+            ]
+        },
+        {
+            "name": "cloud-config-server",
+            "type": "service",
+            "stereotype_instances": [
+                "infrastructural",
+                "configuration_server"
+            ],
+            "tagged_values": [
+                [
+                    "Configuration Server",
+                    "Spring Cloud Config"
+                ],
+                [
+                    "Port",
+                    8888
+                ]
+            ]
+        },
+        {
+            "name": "cloud-eureka-server",
+            "type": "service",
+            "stereotype_instances": [
+                "infrastructural",
+                "service_discovery"
+            ],
+            "tagged_values": [
+                [
+                    "Service Discovery",
+                    "Eureka"
+                ],
+                [
+                    "Port",
+                    8761
+                ]
+            ]
+        },
+        {
+            "name": "cloud-finagle-thrift-api",
+            "type": "service",
+            "stereotype_instances": [
+                "internal"
+            ],
+            "tagged_values": []
+        },
+        {
+            "name": "cloud-simple-ui",
+            "type": "service",
+            "stereotype_instances": [
+                "circuit_breaker",
+                "load_balancer",
+                "internal"
+            ],
+            "tagged_values": [
+                [
+                    "Endpoints",
+                    "['/users']"
+                ],
+                [
+                    "Port",
+                    8090
+                ],
+                [
+                    "Load Balancer",
+                    "Spring Cloud"
+                ]
+            ]
+        },
+        {
+            "name": "cloud-finagle-thrift-client",
+            "type": "service",
+            "stereotype_instances": [
+                "internal"
+            ],
+            "tagged_values": []
+        },
+        {
+            "name": "cloud-thrift-client",
+            "type": "service",
+            "stereotype_instances": [
+                "internal"
+            ],
+            "tagged_values": [
+                [
+                    "Port",
+                    8070
+                ],
+                [
+                    "Endpoints",
+                    "['/hello']"
+                ]
+            ]
+        },
+        {
+            "name": "cloud-finagle-thrift-server",
+            "type": "service",
+            "stereotype_instances": [
+                "internal"
+            ],
+            "tagged_values": []
+        },
+        {
+            "name": "cloud-finagle-commons-thrift",
+            "type": "service",
+            "stereotype_instances": [
+                "internal"
+            ],
+            "tagged_values": []
+        },
+        {
+            "name": "hystrix-dashboard",
+            "type": "service",
+            "stereotype_instances": [
+                "monitoring_dashboard",
+                "infrastructural"
+            ],
+            "tagged_values": [
+                [
+                    "Port",
+                    8022
+                ],
+                [
+                    "Monitoring Dashboard",
+                    "Hystrix"
+                ],
+                [
+                    "Endpoints",
+                    "['/']"
+                ]
+            ]
+        },
+        {
+            "name": "cloud-hystrix-turbine",
+            "type": "service",
+            "stereotype_instances": [
+                "infrastructural",
+                "monitoring_server"
+            ],
+            "tagged_values": [
+                [
+                    "Monitoring Server",
+                    "Turbine"
+                ],
+                [
+                    "Port",
+                    8989
+                ]
+            ]
+        },
+        {
+            "name": "zipkin",
+            "type": "service",
+            "stereotype_instances": [
+                "internal"
+            ],
+            "tagged_values": [
+                [
+                    "Port",
+                    9411
+                ]
+            ]
+        },
+        {
+            "name": "cloud-dummy-service",
+            "type": "service",
+            "stereotype_instances": [
+                "internal",
+                "resource_server"
+            ],
+            "tagged_values": [
+                [
+                    "Endpoints",
+                    "['/']"
+                ]
+            ]
+        },
+        {
+            "name": "cloud-simple-service",
+            "type": "service",
+            "stereotype_instances": [
+                "local_logging",
+                "internal"
+            ],
+            "tagged_values": [
+                [
+                    "Port",
+                    8081
+                ],
+                [
+                    "Endpoints",
+                    "['/user']"
+                ]
+            ]
+        },
+        {
+            "name": "cloud-thrift-interface",
+            "type": "service",
+            "stereotype_instances": [
+                "local_logging",
+                "internal"
+            ],
+            "tagged_values": []
+        },
+        {
+            "name": "cloud-simple-serviceb",
+            "type": "service",
+            "stereotype_instances": [
+                "internal"
+            ],
+            "tagged_values": [
+                [
+                    "Endpoints",
+                    "['/user']"
+                ],
+                [
+                    "Port",
+                    8091
+                ]
+            ]
+        }
+    ],
+    "information_flows": [
+        {
+            "sender": "cloud-config-server",
+            "receiver": "cloud-hystrix-turbine",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "hystrix",
+            "receiver": "gateway",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "turbine",
+            "receiver": "gateway",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "gateway",
+            "receiver": "zipkin",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "simple-service",
+            "receiver": "zipkin",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "simple-service2",
+            "receiver": "zipkin",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "simple-serviceb",
+            "receiver": "zipkin",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "simple-ui",
+            "receiver": "zipkin",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "cloud-simple-serviceb",
+            "receiver": "cloud-eureka-server",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "uaa-service",
+            "receiver": "cloud-eureka-server",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "cloud-simple-ui",
+            "receiver": "cloud-eureka-server",
+            "stereotype_instances": [
+                "restful_http",
+                "circuit_breaker_link",
+                "load_balanced_link"
+            ],
+            "tagged_values": [
+                [
+                    "Load Balancer",
+                    "Spring Cloud"
+                ]
+            ]
+        },
+        {
+            "sender": "cloud-dummy-service",
+            "receiver": "cloud-eureka-server",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "cloud-hystrix-turbine",
+            "receiver": "cloud-eureka-server",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "cloud-config-server",
+            "receiver": "cloud-eureka-server",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "cloud-simple-service",
+            "receiver": "cloud-eureka-server",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "user",
+            "receiver": "gateway",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "gateway",
+            "receiver": "user",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        },
+        {
+            "sender": "cloud-hystrix-turbine",
+            "receiver": "hystrix-dashboard",
+            "stereotype_instances": [
+                "restful_http"
+            ]
+        }
+    ],
+    "external_components": [
+        {
+            "name": "user",
+            "type": "external_component",
+            "stereotype_instances": [
+                "exitpoint",
+                "user_stereotype",
+                "entrypoint"
+            ]
+        }
+    ]
+}

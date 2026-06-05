@@ -1,0 +1,560 @@
+{
+    "nodes": {
+        "statistics-service": {
+            "file": "/opt/code2DFD/analysed_repositories/piggymetrics/statistics-service/src/main/resources/bootstrap.yml",
+            "line": 3,
+            "span": "(10:28)",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/piggymetrics/config/src/main/resources/shared/statistics-service.yml",
+                    "line": 22,
+                    "span": "(8, 12)"
+                },
+                "resource_server": {
+                    "file": "statistics-service/src/main/java/com/piggymetrics/statistics/config/ResourceServerConfig.java",
+                    "line": "15",
+                    "span": "(0, 21)"
+                },
+                "pre_authorized_endpoints": {
+                    "file": "statistics-service/src/main/java/com/piggymetrics/statistics/controller/StatisticsController.java",
+                    "line": "25",
+                    "span": "(1, 14)"
+                },
+                "local_logging": {
+                    "file": "statistics-service/src/main/java/com/piggymetrics/statistics/service/StatisticsServiceImpl.java",
+                    "line": "11",
+                    "span": "(17, 30)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "turbine-stream-service": {
+            "file": "/opt/code2DFD/analysed_repositories/piggymetrics/turbine-stream-service/src/main/resources/bootstrap.yml",
+            "line": 3,
+            "span": "(10:32)",
+            "sub_items": {
+                "monitoring_server": {
+                    "file": "turbine-stream-service/src/main/java/com/piggymetrics/turbine/TurbineStreamServiceApplication.java",
+                    "line": "6",
+                    "span": "(56, 75)"
+                },
+                "infrastructural": {
+                    "file": "heuristic, based on stereotype monitoring_server",
+                    "line": "heuristic, based on stereotype monitoring_server",
+                    "span": "heuristic, based on stereotype monitoring_server"
+                }
+            }
+        },
+        "account-service": {
+            "file": "/opt/code2DFD/analysed_repositories/piggymetrics/account-service/src/main/resources/bootstrap.yml",
+            "line": 3,
+            "span": "(10:25)",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/piggymetrics/config/src/main/resources/shared/account-service.yml",
+                    "line": 22,
+                    "span": "(8, 12)"
+                },
+                "resource_server": {
+                    "file": "account-service/src/main/java/com/piggymetrics/account/config/ResourceServerConfig.java",
+                    "line": "23",
+                    "span": "(0, 21)"
+                },
+                "pre_authorized_endpoints": {
+                    "file": "account-service/src/main/java/com/piggymetrics/account/controller/AccountController.java",
+                    "line": "19",
+                    "span": "(1, 14)"
+                },
+                "local_logging": {
+                    "file": "account-service/src/main/java/com/piggymetrics/account/service/AccountServiceImpl.java",
+                    "line": "11",
+                    "span": "(17, 30)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "notification-service": {
+            "file": "/opt/code2DFD/analysed_repositories/piggymetrics/notification-service/src/main/resources/bootstrap.yml",
+            "line": 3,
+            "span": "(10:30)",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/piggymetrics/config/src/main/resources/shared/notification-service.yml",
+                    "line": 13,
+                    "span": "(8, 12)"
+                },
+                "resource_server": {
+                    "file": "notification-service/src/main/java/com/piggymetrics/notification/config/ResourceServerConfig.java",
+                    "line": "18",
+                    "span": "(0, 21)"
+                },
+                "local_logging": {
+                    "file": "notification-service/src/main/java/com/piggymetrics/notification/service/RecipientServiceImpl.java",
+                    "line": "7",
+                    "span": "(17, 30)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "gateway": {
+            "file": "/opt/code2DFD/analysed_repositories/piggymetrics/gateway/src/main/resources/bootstrap.yml",
+            "line": 3,
+            "span": "(10:17)",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/piggymetrics/config/src/main/resources/shared/gateway.yml",
+                    "line": 45,
+                    "span": "(8, 12)"
+                },
+                "gateway": {
+                    "file": "gateway/src/main/java/com/piggymetrics/gateway/GatewayApplication.java",
+                    "line": "10",
+                    "span": "(0, 16)"
+                },
+                "infrastructural": {
+                    "file": "heuristic, based on stereotype gateway",
+                    "line": "heuristic, based on stereotype gateway",
+                    "span": "heuristic, based on stereotype gateway"
+                }
+            }
+        },
+        "auth-service": {
+            "file": "/opt/code2DFD/analysed_repositories/piggymetrics/auth-service/src/main/resources/bootstrap.yml",
+            "line": 3,
+            "span": "(10:22)",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/piggymetrics/config/src/main/resources/shared/auth-service.yml",
+                    "line": 13,
+                    "span": "(8, 12)"
+                },
+                "csrf_disabled": {
+                    "file": "auth-service/src/main/java/com/piggymetrics/auth/config/WebSecurityConfig.java",
+                    "line": "9",
+                    "span": "(67, 79)"
+                },
+                "authentication_scope_all_requests": {
+                    "file": "auth-service/src/main/java/com/piggymetrics/auth/config/WebSecurityConfig.java",
+                    "line": "9",
+                    "span": "(67, 79)"
+                },
+                "authorization_server": {
+                    "file": "auth-service/src/main/java/com/piggymetrics/auth/config/OAuth2AuthorizationConfig.java",
+                    "line": "22",
+                    "span": "(0, 26)"
+                },
+                "resource_server": {
+                    "file": "auth-service/src/main/java/com/piggymetrics/auth/AuthApplication.java",
+                    "line": "10",
+                    "span": "(0, 21)"
+                },
+                "token_server": {
+                    "file": "/opt/code2DFD/analysed_repositories/piggymetrics/config/src/main/resources/shared/notification-service.yml",
+                    "line": 6,
+                    "span": "(23, 63)"
+                },
+                "pre_authorized_endpoints": {
+                    "file": "auth-service/src/main/java/com/piggymetrics/auth/controller/UserController.java",
+                    "line": "27",
+                    "span": "(1, 14)"
+                },
+                "local_logging": {
+                    "file": "auth-service/src/main/java/com/piggymetrics/auth/service/UserServiceImpl.java",
+                    "line": "6",
+                    "span": "(17, 30)"
+                },
+                "infrastructural": {
+                    "file": "heuristic, based on stereotype authorization_server",
+                    "line": "heuristic, based on stereotype authorization_server",
+                    "span": "heuristic, based on stereotype authorization_server"
+                }
+            }
+        },
+        "monitoring": {
+            "file": "/opt/code2DFD/analysed_repositories/piggymetrics/monitoring/src/main/resources/bootstrap.yml",
+            "line": 3,
+            "span": "(10:20)",
+            "sub_items": {
+                "monitoring_dashboard": {
+                    "file": "monitoring/src/main/java/com/piggymetrics/monitoring/MonitoringApplication.java",
+                    "line": "8",
+                    "span": "(0, 23)"
+                },
+                "infrastructural": {
+                    "file": "heuristic, based on stereotype monitoring_dashboard",
+                    "line": "heuristic, based on stereotype monitoring_dashboard",
+                    "span": "heuristic, based on stereotype monitoring_dashboard"
+                }
+            }
+        },
+        "registry": {
+            "file": "/opt/code2DFD/analysed_repositories/piggymetrics/registry/src/main/resources/bootstrap.yml",
+            "line": 3,
+            "span": "(10:18)",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/piggymetrics/config/src/main/resources/shared/registry.yml",
+                    "line": 2,
+                    "span": "(8, 12)"
+                },
+                "service_discovery": {
+                    "file": "registry/src/main/java/com/piggymetrics/registry/RegistryApplication.java",
+                    "line": "8",
+                    "span": "(0, 19)"
+                },
+                "infrastructural": {
+                    "file": "heuristic, based on stereotype service_discovery",
+                    "line": "heuristic, based on stereotype service_discovery",
+                    "span": "heuristic, based on stereotype service_discovery"
+                }
+            }
+        },
+        "config": {
+            "file": "config/pom.xml",
+            "line": 5,
+            "span": "[13:19]",
+            "sub_items": {
+                "Port": {
+                    "file": "/opt/code2DFD/analysed_repositories/piggymetrics/config/src/main/resources/application.yml",
+                    "line": 14,
+                    "span": "(8, 12)"
+                },
+                "configuration_server": {
+                    "file": "config/src/main/java/com/piggymetrics/config/ConfigApplication.java",
+                    "line": "8",
+                    "span": "(0, 19)"
+                },
+                "csrf_disabled": {
+                    "file": "config/src/main/java/com/piggymetrics/config/SecurityConfig.java",
+                    "line": "4",
+                    "span": "(67, 79)"
+                },
+                "basic_authentication": {
+                    "file": "config/src/main/java/com/piggymetrics/config/SecurityConfig.java",
+                    "line": "4",
+                    "span": "(67, 79)"
+                },
+                "infrastructural": {
+                    "file": "heuristic, based on stereotype configuration_server",
+                    "line": "heuristic, based on stereotype configuration_server",
+                    "span": "heuristic, based on stereotype configuration_server"
+                }
+            }
+        },
+        "account-mongodb": {
+            "file": "docker-compose.yml",
+            "line": 95,
+            "span": "[2:17]",
+            "sub_items": {
+                "plaintext_credentials": {
+                    "file": "docker-compose.yml",
+                    "line": 98,
+                    "span": "[25:42]"
+                }
+            }
+        },
+        "notification-mongodb": {
+            "file": "docker-compose.yml",
+            "line": 146,
+            "span": "[2:22]",
+            "sub_items": {
+                "plaintext_credentials": {
+                    "file": "docker-compose.yml",
+                    "line": 150,
+                    "span": "[25:42]"
+                }
+            }
+        },
+        "auth-mongodb": {
+            "file": "docker-compose.yml",
+            "line": 70,
+            "span": "[2:14]",
+            "sub_items": {
+                "plaintext_credentials": {
+                    "file": "docker-compose.yml",
+                    "line": 72,
+                    "span": "[25:42]"
+                }
+            }
+        },
+        "statistics-mongodb": {
+            "file": "docker-compose.yml",
+            "line": 121,
+            "span": "[2:20]",
+            "sub_items": {
+                "plaintext_credentials": {
+                    "file": "docker-compose.yml",
+                    "line": 123,
+                    "span": "[25:42]"
+                }
+            }
+        },
+        "rabbitmq": {
+            "file": "docker-compose.yml",
+            "line": 3,
+            "span": "[2:10]",
+            "sub_items": {
+                "message_broker": {
+                    "file": "heuristic, based on image in Docker Compose",
+                    "line": "heuristic, based on image in Docker Compose",
+                    "span": "heuristic, based on image in Docker Compose"
+                },
+                "infrastructural": {
+                    "file": "heuristic, based on stereotype message_broker",
+                    "line": "heuristic, based on stereotype message_broker",
+                    "span": "heuristic, based on stereotype message_broker"
+                }
+            }
+        },
+        "user": {
+            "file": "implicit",
+            "line": "implicit",
+            "span": "implicit",
+            "sub_items": {
+                "user_stereotype": {
+                    "file": "implicit",
+                    "line": "implicit",
+                    "span": "implicit"
+                },
+                "entrypoint": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                },
+                "exitpoint": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "external-website": {
+            "file": "/opt/code2DFD/analysed_repositories/piggymetrics/config/src/main/resources/shared/statistics-service.yml",
+            "line": 25,
+            "span": "(8, 39)",
+            "sub_items": {
+                "entrypoint": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                },
+                "exitpoint": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                },
+                "external_website": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "mail-server": {
+            "file": "/opt/code2DFD/analysed_repositories/piggymetrics/config/src/main/resources/shared/notification-service.yml",
+            "line": 37,
+            "span": "(11, 25)",
+            "sub_items": {
+                "entrypoint": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                },
+                "exitpoint": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                },
+                "mail_server": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        }
+    },
+    "edges": {
+        "config -> statistics-service": {
+            "file": "/opt/code2DFD/analysed_repositories/piggymetrics/statistics-service/src/main/resources/bootstrap.yml",
+            "line": 6,
+            "span": "(12, 30)"
+        },
+        "config -> turbine-stream-service": {
+            "file": "/opt/code2DFD/analysed_repositories/piggymetrics/turbine-stream-service/src/main/resources/bootstrap.yml",
+            "line": 6,
+            "span": "(12, 30)"
+        },
+        "config -> account-service": {
+            "file": "/opt/code2DFD/analysed_repositories/piggymetrics/account-service/src/main/resources/bootstrap.yml",
+            "line": 6,
+            "span": "(12, 30)"
+        },
+        "config -> notification-service": {
+            "file": "/opt/code2DFD/analysed_repositories/piggymetrics/notification-service/src/main/resources/bootstrap.yml",
+            "line": 6,
+            "span": "(12, 30)"
+        },
+        "config -> gateway": {
+            "file": "/opt/code2DFD/analysed_repositories/piggymetrics/gateway/src/main/resources/bootstrap.yml",
+            "line": 6,
+            "span": "(12, 30)"
+        },
+        "config -> auth-service": {
+            "file": "/opt/code2DFD/analysed_repositories/piggymetrics/auth-service/src/main/resources/bootstrap.yml",
+            "line": 6,
+            "span": "(12, 30)"
+        },
+        "config -> monitoring": {
+            "file": "/opt/code2DFD/analysed_repositories/piggymetrics/monitoring/src/main/resources/bootstrap.yml",
+            "line": 6,
+            "span": "(12, 30)"
+        },
+        "config -> registry": {
+            "file": "/opt/code2DFD/analysed_repositories/piggymetrics/registry/src/main/resources/bootstrap.yml",
+            "line": 6,
+            "span": "(12, 30)"
+        },
+        "statistics-mongodb -> statistics-service": {
+            "file": "/opt/code2DFD/analysed_repositories/piggymetrics/config/src/main/resources/shared/statistics-service.yml",
+            "line": 13,
+            "span": "(13, 31)"
+        },
+        "account-mongodb -> account-service": {
+            "file": "/opt/code2DFD/analysed_repositories/piggymetrics/config/src/main/resources/shared/account-service.yml",
+            "line": 13,
+            "span": "(13, 28)"
+        },
+        "notification-mongodb -> notification-service": {
+            "file": "/opt/code2DFD/analysed_repositories/piggymetrics/config/src/main/resources/shared/notification-service.yml",
+            "line": 31,
+            "span": "(13, 33)"
+        },
+        "auth-mongodb -> auth-service": {
+            "file": "/opt/code2DFD/analysed_repositories/piggymetrics/config/src/main/resources/shared/auth-service.yml",
+            "line": 4,
+            "span": "(13, 25)"
+        },
+        "auth-service -> registry": {
+            "file": "auth-service/src/main/java/com/piggymetrics/auth/AuthApplication.java",
+            "line": "5",
+            "span": "(50, 71)"
+        },
+        "notification-service -> registry": {
+            "file": "notification-service/src/main/java/com/piggymetrics/notification/NotificationServiceApplication.java",
+            "line": "7",
+            "span": "(50, 71)"
+        },
+        "turbine-stream-service -> registry": {
+            "file": "turbine-stream-service/pom.xml",
+            "line": "26",
+            "span": "(15, 57)"
+        },
+        "statistics-service -> registry": {
+            "file": "statistics-service/pom.xml",
+            "line": "41",
+            "span": "(15, 57)"
+        },
+        "account-service -> registry": {
+            "file": "account-service/pom.xml",
+            "line": "41",
+            "span": "(15, 57)"
+        },
+        "registry -> gateway": {
+            "file": "gateway/pom.xml",
+            "line": "33",
+            "span": "(15, 57)"
+        },
+        "user -> gateway": {
+            "file": "implicit",
+            "line": "implicit",
+            "span": "implicit"
+        },
+        "gateway -> user": {
+            "file": "implicit",
+            "line": "implicit",
+            "span": "implicit"
+        },
+        "gateway -> notification-service": {
+            "file": "/opt/code2DFD/analysed_repositories/piggymetrics/config/src/main/resources/shared/gateway.yml",
+            "line": 40,
+            "span": "(19, 39)"
+        },
+        "gateway -> statistics-service": {
+            "file": "/opt/code2DFD/analysed_repositories/piggymetrics/config/src/main/resources/shared/gateway.yml",
+            "line": 34,
+            "span": "(19, 37)"
+        },
+        "gateway -> account-service": {
+            "file": "/opt/code2DFD/analysed_repositories/piggymetrics/config/src/main/resources/shared/gateway.yml",
+            "line": 28,
+            "span": "(19, 34)"
+        },
+        "gateway -> auth-service": {
+            "file": "/opt/code2DFD/analysed_repositories/piggymetrics/config/src/main/resources/shared/gateway.yml",
+            "line": 22,
+            "span": "(13, 37)"
+        },
+        "auth-service -> statistics-service": {
+            "file": "/opt/code2DFD/analysed_repositories/piggymetrics/config/src/main/resources/shared/statistics-service.yml",
+            "line": 6,
+            "span": "(23, 63)"
+        },
+        "auth-service -> account-service": {
+            "file": "/opt/code2DFD/analysed_repositories/piggymetrics/config/src/main/resources/shared/account-service.yml",
+            "line": 6,
+            "span": "(23, 63)"
+        },
+        "auth-service -> notification-service": {
+            "file": "/opt/code2DFD/analysed_repositories/piggymetrics/config/src/main/resources/shared/notification-service.yml",
+            "line": 6,
+            "span": "(23, 63)"
+        },
+        "turbine-stream-service -> monitoring": {
+            "file": "turbine-stream-service/src/main/java/com/piggymetrics/turbine/TurbineStreamServiceApplication.java",
+            "line": "6",
+            "span": "(56, 75)"
+        },
+        "rabbitmq -> turbine-stream-service": {
+            "file": "turbine-stream-service/src/main/java/com/piggymetrics/turbine/TurbineStreamServiceApplication.java",
+            "line": "6",
+            "span": "(56, 75)"
+        },
+        "statistics-service -> rabbitmq": {
+            "file": "turbine-stream-service/src/main/java/com/piggymetrics/turbine/TurbineStreamServiceApplication.java",
+            "line": "6",
+            "span": "(56, 75)"
+        },
+        "account-service -> rabbitmq": {
+            "file": "turbine-stream-service/src/main/java/com/piggymetrics/turbine/TurbineStreamServiceApplication.java",
+            "line": "6",
+            "span": "(56, 75)"
+        },
+        "notification-service -> rabbitmq": {
+            "file": "turbine-stream-service/src/main/java/com/piggymetrics/turbine/TurbineStreamServiceApplication.java",
+            "line": "6",
+            "span": "(56, 75)"
+        },
+        "external-website -> statistics-service": {
+            "file": "/opt/code2DFD/analysed_repositories/piggymetrics/config/src/main/resources/shared/statistics-service.yml",
+            "line": 25,
+            "span": "(8, 39)"
+        },
+        "notification-service -> mail-server": {
+            "file": "/opt/code2DFD/analysed_repositories/piggymetrics/config/src/main/resources/shared/notification-service.yml",
+            "line": 37,
+            "span": "(11, 25)"
+        }
+    }
+}

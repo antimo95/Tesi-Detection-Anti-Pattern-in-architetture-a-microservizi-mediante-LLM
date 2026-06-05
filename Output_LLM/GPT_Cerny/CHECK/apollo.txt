@@ -1,0 +1,30 @@
+NO API VERSIONING
+Se un servizio espone API REST senza alcuna forma di versioning (tipicamente nel path, es. /v1/...), allora c’è l’anti-pattern.
+
+apollo-adminservice exposes non-versioned REST endpoints like @PostMapping("/apps") and @GetMapping("/apps") (no /v1//v2 path segment). File: apollo-adminservice/src/main/java/com/ctrip/framework/apollo/adminservice/controller/AppController.java lines 30–33, 55–57. 
+
+apollo-adminservice exposes non-versioned REST endpoints like @PostMapping("/apps/{appId}/accesskeys") and @GetMapping("/apps/{appId}/accesskeys"). File: apollo-adminservice/src/main/java/com/ctrip/framework/apollo/adminservice/controller/AccessKeyController.java lines 21–29. 
+
+apollo-configservice exposes a non-versioned REST base path @RequestMapping("/configs") with @GetMapping("/{appId}/{clusterName}/{namespace:.+}"). File: apollo-configservice/src/main/java/com/ctrip/framework/apollo/configservice/controller/ConfigController.java lines 31–33, 55–57. 
+
+apollo-metaservice exposes a non-versioned REST base path @RequestMapping("/services") with routes like @RequestMapping("/config") and @RequestMapping("/admin"). File: apollo-configservice/src/main/java/com/ctrip/framework/apollo/metaservice/controller/ServiceController.java lines 10–30.
+
+
+SHARED PERSISTENCY
+Sia apollo-adminservice che apollo-configservice sono configurati per puntare a ApolloConfigDB
+apollo-adminservice/src/main/docker/Dockerfile:4 run instructions use SPRING_DATASOURCE_URL=.../ApolloConfigDB....
+apollo-configservice/src/main/docker/Dockerfile:4 run instructions use SPRING_DATASOURCE_URL=.../ApolloConfigDB....
+
+NO HEALTH CHECK
+Ci sono indicazioni esplicite di un endpoint /health usato per health check, e presenza di Actuator
+apollo-configservice/src/main/resources/application.yml:40
+eureka.instance.health-check-url-path: /health
+
+apollo-adminservice/src/main/resources/application.yml:41
+eureka.instance.health-check-url-path: /health
+
+apollo-configservice/pom.xml:83
+dipendenza: spring-boot-starter-actuator
+
+apollo-adminservice/pom.xml:70
+dipendenza: spring-boot-starter-actuator

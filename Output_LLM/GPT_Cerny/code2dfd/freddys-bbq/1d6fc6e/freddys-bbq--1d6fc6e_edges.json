@@ -1,0 +1,20 @@
+{
+    "edges": [
+        {
+            "sender": "menu-service",
+            "receiver": "microsec-eureka-server"
+        },
+        {
+            "sender": "order-service",
+            "receiver": "microsec-eureka-server"
+        },
+        {
+            "sender": "customer-portal",
+            "receiver": "microsec-eureka-server"
+        },
+        {
+            "sender": "admin-portal",
+            "receiver": "microsec-eureka-server"
+        }
+    ]
+}

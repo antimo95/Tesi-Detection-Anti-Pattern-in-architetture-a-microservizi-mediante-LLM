@@ -1,0 +1,240 @@
+{
+    "nodes": {
+        "ftgo-order-history-service": {
+            "file": "ftgo-order-history-service/src/main/resources/application.properties",
+            "line": 1,
+            "span": "(24:50)",
+            "sub_items": {
+                "local_logging": {
+                    "file": "ftgo-order-history-service/src/main/java/net/chrisrichardson/ftgo/cqrs/orderhistory/messaging/OrderHistoryEventHandlers.java",
+                    "line": "13",
+                    "span": "(17, 30)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "ftgo-order-service": {
+            "file": "ftgo-delivery-service/src/main/resources/application.properties",
+            "line": 1,
+            "span": "(24:42)",
+            "sub_items": {
+                "local_logging": {
+                    "file": "ftgo-order-service/src/main/java/net/chrisrichardson/ftgo/orderservice/grpc/OrderServiceServer.java",
+                    "line": "13",
+                    "span": "(17, 30)"
+                },
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "ftgo-api-gateway": {
+            "file": "ftgo-api-gateway/src/main/resources/application.properties",
+            "line": 1,
+            "span": "(24:40)",
+            "sub_items": {
+                "gateway": {
+                    "file": "ftgo-api-gateway/build.gradle",
+                    "line": "33",
+                    "span": "(39, 67)"
+                },
+                "infrastructural": {
+                    "file": "heuristic, based on stereotype gateway",
+                    "line": "heuristic, based on stereotype gateway",
+                    "span": "heuristic, based on stereotype gateway"
+                }
+            }
+        },
+        "ftgo-kitchen-service": {
+            "file": "ftgo-kitchen-service/src/main/resources/application.properties",
+            "line": 1,
+            "span": "(24:44)",
+            "sub_items": {
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "ftgo-accounting-service": {
+            "file": "ftgo-accounting-service/src/main/resources/application.properties",
+            "line": 1,
+            "span": "(24:47)",
+            "sub_items": {
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "ftgo-consumer-service": {
+            "file": "ftgo-consumer-service/src/main/resources/application.properties",
+            "line": 1,
+            "span": "(24:45)",
+            "sub_items": {
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "ftgo-restaurant-service": {
+            "file": "ftgo-restaurant-service/src/main/resources/application.properties",
+            "line": 1,
+            "span": "(24:47)",
+            "sub_items": {
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "zookeeper": {
+            "file": "docker-compose.yml",
+            "line": 3,
+            "span": "[2:11]",
+            "sub_items": {
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "kafka": {
+            "file": "docker-compose.yml",
+            "line": 9,
+            "span": "[2:7]",
+            "sub_items": {
+                "message_broker": {
+                    "file": "heuristic, based on image in Docker Compose",
+                    "line": "heuristic, based on image in Docker Compose",
+                    "span": "heuristic, based on image in Docker Compose"
+                },
+                "infrastructural": {
+                    "file": "heuristic, based on stereotype message_broker",
+                    "line": "heuristic, based on stereotype message_broker",
+                    "span": "heuristic, based on stereotype message_broker"
+                }
+            }
+        },
+        "zipkin": {
+            "file": "docker-compose.yml",
+            "line": 221,
+            "span": "[2:8]",
+            "sub_items": {
+                "infrastructural": {
+                    "file": "heuristic, based on stereotype tracing_server",
+                    "line": "heuristic, based on stereotype tracing_server",
+                    "span": "heuristic, based on stereotype tracing_server"
+                }
+            }
+        },
+        "mysql": {
+            "file": "docker-compose.yml",
+            "line": 22,
+            "span": "[2:7]",
+            "sub_items": {
+                "internal": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        },
+        "database-ftgo-order-service": {
+            "file": "ftgo-delivery-service/src/main/resources/application.properties",
+            "line": 16,
+            "span": "(0, 21)"
+        },
+        "database-ftgo-kitchen-service": {
+            "file": "ftgo-kitchen-service/src/main/resources/application.properties",
+            "line": 11,
+            "span": "(0, 21)"
+        },
+        "database-ftgo-accounting-service": {
+            "file": "ftgo-accounting-service/src/main/resources/application.properties",
+            "line": 10,
+            "span": "(0, 21)"
+        },
+        "database-ftgo-consumer-service": {
+            "file": "ftgo-consumer-service/src/main/resources/application.properties",
+            "line": 10,
+            "span": "(0, 21)"
+        },
+        "database-ftgo-restaurant-service": {
+            "file": "ftgo-restaurant-service/src/main/resources/application.properties",
+            "line": 11,
+            "span": "(0, 21)"
+        },
+        "user": {
+            "file": "implicit",
+            "line": "implicit",
+            "span": "implicit",
+            "sub_items": {
+                "user_stereotype": {
+                    "file": "implicit",
+                    "line": "implicit",
+                    "span": "implicit"
+                },
+                "entrypoint": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                },
+                "exitpoint": {
+                    "file": "heuristic",
+                    "line": "heuristic",
+                    "span": "heuristic"
+                }
+            }
+        }
+    },
+    "edges": {
+        "database-ftgo-order-service -> ftgo-order-service": {
+            "file": "ftgo-delivery-service/src/main/resources/application.properties",
+            "line": 16,
+            "span": "(0, 21)"
+        },
+        "database-ftgo-kitchen-service -> ftgo-kitchen-service": {
+            "file": "ftgo-kitchen-service/src/main/resources/application.properties",
+            "line": 11,
+            "span": "(0, 21)"
+        },
+        "database-ftgo-accounting-service -> ftgo-accounting-service": {
+            "file": "ftgo-accounting-service/src/main/resources/application.properties",
+            "line": 10,
+            "span": "(0, 21)"
+        },
+        "database-ftgo-consumer-service -> ftgo-consumer-service": {
+            "file": "ftgo-consumer-service/src/main/resources/application.properties",
+            "line": 10,
+            "span": "(0, 21)"
+        },
+        "database-ftgo-restaurant-service -> ftgo-restaurant-service": {
+            "file": "ftgo-restaurant-service/src/main/resources/application.properties",
+            "line": 11,
+            "span": "(0, 21)"
+        },
+        "user -> ftgo-api-gateway": {
+            "file": "implicit",
+            "line": "implicit",
+            "span": "implicit"
+        },
+        "ftgo-api-gateway -> user": {
+            "file": "implicit",
+            "line": "implicit",
+            "span": "implicit"
+        }
+    }
+}

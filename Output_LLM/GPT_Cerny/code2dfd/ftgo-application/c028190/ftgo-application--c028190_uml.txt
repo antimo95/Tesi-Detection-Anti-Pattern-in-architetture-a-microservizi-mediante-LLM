@@ -1,0 +1,37 @@
+
+@startuml
+skinparam monochrome true
+skinparam ClassBackgroundColor White
+skinparam defaultFontName Arial
+skinparam defaultFontSize 11
+
+
+digraph dfd2{
+    node[shape=record]
+        ftgo_order_history_service [label = "{Service: ftgo_order_history_service | --internal--\n--local_logging--\n}" shape = Mrecord];
+        ftgo_order_service [label = "{Service: ftgo_order_service | --internal--\n--local_logging--\n}" shape = Mrecord];
+        ftgo_api_gateway [label = "{Service: ftgo_api_gateway | --infrastructural--\n--gateway--\n'Gateway': 'Spring Cloud Gateway'\n}" shape = Mrecord];
+        ftgo_kitchen_service [label = "{Service: ftgo_kitchen_service | --internal--\n}" shape = Mrecord];
+        ftgo_accounting_service [label = "{Service: ftgo_accounting_service | --internal--\n}" shape = Mrecord];
+        ftgo_consumer_service [label = "{Service: ftgo_consumer_service | --internal--\n}" shape = Mrecord];
+        ftgo_restaurant_service [label = "{Service: ftgo_restaurant_service | --internal--\n}" shape = Mrecord];
+        zookeeper [label = "{Service: zookeeper | --internal--\n'Port': 2181\n}" shape = Mrecord];
+        kafka [label = "{Service: kafka | --infrastructural--\n--message_broker--\n'Port': 9092\n'Message Broker': 'Kafka'\n}" shape = Mrecord];
+        zipkin [label = "{Service: zipkin | --infrastructural--\n--tracing_server--\n'Port': 9411\n'Tracing Server': 'Zipkin'\n}" shape = Mrecord];
+        mysql [label = "{Service: mysql | --internal--\n'Port': 3306\n}" shape = Mrecord];
+        database_ftgo_order_service [label = "{External Entity: database_ftgo_order_service | --external_database--\n--exitpoint--\n--plaintext_credentials--\n--entrypoint--\n'Password': 'ftgo_delivery_service_password'\n'Username': 'ftgo_delivery_service_user'\n'Database': 'MySQL'\n}"];
+        database_ftgo_kitchen_service [label = "{External Entity: database_ftgo_kitchen_service | --external_database--\n--exitpoint--\n--plaintext_credentials--\n--entrypoint--\n'Database': 'MySQL'\n'Username': 'ftgo_kitchen_service_user'\n'Password': 'ftgo_kitchen_service_password'\n}"];
+        database_ftgo_accounting_service [label = "{External Entity: database_ftgo_accounting_service | --external_database--\n--exitpoint--\n--plaintext_credentials--\n--entrypoint--\n'Database': 'MySQL'\n'Username': 'ftgo_accounting_service_user'\n'Password': 'ftgo_accounting_service_password'\n}"];
+        database_ftgo_consumer_service [label = "{External Entity: database_ftgo_consumer_service | --external_database--\n--exitpoint--\n--plaintext_credentials--\n--entrypoint--\n'Database': 'MySQL'\n'Password': 'ftgo_consumer_service_password'\n'Username': 'ftgo_consumer_service_user'\n}"];
+        database_ftgo_restaurant_service [label = "{External Entity: database_ftgo_restaurant_service | --external_database--\n--exitpoint--\n--plaintext_credentials--\n--entrypoint--\n'Database': 'MySQL'\n'Username': 'ftgo_restaurant_service_user'\n'Password': 'ftgo_restaurant_service_password'\n}"];
+        user [label = "{External Entity: user | --user_stereotype--\n--exitpoint--\n--entrypoint--\n}"];
+        database_ftgo_order_service -> ftgo_order_service [label = " --jdbc--\n--plaintext_credentials_link--\n'Password': 'ftgo_order_service_password'\n 'Username': 'ftgo_order_service_user'\n"]
+        database_ftgo_kitchen_service -> ftgo_kitchen_service [label = " --jdbc--\n--plaintext_credentials_link--\n'Username': 'ftgo_kitchen_service_user'\n 'Password': 'ftgo_kitchen_service_password'\n"]
+        database_ftgo_accounting_service -> ftgo_accounting_service [label = " --jdbc--\n--plaintext_credentials_link--\n'Password': 'ftgo_accounting_service_password'\n 'Username': 'ftgo_accounting_service_user'\n"]
+        database_ftgo_consumer_service -> ftgo_consumer_service [label = " --jdbc--\n--plaintext_credentials_link--\n'Password': 'ftgo_consumer_service_password'\n 'Username': 'ftgo_consumer_service_user'\n"]
+        database_ftgo_restaurant_service -> ftgo_restaurant_service [label = " --jdbc--\n--plaintext_credentials_link--\n'Username': 'ftgo_restaurant_service_user'\n 'Password': 'ftgo_restaurant_service_password'\n"]
+        user -> ftgo_api_gateway [label = " --restful_http--\n"]
+        ftgo_api_gateway -> user [label = " --restful_http--\n"]
+
+}
+@enduml
