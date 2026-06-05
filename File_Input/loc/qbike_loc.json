@@ -1,0 +1,292 @@
+{
+  "metadata": {
+    "project_path": "D:\\Users\\Desktop\\microservices\\qbike-master",
+    "project_name": "qbike-master",
+    "extraction_timestamp": "2026-02-12T22:07:32.205008",
+    "extractor_version": "2.0.0"
+  },
+  "microservices": [
+    {
+      "name": "api-gateway",
+      "type": "maven",
+      "path": "api-gateway",
+      "loc": {
+        "total": 13,
+        "code": 11,
+        "blank": 2,
+        "comment": 0
+      },
+      "classes_count": 1,
+      "methods_count": 1,
+      "constructors_count": 0,
+      "files_count": 1,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://127.0.0.1:8761/eureka/",
+        "http://$"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "intention",
+      "type": "maven",
+      "path": "intention",
+      "loc": {
+        "total": 1032,
+        "code": 782,
+        "blank": 137,
+        "comment": 113
+      },
+      "classes_count": 27,
+      "methods_count": 42,
+      "constructors_count": 1,
+      "files_count": 27,
+      "stereotype_instances": [
+        "configuration",
+        "controller",
+        "service",
+        "component",
+        "entity"
+      ],
+      "stereotype_counts": {
+        "configuration": 2,
+        "controller": 1,
+        "service": 4,
+        "component": 1,
+        "entity": 2
+      },
+      "languages": {
+        "java": 27
+      },
+      "file_types": {
+        ".java": 27
+      },
+      "jpa_tables": [
+        "t_intention_candidate",
+        "t_intention"
+      ],
+      "datasource_url": "jdbc:mysql://127.0.0.1:3306/qbike?useUnicode=true&characterEncoding=utf8",
+      "hardcoded_endpoints": [
+        "http://QBIKE-UC/users/",
+        "http://$",
+        "http://127.0.0.1:8761/eureka/",
+        "http://qbike-trip/trips/match?longitude=%s&latitude=%s",
+        "127.0.0.1:3306"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "microservice-discovery-eureka",
+      "type": "maven",
+      "path": "microservice-discovery-eureka",
+      "loc": {
+        "total": 17,
+        "code": 11,
+        "blank": 2,
+        "comment": 4
+      },
+      "classes_count": 1,
+      "methods_count": 1,
+      "constructors_count": 0,
+      "files_count": 1,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://$",
+        "http://my.oschina.net/buwei/blog/618756",
+        "http://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#_standalone_mode"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "order",
+      "type": "maven",
+      "path": "order",
+      "loc": {
+        "total": 1082,
+        "code": 753,
+        "blank": 150,
+        "comment": 179
+      },
+      "classes_count": 25,
+      "methods_count": 43,
+      "constructors_count": 6,
+      "files_count": 25,
+      "stereotype_instances": [
+        "configuration",
+        "controller",
+        "service",
+        "component",
+        "entity"
+      ],
+      "stereotype_counts": {
+        "configuration": 2,
+        "controller": 1,
+        "service": 5,
+        "component": 5,
+        "entity": 1
+      },
+      "languages": {
+        "java": 25
+      },
+      "file_types": {
+        ".java": 25
+      },
+      "jpa_tables": [
+        "t_qbike_order"
+      ],
+      "datasource_url": "jdbc:mysql://127.0.0.1:3306/qbike?useUnicode=true&characterEncoding=utf8",
+      "hardcoded_endpoints": [
+        "http://QBIKE-UC/users/",
+        "http://127.0.0.1:8761/eureka/",
+        "127.0.0.1:3306",
+        "http://$"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "position",
+      "type": "maven",
+      "path": "position",
+      "loc": {
+        "total": 290,
+        "code": 232,
+        "blank": 37,
+        "comment": 21
+      },
+      "classes_count": 10,
+      "methods_count": 8,
+      "constructors_count": 0,
+      "files_count": 10,
+      "stereotype_instances": [
+        "controller",
+        "service",
+        "entity"
+      ],
+      "stereotype_counts": {
+        "controller": 1,
+        "service": 2,
+        "entity": 2
+      },
+      "languages": {
+        "java": 10
+      },
+      "file_types": {
+        ".java": 10
+      },
+      "jpa_tables": [
+        "t_position",
+        "t_driver_status"
+      ],
+      "datasource_url": "jdbc:mysql://127.0.0.1:3306/qbike?useUnicode=true&characterEncoding=utf8",
+      "hardcoded_endpoints": [
+        "http://QBIKE-UC/users/",
+        "http://127.0.0.1:8761/eureka/",
+        "127.0.0.1:3306",
+        "http://$"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "testclient",
+      "type": "maven",
+      "path": "testclient",
+      "loc": {
+        "total": 182,
+        "code": 144,
+        "blank": 30,
+        "comment": 8
+      },
+      "classes_count": 7,
+      "methods_count": 8,
+      "constructors_count": 0,
+      "files_count": 7,
+      "stereotype_instances": [
+        "component"
+      ],
+      "stereotype_counts": {
+        "component": 2
+      },
+      "languages": {
+        "java": 7
+      },
+      "file_types": {
+        ".java": 7
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://localhost:8050/qbike-trip/trips/updatePosition?driverId=%s&longitude=%s&latitude=%s",
+        "http://qbike-uc/users",
+        "http://qbike-intention/intentions/place"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "uc",
+      "type": "maven",
+      "path": "uc",
+      "loc": {
+        "total": 174,
+        "code": 146,
+        "blank": 28,
+        "comment": 0
+      },
+      "classes_count": 8,
+      "methods_count": 3,
+      "constructors_count": 0,
+      "files_count": 8,
+      "stereotype_instances": [
+        "entity",
+        "repository"
+      ],
+      "stereotype_counts": {
+        "entity": 3,
+        "repository": 1
+      },
+      "languages": {
+        "java": 8
+      },
+      "file_types": {
+        ".java": 8
+      },
+      "jpa_tables": [
+        "UcApplication",
+        "tb_poi",
+        "T_USER"
+      ],
+      "datasource_url": "jdbc:mysql://127.0.0.1:3306/qbike?useUnicode=true&characterEncoding=utf8",
+      "hardcoded_endpoints": [
+        "http://127.0.0.1:8761/eureka/",
+        "127.0.0.1:3306",
+        "http://$"
+      ],
+      "feign_with_url": false
+    }
+  ],
+  "statistics": {
+    "total_services": 7,
+    "total_files": 79,
+    "total_loc_code": 2079,
+    "total_classes": 79,
+    "total_methods": 106,
+    "total_constructors": 7
+  }
+}

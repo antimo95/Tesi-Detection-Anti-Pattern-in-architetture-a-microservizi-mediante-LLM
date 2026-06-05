@@ -1,0 +1,4090 @@
+================================================================
+Directory Structure
+================================================================
+.gitignore
+build.gradle
+command-side/.gitignore
+command-side/build.gradle
+command-side/gradle/wrapper/gradle-wrapper.properties
+command-side/gradlew
+command-side/gradlew.bat
+command-side/src/main/docker/Dockerfile
+command-side/src/main/java/com/soagrowers/productcommand/aggregates/ProductAggregate.java
+command-side/src/main/java/com/soagrowers/productcommand/Application.java
+command-side/src/main/java/com/soagrowers/productcommand/commands/AddProductCommand.java
+command-side/src/main/java/com/soagrowers/productcommand/commands/MarkProductAsSaleableCommand.java
+command-side/src/main/java/com/soagrowers/productcommand/commands/MarkProductAsUnsaleableCommand.java
+command-side/src/main/java/com/soagrowers/productcommand/commands/WebCreateTodoCommand.java
+command-side/src/main/java/com/soagrowers/productcommand/configuration/AxonConfiguration.java
+command-side/src/main/java/com/soagrowers/productcommand/configuration/RabbitConfiguration.java
+command-side/src/main/java/com/soagrowers/productcommand/handlers/EventLoggingHandler.java
+command-side/src/main/java/com/soagrowers/productcommand/ProductRestController.java
+command-side/src/main/resources/banner.txt
+command-side/src/main/resources/bootstrap-production.yml
+command-side/src/main/resources/bootstrap.yml
+common-things/.gitignore
+common-things/build.gradle
+common-things/gradle/wrapper/gradle-wrapper.properties
+common-things/gradlew
+common-things/gradlew.bat
+common-things/src/main/java/com/soagrowers/productevents/events/AbstractEvent.java
+common-things/src/main/java/com/soagrowers/productevents/events/ProductAddedEvent.java
+common-things/src/main/java/com/soagrowers/productevents/events/ProductSaleableEvent.java
+common-things/src/main/java/com/soagrowers/productevents/events/ProductUnsaleableEvent.java
+common-things/src/main/java/com/soagrowers/utils/Asserts.java
+config-service/.gitignore
+config-service/build.gradle
+config-service/gradle/wrapper/gradle-wrapper.properties
+config-service/gradlew
+config-service/gradlew.bat
+config-service/src/main/docker/Dockerfile
+config-service/src/main/java/com/soagrowers/ConfigServiceApplication.java
+config-service/src/main/resources/banner.txt
+config-service/src/main/resources/bootstrap-production.yml
+config-service/src/main/resources/bootstrap.yml
+dev.yml
+discovery-service/.gitignore
+discovery-service/build.gradle
+discovery-service/gradle/wrapper/gradle-wrapper.properties
+discovery-service/gradlew
+discovery-service/gradlew.bat
+discovery-service/src/main/docker/Dockerfile
+discovery-service/src/main/java/com/soagrowers/DiscoveryServiceApplication.java
+discovery-service/src/main/resources/banner.txt
+discovery-service/src/main/resources/bootstrap.yml
+docker-compose.yml
+docker-push.sh
+gateway-service/.gitignore
+gateway-service/build.gradle
+gateway-service/gradle/wrapper/gradle-wrapper.properties
+gateway-service/gradlew
+gateway-service/gradlew.bat
+gateway-service/src/main/docker/Dockerfile
+gateway-service/src/main/java/com/soagrowers/GatewayServiceApplication.java
+gateway-service/src/main/java/com/soagrowers/prefilters/SimpleLoggingPreFilter.java
+gateway-service/src/main/resources/banner.txt
+gateway-service/src/main/resources/bootstrap-production.yml
+gateway-service/src/main/resources/bootstrap.yml
+gradle/wrapper/gradle-wrapper.properties
+gradlew
+gradlew.bat
+purge-docker.sh
+query-side/.gitignore
+query-side/build.gradle
+query-side/gradle/wrapper/gradle-wrapper.properties
+query-side/gradlew
+query-side/gradlew.bat
+query-side/src/main/docker/Dockerfile
+query-side/src/main/java/com/soagrowers/productquery/Application.java
+query-side/src/main/java/com/soagrowers/productquery/configuration/AxonConfiguration.java
+query-side/src/main/java/com/soagrowers/productquery/configuration/RabbitConfiguration.java
+query-side/src/main/java/com/soagrowers/productquery/domain/Product.java
+query-side/src/main/java/com/soagrowers/productquery/handlers/EventLoggingHandler.java
+query-side/src/main/java/com/soagrowers/productquery/handlers/ProductViewEventHandler.java
+query-side/src/main/java/com/soagrowers/productquery/repository/ProductRepository.java
+query-side/src/main/java/com/soagrowers/productquery/repository/ReadOnlyPagingAndSortingRepository.java
+query-side/src/main/resources/banner.txt
+query-side/src/main/resources/bootstrap-production.yml
+query-side/src/main/resources/bootstrap.yml
+repomix.config.json
+settings.gradle
+wip.yml
+
+================================================================
+Files
+================================================================
+
+================
+File: .gitignore
+================
+ 1: # Folders
+ 2: /build
+ 3: .gradle
+ 4: .idea
+ 5: /unused
+ 6: **/.DS_Store
+ 7: 
+ 8: # File Patterns
+ 9: *.class
+10: *.iml
+11: 
+12: # Mobile Tools for Java (J2ME)
+13: .mtj.tmp/
+14: 
+15: # Package Files #
+16: #*.jar
+17: #*.war
+18: #*.ear
+19: 
+20: # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+21: hs_err_pid*
+
+================
+File: build.gradle
+================
+ 1: subprojects {
+ 2:     apply plugin: 'java'
+ 3:     apply plugin: 'idea'
+ 4: 
+ 5:     sourceCompatibility = 1.8
+ 6:     targetCompatibility = 1.8
+ 7: 
+ 8:     repositories {
+ 9:         mavenLocal()
+10:         mavenCentral()
+11:     }
+12: 
+13:     dependencies {
+14:         compile 'ch.qos.logback:logback-classic:1.1.5'
+15:         testCompile 'junit:junit:4.12'
+16:     }
+17: 
+18: //    version = '0.0.1'
+19: }
+20: 
+21: task wrapper(type: Wrapper) {
+22:     gradleVersion = '2.3'
+23: }
+
+================
+File: command-side/.gitignore
+================
+ 1: # Folders
+ 2: build
+ 3: events
+ 4: .gradle
+ 5: .idea
+ 6: 
+ 7: # File Patterns
+ 8: *.class
+ 9: *.iml
+10: 
+11: # Mobile Tools for Java (J2ME)
+12: .mtj.tmp/
+13: 
+14: # Package Files #
+15: *.war
+16: *.ear
+17: 
+18: # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+19: hs_err_pid*
+
+================
+File: command-side/build.gradle
+================
+ 1: buildscript {
+ 2:     ext {
+ 3:         springBootVersion = '1.3.5.RELEASE'
+ 4:     }
+ 5:     repositories {
+ 6:         mavenCentral()
+ 7:         jcenter()
+ 8:     }
+ 9:     dependencies {
+10:         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+11:         classpath('se.transmode.gradle:gradle-docker:1.2')
+12:     }
+13: }
+14: 
+15: configurations{
+16:     compile.exclude module: "spring-boot-starter-tomcat"
+17: }
+18: 
+19: jar {
+20:     baseName = 'product-command-side'
+21:     archiveName = 'product-command-side.jar'
+22: }
+23: 
+24: group = 'benwilcock'
+25: 
+26: apply plugin: 'spring-boot'
+27: apply plugin: 'docker'
+28: 
+29: dependencies {
+30:     compile project(':common-things')
+31:     compile("org.axonframework:axon-amqp:2.4.3")
+32:     compile("org.axonframework:axon-mongo:2.4.3")
+33:     compile("org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}")
+34:     compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+35:     compile("org.springframework.boot:spring-boot-starter-jetty:${springBootVersion}")
+36:     compile("org.springframework.boot:spring-boot-starter-amqp:${springBootVersion}")
+37:     compile("org.springframework.boot:spring-boot-starter-data-mongodb:${springBootVersion}")
+38:     compile("org.springframework.retry:spring-retry")
+39:     compile("org.springframework.boot:spring-boot-starter-aop:${springBootVersion}")
+40:     compile("org.springframework.cloud:spring-cloud-starter-eureka")
+41:     compile("org.springframework.cloud:spring-cloud-starter-config")
+42:     testCompile("org.springframework.boot:spring-boot-starter-test")
+43:     testCompile("org.axonframework:axon-test:2.4.3")
+44: }
+45: 
+46: dependencyManagement {
+47:     imports {
+48:         mavenBom "org.springframework.cloud:spring-cloud-dependencies:Brixton.SR1"
+49:     }
+50: }
+51: 
+52: task wrapper(type: Wrapper) {
+53:     gradleVersion = '2.3'
+54: }
+55: 
+56: task image(type: Docker, dependsOn: build){
+57:     push = false
+58:     applicationName = jar.baseName
+59:     dockerfile = file('src/main/docker/Dockerfile')
+60:     doFirst{
+61:         copy {
+62:             from jar
+63:             into stageDir
+64:         }
+65:     }
+66: }
+
+================
+File: command-side/gradle/wrapper/gradle-wrapper.properties
+================
+1: #Wed Jun 01 16:21:02 BST 2016
+2: distributionBase=GRADLE_USER_HOME
+3: distributionPath=wrapper/dists
+4: zipStoreBase=GRADLE_USER_HOME
+5: zipStorePath=wrapper/dists
+6: distributionUrl=https\://services.gradle.org/distributions/gradle-2.3-bin.zip
+
+================
+File: command-side/gradlew
+================
+  1: #!/usr/bin/env bash
+  2: 
+  3: ##############################################################################
+  4: ##
+  5: ##  Gradle start up script for UN*X
+  6: ##
+  7: ##############################################################################
+  8: 
+  9: # Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
+ 10: DEFAULT_JVM_OPTS=""
+ 11: 
+ 12: APP_NAME="Gradle"
+ 13: APP_BASE_NAME=`basename "$0"`
+ 14: 
+ 15: # Use the maximum available, or set MAX_FD != -1 to use that value.
+ 16: MAX_FD="maximum"
+ 17: 
+ 18: warn ( ) {
+ 19:     echo "$*"
+ 20: }
+ 21: 
+ 22: die ( ) {
+ 23:     echo
+ 24:     echo "$*"
+ 25:     echo
+ 26:     exit 1
+ 27: }
+ 28: 
+ 29: # OS specific support (must be 'true' or 'false').
+ 30: cygwin=false
+ 31: msys=false
+ 32: darwin=false
+ 33: case "`uname`" in
+ 34:   CYGWIN* )
+ 35:     cygwin=true
+ 36:     ;;
+ 37:   Darwin* )
+ 38:     darwin=true
+ 39:     ;;
+ 40:   MINGW* )
+ 41:     msys=true
+ 42:     ;;
+ 43: esac
+ 44: 
+ 45: # Attempt to set APP_HOME
+ 46: # Resolve links: $0 may be a link
+ 47: PRG="$0"
+ 48: # Need this for relative symlinks.
+ 49: while [ -h "$PRG" ] ; do
+ 50:     ls=`ls -ld "$PRG"`
+ 51:     link=`expr "$ls" : '.*-> \(.*\)$'`
+ 52:     if expr "$link" : '/.*' > /dev/null; then
+ 53:         PRG="$link"
+ 54:     else
+ 55:         PRG=`dirname "$PRG"`"/$link"
+ 56:     fi
+ 57: done
+ 58: SAVED="`pwd`"
+ 59: cd "`dirname \"$PRG\"`/" >/dev/null
+ 60: APP_HOME="`pwd -P`"
+ 61: cd "$SAVED" >/dev/null
+ 62: 
+ 63: CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
+ 64: 
+ 65: # Determine the Java command to use to start the JVM.
+ 66: if [ -n "$JAVA_HOME" ] ; then
+ 67:     if [ -x "$JAVA_HOME/jre/sh/java" ] ; then
+ 68:         # IBM's JDK on AIX uses strange locations for the executables
+ 69:         JAVACMD="$JAVA_HOME/jre/sh/java"
+ 70:     else
+ 71:         JAVACMD="$JAVA_HOME/bin/java"
+ 72:     fi
+ 73:     if [ ! -x "$JAVACMD" ] ; then
+ 74:         die "ERROR: JAVA_HOME is set to an invalid directory: $JAVA_HOME
+ 75: 
+ 76: Please set the JAVA_HOME variable in your environment to match the
+ 77: location of your Java installation."
+ 78:     fi
+ 79: else
+ 80:     JAVACMD="java"
+ 81:     which java >/dev/null 2>&1 || die "ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
+ 82: 
+ 83: Please set the JAVA_HOME variable in your environment to match the
+ 84: location of your Java installation."
+ 85: fi
+ 86: 
+ 87: # Increase the maximum file descriptors if we can.
+ 88: if [ "$cygwin" = "false" -a "$darwin" = "false" ] ; then
+ 89:     MAX_FD_LIMIT=`ulimit -H -n`
+ 90:     if [ $? -eq 0 ] ; then
+ 91:         if [ "$MAX_FD" = "maximum" -o "$MAX_FD" = "max" ] ; then
+ 92:             MAX_FD="$MAX_FD_LIMIT"
+ 93:         fi
+ 94:         ulimit -n $MAX_FD
+ 95:         if [ $? -ne 0 ] ; then
+ 96:             warn "Could not set maximum file descriptor limit: $MAX_FD"
+ 97:         fi
+ 98:     else
+ 99:         warn "Could not query maximum file descriptor limit: $MAX_FD_LIMIT"
+100:     fi
+101: fi
+102: 
+103: # For Darwin, add options to specify how the application appears in the dock
+104: if $darwin; then
+105:     GRADLE_OPTS="$GRADLE_OPTS \"-Xdock:name=$APP_NAME\" \"-Xdock:icon=$APP_HOME/media/gradle.icns\""
+106: fi
+107: 
+108: # For Cygwin, switch paths to Windows format before running java
+109: if $cygwin ; then
+110:     APP_HOME=`cygpath --path --mixed "$APP_HOME"`
+111:     CLASSPATH=`cygpath --path --mixed "$CLASSPATH"`
+112:     JAVACMD=`cygpath --unix "$JAVACMD"`
+113: 
+114:     # We build the pattern for arguments to be converted via cygpath
+115:     ROOTDIRSRAW=`find -L / -maxdepth 1 -mindepth 1 -type d 2>/dev/null`
+116:     SEP=""
+117:     for dir in $ROOTDIRSRAW ; do
+118:         ROOTDIRS="$ROOTDIRS$SEP$dir"
+119:         SEP="|"
+120:     done
+121:     OURCYGPATTERN="(^($ROOTDIRS))"
+122:     # Add a user-defined pattern to the cygpath arguments
+123:     if [ "$GRADLE_CYGPATTERN" != "" ] ; then
+124:         OURCYGPATTERN="$OURCYGPATTERN|($GRADLE_CYGPATTERN)"
+125:     fi
+126:     # Now convert the arguments - kludge to limit ourselves to /bin/sh
+127:     i=0
+128:     for arg in "$@" ; do
+129:         CHECK=`echo "$arg"|egrep -c "$OURCYGPATTERN" -`
+130:         CHECK2=`echo "$arg"|egrep -c "^-"`                                 ### Determine if an option
+131: 
+132:         if [ $CHECK -ne 0 ] && [ $CHECK2 -eq 0 ] ; then                    ### Added a condition
+133:             eval `echo args$i`=`cygpath --path --ignore --mixed "$arg"`
+134:         else
+135:             eval `echo args$i`="\"$arg\""
+136:         fi
+137:         i=$((i+1))
+138:     done
+139:     case $i in
+140:         (0) set -- ;;
+141:         (1) set -- "$args0" ;;
+142:         (2) set -- "$args0" "$args1" ;;
+143:         (3) set -- "$args0" "$args1" "$args2" ;;
+144:         (4) set -- "$args0" "$args1" "$args2" "$args3" ;;
+145:         (5) set -- "$args0" "$args1" "$args2" "$args3" "$args4" ;;
+146:         (6) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" ;;
+147:         (7) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" ;;
+148:         (8) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7" ;;
+149:         (9) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7" "$args8" ;;
+150:     esac
+151: fi
+152: 
+153: # Split up the JVM_OPTS And GRADLE_OPTS values into an array, following the shell quoting and substitution rules
+154: function splitJvmOpts() {
+155:     JVM_OPTS=("$@")
+156: }
+157: eval splitJvmOpts $DEFAULT_JVM_OPTS $JAVA_OPTS $GRADLE_OPTS
+158: JVM_OPTS[${#JVM_OPTS[*]}]="-Dorg.gradle.appname=$APP_BASE_NAME"
+159: 
+160: exec "$JAVACMD" "${JVM_OPTS[@]}" -classpath "$CLASSPATH" org.gradle.wrapper.GradleWrapperMain "$@"
+
+================
+File: command-side/gradlew.bat
+================
+ 1: @if "%DEBUG%" == "" @echo off
+ 2: @rem ##########################################################################
+ 3: @rem
+ 4: @rem  Gradle startup script for Windows
+ 5: @rem
+ 6: @rem ##########################################################################
+ 7: 
+ 8: @rem Set local scope for the variables with windows NT shell
+ 9: if "%OS%"=="Windows_NT" setlocal
+10: 
+11: @rem Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
+12: set DEFAULT_JVM_OPTS=
+13: 
+14: set DIRNAME=%~dp0
+15: if "%DIRNAME%" == "" set DIRNAME=.
+16: set APP_BASE_NAME=%~n0
+17: set APP_HOME=%DIRNAME%
+18: 
+19: @rem Find java.exe
+20: if defined JAVA_HOME goto findJavaFromJavaHome
+21: 
+22: set JAVA_EXE=java.exe
+23: %JAVA_EXE% -version >NUL 2>&1
+24: if "%ERRORLEVEL%" == "0" goto init
+25: 
+26: echo.
+27: echo ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
+28: echo.
+29: echo Please set the JAVA_HOME variable in your environment to match the
+30: echo location of your Java installation.
+31: 
+32: goto fail
+33: 
+34: :findJavaFromJavaHome
+35: set JAVA_HOME=%JAVA_HOME:"=%
+36: set JAVA_EXE=%JAVA_HOME%/bin/java.exe
+37: 
+38: if exist "%JAVA_EXE%" goto init
+39: 
+40: echo.
+41: echo ERROR: JAVA_HOME is set to an invalid directory: %JAVA_HOME%
+42: echo.
+43: echo Please set the JAVA_HOME variable in your environment to match the
+44: echo location of your Java installation.
+45: 
+46: goto fail
+47: 
+48: :init
+49: @rem Get command-line arguments, handling Windowz variants
+50: 
+51: if not "%OS%" == "Windows_NT" goto win9xME_args
+52: if "%@eval[2+2]" == "4" goto 4NT_args
+53: 
+54: :win9xME_args
+55: @rem Slurp the command line arguments.
+56: set CMD_LINE_ARGS=
+57: set _SKIP=2
+58: 
+59: :win9xME_args_slurp
+60: if "x%~1" == "x" goto execute
+61: 
+62: set CMD_LINE_ARGS=%*
+63: goto execute
+64: 
+65: :4NT_args
+66: @rem Get arguments from the 4NT Shell from JP Software
+67: set CMD_LINE_ARGS=%$
+68: 
+69: :execute
+70: @rem Setup the command line
+71: 
+72: set CLASSPATH=%APP_HOME%\gradle\wrapper\gradle-wrapper.jar
+73: 
+74: @rem Execute Gradle
+75: "%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %GRADLE_OPTS% "-Dorg.gradle.appname=%APP_BASE_NAME%" -classpath "%CLASSPATH%" org.gradle.wrapper.GradleWrapperMain %CMD_LINE_ARGS%
+76: 
+77: :end
+78: @rem End local scope for the variables with windows NT shell
+79: if "%ERRORLEVEL%"=="0" goto mainEnd
+80: 
+81: :fail
+82: rem Set variable GRADLE_EXIT_CONSOLE if you need the _script_ return code instead of
+83: rem the _cmd.exe /c_ return code!
+84: if  not "" == "%GRADLE_EXIT_CONSOLE%" exit 1
+85: exit /b 1
+86: 
+87: :mainEnd
+88: if "%OS%"=="Windows_NT" endlocal
+89: 
+90: :omega
+
+================
+File: command-side/src/main/docker/Dockerfile
+================
+1: FROM frolvlad/alpine-oraclejdk8:slim
+2: VOLUME /tmp
+3: EXPOSE 9000 9001
+4: ADD product-command-side.jar app.jar
+5: RUN sh -c 'touch /app.jar'
+6: ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+
+================
+File: command-side/src/main/java/com/soagrowers/productcommand/aggregates/ProductAggregate.java
+================
+ 1: package com.soagrowers.productcommand.aggregates;
+ 2: import com.soagrowers.productcommand.commands.AddProductCommand;
+ 3: import com.soagrowers.productcommand.commands.MarkProductAsSaleableCommand;
+ 4: import com.soagrowers.productcommand.commands.MarkProductAsUnsaleableCommand;
+ 5: import com.soagrowers.productevents.events.ProductAddedEvent;
+ 6: import com.soagrowers.productevents.events.ProductSaleableEvent;
+ 7: import com.soagrowers.productevents.events.ProductUnsaleableEvent;
+ 8: import org.axonframework.commandhandling.annotation.CommandHandler;
+ 9: import org.axonframework.eventsourcing.annotation.AbstractAnnotatedAggregateRoot;
+10: import org.axonframework.eventsourcing.annotation.AggregateIdentifier;
+11: import org.axonframework.eventsourcing.annotation.EventSourcingHandler;
+12: import org.slf4j.Logger;
+13: import org.slf4j.LoggerFactory;
+14: public class ProductAggregate extends AbstractAnnotatedAggregateRoot {
+15:     private static final Logger LOG = LoggerFactory.getLogger(ProductAggregate.class);
+16:     @AggregateIdentifier
+17:     private String id;
+18:     private String name;
+19:     private boolean isSaleable = false;
+20:     public ProductAggregate() {
+21:     }
+22:     @CommandHandler
+23:     public ProductAggregate(AddProductCommand command) {
+24:         LOG.debug("Command: 'AddProductCommand' received.");
+25:         LOG.debug("Queuing up a new ProductAddedEvent for product '{}'", command.getId());
+26:         apply(new ProductAddedEvent(command.getId(), command.getName()));
+27:     }
+28:     @CommandHandler
+29:     public void markSaleable(MarkProductAsSaleableCommand command) {
+30:         LOG.debug("Command: 'MarkProductAsSaleableCommand' received.");
+31:         if (!this.isSaleable()) {
+32:             apply(new ProductSaleableEvent(id));
+33:         } else {
+34:             throw new IllegalStateException("This ProductAggregate (" + this.getId() + ") is already Saleable.");
+35:         }
+36:     }
+37:     @CommandHandler
+38:     public void markUnsaleable(MarkProductAsUnsaleableCommand command) {
+39:         LOG.debug("Command: 'MarkProductAsUnsaleableCommand' received.");
+40:         if (this.isSaleable()) {
+41:             apply(new ProductUnsaleableEvent(id));
+42:         } else {
+43:             throw new IllegalStateException("This ProductAggregate (" + this.getId() + ") is already off-sale.");
+44:         }
+45:     }
+46:     @EventSourcingHandler
+47:     public void on(ProductAddedEvent event) {
+48:         this.id = event.getId();
+49:         this.name = event.getName();
+50:         LOG.debug("Applied: 'ProductAddedEvent' [{}] '{}'", event.getId(), event.getName());
+51:     }
+52:     @EventSourcingHandler
+53:     public void on(ProductSaleableEvent event) {
+54:         this.isSaleable = true;
+55:         LOG.debug("Applied: 'ProductSaleableEvent' [{}]", event.getId());
+56:     }
+57:     @EventSourcingHandler
+58:     public void on(ProductUnsaleableEvent event) {
+59:         this.isSaleable = false;
+60:         LOG.debug("Applied: 'ProductUnsaleableEvent' [{}]", event.getId());
+61:     }
+62:     public String getId() {
+63:         return id;
+64:     }
+65:     public String getName() {
+66:         return name;
+67:     }
+68:     public boolean isSaleable() {
+69:         return isSaleable;
+70:     }
+71: }
+
+================
+File: command-side/src/main/java/com/soagrowers/productcommand/Application.java
+================
+ 1: package com.soagrowers.productcommand;
+ 2: import org.springframework.beans.factory.annotation.Autowired;
+ 3: import org.springframework.beans.factory.annotation.Value;
+ 4: import org.springframework.boot.SpringApplication;
+ 5: import org.springframework.boot.autoconfigure.SpringBootApplication;
+ 6: import org.springframework.cloud.client.ServiceInstance;
+ 7: import org.springframework.cloud.client.discovery.DiscoveryClient;
+ 8: import org.springframework.cloud.context.config.annotation.RefreshScope;
+ 9: import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+10: import org.springframework.context.ApplicationContext;
+11: import org.springframework.web.bind.annotation.RequestMapping;
+12: import org.springframework.web.bind.annotation.RestController;
+13: import java.util.List;
+14: @EnableEurekaClient
+15: @SpringBootApplication
+16: public class Application {
+17:     public static void main(String... args) {
+18:         ApplicationContext context = SpringApplication.run(Application.class, args);
+19:     }
+20: }
+21: @RestController
+22: class ServiceInstanceRestController {
+23:     @Autowired
+24:     private DiscoveryClient discoveryClient;
+25:     @Value("${spring.application.name}")
+26:     private String appName;
+27:     @RequestMapping("/instances")
+28:     public List<ServiceInstance> serviceInstancesByApplicationName() {
+29:         return this.discoveryClient.getInstances(appName);
+30:     }
+31: }
+32: @RefreshScope
+33: @RestController
+34: class MessageRestController {
+35:     @Value("${message}")
+36:     private String message;
+37:     @RequestMapping("/message")
+38:     String getMessage() {
+39:         return this.message;
+40:     }
+41: }
+
+================
+File: command-side/src/main/java/com/soagrowers/productcommand/commands/AddProductCommand.java
+================
+ 1: package com.soagrowers.productcommand.commands;
+ 2: import org.axonframework.commandhandling.annotation.TargetAggregateIdentifier;
+ 3: public class AddProductCommand {
+ 4:     @TargetAggregateIdentifier
+ 5:     private final String id;
+ 6:     private final String name;
+ 7:     public AddProductCommand(String id, String name) {
+ 8:         this.id = id;
+ 9:         this.name = name;
+10:     }
+11:     public String getId() {
+12:         return id;
+13:     }
+14:     public String getName() {
+15:         return name;
+16:     }
+17: }
+
+================
+File: command-side/src/main/java/com/soagrowers/productcommand/commands/MarkProductAsSaleableCommand.java
+================
+ 1: package com.soagrowers.productcommand.commands;
+ 2: import org.axonframework.commandhandling.annotation.TargetAggregateIdentifier;
+ 3: public class MarkProductAsSaleableCommand {
+ 4:     @TargetAggregateIdentifier
+ 5:     private final String id;
+ 6:     public MarkProductAsSaleableCommand(String id) {
+ 7:         this.id = id;
+ 8:     }
+ 9:     public String getId() {
+10:         return id;
+11:     }
+12: }
+
+================
+File: command-side/src/main/java/com/soagrowers/productcommand/commands/MarkProductAsUnsaleableCommand.java
+================
+ 1: package com.soagrowers.productcommand.commands;
+ 2: import org.axonframework.commandhandling.annotation.TargetAggregateIdentifier;
+ 3: public class MarkProductAsUnsaleableCommand {
+ 4:     @TargetAggregateIdentifier
+ 5:     private final String id;
+ 6:     public MarkProductAsUnsaleableCommand(String id) {
+ 7:         this.id = id;
+ 8:     }
+ 9:     public String getId() {
+10:         return id;
+11:     }
+12: }
+
+================
+File: command-side/src/main/java/com/soagrowers/productcommand/commands/WebCreateTodoCommand.java
+================
+ 1: package com.soagrowers.productcommand.commands;
+ 2: public class WebCreateTodoCommand {
+ 3:     private final String id;
+ 4:     private final String description;
+ 5:     public WebCreateTodoCommand(String id, String description) {
+ 6:         this.id = id;
+ 7:         this.description = description;
+ 8:     }
+ 9:     public String getId() {
+10:         return id;
+11:     }
+12:     public String getDescription() {
+13:         return description;
+14:     }
+15: }
+
+================
+File: command-side/src/main/java/com/soagrowers/productcommand/configuration/AxonConfiguration.java
+================
+  1: package com.soagrowers.productcommand.configuration;
+  2: import com.mongodb.Mongo;
+  3: import com.soagrowers.productcommand.aggregates.ProductAggregate;
+  4: import org.axonframework.commandhandling.CommandBus;
+  5: import org.axonframework.commandhandling.SimpleCommandBus;
+  6: import org.axonframework.commandhandling.annotation.AggregateAnnotationCommandHandler;
+  7: import org.axonframework.commandhandling.annotation.AnnotationCommandHandlerBeanPostProcessor;
+  8: import org.axonframework.commandhandling.gateway.CommandGateway;
+  9: import org.axonframework.commandhandling.gateway.CommandGatewayFactoryBean;
+ 10: import org.axonframework.contextsupport.spring.AnnotationDriven;
+ 11: import org.axonframework.eventhandling.*;
+ 12: import org.axonframework.eventhandling.amqp.spring.ListenerContainerLifecycleManager;
+ 13: import org.axonframework.eventhandling.amqp.spring.SpringAMQPConsumerConfiguration;
+ 14: import org.axonframework.eventhandling.amqp.spring.SpringAMQPTerminal;
+ 15: import org.axonframework.eventhandling.annotation.AnnotationEventListenerBeanPostProcessor;
+ 16: import org.axonframework.eventsourcing.EventSourcingRepository;
+ 17: import org.axonframework.eventstore.EventStore;
+ 18: import org.axonframework.eventstore.mongo.DefaultMongoTemplate;
+ 19: import org.axonframework.eventstore.mongo.MongoEventStore;
+ 20: import org.axonframework.eventstore.mongo.MongoTemplate;
+ 21: import org.axonframework.serializer.json.JacksonSerializer;
+ 22: import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+ 23: import org.springframework.amqp.rabbit.transaction.RabbitTransactionManager;
+ 24: import org.springframework.beans.factory.annotation.Autowired;
+ 25: import org.springframework.beans.factory.annotation.Value;
+ 26: import org.springframework.context.annotation.Bean;
+ 27: import org.springframework.context.annotation.Configuration;
+ 28: @Configuration
+ 29: @AnnotationDriven
+ 30: public class AxonConfiguration {
+ 31:     private static final String AMQP_CONFIG_KEY = "AMQP.Config";
+ 32:     @Autowired
+ 33:     public Mongo mongo;
+ 34:     @Autowired
+ 35:     public ConnectionFactory connectionFactory;
+ 36:     @Autowired
+ 37:     public RabbitTransactionManager transactionManager;
+ 38:     @Value("${spring.application.queue}")
+ 39:     private String queueName;
+ 40:     @Value("${spring.application.exchange}")
+ 41:     private String exchangeName;
+ 42:     @Value("${spring.application.databaseName}")
+ 43:     private String databaseName;
+ 44:     @Value("${spring.application.eventsCollectionName}")
+ 45:     private String eventsCollectionName;
+ 46:     @Value("${spring.application.snapshotCollectionName}")
+ 47:     private String snapshotCollectionName;
+ 48:     @Bean
+ 49:     JacksonSerializer axonJsonSerializer() {
+ 50:         return new JacksonSerializer();
+ 51:     }
+ 52:     @Bean
+ 53:     ListenerContainerLifecycleManager listenerContainerLifecycleManager() {
+ 54:         ListenerContainerLifecycleManager mgr = new ListenerContainerLifecycleManager();
+ 55:         mgr.setConnectionFactory(connectionFactory);
+ 56:         return mgr;
+ 57:     }
+ 58:     @Bean
+ 59:     SpringAMQPConsumerConfiguration springAMQPConsumerConfiguration() {
+ 60:         SpringAMQPConsumerConfiguration cfg = new SpringAMQPConsumerConfiguration();
+ 61:         cfg.setTransactionManager(transactionManager);
+ 62:         cfg.setQueueName(queueName);
+ 63:         cfg.setTxSize(10);
+ 64:         return cfg;
+ 65:     }
+ 66:     @Bean
+ 67:     SimpleCluster simpleCluster() {
+ 68:         SimpleCluster cluster = new SimpleCluster(queueName);
+ 69:         cluster.getMetaData().setProperty(AMQP_CONFIG_KEY, springAMQPConsumerConfiguration());
+ 70:         return cluster;
+ 71:     }
+ 72:     @Bean
+ 73:     EventBusTerminal terminal() {
+ 74:         SpringAMQPTerminal terminal = new SpringAMQPTerminal();
+ 75:         terminal.setConnectionFactory(connectionFactory);
+ 76:         terminal.setExchangeName(exchangeName);
+ 77:         terminal.setDurable(true);
+ 78:         terminal.setTransactional(true);
+ 79:         terminal.setSerializer(axonJsonSerializer());
+ 80:         terminal.setListenerContainerLifecycleManager(listenerContainerLifecycleManager());
+ 81:         return terminal;
+ 82:     }
+ 83:     @Bean
+ 84:     EventBus eventBus() {
+ 85:         return new ClusteringEventBus(new DefaultClusterSelector(simpleCluster()), terminal());
+ 86:     }
+ 87:     @Bean(name = "axonMongoTemplate")
+ 88:     MongoTemplate axonMongoTemplate() {
+ 89:         MongoTemplate template = new DefaultMongoTemplate(mongo,
+ 90:                 databaseName, eventsCollectionName, snapshotCollectionName, null, null);
+ 91:         return template;
+ 92:     }
+ 93:     @Bean
+ 94:     EventStore eventStore() {
+ 95:         MongoEventStore eventStore = new MongoEventStore(axonJsonSerializer(), axonMongoTemplate());
+ 96:         return eventStore;
+ 97:     }
+ 98:     @Bean
+ 99:     EventSourcingRepository<ProductAggregate> productEventSourcingRepository() {
+100:         EventSourcingRepository<ProductAggregate> repo = new EventSourcingRepository<ProductAggregate>(ProductAggregate.class, eventStore());
+101:         repo.setEventBus(eventBus());
+102:         return repo;
+103:     }
+104:     @Bean
+105:     CommandBus commandBus() {
+106:         SimpleCommandBus commandBus = new SimpleCommandBus();
+107:         return commandBus;
+108:     }
+109:     @Bean
+110:     CommandGatewayFactoryBean<CommandGateway> commandGatewayFactoryBean() {
+111:         CommandGatewayFactoryBean<CommandGateway> factory = new CommandGatewayFactoryBean<CommandGateway>();
+112:         factory.setCommandBus(commandBus());
+113:         return factory;
+114:     }
+115:     @Bean
+116:     AnnotationEventListenerBeanPostProcessor eventListenerBeanPostProcessor() {
+117:         AnnotationEventListenerBeanPostProcessor proc = new AnnotationEventListenerBeanPostProcessor();
+118:         proc.setEventBus(eventBus());
+119:         return proc;
+120:     }
+121:     @Bean
+122:     AnnotationCommandHandlerBeanPostProcessor commandHandlerBeanPostProcessor() {
+123:         AnnotationCommandHandlerBeanPostProcessor proc = new AnnotationCommandHandlerBeanPostProcessor();
+124:         proc.setCommandBus(commandBus());
+125:         return proc;
+126:     }
+127:     @Bean
+128:     AggregateAnnotationCommandHandler<ProductAggregate> productAggregateCommandHandler() {
+129:         AggregateAnnotationCommandHandler<ProductAggregate> handler = new AggregateAnnotationCommandHandler<ProductAggregate>(
+130:                 ProductAggregate.class,
+131:                 productEventSourcingRepository(),
+132:                 commandBus());
+133:         return handler;
+134:     }
+135: }
+
+================
+File: command-side/src/main/java/com/soagrowers/productcommand/configuration/RabbitConfiguration.java
+================
+ 1: package com.soagrowers.productcommand.configuration;
+ 2: import org.springframework.amqp.core.Binding;
+ 3: import org.springframework.amqp.core.FanoutExchange;
+ 4: import org.springframework.amqp.core.Queue;
+ 5: import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
+ 6: import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+ 7: import org.springframework.amqp.rabbit.core.RabbitAdmin;
+ 8: import org.springframework.amqp.rabbit.transaction.RabbitTransactionManager;
+ 9: import org.springframework.beans.factory.annotation.Required;
+10: import org.springframework.beans.factory.annotation.Value;
+11: import org.springframework.context.annotation.Bean;
+12: import org.springframework.context.annotation.Configuration;
+13: @Configuration
+14: public class RabbitConfiguration {
+15:     @Value("${spring.rabbitmq.hostname}")
+16:     private String hostname;
+17:     @Value("${spring.rabbitmq.username}")
+18:     private String username;
+19:     @Value("${spring.rabbitmq.password}")
+20:     private String password;
+21:     @Value("${spring.application.exchange}")
+22:     private String exchangeName;
+23:     @Value("${spring.application.queue}")
+24:     private String queueName;
+25:     @Bean
+26:     Queue defaultStream() {
+27:         return new Queue(queueName, true);
+28:     }
+29:     @Bean
+30:     FanoutExchange eventBusExchange() {
+31:         return new FanoutExchange(exchangeName, true, false);
+32:     }
+33:     @Bean
+34:     Binding binding() {
+35:         return new Binding(queueName, Binding.DestinationType.QUEUE, exchangeName, "*.*", null);
+36:     }
+37:     @Bean
+38:     ConnectionFactory connectionFactory() {
+39:         CachingConnectionFactory connectionFactory = new CachingConnectionFactory(hostname);
+40:         connectionFactory.setUsername(username);
+41:         connectionFactory.setPassword(password);
+42:         return connectionFactory;
+43:     }
+44:     @Bean
+45:     @Required
+46:     RabbitAdmin rabbitAdmin() {
+47:         RabbitAdmin admin = new RabbitAdmin(connectionFactory());
+48:         admin.setAutoStartup(true);
+49:         admin.declareExchange(eventBusExchange());
+50:         admin.declareQueue(defaultStream());
+51:         admin.declareBinding(binding());
+52:         return admin;
+53:     }
+54:     @Bean
+55:     RabbitTransactionManager transactionManager(){
+56:         RabbitTransactionManager txMgr = new RabbitTransactionManager(connectionFactory());
+57:         return txMgr;
+58:     }
+59: }
+
+================
+File: command-side/src/main/java/com/soagrowers/productcommand/handlers/EventLoggingHandler.java
+================
+ 1: package com.soagrowers.productcommand.handlers;
+ 2: import com.soagrowers.productevents.events.ProductAddedEvent;
+ 3: import com.soagrowers.productevents.events.ProductSaleableEvent;
+ 4: import com.soagrowers.productevents.events.ProductUnsaleableEvent;
+ 5: import org.axonframework.eventhandling.annotation.EventHandler;
+ 6: import org.slf4j.Logger;
+ 7: import org.slf4j.LoggerFactory;
+ 8: import org.springframework.stereotype.Component;
+ 9: @Component
+10: public class EventLoggingHandler {
+11:     private static final Logger LOG = LoggerFactory.getLogger(EventLoggingHandler.class);
+12:     private static final String IID = String.valueOf(Double.valueOf(Math.random() * 1000).intValue());
+13:     @EventHandler
+14:     public void handle(ProductAddedEvent event) {
+15:         LOG.debug("Instance:{} EventType:{} EventId:[{}] '{}'", IID, event.getClass().getSimpleName(), event.getId(), event.getName());
+16:     }
+17:     @EventHandler
+18:     public void handle(ProductSaleableEvent event) {
+19:         LOG.debug("Instance:{} EventType:{} EventId:[{}]", IID, event.getClass().getSimpleName(), event.getId());
+20:     }
+21:     @EventHandler
+22:     public void handle(ProductUnsaleableEvent event) {
+23:         LOG.debug("Instance:{} EventType:{} EventId:[{}]", IID, event.getClass().getSimpleName(), event.getId());
+24:     }
+25: }
+
+================
+File: command-side/src/main/java/com/soagrowers/productcommand/ProductRestController.java
+================
+ 1: package com.soagrowers.productcommand;
+ 2: import com.soagrowers.productcommand.commands.AddProductCommand;
+ 3: import com.soagrowers.utils.Asserts;
+ 4: import org.axonframework.commandhandling.CommandExecutionException;
+ 5: import org.axonframework.commandhandling.gateway.CommandGateway;
+ 6: import org.axonframework.repository.ConcurrencyException;
+ 7: import org.slf4j.Logger;
+ 8: import org.slf4j.LoggerFactory;
+ 9: import org.springframework.beans.factory.annotation.Autowired;
+10: import org.springframework.web.bind.annotation.*;
+11: import javax.servlet.http.HttpServletResponse;
+12: import java.util.Arrays;
+13: @RestController
+14: @RequestMapping("/products")
+15: public class ProductRestController {
+16:     private static final Logger LOG = LoggerFactory.getLogger(ProductRestController.class);
+17:     @Autowired
+18:     CommandGateway commandGateway;
+19:     @RequestMapping(value = "/add/{id}", method = RequestMethod.POST)
+20:     public void add(@PathVariable(value = "id") String id,
+21:                     @RequestParam(value = "name", required = true) String name,
+22:                     HttpServletResponse response) {
+23:         LOG.debug("Adding Product [{}] '{}'", id, name);
+24:         try {
+25:             Asserts.INSTANCE.areNotEmpty(Arrays.asList(id, name));
+26:             AddProductCommand command = new AddProductCommand(id, name);
+27:             commandGateway.sendAndWait(command);
+28:             LOG.info("Added Product [{}] '{}'", id, name);
+29:             response.setStatus(HttpServletResponse.SC_CREATED);
+30:             return;
+31:         } catch (AssertionError ae) {
+32:             LOG.warn("Add Request failed - empty params?. [{}] '{}'", id, name);
+33:             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+34:         } catch (CommandExecutionException cex) {
+35:             LOG.warn("Add Command FAILED with Message: {}", cex.getMessage());
+36:             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+37:             if (null != cex.getCause()) {
+38:                 LOG.warn("Caused by: {} {}", cex.getCause().getClass().getName(), cex.getCause().getMessage());
+39:                 if (cex.getCause() instanceof ConcurrencyException) {
+40:                     LOG.warn("A duplicate product with the same ID [{}] already exists.", id);
+41:                     response.setStatus(HttpServletResponse.SC_CONFLICT);
+42:                 }
+43:             }
+44:         }
+45:     }
+46: }
+
+================
+File: command-side/src/main/resources/banner.txt
+================
+1: .,-:::::  .        : :::::::-.
+2: ,;;;'````'  ;;,.    ;;; ;;,   `';,
+3: [[[         [[[[, ,[[[[,`[[     [[
+4: $$$         $$$$$$$$"$$$ $$,    $$
+5: `88bo,__,o, 888 Y88" 888o888_,o8P'
+6:   "YUMMMMMP"MMM  M'  "MMMMMMMP"`
+
+================
+File: command-side/src/main/resources/bootstrap-production.yml
+================
+ 1: server:
+ 2:   port: 9000
+ 3: spring:
+ 4:   application:
+ 5:     name: product-command-side
+ 6:   cloud:
+ 7:     config:
+ 8:       uri: http://config:8888
+ 9:       failFast: true
+10:       retry:
+11:         initialInterval: 2000
+12:         maxAttempts: 30
+
+================
+File: command-side/src/main/resources/bootstrap.yml
+================
+ 1: server:
+ 2:   port: 9000
+ 3: spring:
+ 4:   application:
+ 5:     name: product-command-side
+ 6:   cloud:
+ 7:     config:
+ 8:       uri: http://localhost:8888
+ 9:       failFast: true
+10:       retry:
+11:         initialInterval: 2000
+12:         maxAttempts: 30
+
+================
+File: common-things/.gitignore
+================
+ 1: # Folders
+ 2: build
+ 3: .gradle
+ 4: .idea
+ 5: 
+ 6: # File Patterns
+ 7: *.class
+ 8: *.iml
+ 9: 
+10: # Mobile Tools for Java (J2ME)
+11: .mtj.tmp/
+12: 
+13: # Package Files #
+14: *.war
+15: *.ear
+16: 
+17: # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+18: hs_err_pid*
+
+================
+File: common-things/build.gradle
+================
+ 1: buildscript {
+ 2:     repositories {
+ 3:         mavenCentral()
+ 4:     }
+ 5:     dependencies {
+ 6:     }
+ 7: }
+ 8: 
+ 9: jar {
+10:     baseName = 'product-domain-events'
+11: }
+12: 
+13: 
+14: task wrapper(type: Wrapper) {
+15:     gradleVersion = '2.3'
+16: }
+17: 
+18: task image(){
+19:     // Dummy task to allow global commands to work as intended
+20: }
+
+================
+File: common-things/gradle/wrapper/gradle-wrapper.properties
+================
+1: #Thu Jun 02 13:01:38 BST 2016
+2: distributionBase=GRADLE_USER_HOME
+3: distributionPath=wrapper/dists
+4: zipStoreBase=GRADLE_USER_HOME
+5: zipStorePath=wrapper/dists
+6: distributionUrl=https\://services.gradle.org/distributions/gradle-2.3-bin.zip
+
+================
+File: common-things/gradlew
+================
+  1: #!/usr/bin/env bash
+  2: 
+  3: ##############################################################################
+  4: ##
+  5: ##  Gradle start up script for UN*X
+  6: ##
+  7: ##############################################################################
+  8: 
+  9: # Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
+ 10: DEFAULT_JVM_OPTS=""
+ 11: 
+ 12: APP_NAME="Gradle"
+ 13: APP_BASE_NAME=`basename "$0"`
+ 14: 
+ 15: # Use the maximum available, or set MAX_FD != -1 to use that value.
+ 16: MAX_FD="maximum"
+ 17: 
+ 18: warn ( ) {
+ 19:     echo "$*"
+ 20: }
+ 21: 
+ 22: die ( ) {
+ 23:     echo
+ 24:     echo "$*"
+ 25:     echo
+ 26:     exit 1
+ 27: }
+ 28: 
+ 29: # OS specific support (must be 'true' or 'false').
+ 30: cygwin=false
+ 31: msys=false
+ 32: darwin=false
+ 33: case "`uname`" in
+ 34:   CYGWIN* )
+ 35:     cygwin=true
+ 36:     ;;
+ 37:   Darwin* )
+ 38:     darwin=true
+ 39:     ;;
+ 40:   MINGW* )
+ 41:     msys=true
+ 42:     ;;
+ 43: esac
+ 44: 
+ 45: # Attempt to set APP_HOME
+ 46: # Resolve links: $0 may be a link
+ 47: PRG="$0"
+ 48: # Need this for relative symlinks.
+ 49: while [ -h "$PRG" ] ; do
+ 50:     ls=`ls -ld "$PRG"`
+ 51:     link=`expr "$ls" : '.*-> \(.*\)$'`
+ 52:     if expr "$link" : '/.*' > /dev/null; then
+ 53:         PRG="$link"
+ 54:     else
+ 55:         PRG=`dirname "$PRG"`"/$link"
+ 56:     fi
+ 57: done
+ 58: SAVED="`pwd`"
+ 59: cd "`dirname \"$PRG\"`/" >/dev/null
+ 60: APP_HOME="`pwd -P`"
+ 61: cd "$SAVED" >/dev/null
+ 62: 
+ 63: CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
+ 64: 
+ 65: # Determine the Java command to use to start the JVM.
+ 66: if [ -n "$JAVA_HOME" ] ; then
+ 67:     if [ -x "$JAVA_HOME/jre/sh/java" ] ; then
+ 68:         # IBM's JDK on AIX uses strange locations for the executables
+ 69:         JAVACMD="$JAVA_HOME/jre/sh/java"
+ 70:     else
+ 71:         JAVACMD="$JAVA_HOME/bin/java"
+ 72:     fi
+ 73:     if [ ! -x "$JAVACMD" ] ; then
+ 74:         die "ERROR: JAVA_HOME is set to an invalid directory: $JAVA_HOME
+ 75: 
+ 76: Please set the JAVA_HOME variable in your environment to match the
+ 77: location of your Java installation."
+ 78:     fi
+ 79: else
+ 80:     JAVACMD="java"
+ 81:     which java >/dev/null 2>&1 || die "ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
+ 82: 
+ 83: Please set the JAVA_HOME variable in your environment to match the
+ 84: location of your Java installation."
+ 85: fi
+ 86: 
+ 87: # Increase the maximum file descriptors if we can.
+ 88: if [ "$cygwin" = "false" -a "$darwin" = "false" ] ; then
+ 89:     MAX_FD_LIMIT=`ulimit -H -n`
+ 90:     if [ $? -eq 0 ] ; then
+ 91:         if [ "$MAX_FD" = "maximum" -o "$MAX_FD" = "max" ] ; then
+ 92:             MAX_FD="$MAX_FD_LIMIT"
+ 93:         fi
+ 94:         ulimit -n $MAX_FD
+ 95:         if [ $? -ne 0 ] ; then
+ 96:             warn "Could not set maximum file descriptor limit: $MAX_FD"
+ 97:         fi
+ 98:     else
+ 99:         warn "Could not query maximum file descriptor limit: $MAX_FD_LIMIT"
+100:     fi
+101: fi
+102: 
+103: # For Darwin, add options to specify how the application appears in the dock
+104: if $darwin; then
+105:     GRADLE_OPTS="$GRADLE_OPTS \"-Xdock:name=$APP_NAME\" \"-Xdock:icon=$APP_HOME/media/gradle.icns\""
+106: fi
+107: 
+108: # For Cygwin, switch paths to Windows format before running java
+109: if $cygwin ; then
+110:     APP_HOME=`cygpath --path --mixed "$APP_HOME"`
+111:     CLASSPATH=`cygpath --path --mixed "$CLASSPATH"`
+112:     JAVACMD=`cygpath --unix "$JAVACMD"`
+113: 
+114:     # We build the pattern for arguments to be converted via cygpath
+115:     ROOTDIRSRAW=`find -L / -maxdepth 1 -mindepth 1 -type d 2>/dev/null`
+116:     SEP=""
+117:     for dir in $ROOTDIRSRAW ; do
+118:         ROOTDIRS="$ROOTDIRS$SEP$dir"
+119:         SEP="|"
+120:     done
+121:     OURCYGPATTERN="(^($ROOTDIRS))"
+122:     # Add a user-defined pattern to the cygpath arguments
+123:     if [ "$GRADLE_CYGPATTERN" != "" ] ; then
+124:         OURCYGPATTERN="$OURCYGPATTERN|($GRADLE_CYGPATTERN)"
+125:     fi
+126:     # Now convert the arguments - kludge to limit ourselves to /bin/sh
+127:     i=0
+128:     for arg in "$@" ; do
+129:         CHECK=`echo "$arg"|egrep -c "$OURCYGPATTERN" -`
+130:         CHECK2=`echo "$arg"|egrep -c "^-"`                                 ### Determine if an option
+131: 
+132:         if [ $CHECK -ne 0 ] && [ $CHECK2 -eq 0 ] ; then                    ### Added a condition
+133:             eval `echo args$i`=`cygpath --path --ignore --mixed "$arg"`
+134:         else
+135:             eval `echo args$i`="\"$arg\""
+136:         fi
+137:         i=$((i+1))
+138:     done
+139:     case $i in
+140:         (0) set -- ;;
+141:         (1) set -- "$args0" ;;
+142:         (2) set -- "$args0" "$args1" ;;
+143:         (3) set -- "$args0" "$args1" "$args2" ;;
+144:         (4) set -- "$args0" "$args1" "$args2" "$args3" ;;
+145:         (5) set -- "$args0" "$args1" "$args2" "$args3" "$args4" ;;
+146:         (6) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" ;;
+147:         (7) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" ;;
+148:         (8) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7" ;;
+149:         (9) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7" "$args8" ;;
+150:     esac
+151: fi
+152: 
+153: # Split up the JVM_OPTS And GRADLE_OPTS values into an array, following the shell quoting and substitution rules
+154: function splitJvmOpts() {
+155:     JVM_OPTS=("$@")
+156: }
+157: eval splitJvmOpts $DEFAULT_JVM_OPTS $JAVA_OPTS $GRADLE_OPTS
+158: JVM_OPTS[${#JVM_OPTS[*]}]="-Dorg.gradle.appname=$APP_BASE_NAME"
+159: 
+160: exec "$JAVACMD" "${JVM_OPTS[@]}" -classpath "$CLASSPATH" org.gradle.wrapper.GradleWrapperMain "$@"
+
+================
+File: common-things/gradlew.bat
+================
+ 1: @if "%DEBUG%" == "" @echo off
+ 2: @rem ##########################################################################
+ 3: @rem
+ 4: @rem  Gradle startup script for Windows
+ 5: @rem
+ 6: @rem ##########################################################################
+ 7: 
+ 8: @rem Set local scope for the variables with windows NT shell
+ 9: if "%OS%"=="Windows_NT" setlocal
+10: 
+11: @rem Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
+12: set DEFAULT_JVM_OPTS=
+13: 
+14: set DIRNAME=%~dp0
+15: if "%DIRNAME%" == "" set DIRNAME=.
+16: set APP_BASE_NAME=%~n0
+17: set APP_HOME=%DIRNAME%
+18: 
+19: @rem Find java.exe
+20: if defined JAVA_HOME goto findJavaFromJavaHome
+21: 
+22: set JAVA_EXE=java.exe
+23: %JAVA_EXE% -version >NUL 2>&1
+24: if "%ERRORLEVEL%" == "0" goto init
+25: 
+26: echo.
+27: echo ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
+28: echo.
+29: echo Please set the JAVA_HOME variable in your environment to match the
+30: echo location of your Java installation.
+31: 
+32: goto fail
+33: 
+34: :findJavaFromJavaHome
+35: set JAVA_HOME=%JAVA_HOME:"=%
+36: set JAVA_EXE=%JAVA_HOME%/bin/java.exe
+37: 
+38: if exist "%JAVA_EXE%" goto init
+39: 
+40: echo.
+41: echo ERROR: JAVA_HOME is set to an invalid directory: %JAVA_HOME%
+42: echo.
+43: echo Please set the JAVA_HOME variable in your environment to match the
+44: echo location of your Java installation.
+45: 
+46: goto fail
+47: 
+48: :init
+49: @rem Get command-line arguments, handling Windowz variants
+50: 
+51: if not "%OS%" == "Windows_NT" goto win9xME_args
+52: if "%@eval[2+2]" == "4" goto 4NT_args
+53: 
+54: :win9xME_args
+55: @rem Slurp the command line arguments.
+56: set CMD_LINE_ARGS=
+57: set _SKIP=2
+58: 
+59: :win9xME_args_slurp
+60: if "x%~1" == "x" goto execute
+61: 
+62: set CMD_LINE_ARGS=%*
+63: goto execute
+64: 
+65: :4NT_args
+66: @rem Get arguments from the 4NT Shell from JP Software
+67: set CMD_LINE_ARGS=%$
+68: 
+69: :execute
+70: @rem Setup the command line
+71: 
+72: set CLASSPATH=%APP_HOME%\gradle\wrapper\gradle-wrapper.jar
+73: 
+74: @rem Execute Gradle
+75: "%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %GRADLE_OPTS% "-Dorg.gradle.appname=%APP_BASE_NAME%" -classpath "%CLASSPATH%" org.gradle.wrapper.GradleWrapperMain %CMD_LINE_ARGS%
+76: 
+77: :end
+78: @rem End local scope for the variables with windows NT shell
+79: if "%ERRORLEVEL%"=="0" goto mainEnd
+80: 
+81: :fail
+82: rem Set variable GRADLE_EXIT_CONSOLE if you need the _script_ return code instead of
+83: rem the _cmd.exe /c_ return code!
+84: if  not "" == "%GRADLE_EXIT_CONSOLE%" exit 1
+85: exit /b 1
+86: 
+87: :mainEnd
+88: if "%OS%"=="Windows_NT" endlocal
+89: 
+90: :omega
+
+================
+File: common-things/src/main/java/com/soagrowers/productevents/events/AbstractEvent.java
+================
+ 1: package com.soagrowers.productevents.events;
+ 2: import java.io.Serializable;
+ 3: public abstract class AbstractEvent implements Serializable {
+ 4:     private String id;
+ 5:     public AbstractEvent() {}
+ 6:     public AbstractEvent(String id) {
+ 7:         this.id = id;
+ 8:     }
+ 9:     public String getId() {
+10:         return id;
+11:     }
+12: }
+
+================
+File: common-things/src/main/java/com/soagrowers/productevents/events/ProductAddedEvent.java
+================
+ 1: package com.soagrowers.productevents.events;
+ 2: public class ProductAddedEvent extends AbstractEvent {
+ 3:     private String name;
+ 4:     public ProductAddedEvent() {
+ 5:     }
+ 6:     public ProductAddedEvent(String id, String name) {
+ 7:         super(id);
+ 8:         this.name = name;
+ 9:     }
+10:     public String getName() {
+11:         return name;
+12:     }
+13: }
+
+================
+File: common-things/src/main/java/com/soagrowers/productevents/events/ProductSaleableEvent.java
+================
+1: package com.soagrowers.productevents.events;
+2: public class ProductSaleableEvent extends AbstractEvent {
+3:     public ProductSaleableEvent() {
+4:     }
+5:     public ProductSaleableEvent(String id) {
+6:         super(id);
+7:     }
+8: }
+
+================
+File: common-things/src/main/java/com/soagrowers/productevents/events/ProductUnsaleableEvent.java
+================
+1: package com.soagrowers.productevents.events;
+2: public class ProductUnsaleableEvent extends AbstractEvent {
+3:     public ProductUnsaleableEvent() {
+4:     }
+5:     public ProductUnsaleableEvent(String id) {
+6:         super(id);
+7:     }
+8: }
+
+================
+File: common-things/src/main/java/com/soagrowers/utils/Asserts.java
+================
+ 1: package com.soagrowers.utils;
+ 2: import org.slf4j.Logger;
+ 3: import org.slf4j.LoggerFactory;
+ 4: import java.util.List;
+ 5: public enum Asserts {
+ 6:     INSTANCE;
+ 7:     private static final Logger LOG = LoggerFactory.getLogger(Asserts.class);
+ 8:     private static boolean active = false;
+ 9:     public static final String EMPTY_STRING = "";
+10:     public static final String UNEXPECTED_NULL = "Unexpected Null Parameter";
+11:     public static final String UNEXPECTED_EMPTY_STRING = "Unexpected Null Parameter";
+12:     public static final String NOT_TRUE = "Should have been TRUE but wasn't";
+13:     public static final String NOT_FALSE = "Should have been FALSE but wasn't";
+14:     public static final String USED_WRONG_METHOD = "I think you used the wrong Asserts method!";
+15:     private static Asserts instance;
+16:     private Asserts() {
+17:     }
+18:     public void isTrue(boolean trueism) {
+19:         if (active && trueism == false) {
+20:             LOG.warn(NOT_TRUE);
+21:             throw new AssertionError(NOT_TRUE);
+22:         }
+23:     }
+24:     public void isFalse(boolean falsehood) {
+25:         if (active && falsehood == true) {
+26:             LOG.warn(NOT_FALSE);
+27:             throw new AssertionError(NOT_FALSE);
+28:         }
+29:     }
+30:     public void isNotEmpty(Object object) {
+31:         if (active) {
+32:             if (null == object) {
+33:                 LOG.debug(UNEXPECTED_NULL);
+34:                 throw new AssertionError(UNEXPECTED_NULL);
+35:             }
+36:             if (List.class.isAssignableFrom(object.getClass())) {
+37:                 LOG.debug(USED_WRONG_METHOD);
+38:                 throw new IllegalArgumentException(USED_WRONG_METHOD);
+39:             }
+40:             if (String.class.isAssignableFrom(object.getClass())) {
+41:                 if ((String) object == EMPTY_STRING) {
+42:                     LOG.debug(UNEXPECTED_EMPTY_STRING);
+43:                     throw new AssertionError(UNEXPECTED_EMPTY_STRING);
+44:                 }
+45:             }
+46:         }
+47:     }
+48:     public void areNotEmpty(List<Object> objects) {
+49:         if (active) {
+50:             for (Object object : objects) {
+51:                 isNotEmpty(object);
+52:             }
+53:         }
+54:     }
+55:     public boolean isAssertsOn() {
+56:         return active;
+57:     }
+58:     public void setAssertsTo(boolean asserts) {
+59:         Asserts.active = asserts;
+60:     }
+61: }
+
+================
+File: config-service/.gitignore
+================
+ 1: # Folders
+ 2: build
+ 3: .gradle
+ 4: .idea
+ 5: 
+ 6: # File Patterns
+ 7: *.class
+ 8: *.iml
+ 9: 
+10: # Mobile Tools for Java (J2ME)
+11: .mtj.tmp/
+12: 
+13: # Package Files #
+14: *.war
+15: *.ear
+16: 
+17: # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+18: hs_err_pid*
+
+================
+File: config-service/build.gradle
+================
+ 1: buildscript {
+ 2: 	ext {
+ 3: 		springBootVersion = '1.3.5.RELEASE'
+ 4: 	}
+ 5: 	repositories {
+ 6: 		mavenCentral()
+ 7: 	}
+ 8: 	dependencies {
+ 9: 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+10: 		classpath('se.transmode.gradle:gradle-docker:1.2')
+11: 	}
+12: }
+13: 
+14: group = 'benwilcock'
+15: apply plugin: 'spring-boot'
+16: apply plugin: 'docker'
+17: 
+18: jar {
+19: 	baseName = 'config-service'
+20: 	archiveName = 'config-service.jar'
+21: }
+22: 
+23: configurations{
+24:     compile.exclude module: "spring-boot-starter-tomcat"
+25: }
+26: 
+27: 
+28: dependencies {
+29:     compile("org.springframework.boot:spring-boot-starter-jetty:${springBootVersion}")
+30: 	compile('org.springframework.cloud:spring-cloud-config-server')
+31: 	testCompile('org.springframework.boot:spring-boot-starter-test') 
+32: }
+33: 
+34: dependencyManagement {
+35: 	imports { 
+36: 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:Brixton.SR1"
+37: 	}
+38: }
+39: 
+40: task wrapper(type: Wrapper) {
+41: 	gradleVersion = '2.3'
+42: }
+43: 
+44: task image(type: Docker, dependsOn: build){
+45: 	push = false
+46: 	applicationName = jar.baseName
+47: 	dockerfile = file('src/main/docker/Dockerfile')
+48: 	doFirst{
+49: 		copy {
+50: 			from jar
+51: 			into stageDir
+52: 		}
+53: 	}
+54: }
+
+================
+File: config-service/gradle/wrapper/gradle-wrapper.properties
+================
+1: #Wed Jun 08 16:08:48 BST 2016
+2: distributionBase=GRADLE_USER_HOME
+3: distributionPath=wrapper/dists
+4: zipStoreBase=GRADLE_USER_HOME
+5: zipStorePath=wrapper/dists
+6: distributionUrl=https\://services.gradle.org/distributions/gradle-2.3-bin.zip
+
+================
+File: config-service/gradlew
+================
+  1: #!/usr/bin/env bash
+  2: 
+  3: ##############################################################################
+  4: ##
+  5: ##  Gradle start up script for UN*X
+  6: ##
+  7: ##############################################################################
+  8: 
+  9: # Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
+ 10: DEFAULT_JVM_OPTS=""
+ 11: 
+ 12: APP_NAME="Gradle"
+ 13: APP_BASE_NAME=`basename "$0"`
+ 14: 
+ 15: # Use the maximum available, or set MAX_FD != -1 to use that value.
+ 16: MAX_FD="maximum"
+ 17: 
+ 18: warn ( ) {
+ 19:     echo "$*"
+ 20: }
+ 21: 
+ 22: die ( ) {
+ 23:     echo
+ 24:     echo "$*"
+ 25:     echo
+ 26:     exit 1
+ 27: }
+ 28: 
+ 29: # OS specific support (must be 'true' or 'false').
+ 30: cygwin=false
+ 31: msys=false
+ 32: darwin=false
+ 33: case "`uname`" in
+ 34:   CYGWIN* )
+ 35:     cygwin=true
+ 36:     ;;
+ 37:   Darwin* )
+ 38:     darwin=true
+ 39:     ;;
+ 40:   MINGW* )
+ 41:     msys=true
+ 42:     ;;
+ 43: esac
+ 44: 
+ 45: # Attempt to set APP_HOME
+ 46: # Resolve links: $0 may be a link
+ 47: PRG="$0"
+ 48: # Need this for relative symlinks.
+ 49: while [ -h "$PRG" ] ; do
+ 50:     ls=`ls -ld "$PRG"`
+ 51:     link=`expr "$ls" : '.*-> \(.*\)$'`
+ 52:     if expr "$link" : '/.*' > /dev/null; then
+ 53:         PRG="$link"
+ 54:     else
+ 55:         PRG=`dirname "$PRG"`"/$link"
+ 56:     fi
+ 57: done
+ 58: SAVED="`pwd`"
+ 59: cd "`dirname \"$PRG\"`/" >/dev/null
+ 60: APP_HOME="`pwd -P`"
+ 61: cd "$SAVED" >/dev/null
+ 62: 
+ 63: CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
+ 64: 
+ 65: # Determine the Java command to use to start the JVM.
+ 66: if [ -n "$JAVA_HOME" ] ; then
+ 67:     if [ -x "$JAVA_HOME/jre/sh/java" ] ; then
+ 68:         # IBM's JDK on AIX uses strange locations for the executables
+ 69:         JAVACMD="$JAVA_HOME/jre/sh/java"
+ 70:     else
+ 71:         JAVACMD="$JAVA_HOME/bin/java"
+ 72:     fi
+ 73:     if [ ! -x "$JAVACMD" ] ; then
+ 74:         die "ERROR: JAVA_HOME is set to an invalid directory: $JAVA_HOME
+ 75: 
+ 76: Please set the JAVA_HOME variable in your environment to match the
+ 77: location of your Java installation."
+ 78:     fi
+ 79: else
+ 80:     JAVACMD="java"
+ 81:     which java >/dev/null 2>&1 || die "ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
+ 82: 
+ 83: Please set the JAVA_HOME variable in your environment to match the
+ 84: location of your Java installation."
+ 85: fi
+ 86: 
+ 87: # Increase the maximum file descriptors if we can.
+ 88: if [ "$cygwin" = "false" -a "$darwin" = "false" ] ; then
+ 89:     MAX_FD_LIMIT=`ulimit -H -n`
+ 90:     if [ $? -eq 0 ] ; then
+ 91:         if [ "$MAX_FD" = "maximum" -o "$MAX_FD" = "max" ] ; then
+ 92:             MAX_FD="$MAX_FD_LIMIT"
+ 93:         fi
+ 94:         ulimit -n $MAX_FD
+ 95:         if [ $? -ne 0 ] ; then
+ 96:             warn "Could not set maximum file descriptor limit: $MAX_FD"
+ 97:         fi
+ 98:     else
+ 99:         warn "Could not query maximum file descriptor limit: $MAX_FD_LIMIT"
+100:     fi
+101: fi
+102: 
+103: # For Darwin, add options to specify how the application appears in the dock
+104: if $darwin; then
+105:     GRADLE_OPTS="$GRADLE_OPTS \"-Xdock:name=$APP_NAME\" \"-Xdock:icon=$APP_HOME/media/gradle.icns\""
+106: fi
+107: 
+108: # For Cygwin, switch paths to Windows format before running java
+109: if $cygwin ; then
+110:     APP_HOME=`cygpath --path --mixed "$APP_HOME"`
+111:     CLASSPATH=`cygpath --path --mixed "$CLASSPATH"`
+112:     JAVACMD=`cygpath --unix "$JAVACMD"`
+113: 
+114:     # We build the pattern for arguments to be converted via cygpath
+115:     ROOTDIRSRAW=`find -L / -maxdepth 1 -mindepth 1 -type d 2>/dev/null`
+116:     SEP=""
+117:     for dir in $ROOTDIRSRAW ; do
+118:         ROOTDIRS="$ROOTDIRS$SEP$dir"
+119:         SEP="|"
+120:     done
+121:     OURCYGPATTERN="(^($ROOTDIRS))"
+122:     # Add a user-defined pattern to the cygpath arguments
+123:     if [ "$GRADLE_CYGPATTERN" != "" ] ; then
+124:         OURCYGPATTERN="$OURCYGPATTERN|($GRADLE_CYGPATTERN)"
+125:     fi
+126:     # Now convert the arguments - kludge to limit ourselves to /bin/sh
+127:     i=0
+128:     for arg in "$@" ; do
+129:         CHECK=`echo "$arg"|egrep -c "$OURCYGPATTERN" -`
+130:         CHECK2=`echo "$arg"|egrep -c "^-"`                                 ### Determine if an option
+131: 
+132:         if [ $CHECK -ne 0 ] && [ $CHECK2 -eq 0 ] ; then                    ### Added a condition
+133:             eval `echo args$i`=`cygpath --path --ignore --mixed "$arg"`
+134:         else
+135:             eval `echo args$i`="\"$arg\""
+136:         fi
+137:         i=$((i+1))
+138:     done
+139:     case $i in
+140:         (0) set -- ;;
+141:         (1) set -- "$args0" ;;
+142:         (2) set -- "$args0" "$args1" ;;
+143:         (3) set -- "$args0" "$args1" "$args2" ;;
+144:         (4) set -- "$args0" "$args1" "$args2" "$args3" ;;
+145:         (5) set -- "$args0" "$args1" "$args2" "$args3" "$args4" ;;
+146:         (6) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" ;;
+147:         (7) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" ;;
+148:         (8) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7" ;;
+149:         (9) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7" "$args8" ;;
+150:     esac
+151: fi
+152: 
+153: # Split up the JVM_OPTS And GRADLE_OPTS values into an array, following the shell quoting and substitution rules
+154: function splitJvmOpts() {
+155:     JVM_OPTS=("$@")
+156: }
+157: eval splitJvmOpts $DEFAULT_JVM_OPTS $JAVA_OPTS $GRADLE_OPTS
+158: JVM_OPTS[${#JVM_OPTS[*]}]="-Dorg.gradle.appname=$APP_BASE_NAME"
+159: 
+160: exec "$JAVACMD" "${JVM_OPTS[@]}" -classpath "$CLASSPATH" org.gradle.wrapper.GradleWrapperMain "$@"
+
+================
+File: config-service/gradlew.bat
+================
+ 1: @if "%DEBUG%" == "" @echo off
+ 2: @rem ##########################################################################
+ 3: @rem
+ 4: @rem  Gradle startup script for Windows
+ 5: @rem
+ 6: @rem ##########################################################################
+ 7: 
+ 8: @rem Set local scope for the variables with windows NT shell
+ 9: if "%OS%"=="Windows_NT" setlocal
+10: 
+11: @rem Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
+12: set DEFAULT_JVM_OPTS=
+13: 
+14: set DIRNAME=%~dp0
+15: if "%DIRNAME%" == "" set DIRNAME=.
+16: set APP_BASE_NAME=%~n0
+17: set APP_HOME=%DIRNAME%
+18: 
+19: @rem Find java.exe
+20: if defined JAVA_HOME goto findJavaFromJavaHome
+21: 
+22: set JAVA_EXE=java.exe
+23: %JAVA_EXE% -version >NUL 2>&1
+24: if "%ERRORLEVEL%" == "0" goto init
+25: 
+26: echo.
+27: echo ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
+28: echo.
+29: echo Please set the JAVA_HOME variable in your environment to match the
+30: echo location of your Java installation.
+31: 
+32: goto fail
+33: 
+34: :findJavaFromJavaHome
+35: set JAVA_HOME=%JAVA_HOME:"=%
+36: set JAVA_EXE=%JAVA_HOME%/bin/java.exe
+37: 
+38: if exist "%JAVA_EXE%" goto init
+39: 
+40: echo.
+41: echo ERROR: JAVA_HOME is set to an invalid directory: %JAVA_HOME%
+42: echo.
+43: echo Please set the JAVA_HOME variable in your environment to match the
+44: echo location of your Java installation.
+45: 
+46: goto fail
+47: 
+48: :init
+49: @rem Get command-line arguments, handling Windowz variants
+50: 
+51: if not "%OS%" == "Windows_NT" goto win9xME_args
+52: if "%@eval[2+2]" == "4" goto 4NT_args
+53: 
+54: :win9xME_args
+55: @rem Slurp the command line arguments.
+56: set CMD_LINE_ARGS=
+57: set _SKIP=2
+58: 
+59: :win9xME_args_slurp
+60: if "x%~1" == "x" goto execute
+61: 
+62: set CMD_LINE_ARGS=%*
+63: goto execute
+64: 
+65: :4NT_args
+66: @rem Get arguments from the 4NT Shell from JP Software
+67: set CMD_LINE_ARGS=%$
+68: 
+69: :execute
+70: @rem Setup the command line
+71: 
+72: set CLASSPATH=%APP_HOME%\gradle\wrapper\gradle-wrapper.jar
+73: 
+74: @rem Execute Gradle
+75: "%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %GRADLE_OPTS% "-Dorg.gradle.appname=%APP_BASE_NAME%" -classpath "%CLASSPATH%" org.gradle.wrapper.GradleWrapperMain %CMD_LINE_ARGS%
+76: 
+77: :end
+78: @rem End local scope for the variables with windows NT shell
+79: if "%ERRORLEVEL%"=="0" goto mainEnd
+80: 
+81: :fail
+82: rem Set variable GRADLE_EXIT_CONSOLE if you need the _script_ return code instead of
+83: rem the _cmd.exe /c_ return code!
+84: if  not "" == "%GRADLE_EXIT_CONSOLE%" exit 1
+85: exit /b 1
+86: 
+87: :mainEnd
+88: if "%OS%"=="Windows_NT" endlocal
+89: 
+90: :omega
+
+================
+File: config-service/src/main/docker/Dockerfile
+================
+1: FROM frolvlad/alpine-oraclejdk8:slim
+2: VOLUME /tmp
+3: EXPOSE 8888
+4: ADD config-service.jar app.jar
+5: RUN sh -c 'touch /app.jar'
+6: ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+
+================
+File: config-service/src/main/java/com/soagrowers/ConfigServiceApplication.java
+================
+ 1: package com.soagrowers;
+ 2: import org.springframework.boot.SpringApplication;
+ 3: import org.springframework.boot.autoconfigure.SpringBootApplication;
+ 4: import org.springframework.cloud.config.server.EnableConfigServer;
+ 5: @SpringBootApplication
+ 6: @EnableConfigServer
+ 7: public class ConfigServiceApplication {
+ 8:     public static void main(String[] args) {
+ 9:         SpringApplication.run(ConfigServiceApplication.class, args);
+10:     }
+11: }
+
+================
+File: config-service/src/main/resources/banner.txt
+================
+1: .,-:::::     ...   :::.    :::..-:::::':::  .,-:::::/
+2: ,;;;'````'  .;;;;;;;.`;;;;,  `;;;;;;'''' ;;;,;;-'````'
+3: [[[        ,[[     \[[,[[[[[. '[[[[[,,== [[[[[[   [[[[[[/
+4: $$$        $$$,     $$$$$$ "Y$c$$`$$$"`` $$$"$$c.    "$$
+5: `88bo,__,o,"888,_ _,88P888    Y88 888    888 `Y8bo,,,o88o
+6:   "YUMMMMMP" "YMMMMMP" MMM     YM "MM,   MMM   `'YMUP"YMM
+
+================
+File: config-service/src/main/resources/bootstrap-production.yml
+================
+ 1: spring:
+ 2:   application:
+ 3:     name: config-service
+ 4:   cloud:
+ 5:     config:
+ 6:       server:
+ 7:         git:
+ 8:           uri: https://github.com/benwilcock/microservice-sampler-config
+ 9: server:
+10:   port: 8888
+
+================
+File: config-service/src/main/resources/bootstrap.yml
+================
+ 1: spring:
+ 2:   application:
+ 3:     name: config-service
+ 4:   cloud:
+ 5:     config:
+ 6:       server:
+ 7:         git:
+ 8:           uri: file://home/ben/src/github/microservice-sampler-config
+ 9: server:
+10:   port: 8888
+
+================
+File: dev.yml
+================
+ 1: version: '2'
+ 2: services:
+ 3:   mongodb:
+ 4:     image: mongo:2.4
+ 5:     container_name: mongodb
+ 6:     ports:
+ 7:      - "27017:27017"
+ 8:   rabbitmq:
+ 9:     image: rabbitmq:3-management
+10:     container_name: rabbitmq
+11:     ports:
+12:      - "5672:5672"
+13:      - "15672:15672"
+14:     environment:
+15:      - RABBITMQ_DEFAULT_USER=test
+16:      - RABBITMQ_DEFAULT_PASS=password
+17:   config:
+18:     image: benwilcock/config-service
+19:     container_name: config
+20:     ports:
+21:      - "8888:8888"
+22:     volumes:
+23:      - ..:/home/ben/src/github
+24:     depends_on:
+25:      - mongodb
+26:      - rabbitmq
+27:   discovery:
+28:     image: benwilcock/discovery-service
+29:     container_name: discovery
+30:     ports:
+31:      - "8761:8761"
+32:   gateway:
+33:     image: benwilcock/gateway-service
+34:     container_name: gateway
+35:     ports:
+36:      - "8080:8080"
+37:     depends_on:
+38:      - config
+39:      - discovery
+
+================
+File: discovery-service/.gitignore
+================
+ 1: # Folders
+ 2: build
+ 3: events
+ 4: .gradle
+ 5: .idea
+ 6: 
+ 7: # File Patterns
+ 8: *.class
+ 9: *.iml
+10: 
+11: # Mobile Tools for Java (J2ME)
+12: .mtj.tmp/
+13: 
+14: # Package Files #
+15: *.war
+16: *.ear
+17: 
+18: # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+19: hs_err_pid*
+
+================
+File: discovery-service/build.gradle
+================
+ 1: buildscript {
+ 2: 	ext {
+ 3: 		springBootVersion = '1.3.5.RELEASE'
+ 4: 	}
+ 5: 	repositories {
+ 6: 		mavenCentral()
+ 7: 	}
+ 8: 	dependencies {
+ 9: 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+10: 		classpath('se.transmode.gradle:gradle-docker:1.2')
+11: 	}
+12: }
+13: 
+14: group = 'benwilcock'
+15: apply plugin: 'spring-boot'
+16: apply plugin: 'docker'
+17: 
+18: jar {
+19: 	baseName = 'discovery-service'
+20: 	archiveName = 'discovery-service.jar'
+21: }
+22: 
+23: dependencies {
+24: 	compile('org.springframework.cloud:spring-cloud-starter-eureka-server')
+25: 	testCompile('org.springframework.boot:spring-boot-starter-test') 
+26: }
+27: 
+28: dependencyManagement {
+29: 	imports { 
+30: 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:Brixton.RELEASE" 
+31: 	}
+32: }
+33: 
+34: task wrapper(type: Wrapper) {
+35: 	gradleVersion = '2.3'
+36: }
+37: 
+38: task image(type: Docker, dependsOn: build){
+39: 	push = false
+40: 	applicationName = jar.baseName
+41: 	dockerfile = file('src/main/docker/Dockerfile')
+42: 	doFirst{
+43: 		copy {
+44: 			from jar
+45: 			into stageDir
+46: 		}
+47: 	}
+48: }
+
+================
+File: discovery-service/gradle/wrapper/gradle-wrapper.properties
+================
+1: distributionBase=GRADLE_USER_HOME
+2: distributionPath=wrapper/dists
+3: zipStoreBase=GRADLE_USER_HOME
+4: zipStorePath=wrapper/dists
+5: distributionUrl=https\://services.gradle.org/distributions/gradle-2.13-bin.zip
+
+================
+File: discovery-service/gradlew
+================
+  1: #!/usr/bin/env bash
+  2: 
+  3: ##############################################################################
+  4: ##
+  5: ##  Gradle start up script for UN*X
+  6: ##
+  7: ##############################################################################
+  8: 
+  9: # Attempt to set APP_HOME
+ 10: # Resolve links: $0 may be a link
+ 11: PRG="$0"
+ 12: # Need this for relative symlinks.
+ 13: while [ -h "$PRG" ] ; do
+ 14:     ls=`ls -ld "$PRG"`
+ 15:     link=`expr "$ls" : '.*-> \(.*\)$'`
+ 16:     if expr "$link" : '/.*' > /dev/null; then
+ 17:         PRG="$link"
+ 18:     else
+ 19:         PRG=`dirname "$PRG"`"/$link"
+ 20:     fi
+ 21: done
+ 22: SAVED="`pwd`"
+ 23: cd "`dirname \"$PRG\"`/" >/dev/null
+ 24: APP_HOME="`pwd -P`"
+ 25: cd "$SAVED" >/dev/null
+ 26: 
+ 27: APP_NAME="Gradle"
+ 28: APP_BASE_NAME=`basename "$0"`
+ 29: 
+ 30: # Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
+ 31: DEFAULT_JVM_OPTS=""
+ 32: 
+ 33: # Use the maximum available, or set MAX_FD != -1 to use that value.
+ 34: MAX_FD="maximum"
+ 35: 
+ 36: warn ( ) {
+ 37:     echo "$*"
+ 38: }
+ 39: 
+ 40: die ( ) {
+ 41:     echo
+ 42:     echo "$*"
+ 43:     echo
+ 44:     exit 1
+ 45: }
+ 46: 
+ 47: # OS specific support (must be 'true' or 'false').
+ 48: cygwin=false
+ 49: msys=false
+ 50: darwin=false
+ 51: nonstop=false
+ 52: case "`uname`" in
+ 53:   CYGWIN* )
+ 54:     cygwin=true
+ 55:     ;;
+ 56:   Darwin* )
+ 57:     darwin=true
+ 58:     ;;
+ 59:   MINGW* )
+ 60:     msys=true
+ 61:     ;;
+ 62:   NONSTOP* )
+ 63:     nonstop=true
+ 64:     ;;
+ 65: esac
+ 66: 
+ 67: CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
+ 68: 
+ 69: # Determine the Java command to use to start the JVM.
+ 70: if [ -n "$JAVA_HOME" ] ; then
+ 71:     if [ -x "$JAVA_HOME/jre/sh/java" ] ; then
+ 72:         # IBM's JDK on AIX uses strange locations for the executables
+ 73:         JAVACMD="$JAVA_HOME/jre/sh/java"
+ 74:     else
+ 75:         JAVACMD="$JAVA_HOME/bin/java"
+ 76:     fi
+ 77:     if [ ! -x "$JAVACMD" ] ; then
+ 78:         die "ERROR: JAVA_HOME is set to an invalid directory: $JAVA_HOME
+ 79: 
+ 80: Please set the JAVA_HOME variable in your environment to match the
+ 81: location of your Java installation."
+ 82:     fi
+ 83: else
+ 84:     JAVACMD="java"
+ 85:     which java >/dev/null 2>&1 || die "ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
+ 86: 
+ 87: Please set the JAVA_HOME variable in your environment to match the
+ 88: location of your Java installation."
+ 89: fi
+ 90: 
+ 91: # Increase the maximum file descriptors if we can.
+ 92: if [ "$cygwin" = "false" -a "$darwin" = "false" -a "$nonstop" = "false" ] ; then
+ 93:     MAX_FD_LIMIT=`ulimit -H -n`
+ 94:     if [ $? -eq 0 ] ; then
+ 95:         if [ "$MAX_FD" = "maximum" -o "$MAX_FD" = "max" ] ; then
+ 96:             MAX_FD="$MAX_FD_LIMIT"
+ 97:         fi
+ 98:         ulimit -n $MAX_FD
+ 99:         if [ $? -ne 0 ] ; then
+100:             warn "Could not set maximum file descriptor limit: $MAX_FD"
+101:         fi
+102:     else
+103:         warn "Could not query maximum file descriptor limit: $MAX_FD_LIMIT"
+104:     fi
+105: fi
+106: 
+107: # For Darwin, add options to specify how the application appears in the dock
+108: if $darwin; then
+109:     GRADLE_OPTS="$GRADLE_OPTS \"-Xdock:name=$APP_NAME\" \"-Xdock:icon=$APP_HOME/media/gradle.icns\""
+110: fi
+111: 
+112: # For Cygwin, switch paths to Windows format before running java
+113: if $cygwin ; then
+114:     APP_HOME=`cygpath --path --mixed "$APP_HOME"`
+115:     CLASSPATH=`cygpath --path --mixed "$CLASSPATH"`
+116:     JAVACMD=`cygpath --unix "$JAVACMD"`
+117: 
+118:     # We build the pattern for arguments to be converted via cygpath
+119:     ROOTDIRSRAW=`find -L / -maxdepth 1 -mindepth 1 -type d 2>/dev/null`
+120:     SEP=""
+121:     for dir in $ROOTDIRSRAW ; do
+122:         ROOTDIRS="$ROOTDIRS$SEP$dir"
+123:         SEP="|"
+124:     done
+125:     OURCYGPATTERN="(^($ROOTDIRS))"
+126:     # Add a user-defined pattern to the cygpath arguments
+127:     if [ "$GRADLE_CYGPATTERN" != "" ] ; then
+128:         OURCYGPATTERN="$OURCYGPATTERN|($GRADLE_CYGPATTERN)"
+129:     fi
+130:     # Now convert the arguments - kludge to limit ourselves to /bin/sh
+131:     i=0
+132:     for arg in "$@" ; do
+133:         CHECK=`echo "$arg"|egrep -c "$OURCYGPATTERN" -`
+134:         CHECK2=`echo "$arg"|egrep -c "^-"`                                 ### Determine if an option
+135: 
+136:         if [ $CHECK -ne 0 ] && [ $CHECK2 -eq 0 ] ; then                    ### Added a condition
+137:             eval `echo args$i`=`cygpath --path --ignore --mixed "$arg"`
+138:         else
+139:             eval `echo args$i`="\"$arg\""
+140:         fi
+141:         i=$((i+1))
+142:     done
+143:     case $i in
+144:         (0) set -- ;;
+145:         (1) set -- "$args0" ;;
+146:         (2) set -- "$args0" "$args1" ;;
+147:         (3) set -- "$args0" "$args1" "$args2" ;;
+148:         (4) set -- "$args0" "$args1" "$args2" "$args3" ;;
+149:         (5) set -- "$args0" "$args1" "$args2" "$args3" "$args4" ;;
+150:         (6) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" ;;
+151:         (7) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" ;;
+152:         (8) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7" ;;
+153:         (9) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7" "$args8" ;;
+154:     esac
+155: fi
+156: 
+157: # Split up the JVM_OPTS And GRADLE_OPTS values into an array, following the shell quoting and substitution rules
+158: function splitJvmOpts() {
+159:     JVM_OPTS=("$@")
+160: }
+161: eval splitJvmOpts $DEFAULT_JVM_OPTS $JAVA_OPTS $GRADLE_OPTS
+162: JVM_OPTS[${#JVM_OPTS[*]}]="-Dorg.gradle.appname=$APP_BASE_NAME"
+163: 
+164: exec "$JAVACMD" "${JVM_OPTS[@]}" -classpath "$CLASSPATH" org.gradle.wrapper.GradleWrapperMain "$@"
+
+================
+File: discovery-service/gradlew.bat
+================
+ 1: @if "%DEBUG%" == "" @echo off
+ 2: @rem ##########################################################################
+ 3: @rem
+ 4: @rem  Gradle startup script for Windows
+ 5: @rem
+ 6: @rem ##########################################################################
+ 7: 
+ 8: @rem Set local scope for the variables with windows NT shell
+ 9: if "%OS%"=="Windows_NT" setlocal
+10: 
+11: set DIRNAME=%~dp0
+12: if "%DIRNAME%" == "" set DIRNAME=.
+13: set APP_BASE_NAME=%~n0
+14: set APP_HOME=%DIRNAME%
+15: 
+16: @rem Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
+17: set DEFAULT_JVM_OPTS=
+18: 
+19: @rem Find java.exe
+20: if defined JAVA_HOME goto findJavaFromJavaHome
+21: 
+22: set JAVA_EXE=java.exe
+23: %JAVA_EXE% -version >NUL 2>&1
+24: if "%ERRORLEVEL%" == "0" goto init
+25: 
+26: echo.
+27: echo ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
+28: echo.
+29: echo Please set the JAVA_HOME variable in your environment to match the
+30: echo location of your Java installation.
+31: 
+32: goto fail
+33: 
+34: :findJavaFromJavaHome
+35: set JAVA_HOME=%JAVA_HOME:"=%
+36: set JAVA_EXE=%JAVA_HOME%/bin/java.exe
+37: 
+38: if exist "%JAVA_EXE%" goto init
+39: 
+40: echo.
+41: echo ERROR: JAVA_HOME is set to an invalid directory: %JAVA_HOME%
+42: echo.
+43: echo Please set the JAVA_HOME variable in your environment to match the
+44: echo location of your Java installation.
+45: 
+46: goto fail
+47: 
+48: :init
+49: @rem Get command-line arguments, handling Windows variants
+50: 
+51: if not "%OS%" == "Windows_NT" goto win9xME_args
+52: if "%@eval[2+2]" == "4" goto 4NT_args
+53: 
+54: :win9xME_args
+55: @rem Slurp the command line arguments.
+56: set CMD_LINE_ARGS=
+57: set _SKIP=2
+58: 
+59: :win9xME_args_slurp
+60: if "x%~1" == "x" goto execute
+61: 
+62: set CMD_LINE_ARGS=%*
+63: goto execute
+64: 
+65: :4NT_args
+66: @rem Get arguments from the 4NT Shell from JP Software
+67: set CMD_LINE_ARGS=%$
+68: 
+69: :execute
+70: @rem Setup the command line
+71: 
+72: set CLASSPATH=%APP_HOME%\gradle\wrapper\gradle-wrapper.jar
+73: 
+74: @rem Execute Gradle
+75: "%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %GRADLE_OPTS% "-Dorg.gradle.appname=%APP_BASE_NAME%" -classpath "%CLASSPATH%" org.gradle.wrapper.GradleWrapperMain %CMD_LINE_ARGS%
+76: 
+77: :end
+78: @rem End local scope for the variables with windows NT shell
+79: if "%ERRORLEVEL%"=="0" goto mainEnd
+80: 
+81: :fail
+82: rem Set variable GRADLE_EXIT_CONSOLE if you need the _script_ return code instead of
+83: rem the _cmd.exe /c_ return code!
+84: if  not "" == "%GRADLE_EXIT_CONSOLE%" exit 1
+85: exit /b 1
+86: 
+87: :mainEnd
+88: if "%OS%"=="Windows_NT" endlocal
+89: 
+90: :omega
+
+================
+File: discovery-service/src/main/docker/Dockerfile
+================
+1: FROM frolvlad/alpine-oraclejdk8:slim
+2: VOLUME /tmp
+3: EXPOSE 8761
+4: ADD discovery-service.jar app.jar
+5: RUN sh -c 'touch /app.jar'
+6: ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+
+================
+File: discovery-service/src/main/java/com/soagrowers/DiscoveryServiceApplication.java
+================
+ 1: package com.soagrowers;
+ 2: import org.springframework.boot.SpringApplication;
+ 3: import org.springframework.boot.autoconfigure.SpringBootApplication;
+ 4: import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+ 5: @EnableEurekaServer
+ 6: @SpringBootApplication
+ 7: public class DiscoveryServiceApplication {
+ 8: 	public static void main(String[] args) {
+ 9: 		SpringApplication.run(DiscoveryServiceApplication.class, args);
+10: 	}
+11: }
+
+================
+File: discovery-service/src/main/resources/banner.txt
+================
+1: :::::::-.  ::: .::::::.   .,-:::::     ...
+2:  ;;,   `';,;;;;;;`    ` ,;;;'````'  .;;;;;;;.
+3:  `[[     [[[[['[==/[[[[,[[[        ,[[     \[[,
+4:   $$,    $$$$$  '''    $$$$        $$$,     $$$
+5:   888_,o8P'888 88b    dP`88bo,__,o,"888,_ _,88P
+6:   MMMMP"`  MMM  "YMmMY"   "YUMMMMMP" "YMMMMMP"
+
+================
+File: discovery-service/src/main/resources/bootstrap.yml
+================
+1: server:
+2:   port: 8761
+3: eureka:
+4:   client:
+5:     register-with-eureka: false
+6:     fetch-registry: false
+
+================
+File: docker-compose.yml
+================
+ 1: version: '2'
+ 2: services:
+ 3:   mongodb:
+ 4:     image: mongo:2.4
+ 5:     container_name: mongodb
+ 6:     ports:
+ 7:      - "27017:27017"
+ 8:   rabbitmq:
+ 9:     image: rabbitmq:3-management
+10:     container_name: rabbitmq
+11:     ports:
+12:      - "5672:5672"
+13:      - "15672:15672"
+14:     environment:
+15:      - RABBITMQ_DEFAULT_USER=test
+16:      - RABBITMQ_DEFAULT_PASS=password
+17:   config:
+18:     image: benwilcock/config-service
+19:     container_name: config
+20:     ports:
+21:      - "8888:8888"
+22:     environment:
+23:      - SPRING_PROFILES_ACTIVE=production
+24:   discovery:
+25:     image: benwilcock/discovery-service
+26:     container_name: discovery
+27:     ports:
+28:      - "8761:8761"
+29:   gateway:
+30:     image: benwilcock/gateway-service
+31:     container_name: gateway
+32:     ports:
+33:      - "8080:8080"
+34:     environment:
+35:      - SPRING_PROFILES_ACTIVE=production
+36:     depends_on:
+37:      - discovery
+38:      - config
+39:   product-command-side:
+40:     image: benwilcock/product-command-side:latest
+41:     container_name: product-cmd-side
+42:     depends_on:
+43:      - mongodb
+44:      - rabbitmq
+45:      - discovery
+46:      - config
+47:     ports:
+48:       - "9000"
+49:     environment:
+50:      - SPRING_PROFILES_ACTIVE=production
+51:   product-query-side:
+52:     image: benwilcock/product-query-side:latest
+53:     container_name: product-qry-side
+54:     depends_on:
+55:      - rabbitmq
+56:      - discovery
+57:      - config
+58:     ports:
+59:      - "9001"
+60:     environment:
+61:      - SPRING_PROFILES_ACTIVE=production
+
+================
+File: docker-push.sh
+================
+1: docker push benwilcock/config-service:latest
+2: docker push benwilcock/discovery-service:latest
+3: docker push benwilcock/gateway-service:latest
+4: docker push benwilcock/product-query-side:latest
+5: docker push benwilcock/product-command-side:latest
+
+================
+File: gateway-service/.gitignore
+================
+ 1: # Folders
+ 2: build
+ 3: .gradle
+ 4: .idea
+ 5: 
+ 6: # File Patterns
+ 7: *.class
+ 8: *.iml
+ 9: 
+10: # Mobile Tools for Java (J2ME)
+11: .mtj.tmp/
+12: 
+13: # Package Files #
+14: *.war
+15: *.ear
+16: 
+17: # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+18: hs_err_pid*
+
+================
+File: gateway-service/build.gradle
+================
+ 1: buildscript {
+ 2: 	ext {
+ 3: 		springBootVersion = '1.3.5.RELEASE'
+ 4: 	}
+ 5: 	repositories {
+ 6: 		mavenCentral()
+ 7: 	}
+ 8: 	dependencies {
+ 9: 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+10: 		classpath('se.transmode.gradle:gradle-docker:1.2')
+11: 	}
+12: }
+13: 
+14: group = 'benwilcock'
+15: apply plugin: 'spring-boot'
+16: apply plugin: 'docker'
+17: 
+18: jar {
+19: 	baseName = 'gateway-service'
+20: 	archiveName = "gateway-service.jar"
+21: }
+22: 
+23: configurations{
+24: 	compile.exclude module: "spring-boot-starter-tomcat"
+25: }
+26: 
+27: 
+28: dependencies {
+29: 	compile("org.springframework.boot:spring-boot-starter-jetty:${springBootVersion}")
+30: 	compile("org.springframework.retry:spring-retry")
+31: 	compile("org.springframework.boot:spring-boot-starter-aop:${springBootVersion}")
+32: 	compile("org.springframework.cloud:spring-cloud-starter-eureka")
+33: 	compile('org.springframework.cloud:spring-cloud-starter-zuul')
+34: 	compile("org.springframework.cloud:spring-cloud-starter-config")
+35: 	testCompile('org.springframework.boot:spring-boot-starter-test') 
+36: }
+37: 
+38: dependencyManagement {
+39: 	imports { 
+40: 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:Brixton.SR1" 
+41: 	}
+42: }
+43: 
+44: task wrapper(type: Wrapper) {
+45: 	gradleVersion = '2.3'
+46: }
+47: 
+48: task image(type: Docker, dependsOn: build){
+49: 	push = false
+50: 	applicationName = jar.baseName
+51: 	dockerfile = file('src/main/docker/Dockerfile')
+52: 	doFirst{
+53: 		copy {
+54: 			from jar
+55: 			into stageDir
+56: 		}
+57: 	}
+58: }
+
+================
+File: gateway-service/gradle/wrapper/gradle-wrapper.properties
+================
+1: #Tue Jun 28 19:00:48 BST 2016
+2: distributionBase=GRADLE_USER_HOME
+3: distributionPath=wrapper/dists
+4: zipStoreBase=GRADLE_USER_HOME
+5: zipStorePath=wrapper/dists
+6: distributionUrl=https\://services.gradle.org/distributions/gradle-2.3-bin.zip
+
+================
+File: gateway-service/gradlew
+================
+  1: #!/usr/bin/env bash
+  2: 
+  3: ##############################################################################
+  4: ##
+  5: ##  Gradle start up script for UN*X
+  6: ##
+  7: ##############################################################################
+  8: 
+  9: # Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
+ 10: DEFAULT_JVM_OPTS=""
+ 11: 
+ 12: APP_NAME="Gradle"
+ 13: APP_BASE_NAME=`basename "$0"`
+ 14: 
+ 15: # Use the maximum available, or set MAX_FD != -1 to use that value.
+ 16: MAX_FD="maximum"
+ 17: 
+ 18: warn ( ) {
+ 19:     echo "$*"
+ 20: }
+ 21: 
+ 22: die ( ) {
+ 23:     echo
+ 24:     echo "$*"
+ 25:     echo
+ 26:     exit 1
+ 27: }
+ 28: 
+ 29: # OS specific support (must be 'true' or 'false').
+ 30: cygwin=false
+ 31: msys=false
+ 32: darwin=false
+ 33: case "`uname`" in
+ 34:   CYGWIN* )
+ 35:     cygwin=true
+ 36:     ;;
+ 37:   Darwin* )
+ 38:     darwin=true
+ 39:     ;;
+ 40:   MINGW* )
+ 41:     msys=true
+ 42:     ;;
+ 43: esac
+ 44: 
+ 45: # Attempt to set APP_HOME
+ 46: # Resolve links: $0 may be a link
+ 47: PRG="$0"
+ 48: # Need this for relative symlinks.
+ 49: while [ -h "$PRG" ] ; do
+ 50:     ls=`ls -ld "$PRG"`
+ 51:     link=`expr "$ls" : '.*-> \(.*\)$'`
+ 52:     if expr "$link" : '/.*' > /dev/null; then
+ 53:         PRG="$link"
+ 54:     else
+ 55:         PRG=`dirname "$PRG"`"/$link"
+ 56:     fi
+ 57: done
+ 58: SAVED="`pwd`"
+ 59: cd "`dirname \"$PRG\"`/" >/dev/null
+ 60: APP_HOME="`pwd -P`"
+ 61: cd "$SAVED" >/dev/null
+ 62: 
+ 63: CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
+ 64: 
+ 65: # Determine the Java command to use to start the JVM.
+ 66: if [ -n "$JAVA_HOME" ] ; then
+ 67:     if [ -x "$JAVA_HOME/jre/sh/java" ] ; then
+ 68:         # IBM's JDK on AIX uses strange locations for the executables
+ 69:         JAVACMD="$JAVA_HOME/jre/sh/java"
+ 70:     else
+ 71:         JAVACMD="$JAVA_HOME/bin/java"
+ 72:     fi
+ 73:     if [ ! -x "$JAVACMD" ] ; then
+ 74:         die "ERROR: JAVA_HOME is set to an invalid directory: $JAVA_HOME
+ 75: 
+ 76: Please set the JAVA_HOME variable in your environment to match the
+ 77: location of your Java installation."
+ 78:     fi
+ 79: else
+ 80:     JAVACMD="java"
+ 81:     which java >/dev/null 2>&1 || die "ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
+ 82: 
+ 83: Please set the JAVA_HOME variable in your environment to match the
+ 84: location of your Java installation."
+ 85: fi
+ 86: 
+ 87: # Increase the maximum file descriptors if we can.
+ 88: if [ "$cygwin" = "false" -a "$darwin" = "false" ] ; then
+ 89:     MAX_FD_LIMIT=`ulimit -H -n`
+ 90:     if [ $? -eq 0 ] ; then
+ 91:         if [ "$MAX_FD" = "maximum" -o "$MAX_FD" = "max" ] ; then
+ 92:             MAX_FD="$MAX_FD_LIMIT"
+ 93:         fi
+ 94:         ulimit -n $MAX_FD
+ 95:         if [ $? -ne 0 ] ; then
+ 96:             warn "Could not set maximum file descriptor limit: $MAX_FD"
+ 97:         fi
+ 98:     else
+ 99:         warn "Could not query maximum file descriptor limit: $MAX_FD_LIMIT"
+100:     fi
+101: fi
+102: 
+103: # For Darwin, add options to specify how the application appears in the dock
+104: if $darwin; then
+105:     GRADLE_OPTS="$GRADLE_OPTS \"-Xdock:name=$APP_NAME\" \"-Xdock:icon=$APP_HOME/media/gradle.icns\""
+106: fi
+107: 
+108: # For Cygwin, switch paths to Windows format before running java
+109: if $cygwin ; then
+110:     APP_HOME=`cygpath --path --mixed "$APP_HOME"`
+111:     CLASSPATH=`cygpath --path --mixed "$CLASSPATH"`
+112:     JAVACMD=`cygpath --unix "$JAVACMD"`
+113: 
+114:     # We build the pattern for arguments to be converted via cygpath
+115:     ROOTDIRSRAW=`find -L / -maxdepth 1 -mindepth 1 -type d 2>/dev/null`
+116:     SEP=""
+117:     for dir in $ROOTDIRSRAW ; do
+118:         ROOTDIRS="$ROOTDIRS$SEP$dir"
+119:         SEP="|"
+120:     done
+121:     OURCYGPATTERN="(^($ROOTDIRS))"
+122:     # Add a user-defined pattern to the cygpath arguments
+123:     if [ "$GRADLE_CYGPATTERN" != "" ] ; then
+124:         OURCYGPATTERN="$OURCYGPATTERN|($GRADLE_CYGPATTERN)"
+125:     fi
+126:     # Now convert the arguments - kludge to limit ourselves to /bin/sh
+127:     i=0
+128:     for arg in "$@" ; do
+129:         CHECK=`echo "$arg"|egrep -c "$OURCYGPATTERN" -`
+130:         CHECK2=`echo "$arg"|egrep -c "^-"`                                 ### Determine if an option
+131: 
+132:         if [ $CHECK -ne 0 ] && [ $CHECK2 -eq 0 ] ; then                    ### Added a condition
+133:             eval `echo args$i`=`cygpath --path --ignore --mixed "$arg"`
+134:         else
+135:             eval `echo args$i`="\"$arg\""
+136:         fi
+137:         i=$((i+1))
+138:     done
+139:     case $i in
+140:         (0) set -- ;;
+141:         (1) set -- "$args0" ;;
+142:         (2) set -- "$args0" "$args1" ;;
+143:         (3) set -- "$args0" "$args1" "$args2" ;;
+144:         (4) set -- "$args0" "$args1" "$args2" "$args3" ;;
+145:         (5) set -- "$args0" "$args1" "$args2" "$args3" "$args4" ;;
+146:         (6) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" ;;
+147:         (7) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" ;;
+148:         (8) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7" ;;
+149:         (9) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7" "$args8" ;;
+150:     esac
+151: fi
+152: 
+153: # Split up the JVM_OPTS And GRADLE_OPTS values into an array, following the shell quoting and substitution rules
+154: function splitJvmOpts() {
+155:     JVM_OPTS=("$@")
+156: }
+157: eval splitJvmOpts $DEFAULT_JVM_OPTS $JAVA_OPTS $GRADLE_OPTS
+158: JVM_OPTS[${#JVM_OPTS[*]}]="-Dorg.gradle.appname=$APP_BASE_NAME"
+159: 
+160: exec "$JAVACMD" "${JVM_OPTS[@]}" -classpath "$CLASSPATH" org.gradle.wrapper.GradleWrapperMain "$@"
+
+================
+File: gateway-service/gradlew.bat
+================
+ 1: @if "%DEBUG%" == "" @echo off
+ 2: @rem ##########################################################################
+ 3: @rem
+ 4: @rem  Gradle startup script for Windows
+ 5: @rem
+ 6: @rem ##########################################################################
+ 7: 
+ 8: @rem Set local scope for the variables with windows NT shell
+ 9: if "%OS%"=="Windows_NT" setlocal
+10: 
+11: @rem Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
+12: set DEFAULT_JVM_OPTS=
+13: 
+14: set DIRNAME=%~dp0
+15: if "%DIRNAME%" == "" set DIRNAME=.
+16: set APP_BASE_NAME=%~n0
+17: set APP_HOME=%DIRNAME%
+18: 
+19: @rem Find java.exe
+20: if defined JAVA_HOME goto findJavaFromJavaHome
+21: 
+22: set JAVA_EXE=java.exe
+23: %JAVA_EXE% -version >NUL 2>&1
+24: if "%ERRORLEVEL%" == "0" goto init
+25: 
+26: echo.
+27: echo ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
+28: echo.
+29: echo Please set the JAVA_HOME variable in your environment to match the
+30: echo location of your Java installation.
+31: 
+32: goto fail
+33: 
+34: :findJavaFromJavaHome
+35: set JAVA_HOME=%JAVA_HOME:"=%
+36: set JAVA_EXE=%JAVA_HOME%/bin/java.exe
+37: 
+38: if exist "%JAVA_EXE%" goto init
+39: 
+40: echo.
+41: echo ERROR: JAVA_HOME is set to an invalid directory: %JAVA_HOME%
+42: echo.
+43: echo Please set the JAVA_HOME variable in your environment to match the
+44: echo location of your Java installation.
+45: 
+46: goto fail
+47: 
+48: :init
+49: @rem Get command-line arguments, handling Windowz variants
+50: 
+51: if not "%OS%" == "Windows_NT" goto win9xME_args
+52: if "%@eval[2+2]" == "4" goto 4NT_args
+53: 
+54: :win9xME_args
+55: @rem Slurp the command line arguments.
+56: set CMD_LINE_ARGS=
+57: set _SKIP=2
+58: 
+59: :win9xME_args_slurp
+60: if "x%~1" == "x" goto execute
+61: 
+62: set CMD_LINE_ARGS=%*
+63: goto execute
+64: 
+65: :4NT_args
+66: @rem Get arguments from the 4NT Shell from JP Software
+67: set CMD_LINE_ARGS=%$
+68: 
+69: :execute
+70: @rem Setup the command line
+71: 
+72: set CLASSPATH=%APP_HOME%\gradle\wrapper\gradle-wrapper.jar
+73: 
+74: @rem Execute Gradle
+75: "%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %GRADLE_OPTS% "-Dorg.gradle.appname=%APP_BASE_NAME%" -classpath "%CLASSPATH%" org.gradle.wrapper.GradleWrapperMain %CMD_LINE_ARGS%
+76: 
+77: :end
+78: @rem End local scope for the variables with windows NT shell
+79: if "%ERRORLEVEL%"=="0" goto mainEnd
+80: 
+81: :fail
+82: rem Set variable GRADLE_EXIT_CONSOLE if you need the _script_ return code instead of
+83: rem the _cmd.exe /c_ return code!
+84: if  not "" == "%GRADLE_EXIT_CONSOLE%" exit 1
+85: exit /b 1
+86: 
+87: :mainEnd
+88: if "%OS%"=="Windows_NT" endlocal
+89: 
+90: :omega
+
+================
+File: gateway-service/src/main/docker/Dockerfile
+================
+1: FROM frolvlad/alpine-oraclejdk8:slim
+2: VOLUME /tmp
+3: EXPOSE 8080
+4: ADD gateway-service.jar app.jar
+5: RUN sh -c 'touch /app.jar'
+6: ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+
+================
+File: gateway-service/src/main/java/com/soagrowers/GatewayServiceApplication.java
+================
+ 1: package com.soagrowers;
+ 2: import com.soagrowers.prefilters.SimpleLoggingPreFilter;
+ 3: import org.springframework.boot.SpringApplication;
+ 4: import org.springframework.boot.autoconfigure.SpringBootApplication;
+ 5: import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+ 6: import org.springframework.context.annotation.Bean;
+ 7: @EnableZuulProxy
+ 8: @SpringBootApplication
+ 9: public class GatewayServiceApplication {
+10:     @Bean
+11:     public SimpleLoggingPreFilter simplePreFilter() {
+12:         return new SimpleLoggingPreFilter();
+13:     }
+14:     public static void main(String[] args) {
+15:         SpringApplication.run(GatewayServiceApplication.class, args);
+16:     }
+17: }
+
+================
+File: gateway-service/src/main/java/com/soagrowers/prefilters/SimpleLoggingPreFilter.java
+================
+ 1: package com.soagrowers.prefilters;
+ 2: import com.netflix.zuul.ZuulFilter;
+ 3: import com.netflix.zuul.context.RequestContext;
+ 4: import org.slf4j.Logger;
+ 5: import org.slf4j.LoggerFactory;
+ 6: import javax.servlet.http.HttpServletRequest;
+ 7: public class SimpleLoggingPreFilter extends ZuulFilter {
+ 8:     private static Logger log = LoggerFactory.getLogger(SimpleLoggingPreFilter.class);
+ 9:     @Override
+10:     public String filterType() {
+11:         return "pre";
+12:     }
+13:     @Override
+14:     public int filterOrder() {
+15:         return 1;
+16:     }
+17:     @Override
+18:     public boolean shouldFilter() {
+19:         return true;
+20:     }
+21:     @Override
+22:     public Object run() {
+23:         RequestContext ctx = RequestContext.getCurrentContext();
+24:         HttpServletRequest request = ctx.getRequest();
+25:         log.debug("{} request to {}", request.getMethod(), request.getRequestURL().toString());
+26:         return null;
+27:     }
+28: }
+
+================
+File: gateway-service/src/main/resources/banner.txt
+================
+1: .,-:::::/   :::. ::::::::::::.,::::::
+2: ,;;-'````'    ;;`;;;;;;;;;;'''';;;;''''
+3: [[[   [[[[[[/,[[ '[[,   [[      [[cccc
+4: "$$c.    "$$c$$$cc$$$c  $$      $$""""
+5:  `Y8bo,,,o88o888   888, 88,     888oo,__
+6:    `'YMUP"YMMYMM   ""`  MMM     """"YUMMM
+
+================
+File: gateway-service/src/main/resources/bootstrap-production.yml
+================
+ 1: server:
+ 2:   port: 8080
+ 3: spring:
+ 4:   application:
+ 5:     name: gateway-service
+ 6:   cloud:
+ 7:     config:
+ 8:       uri: http://config:8888
+ 9:       failFast: true
+10:       retry:
+11:         initialInterval: 2000
+12:         maxAttempts: 30
+
+================
+File: gateway-service/src/main/resources/bootstrap.yml
+================
+ 1: server:
+ 2:   port: 8080
+ 3: spring:
+ 4:   application:
+ 5:     name: gateway-service
+ 6:   cloud:
+ 7:     config:
+ 8:       uri: http://config:8888
+ 9:       failFast: true
+10:       retry:
+11:         initialInterval: 2000
+12:         maxAttempts: 30
+
+================
+File: gradle/wrapper/gradle-wrapper.properties
+================
+1: #Wed Jun 08 16:04:54 BST 2016
+2: distributionBase=GRADLE_USER_HOME
+3: distributionPath=wrapper/dists
+4: zipStoreBase=GRADLE_USER_HOME
+5: zipStorePath=wrapper/dists
+6: distributionUrl=https\://services.gradle.org/distributions/gradle-2.3-bin.zip
+
+================
+File: gradlew
+================
+  1: #!/usr/bin/env bash
+  2: 
+  3: ##############################################################################
+  4: ##
+  5: ##  Gradle start up script for UN*X
+  6: ##
+  7: ##############################################################################
+  8: 
+  9: # Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
+ 10: DEFAULT_JVM_OPTS=""
+ 11: 
+ 12: APP_NAME="Gradle"
+ 13: APP_BASE_NAME=`basename "$0"`
+ 14: 
+ 15: # Use the maximum available, or set MAX_FD != -1 to use that value.
+ 16: MAX_FD="maximum"
+ 17: 
+ 18: warn ( ) {
+ 19:     echo "$*"
+ 20: }
+ 21: 
+ 22: die ( ) {
+ 23:     echo
+ 24:     echo "$*"
+ 25:     echo
+ 26:     exit 1
+ 27: }
+ 28: 
+ 29: # OS specific support (must be 'true' or 'false').
+ 30: cygwin=false
+ 31: msys=false
+ 32: darwin=false
+ 33: case "`uname`" in
+ 34:   CYGWIN* )
+ 35:     cygwin=true
+ 36:     ;;
+ 37:   Darwin* )
+ 38:     darwin=true
+ 39:     ;;
+ 40:   MINGW* )
+ 41:     msys=true
+ 42:     ;;
+ 43: esac
+ 44: 
+ 45: # Attempt to set APP_HOME
+ 46: # Resolve links: $0 may be a link
+ 47: PRG="$0"
+ 48: # Need this for relative symlinks.
+ 49: while [ -h "$PRG" ] ; do
+ 50:     ls=`ls -ld "$PRG"`
+ 51:     link=`expr "$ls" : '.*-> \(.*\)$'`
+ 52:     if expr "$link" : '/.*' > /dev/null; then
+ 53:         PRG="$link"
+ 54:     else
+ 55:         PRG=`dirname "$PRG"`"/$link"
+ 56:     fi
+ 57: done
+ 58: SAVED="`pwd`"
+ 59: cd "`dirname \"$PRG\"`/" >/dev/null
+ 60: APP_HOME="`pwd -P`"
+ 61: cd "$SAVED" >/dev/null
+ 62: 
+ 63: CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
+ 64: 
+ 65: # Determine the Java command to use to start the JVM.
+ 66: if [ -n "$JAVA_HOME" ] ; then
+ 67:     if [ -x "$JAVA_HOME/jre/sh/java" ] ; then
+ 68:         # IBM's JDK on AIX uses strange locations for the executables
+ 69:         JAVACMD="$JAVA_HOME/jre/sh/java"
+ 70:     else
+ 71:         JAVACMD="$JAVA_HOME/bin/java"
+ 72:     fi
+ 73:     if [ ! -x "$JAVACMD" ] ; then
+ 74:         die "ERROR: JAVA_HOME is set to an invalid directory: $JAVA_HOME
+ 75: 
+ 76: Please set the JAVA_HOME variable in your environment to match the
+ 77: location of your Java installation."
+ 78:     fi
+ 79: else
+ 80:     JAVACMD="java"
+ 81:     which java >/dev/null 2>&1 || die "ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
+ 82: 
+ 83: Please set the JAVA_HOME variable in your environment to match the
+ 84: location of your Java installation."
+ 85: fi
+ 86: 
+ 87: # Increase the maximum file descriptors if we can.
+ 88: if [ "$cygwin" = "false" -a "$darwin" = "false" ] ; then
+ 89:     MAX_FD_LIMIT=`ulimit -H -n`
+ 90:     if [ $? -eq 0 ] ; then
+ 91:         if [ "$MAX_FD" = "maximum" -o "$MAX_FD" = "max" ] ; then
+ 92:             MAX_FD="$MAX_FD_LIMIT"
+ 93:         fi
+ 94:         ulimit -n $MAX_FD
+ 95:         if [ $? -ne 0 ] ; then
+ 96:             warn "Could not set maximum file descriptor limit: $MAX_FD"
+ 97:         fi
+ 98:     else
+ 99:         warn "Could not query maximum file descriptor limit: $MAX_FD_LIMIT"
+100:     fi
+101: fi
+102: 
+103: # For Darwin, add options to specify how the application appears in the dock
+104: if $darwin; then
+105:     GRADLE_OPTS="$GRADLE_OPTS \"-Xdock:name=$APP_NAME\" \"-Xdock:icon=$APP_HOME/media/gradle.icns\""
+106: fi
+107: 
+108: # For Cygwin, switch paths to Windows format before running java
+109: if $cygwin ; then
+110:     APP_HOME=`cygpath --path --mixed "$APP_HOME"`
+111:     CLASSPATH=`cygpath --path --mixed "$CLASSPATH"`
+112:     JAVACMD=`cygpath --unix "$JAVACMD"`
+113: 
+114:     # We build the pattern for arguments to be converted via cygpath
+115:     ROOTDIRSRAW=`find -L / -maxdepth 1 -mindepth 1 -type d 2>/dev/null`
+116:     SEP=""
+117:     for dir in $ROOTDIRSRAW ; do
+118:         ROOTDIRS="$ROOTDIRS$SEP$dir"
+119:         SEP="|"
+120:     done
+121:     OURCYGPATTERN="(^($ROOTDIRS))"
+122:     # Add a user-defined pattern to the cygpath arguments
+123:     if [ "$GRADLE_CYGPATTERN" != "" ] ; then
+124:         OURCYGPATTERN="$OURCYGPATTERN|($GRADLE_CYGPATTERN)"
+125:     fi
+126:     # Now convert the arguments - kludge to limit ourselves to /bin/sh
+127:     i=0
+128:     for arg in "$@" ; do
+129:         CHECK=`echo "$arg"|egrep -c "$OURCYGPATTERN" -`
+130:         CHECK2=`echo "$arg"|egrep -c "^-"`                                 ### Determine if an option
+131: 
+132:         if [ $CHECK -ne 0 ] && [ $CHECK2 -eq 0 ] ; then                    ### Added a condition
+133:             eval `echo args$i`=`cygpath --path --ignore --mixed "$arg"`
+134:         else
+135:             eval `echo args$i`="\"$arg\""
+136:         fi
+137:         i=$((i+1))
+138:     done
+139:     case $i in
+140:         (0) set -- ;;
+141:         (1) set -- "$args0" ;;
+142:         (2) set -- "$args0" "$args1" ;;
+143:         (3) set -- "$args0" "$args1" "$args2" ;;
+144:         (4) set -- "$args0" "$args1" "$args2" "$args3" ;;
+145:         (5) set -- "$args0" "$args1" "$args2" "$args3" "$args4" ;;
+146:         (6) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" ;;
+147:         (7) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" ;;
+148:         (8) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7" ;;
+149:         (9) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7" "$args8" ;;
+150:     esac
+151: fi
+152: 
+153: # Split up the JVM_OPTS And GRADLE_OPTS values into an array, following the shell quoting and substitution rules
+154: function splitJvmOpts() {
+155:     JVM_OPTS=("$@")
+156: }
+157: eval splitJvmOpts $DEFAULT_JVM_OPTS $JAVA_OPTS $GRADLE_OPTS
+158: JVM_OPTS[${#JVM_OPTS[*]}]="-Dorg.gradle.appname=$APP_BASE_NAME"
+159: 
+160: exec "$JAVACMD" "${JVM_OPTS[@]}" -classpath "$CLASSPATH" org.gradle.wrapper.GradleWrapperMain "$@"
+
+================
+File: gradlew.bat
+================
+ 1: @if "%DEBUG%" == "" @echo off
+ 2: @rem ##########################################################################
+ 3: @rem
+ 4: @rem  Gradle startup script for Windows
+ 5: @rem
+ 6: @rem ##########################################################################
+ 7: 
+ 8: @rem Set local scope for the variables with windows NT shell
+ 9: if "%OS%"=="Windows_NT" setlocal
+10: 
+11: @rem Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
+12: set DEFAULT_JVM_OPTS=
+13: 
+14: set DIRNAME=%~dp0
+15: if "%DIRNAME%" == "" set DIRNAME=.
+16: set APP_BASE_NAME=%~n0
+17: set APP_HOME=%DIRNAME%
+18: 
+19: @rem Find java.exe
+20: if defined JAVA_HOME goto findJavaFromJavaHome
+21: 
+22: set JAVA_EXE=java.exe
+23: %JAVA_EXE% -version >NUL 2>&1
+24: if "%ERRORLEVEL%" == "0" goto init
+25: 
+26: echo.
+27: echo ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
+28: echo.
+29: echo Please set the JAVA_HOME variable in your environment to match the
+30: echo location of your Java installation.
+31: 
+32: goto fail
+33: 
+34: :findJavaFromJavaHome
+35: set JAVA_HOME=%JAVA_HOME:"=%
+36: set JAVA_EXE=%JAVA_HOME%/bin/java.exe
+37: 
+38: if exist "%JAVA_EXE%" goto init
+39: 
+40: echo.
+41: echo ERROR: JAVA_HOME is set to an invalid directory: %JAVA_HOME%
+42: echo.
+43: echo Please set the JAVA_HOME variable in your environment to match the
+44: echo location of your Java installation.
+45: 
+46: goto fail
+47: 
+48: :init
+49: @rem Get command-line arguments, handling Windowz variants
+50: 
+51: if not "%OS%" == "Windows_NT" goto win9xME_args
+52: if "%@eval[2+2]" == "4" goto 4NT_args
+53: 
+54: :win9xME_args
+55: @rem Slurp the command line arguments.
+56: set CMD_LINE_ARGS=
+57: set _SKIP=2
+58: 
+59: :win9xME_args_slurp
+60: if "x%~1" == "x" goto execute
+61: 
+62: set CMD_LINE_ARGS=%*
+63: goto execute
+64: 
+65: :4NT_args
+66: @rem Get arguments from the 4NT Shell from JP Software
+67: set CMD_LINE_ARGS=%$
+68: 
+69: :execute
+70: @rem Setup the command line
+71: 
+72: set CLASSPATH=%APP_HOME%\gradle\wrapper\gradle-wrapper.jar
+73: 
+74: @rem Execute Gradle
+75: "%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %GRADLE_OPTS% "-Dorg.gradle.appname=%APP_BASE_NAME%" -classpath "%CLASSPATH%" org.gradle.wrapper.GradleWrapperMain %CMD_LINE_ARGS%
+76: 
+77: :end
+78: @rem End local scope for the variables with windows NT shell
+79: if "%ERRORLEVEL%"=="0" goto mainEnd
+80: 
+81: :fail
+82: rem Set variable GRADLE_EXIT_CONSOLE if you need the _script_ return code instead of
+83: rem the _cmd.exe /c_ return code!
+84: if  not "" == "%GRADLE_EXIT_CONSOLE%" exit 1
+85: exit /b 1
+86: 
+87: :mainEnd
+88: if "%OS%"=="Windows_NT" endlocal
+89: 
+90: :omega
+
+================
+File: purge-docker.sh
+================
+1: docker rm -v $(docker ps -a -q -f status=exited)
+2: docker rmi $(docker images -f "dangling=true" -q)
+3: docker volume rm $(docker volume ls -qf dangling=true)
+
+================
+File: query-side/.gitignore
+================
+ 1: # Folders
+ 2: build
+ 3: .gradle
+ 4: .idea
+ 5: 
+ 6: # File Patterns
+ 7: *.class
+ 8: *.iml
+ 9: 
+10: # Mobile Tools for Java (J2ME)
+11: .mtj.tmp/
+12: 
+13: # Package Files #
+14: *.war
+15: *.ear
+16: 
+17: # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+18: hs_err_pid*
+
+================
+File: query-side/build.gradle
+================
+ 1: buildscript {
+ 2:     ext {
+ 3:         springBootVersion = '1.3.5.RELEASE'
+ 4:     }
+ 5:     repositories {
+ 6:         mavenCentral()
+ 7:     }
+ 8:     dependencies {
+ 9:         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+10:         classpath('se.transmode.gradle:gradle-docker:1.2')
+11:     }
+12: }
+13: 
+14: configurations{
+15:     compile.exclude module: "spring-boot-starter-tomcat"
+16: }
+17: 
+18: jar {
+19:     baseName = 'product-query-side'
+20:     archiveName = 'product-query-side.jar'
+21: }
+22: 
+23: group = 'benwilcock'
+24: apply plugin: 'spring-boot'
+25: apply plugin: 'docker'
+26: 
+27: dependencies {
+28:     compile project(':common-things')
+29:     compile("com.h2database:h2")
+30:     compile("org.axonframework:axon-amqp:2.4.3")
+31:     compile("org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}")
+32:     compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+33:     compile("org.springframework.boot:spring-boot-starter-jetty:${springBootVersion}")
+34:     compile("org.springframework.boot:spring-boot-starter-amqp:${springBootVersion}")
+35:     compile("org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}")
+36:     compile("org.springframework.boot:spring-boot-starter-data-rest:${springBootVersion}")
+37:     compile("org.springframework.retry:spring-retry")
+38:     compile("org.springframework.boot:spring-boot-starter-aop:${springBootVersion}")
+39:     compile("org.springframework.cloud:spring-cloud-starter-eureka")
+40:     compile("org.springframework.cloud:spring-cloud-starter-config")
+41:     testCompile("org.springframework.boot:spring-boot-starter-test")
+42: }
+43: 
+44: dependencyManagement {
+45:     imports {
+46:         mavenBom "org.springframework.cloud:spring-cloud-dependencies:Brixton.SR1"
+47:     }
+48: }
+49: 
+50: task wrapper(type: Wrapper) {
+51:     gradleVersion = '2.3'
+52: }
+53: 
+54: task image(type: Docker, dependsOn: assemble){
+55:     push = false
+56:     applicationName = jar.baseName
+57:     dockerfile = file('src/main/docker/Dockerfile')
+58:     doFirst{
+59:         copy {
+60:             from jar
+61:             into stageDir
+62:         }
+63:     }
+64: }
+
+================
+File: query-side/gradle/wrapper/gradle-wrapper.properties
+================
+1: #Wed Jun 01 16:22:56 BST 2016
+2: distributionBase=GRADLE_USER_HOME
+3: distributionPath=wrapper/dists
+4: zipStoreBase=GRADLE_USER_HOME
+5: zipStorePath=wrapper/dists
+6: distributionUrl=https\://services.gradle.org/distributions/gradle-2.3-bin.zip
+
+================
+File: query-side/gradlew
+================
+  1: #!/usr/bin/env bash
+  2: 
+  3: ##############################################################################
+  4: ##
+  5: ##  Gradle start up script for UN*X
+  6: ##
+  7: ##############################################################################
+  8: 
+  9: # Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
+ 10: DEFAULT_JVM_OPTS=""
+ 11: 
+ 12: APP_NAME="Gradle"
+ 13: APP_BASE_NAME=`basename "$0"`
+ 14: 
+ 15: # Use the maximum available, or set MAX_FD != -1 to use that value.
+ 16: MAX_FD="maximum"
+ 17: 
+ 18: warn ( ) {
+ 19:     echo "$*"
+ 20: }
+ 21: 
+ 22: die ( ) {
+ 23:     echo
+ 24:     echo "$*"
+ 25:     echo
+ 26:     exit 1
+ 27: }
+ 28: 
+ 29: # OS specific support (must be 'true' or 'false').
+ 30: cygwin=false
+ 31: msys=false
+ 32: darwin=false
+ 33: case "`uname`" in
+ 34:   CYGWIN* )
+ 35:     cygwin=true
+ 36:     ;;
+ 37:   Darwin* )
+ 38:     darwin=true
+ 39:     ;;
+ 40:   MINGW* )
+ 41:     msys=true
+ 42:     ;;
+ 43: esac
+ 44: 
+ 45: # Attempt to set APP_HOME
+ 46: # Resolve links: $0 may be a link
+ 47: PRG="$0"
+ 48: # Need this for relative symlinks.
+ 49: while [ -h "$PRG" ] ; do
+ 50:     ls=`ls -ld "$PRG"`
+ 51:     link=`expr "$ls" : '.*-> \(.*\)$'`
+ 52:     if expr "$link" : '/.*' > /dev/null; then
+ 53:         PRG="$link"
+ 54:     else
+ 55:         PRG=`dirname "$PRG"`"/$link"
+ 56:     fi
+ 57: done
+ 58: SAVED="`pwd`"
+ 59: cd "`dirname \"$PRG\"`/" >/dev/null
+ 60: APP_HOME="`pwd -P`"
+ 61: cd "$SAVED" >/dev/null
+ 62: 
+ 63: CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
+ 64: 
+ 65: # Determine the Java command to use to start the JVM.
+ 66: if [ -n "$JAVA_HOME" ] ; then
+ 67:     if [ -x "$JAVA_HOME/jre/sh/java" ] ; then
+ 68:         # IBM's JDK on AIX uses strange locations for the executables
+ 69:         JAVACMD="$JAVA_HOME/jre/sh/java"
+ 70:     else
+ 71:         JAVACMD="$JAVA_HOME/bin/java"
+ 72:     fi
+ 73:     if [ ! -x "$JAVACMD" ] ; then
+ 74:         die "ERROR: JAVA_HOME is set to an invalid directory: $JAVA_HOME
+ 75: 
+ 76: Please set the JAVA_HOME variable in your environment to match the
+ 77: location of your Java installation."
+ 78:     fi
+ 79: else
+ 80:     JAVACMD="java"
+ 81:     which java >/dev/null 2>&1 || die "ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
+ 82: 
+ 83: Please set the JAVA_HOME variable in your environment to match the
+ 84: location of your Java installation."
+ 85: fi
+ 86: 
+ 87: # Increase the maximum file descriptors if we can.
+ 88: if [ "$cygwin" = "false" -a "$darwin" = "false" ] ; then
+ 89:     MAX_FD_LIMIT=`ulimit -H -n`
+ 90:     if [ $? -eq 0 ] ; then
+ 91:         if [ "$MAX_FD" = "maximum" -o "$MAX_FD" = "max" ] ; then
+ 92:             MAX_FD="$MAX_FD_LIMIT"
+ 93:         fi
+ 94:         ulimit -n $MAX_FD
+ 95:         if [ $? -ne 0 ] ; then
+ 96:             warn "Could not set maximum file descriptor limit: $MAX_FD"
+ 97:         fi
+ 98:     else
+ 99:         warn "Could not query maximum file descriptor limit: $MAX_FD_LIMIT"
+100:     fi
+101: fi
+102: 
+103: # For Darwin, add options to specify how the application appears in the dock
+104: if $darwin; then
+105:     GRADLE_OPTS="$GRADLE_OPTS \"-Xdock:name=$APP_NAME\" \"-Xdock:icon=$APP_HOME/media/gradle.icns\""
+106: fi
+107: 
+108: # For Cygwin, switch paths to Windows format before running java
+109: if $cygwin ; then
+110:     APP_HOME=`cygpath --path --mixed "$APP_HOME"`
+111:     CLASSPATH=`cygpath --path --mixed "$CLASSPATH"`
+112:     JAVACMD=`cygpath --unix "$JAVACMD"`
+113: 
+114:     # We build the pattern for arguments to be converted via cygpath
+115:     ROOTDIRSRAW=`find -L / -maxdepth 1 -mindepth 1 -type d 2>/dev/null`
+116:     SEP=""
+117:     for dir in $ROOTDIRSRAW ; do
+118:         ROOTDIRS="$ROOTDIRS$SEP$dir"
+119:         SEP="|"
+120:     done
+121:     OURCYGPATTERN="(^($ROOTDIRS))"
+122:     # Add a user-defined pattern to the cygpath arguments
+123:     if [ "$GRADLE_CYGPATTERN" != "" ] ; then
+124:         OURCYGPATTERN="$OURCYGPATTERN|($GRADLE_CYGPATTERN)"
+125:     fi
+126:     # Now convert the arguments - kludge to limit ourselves to /bin/sh
+127:     i=0
+128:     for arg in "$@" ; do
+129:         CHECK=`echo "$arg"|egrep -c "$OURCYGPATTERN" -`
+130:         CHECK2=`echo "$arg"|egrep -c "^-"`                                 ### Determine if an option
+131: 
+132:         if [ $CHECK -ne 0 ] && [ $CHECK2 -eq 0 ] ; then                    ### Added a condition
+133:             eval `echo args$i`=`cygpath --path --ignore --mixed "$arg"`
+134:         else
+135:             eval `echo args$i`="\"$arg\""
+136:         fi
+137:         i=$((i+1))
+138:     done
+139:     case $i in
+140:         (0) set -- ;;
+141:         (1) set -- "$args0" ;;
+142:         (2) set -- "$args0" "$args1" ;;
+143:         (3) set -- "$args0" "$args1" "$args2" ;;
+144:         (4) set -- "$args0" "$args1" "$args2" "$args3" ;;
+145:         (5) set -- "$args0" "$args1" "$args2" "$args3" "$args4" ;;
+146:         (6) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" ;;
+147:         (7) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" ;;
+148:         (8) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7" ;;
+149:         (9) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7" "$args8" ;;
+150:     esac
+151: fi
+152: 
+153: # Split up the JVM_OPTS And GRADLE_OPTS values into an array, following the shell quoting and substitution rules
+154: function splitJvmOpts() {
+155:     JVM_OPTS=("$@")
+156: }
+157: eval splitJvmOpts $DEFAULT_JVM_OPTS $JAVA_OPTS $GRADLE_OPTS
+158: JVM_OPTS[${#JVM_OPTS[*]}]="-Dorg.gradle.appname=$APP_BASE_NAME"
+159: 
+160: exec "$JAVACMD" "${JVM_OPTS[@]}" -classpath "$CLASSPATH" org.gradle.wrapper.GradleWrapperMain "$@"
+
+================
+File: query-side/gradlew.bat
+================
+ 1: @if "%DEBUG%" == "" @echo off
+ 2: @rem ##########################################################################
+ 3: @rem
+ 4: @rem  Gradle startup script for Windows
+ 5: @rem
+ 6: @rem ##########################################################################
+ 7: 
+ 8: @rem Set local scope for the variables with windows NT shell
+ 9: if "%OS%"=="Windows_NT" setlocal
+10: 
+11: @rem Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
+12: set DEFAULT_JVM_OPTS=
+13: 
+14: set DIRNAME=%~dp0
+15: if "%DIRNAME%" == "" set DIRNAME=.
+16: set APP_BASE_NAME=%~n0
+17: set APP_HOME=%DIRNAME%
+18: 
+19: @rem Find java.exe
+20: if defined JAVA_HOME goto findJavaFromJavaHome
+21: 
+22: set JAVA_EXE=java.exe
+23: %JAVA_EXE% -version >NUL 2>&1
+24: if "%ERRORLEVEL%" == "0" goto init
+25: 
+26: echo.
+27: echo ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
+28: echo.
+29: echo Please set the JAVA_HOME variable in your environment to match the
+30: echo location of your Java installation.
+31: 
+32: goto fail
+33: 
+34: :findJavaFromJavaHome
+35: set JAVA_HOME=%JAVA_HOME:"=%
+36: set JAVA_EXE=%JAVA_HOME%/bin/java.exe
+37: 
+38: if exist "%JAVA_EXE%" goto init
+39: 
+40: echo.
+41: echo ERROR: JAVA_HOME is set to an invalid directory: %JAVA_HOME%
+42: echo.
+43: echo Please set the JAVA_HOME variable in your environment to match the
+44: echo location of your Java installation.
+45: 
+46: goto fail
+47: 
+48: :init
+49: @rem Get command-line arguments, handling Windowz variants
+50: 
+51: if not "%OS%" == "Windows_NT" goto win9xME_args
+52: if "%@eval[2+2]" == "4" goto 4NT_args
+53: 
+54: :win9xME_args
+55: @rem Slurp the command line arguments.
+56: set CMD_LINE_ARGS=
+57: set _SKIP=2
+58: 
+59: :win9xME_args_slurp
+60: if "x%~1" == "x" goto execute
+61: 
+62: set CMD_LINE_ARGS=%*
+63: goto execute
+64: 
+65: :4NT_args
+66: @rem Get arguments from the 4NT Shell from JP Software
+67: set CMD_LINE_ARGS=%$
+68: 
+69: :execute
+70: @rem Setup the command line
+71: 
+72: set CLASSPATH=%APP_HOME%\gradle\wrapper\gradle-wrapper.jar
+73: 
+74: @rem Execute Gradle
+75: "%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %GRADLE_OPTS% "-Dorg.gradle.appname=%APP_BASE_NAME%" -classpath "%CLASSPATH%" org.gradle.wrapper.GradleWrapperMain %CMD_LINE_ARGS%
+76: 
+77: :end
+78: @rem End local scope for the variables with windows NT shell
+79: if "%ERRORLEVEL%"=="0" goto mainEnd
+80: 
+81: :fail
+82: rem Set variable GRADLE_EXIT_CONSOLE if you need the _script_ return code instead of
+83: rem the _cmd.exe /c_ return code!
+84: if  not "" == "%GRADLE_EXIT_CONSOLE%" exit 1
+85: exit /b 1
+86: 
+87: :mainEnd
+88: if "%OS%"=="Windows_NT" endlocal
+89: 
+90: :omega
+
+================
+File: query-side/src/main/docker/Dockerfile
+================
+1: FROM frolvlad/alpine-oraclejdk8:slim
+2: VOLUME /tmp
+3: EXPOSE 9090 9091
+4: ADD product-query-side.jar app.jar
+5: RUN sh -c 'touch /app.jar'
+6: ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+
+================
+File: query-side/src/main/java/com/soagrowers/productquery/Application.java
+================
+ 1: package com.soagrowers.productquery;
+ 2: import org.springframework.beans.factory.annotation.Autowired;
+ 3: import org.springframework.beans.factory.annotation.Value;
+ 4: import org.springframework.boot.SpringApplication;
+ 5: import org.springframework.boot.autoconfigure.SpringBootApplication;
+ 6: import org.springframework.boot.orm.jpa.EntityScan;
+ 7: import org.springframework.cloud.client.ServiceInstance;
+ 8: import org.springframework.cloud.client.discovery.DiscoveryClient;
+ 9: import org.springframework.cloud.context.config.annotation.RefreshScope;
+10: import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+11: import org.springframework.web.bind.annotation.RequestMapping;
+12: import org.springframework.web.bind.annotation.RestController;
+13: import java.util.List;
+14: @EnableEurekaClient
+15: @SpringBootApplication
+16: @EntityScan("com.soagrowers.productquery.domain")
+17: public class Application {
+18:     public static void main(String... args) {
+19:         SpringApplication.run(Application.class, args);
+20:     }
+21: }
+22: @RestController
+23: class ServiceInstanceRestController {
+24:     @Autowired
+25:     private DiscoveryClient discoveryClient;
+26:     @Value("${spring.application.name}")
+27:     private String appName;
+28:     @RequestMapping("/instances")
+29:     public List<ServiceInstance> serviceInstancesByApplicationName() {
+30:         return this.discoveryClient.getInstances(appName);
+31:     }
+32: }
+33: @RefreshScope
+34: @RestController
+35: class MessageRestController {
+36:     @Value("${message}")
+37:     private String message;
+38:     @RequestMapping("/message")
+39:     String getMessage() {
+40:         return this.message;
+41:     }
+42: }
+
+================
+File: query-side/src/main/java/com/soagrowers/productquery/configuration/AxonConfiguration.java
+================
+ 1: package com.soagrowers.productquery.configuration;
+ 2: import org.axonframework.contextsupport.spring.AnnotationDriven;
+ 3: import org.axonframework.eventhandling.*;
+ 4: import org.axonframework.eventhandling.amqp.spring.ListenerContainerLifecycleManager;
+ 5: import org.axonframework.eventhandling.amqp.spring.SpringAMQPConsumerConfiguration;
+ 6: import org.axonframework.eventhandling.amqp.spring.SpringAMQPTerminal;
+ 7: import org.axonframework.serializer.json.JacksonSerializer;
+ 8: import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+ 9: import org.springframework.beans.factory.annotation.Autowired;
+10: import org.springframework.beans.factory.annotation.Value;
+11: import org.springframework.context.annotation.Bean;
+12: import org.springframework.context.annotation.Configuration;
+13: import org.springframework.transaction.PlatformTransactionManager;
+14: @Configuration
+15: @AnnotationDriven
+16: class AxonConfiguration {
+17:     private static final String AMQP_CONFIG_KEY = "AMQP.Config";
+18:     @Autowired
+19:     public ConnectionFactory connectionFactory;
+20:     @Autowired
+21:     public PlatformTransactionManager transactionManager;
+22:     @Autowired
+23:     public String uniqueQueueName;
+24:     @Value("${spring.application.terminal}")
+25:     private String terminalName;
+26:     @Bean
+27:     JacksonSerializer axonJsonSerializer() {
+28:         return new JacksonSerializer();
+29:     }
+30:     @Bean
+31:     ListenerContainerLifecycleManager listenerContainerLifecycleManager() {
+32:         ListenerContainerLifecycleManager listenerContainerLifecycleManager = new ListenerContainerLifecycleManager();
+33:         listenerContainerLifecycleManager.setConnectionFactory(connectionFactory);
+34:         return listenerContainerLifecycleManager;
+35:     }
+36:     @Bean
+37:     SpringAMQPConsumerConfiguration springAMQPConsumerConfiguration() {
+38:         SpringAMQPConsumerConfiguration amqpConsumerConfiguration = new SpringAMQPConsumerConfiguration();
+39:         amqpConsumerConfiguration.setTxSize(10);
+40:         amqpConsumerConfiguration.setTransactionManager(transactionManager);
+41:         amqpConsumerConfiguration.setQueueName(uniqueQueueName);
+42:         return amqpConsumerConfiguration;
+43:     }
+44:     @Bean
+45:     SimpleCluster simpleCluster(SpringAMQPConsumerConfiguration springAMQPConsumerConfiguration) {
+46:         SimpleCluster simpleCluster = new SimpleCluster(uniqueQueueName);
+47:         simpleCluster.getMetaData().setProperty(AMQP_CONFIG_KEY, springAMQPConsumerConfiguration);
+48:         return simpleCluster;
+49:     }
+50:     @Bean
+51:     EventBusTerminal terminal() {
+52:         SpringAMQPTerminal terminal = new SpringAMQPTerminal();
+53:         terminal.setConnectionFactory(connectionFactory);
+54:         terminal.setSerializer(axonJsonSerializer());
+55:         terminal.setExchangeName(terminalName);
+56:         terminal.setListenerContainerLifecycleManager(listenerContainerLifecycleManager());
+57:         terminal.setDurable(true);
+58:         terminal.setTransactional(true);
+59:         return terminal;
+60:     }
+61:     @Bean
+62:     EventBus eventBus(SimpleCluster simpleCluster) {
+63:         return new ClusteringEventBus(new DefaultClusterSelector(simpleCluster), terminal());
+64:     }
+65: }
+
+================
+File: query-side/src/main/java/com/soagrowers/productquery/configuration/RabbitConfiguration.java
+================
+ 1: package com.soagrowers.productquery.configuration;
+ 2: import org.axonframework.contextsupport.spring.AnnotationDriven;
+ 3: import org.springframework.amqp.core.Binding;
+ 4: import org.springframework.amqp.core.FanoutExchange;
+ 5: import org.springframework.amqp.core.Queue;
+ 6: import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
+ 7: import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+ 8: import org.springframework.amqp.rabbit.core.RabbitAdmin;
+ 9: import org.springframework.beans.factory.annotation.Required;
+10: import org.springframework.beans.factory.annotation.Value;
+11: import org.springframework.context.annotation.Bean;
+12: import org.springframework.context.annotation.Configuration;
+13: @Configuration
+14: @AnnotationDriven
+15: public class RabbitConfiguration {
+16:     @Value("${spring.rabbitmq.hostname}")
+17:     private String hostname;
+18:     @Value("${spring.rabbitmq.username}")
+19:     private String username;
+20:     @Value("${spring.rabbitmq.password}")
+21:     private String password;
+22:     @Value("${spring.application.exchange}")
+23:     private String exchangeName;
+24:     @Value("${spring.application.queue}")
+25:     private String queueName;
+26:     @Value("${spring.application.index}")
+27:     private Integer index;
+28:     @Bean
+29:     public String uniqueQueueName() {
+30:         return queueName + "." + index;
+31:     }
+32:     @Bean
+33:     Queue eventStream(String uniqueQueueName) {
+34:         return new Queue(uniqueQueueName, false, false, true);
+35:     }
+36:     @Bean
+37:     FanoutExchange eventBusExchange() {
+38:         return new FanoutExchange(exchangeName, true, false);
+39:     }
+40:     @Bean
+41:     Binding binding(String uniqueQueueName) {
+42:         return new Binding(uniqueQueueName, Binding.DestinationType.QUEUE, exchangeName, "*.*", null);
+43:     }
+44:     @Bean
+45:     ConnectionFactory connectionFactory() {
+46:         CachingConnectionFactory connectionFactory = new CachingConnectionFactory(hostname);
+47:         connectionFactory.setUsername(username);
+48:         connectionFactory.setPassword(password);
+49:         return connectionFactory;
+50:     }
+51:     @Bean
+52:     @Required
+53:     RabbitAdmin rabbitAdmin(String uniqueQueueName) {
+54:         RabbitAdmin admin = new RabbitAdmin(connectionFactory());
+55:         admin.setAutoStartup(true);
+56:         admin.declareExchange(eventBusExchange());
+57:         admin.declareQueue(eventStream(uniqueQueueName));
+58:         admin.declareBinding(binding(uniqueQueueName));
+59:         return admin;
+60:     }
+61: }
+
+================
+File: query-side/src/main/java/com/soagrowers/productquery/domain/Product.java
+================
+ 1: package com.soagrowers.productquery.domain;
+ 2: import javax.persistence.Entity;
+ 3: import javax.persistence.Id;
+ 4: @Entity
+ 5: public class Product {
+ 6:     @Id
+ 7:     private String id;
+ 8:     private String name;
+ 9:     private boolean saleable;
+10:     public Product() {
+11:     }
+12:     public Product(String id, String name, boolean saleable) {
+13:         this.id = id;
+14:         this.name = name;
+15:         this.saleable = saleable;
+16:     }
+17:     public String getId() {
+18:         return id;
+19:     }
+20:     public void setId(String id) {
+21:         this.id = id;
+22:     }
+23:     public String getName() {
+24:         return name;
+25:     }
+26:     public void setName(String name) {
+27:         this.name = name;
+28:     }
+29:     public boolean isSaleable() {
+30:         return saleable;
+31:     }
+32:     public void setSaleable(boolean saleable) {
+33:         this.saleable = saleable;
+34:     }
+35: }
+
+================
+File: query-side/src/main/java/com/soagrowers/productquery/handlers/EventLoggingHandler.java
+================
+ 1: package com.soagrowers.productquery.handlers;
+ 2: import com.soagrowers.productevents.events.ProductAddedEvent;
+ 3: import com.soagrowers.productevents.events.ProductSaleableEvent;
+ 4: import com.soagrowers.productevents.events.ProductUnsaleableEvent;
+ 5: import org.axonframework.eventhandling.annotation.EventHandler;
+ 6: import org.slf4j.Logger;
+ 7: import org.slf4j.LoggerFactory;
+ 8: import org.springframework.beans.factory.annotation.Value;
+ 9: import org.springframework.stereotype.Component;
+10: @Component
+11: public class EventLoggingHandler {
+12:     private static final Logger LOG = LoggerFactory.getLogger(EventLoggingHandler.class);
+13:     @Value("${spring.application.index}")
+14:     private Integer indexId;
+15:     @EventHandler
+16:     public void handle(ProductAddedEvent event) {
+17:         LOG.debug("Instance:[{}] Event:{} Id:{} Name:'{}'", indexId, event.getClass().getSimpleName(), event.getId(), event.getName());
+18:     }
+19:     @EventHandler
+20:     public void handle(ProductSaleableEvent event) {
+21:         LOG.debug("Instance:[{}] Event:{} Id:{}", indexId, event.getClass().getSimpleName(), event.getId());
+22:     }
+23:     @EventHandler
+24:     public void handle(ProductUnsaleableEvent event) {
+25:         LOG.debug("Instance:[{}] Event:{} Id:{}", indexId, event.getClass().getSimpleName(), event.getId());
+26:     }
+27: }
+
+================
+File: query-side/src/main/java/com/soagrowers/productquery/handlers/ProductViewEventHandler.java
+================
+ 1: package com.soagrowers.productquery.handlers;
+ 2: import com.soagrowers.productevents.events.ProductAddedEvent;
+ 3: import com.soagrowers.productevents.events.ProductSaleableEvent;
+ 4: import com.soagrowers.productevents.events.ProductUnsaleableEvent;
+ 5: import com.soagrowers.productquery.domain.Product;
+ 6: import com.soagrowers.productquery.repository.ProductRepository;
+ 7: import org.axonframework.eventhandling.annotation.EventHandler;
+ 8: import org.axonframework.eventhandling.replay.ReplayAware;
+ 9: import org.slf4j.Logger;
+10: import org.slf4j.LoggerFactory;
+11: import org.springframework.beans.factory.annotation.Autowired;
+12: import org.springframework.stereotype.Component;
+13: @Component
+14: public class ProductViewEventHandler implements ReplayAware {
+15:     private static final Logger LOG = LoggerFactory.getLogger(ProductViewEventHandler.class);
+16:     @Autowired
+17:     private ProductRepository productRepository;
+18:     @EventHandler
+19:     public void handle(ProductAddedEvent event) {
+20:         LOG.info("ProductAddedEvent: [{}] '{}'", event.getId(), event.getName());
+21:         productRepository.save(new Product(event.getId(), event.getName(), false));
+22:     }
+23:     @EventHandler
+24:     public void handle(ProductSaleableEvent event) {
+25:         LOG.info("ProductSaleableEvent: [{}]", event.getId());
+26:         if (productRepository.exists(event.getId())) {
+27:             Product product = productRepository.findOne(event.getId());
+28:             if (!product.isSaleable()) {
+29:                 product.setSaleable(true);
+30:                 productRepository.save(product);
+31:             }
+32:         }
+33:     }
+34:     @EventHandler
+35:     public void handle(ProductUnsaleableEvent event) {
+36:         LOG.info("ProductUnsaleableEvent: [{}]", event.getId());
+37:         if (productRepository.exists(event.getId())) {
+38:             Product product = productRepository.findOne(event.getId());
+39:             if (product.isSaleable()) {
+40:                 product.setSaleable(false);
+41:                 productRepository.save(product);
+42:             }
+43:         }
+44:     }
+45:     public void beforeReplay() {
+46:         LOG.info("Event Replay is about to START. Clearing the View...");
+47:     }
+48:     public void afterReplay() {
+49:         LOG.info("Event Replay has FINISHED.");
+50:     }
+51:     public void onReplayFailed(Throwable cause) {
+52:         LOG.error("Event Replay has FAILED.");
+53:     }
+54: }
+
+================
+File: query-side/src/main/java/com/soagrowers/productquery/repository/ProductRepository.java
+================
+ 1: package com.soagrowers.productquery.repository;
+ 2: import com.soagrowers.productquery.domain.Product;
+ 3: import org.springframework.data.repository.query.Param;
+ 4: import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+ 5: import java.util.List;
+ 6: @SuppressWarnings("unchecked")
+ 7: @RepositoryRestResource(collectionResourceRel = "products", path = "products")
+ 8: public interface ProductRepository extends ReadOnlyPagingAndSortingRepository {
+ 9:     public List<Product> findBySaleable(@Param("saleable") boolean saleable);
+10: }
+
+================
+File: query-side/src/main/java/com/soagrowers/productquery/repository/ReadOnlyPagingAndSortingRepository.java
+================
+ 1: package com.soagrowers.productquery.repository;
+ 2: import com.soagrowers.productquery.domain.Product;
+ 3: import org.springframework.data.repository.NoRepositoryBean;
+ 4: import org.springframework.data.repository.PagingAndSortingRepository;
+ 5: import org.springframework.data.rest.core.annotation.RestResource;
+ 6: @NoRepositoryBean
+ 7: public interface ReadOnlyPagingAndSortingRepository extends PagingAndSortingRepository<Product, String> {
+ 8:     @Override
+ 9:     @SuppressWarnings("unchecked")
+10:     @RestResource(exported = false)
+11:     Product save(Product entity);
+12:     @Override
+13:     @RestResource(exported = false)
+14:     void delete(String aLong);
+15:     @Override
+16:     @RestResource(exported = false)
+17:     void delete(Product entity);
+18: }
+
+================
+File: query-side/src/main/resources/banner.txt
+================
+1: .::::::.  :::::::...-:.     ::-.
+2: ,;;'```';;,;;;;``;;;;';;.   ;;;;'
+3: [[[     [[[\[[[,/[[['  '[[,[[['
+4: "$$c  cc$$$"$$$$$$c      c$$"
+5:  "*8bo,Y88b,888b "88bo,,8P"`
+6:    "*YP" "M"MMMM   "W"mM"
+
+================
+File: query-side/src/main/resources/bootstrap-production.yml
+================
+ 1: server:
+ 2:   port: 9001
+ 3: spring:
+ 4:   application:
+ 5:     name: product-query-side
+ 6:     index: ${random.int[1024,4096]}
+ 7:   cloud:
+ 8:     config:
+ 9:       uri: http://config:8888
+10:       failFast: true
+11:       retry:
+12:         initialInterval: 2000
+13:         maxAttempts: 30
+
+================
+File: query-side/src/main/resources/bootstrap.yml
+================
+ 1: server:
+ 2:   port: 9001
+ 3: spring:
+ 4:   application:
+ 5:     name: product-query-side
+ 6:     index: ${random.int[1024,4096]}
+ 7:   cloud:
+ 8:     config:
+ 9:       uri: http://localhost:8888
+10:       failFast: true
+11:       retry:
+12:         initialInterval: 2000
+13:         maxAttempts: 30
+
+================
+File: repomix.config.json
+================
+  1: {
+  2:   "$schema": "https://repomix.com/schemas/latest/schema.json",
+  3:   "input": {
+  4:     "maxFileSize": 52428800
+  5:   },
+  6:   "output": {
+  7:     "filePath": "repo_scan.txt",
+  8:     "style": "plain",
+  9:     "parsableStyle": false,
+ 10:     "fileSummary": false,
+ 11:     "directoryStructure": true,
+ 12:     "files": true,
+ 13:     "removeComments": true,
+ 14:     "removeEmptyLines": true,
+ 15:     "compress": false,
+ 16:     "topFilesLength": 5,
+ 17:     "showLineNumbers": true,
+ 18:     "truncateBase64": false,
+ 19:     "copyToClipboard": false,
+ 20:     "includeFullDirectoryStructure": false,
+ 21:     "tokenCountTree": false,
+ 22:     "git": {
+ 23:       "sortByChanges": true,
+ 24:       "sortByChangesMaxCommits": 100,
+ 25:       "includeDiffs": false,
+ 26:       "includeLogs": false,
+ 27:       "includeLogsCount": 50
+ 28:     }
+ 29:   },
+ 30:   "ignore": {
+ 31:     "useGitignore": false,
+ 32:     "useDotIgnore": true,
+ 33:     "useDefaultPatterns": true,
+ 34:     "customPatterns": [
+ 35:       "**/*.png",
+ 36:       "**/*.jpg",
+ 37:       "**/*.jpeg",
+ 38:       "**/*.gif",
+ 39:       "**/*.svg",
+ 40:       "**/*.pdf",
+ 41:       "**/*.ipynb",
+ 42:       "**/*.jar",
+ 43:       "**/*.exe",
+ 44:       "**/*.dll",
+ 45:       "**/*.zip",
+ 46:       "**/*.tar",
+ 47:       "**/*.gz",
+ 48:       "**/*.7z",
+ 49:       "**/*.class",
+ 50:       "**/*.o",
+ 51:       "**/*.so",
+ 52:       "**/*.dylib",
+ 53:       "**/*.bin",
+ 54:       "**/*.npy",
+ 55:       "**/*.pickle",
+ 56:       "**/*.pb",
+ 57:       "**/*.index",
+ 58:       "**/*.min.js",
+ 59:       "**/*.min.css",
+ 60:       "**/*.map",
+ 61:       "**/*.woff",
+ 62:       "**/*.woff2",
+ 63:       "**/*.ttf",
+ 64:       "**/*.eot",
+ 65:       "**/*.otf",
+ 66:       "**/.idea/**",
+ 67:       "**/.vscode/**",
+ 68:       "**/*.iml",
+ 69:       "**/.DS_Store",
+ 70:       "**/__pycache__/**",
+ 71:       "**/.pytest_cache/**",
+ 72:       "**/.cache/**",
+ 73:       //"**/.gradle/**",
+ 74:       //"**/.mvn/**",
+ 75:       "node_modules/**/*",
+ 76:       "build/**/*",
+ 77:       "dist/**/*",
+ 78:       "**/target/**",
+ 79:       "**/out/**",
+ 80:       "**/bin/**",
+ 81:       "**/static/lib/**",
+ 82:       "**/static/vendor/**",
+ 83:       "**/vendor/**",
+ 84:       "**/bower_components/**",
+ 85:       "**/src/main/resources/static/**/bootstrap/**",
+ 86:       "**/microsec-test/**",
+ 87:       "tests/**/*",
+ 88:       "**/tests/**",
+ 89:       "**/test/**",
+ 90:       "**/testing/**",
+ 91:       "**/__tests__/**",
+ 92:       "**/src/test/**",
+ 93:       "**/src/**/test/**",
+ 94:       "**/*-test/**",
+ 95:       "**/*_test/**",
+ 96:       "**/test-*/**",
+ 97:       "**/tests-*/**",
+ 98:       "**/*.log",
+ 99:       "**/*.patch",
+100:       "**/*.bak",
+101:       "**/*.swp",
+102:       "**/*.tmp",
+103:       "**/coverage/**",
+104:       "**/.nyc_output/**",
+105:       "**/surefire-reports/**",
+106:       "**/failsafe-reports/**",
+107:       "**/*.md",
+108:       "**/*.adoc",
+109:       "**/*.rst",
+110:       "**/*/cnn/**/*",
+111:       "**/package-lock.json",
+112:       "**/yarn.lock",
+113:       "**/pnpm-lock.yaml",
+114:       "**/*.spec.ts",
+115:       "**/*.test.ts",
+116:       "**/*.spec.js",
+117:       "**/*.test.js",
+118:       "**/*Test.java",
+119:       "**/*Tests.java",
+120:       "**/*IT.java"
+121:     ]
+122:   },
+123:   "security": {
+124:     "enableSecurityCheck": false
+125:   },
+126:   "tokenCount": {
+127:     "encoding": "o200k_base"
+128:   }
+129: }
+
+================
+File: settings.gradle
+================
+1: include "common-things", "command-side", "query-side", "integration-test", "discovery-service", "config-service", "gateway-service"
+
+================
+File: wip.yml
+================
+ 1: version: '2'
+ 2: services:
+ 3:   mongodb:
+ 4:     image: mongo:2.4
+ 5:     container_name: mongodb
+ 6:     ports:
+ 7:      - "27017:27017"
+ 8:   rabbitmq:
+ 9:     image: rabbitmq:3-management
+10:     container_name: rabbitmq
+11:     ports:
+12:      - "5672:5672"
+13:      - "15672:15672"
+14:     environment:
+15:      - RABBITMQ_DEFAULT_USER=test
+16:      - RABBITMQ_DEFAULT_PASS=password
+17:   config:
+18:     image: benwilcock/config-service
+19:     container_name: config
+20:     ports:
+21:      - "8888:8888"
+22:     environment:
+23:      - SPRING_PROFILES_ACTIVE=production
+24:     depends_on:
+25:      - mongodb
+26:      - rabbitmq
+27:   discovery:
+28:     image: benwilcock/discovery-service
+29:     container_name: discovery
+30:     ports:
+31:      - "8761:8761"
+32:   gateway:
+33:     image: benwilcock/gateway-service
+34:     container_name: gateway
+35:     ports:
+36:      - "8080:8080"
+37:     environment:
+38:      - SPRING_PROFILES_ACTIVE=production
+39:     depends_on:
+40:      - discovery
+41:      - config
+42:   product-command-side:
+43:     image: benwilcock/product-command-side:latest
+44:     container_name: product-cmd-side
+45:     depends_on:
+46:      - mongodb
+47:      - rabbitmq
+48:      - discovery
+49:      - config
+50:     ports:
+51:       - "9000"
+52:     environment:
+53:      - SPRING_PROFILES_ACTIVE=production
+54:   product-query-side:
+55:     image: benwilcock/product-query-side:latest
+56:     container_name: product-qry-side
+57:     depends_on:
+58:      - rabbitmq
+59:      - discovery
+60:      - config
+61:     ports:
+62:      - "9001"
+63:     environment:
+64:      - SPRING_PROFILES_ACTIVE=production
+
+
+
+
+
+================================================================
+End of Codebase
+================================================================

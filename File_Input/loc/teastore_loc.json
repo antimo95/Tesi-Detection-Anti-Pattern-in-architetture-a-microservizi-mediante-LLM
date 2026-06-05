@@ -1,0 +1,443 @@
+{
+  "metadata": {
+    "project_path": "D:\\Users\\Desktop\\microservices\\Peggiori\\TeaStore-e93bca736abe5bf92267d0bc61e95fc9198e6014",
+    "project_name": "TeaStore-e93bca736abe5bf92267d0bc61e95fc9198e6014",
+    "extraction_timestamp": "2026-02-16T17:07:59.772445",
+    "extractor_version": "2.1.0"
+  },
+  "microservices": [
+    {
+      "name": "tools.descartes.teastore.auth",
+      "type": "docker",
+      "path": "services\\tools.descartes.teastore.auth",
+      "loc": {
+        "total": 1342,
+        "code": 735,
+        "blank": 175,
+        "comment": 432
+      },
+      "classes_count": 19,
+      "methods_count": 45,
+      "constructors_count": 3,
+      "files_count": 17,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 17
+      },
+      "file_types": {
+        ".java": 17
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://localhost:18080/tools.descartes.teastore.registry/rest/services/",
+        "localhost:18080",
+        "http://www.apache.org/licenses/LICENSE-2.0",
+        "localhost:3000"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "tools.descartes.teastore.database",
+      "type": "docker",
+      "path": "utilities\\tools.descartes.teastore.database",
+      "loc": {
+        "total": 0,
+        "code": 0,
+        "blank": 0,
+        "comment": 0
+      },
+      "classes_count": 0,
+      "methods_count": 0,
+      "constructors_count": 0,
+      "files_count": 0,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {},
+      "file_types": {},
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "tools.descartes.teastore.docker.all",
+      "type": "docker",
+      "path": "utilities\\tools.descartes.teastore.docker.all",
+      "loc": {
+        "total": 0,
+        "code": 0,
+        "blank": 0,
+        "comment": 0
+      },
+      "classes_count": 0,
+      "methods_count": 0,
+      "constructors_count": 0,
+      "files_count": 0,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {},
+      "file_types": {},
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "tools.descartes.teastore.dockerbase",
+      "type": "docker",
+      "path": "utilities\\tools.descartes.teastore.dockerbase",
+      "loc": {
+        "total": 0,
+        "code": 0,
+        "blank": 0,
+        "comment": 0
+      },
+      "classes_count": 0,
+      "methods_count": 0,
+      "constructors_count": 0,
+      "files_count": 0,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {},
+      "file_types": {},
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "tools.descartes.teastore.dockermemoryconfigurator",
+      "type": "maven",
+      "path": "utilities\\tools.descartes.teastore.dockermemoryconfigurator",
+      "loc": {
+        "total": 130,
+        "code": 87,
+        "blank": 16,
+        "comment": 27
+      },
+      "classes_count": 1,
+      "methods_count": 5,
+      "constructors_count": 1,
+      "files_count": 1,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "tools.descartes.teastore.entities",
+      "type": "maven",
+      "path": "interfaces\\tools.descartes.teastore.entities",
+      "loc": {
+        "total": 1382,
+        "code": 575,
+        "blank": 143,
+        "comment": 664
+      },
+      "classes_count": 9,
+      "methods_count": 88,
+      "constructors_count": 15,
+      "files_count": 9,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 9
+      },
+      "file_types": {
+        ".java": 9
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://www.apache.org/licenses/LICENSE-2.0"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "tools.descartes.teastore.image",
+      "type": "docker",
+      "path": "services\\tools.descartes.teastore.image",
+      "loc": {
+        "total": 6703,
+        "code": 3918,
+        "blank": 893,
+        "comment": 1892
+      },
+      "classes_count": 104,
+      "methods_count": 345,
+      "constructors_count": 56,
+      "files_count": 64,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 64
+      },
+      "file_types": {
+        ".java": 64
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://www.apache.org/licenses/LICENSE-2.0"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "tools.descartes.teastore.kieker.probes",
+      "type": "maven",
+      "path": "utilities\\tools.descartes.teastore.kieker.probes",
+      "loc": {
+        "total": 513,
+        "code": 328,
+        "blank": 50,
+        "comment": 135
+      },
+      "classes_count": 4,
+      "methods_count": 19,
+      "constructors_count": 2,
+      "files_count": 3,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 3
+      },
+      "file_types": {
+        ".java": 3
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "tools.descartes.teastore.kieker.rabbitmq",
+      "type": "docker",
+      "path": "utilities\\tools.descartes.teastore.kieker.rabbitmq",
+      "loc": {
+        "total": 428,
+        "code": 248,
+        "blank": 57,
+        "comment": 123
+      },
+      "classes_count": 9,
+      "methods_count": 16,
+      "constructors_count": 3,
+      "files_count": 8,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 8
+      },
+      "file_types": {
+        ".java": 8
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://www.apache.org/licenses/LICENSE-2.0"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "tools.descartes.teastore.persistence",
+      "type": "docker",
+      "path": "services\\tools.descartes.teastore.persistence",
+      "loc": {
+        "total": 5042,
+        "code": 2811,
+        "blank": 555,
+        "comment": 1676
+      },
+      "classes_count": 49,
+      "methods_count": 221,
+      "constructors_count": 14,
+      "files_count": 36,
+      "stereotype_instances": [
+        "entity"
+      ],
+      "stereotype_counts": {
+        "entity": 6
+      },
+      "languages": {
+        "java": 36
+      },
+      "file_types": {
+        ".java": 36
+      },
+      "jpa_tables": [
+        "PersistenceOrder",
+        "PersistenceOrderItem",
+        "PersistenceUser",
+        "DatabaseManagementEntity",
+        "PersistenceProduct",
+        "PersistenceCategory"
+      ],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://www.apache.org/licenses/LICENSE-2.0",
+        "http://localhost:"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "tools.descartes.teastore.recommender",
+      "type": "docker",
+      "path": "services\\tools.descartes.teastore.recommender",
+      "loc": {
+        "total": 5388,
+        "code": 3446,
+        "blank": 423,
+        "comment": 1519
+      },
+      "classes_count": 35,
+      "methods_count": 121,
+      "constructors_count": 11,
+      "files_count": 29,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 29
+      },
+      "file_types": {
+        ".java": 29
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://www.apache.org/licenses/LICENSE-2.0",
+        "http://localhost:"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "tools.descartes.teastore.registry",
+      "type": "docker",
+      "path": "services\\tools.descartes.teastore.registry",
+      "loc": {
+        "total": 608,
+        "code": 321,
+        "blank": 60,
+        "comment": 227
+      },
+      "classes_count": 7,
+      "methods_count": 24,
+      "constructors_count": 4,
+      "files_count": 6,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 6
+      },
+      "file_types": {
+        ".java": 6
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://www.apache.org/licenses/LICENSE-2.0",
+        "http://localhost:"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "tools.descartes.teastore.registryclient",
+      "type": "maven",
+      "path": "utilities\\tools.descartes.teastore.registryclient",
+      "loc": {
+        "total": 4336,
+        "code": 2165,
+        "blank": 420,
+        "comment": 1751
+      },
+      "classes_count": 58,
+      "methods_count": 150,
+      "constructors_count": 24,
+      "files_count": 36,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 36
+      },
+      "file_types": {
+        ".java": 36
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://www.apache.org/licenses/LICENSE-2.0",
+        "http://localhost:"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "tools.descartes.teastore.webui",
+      "type": "docker",
+      "path": "services\\tools.descartes.teastore.webui",
+      "loc": {
+        "total": 5138,
+        "code": 3299,
+        "blank": 979,
+        "comment": 860
+      },
+      "classes_count": 28,
+      "methods_count": 191,
+      "constructors_count": 16,
+      "files_count": 32,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 27,
+        "javascript": 5
+      },
+      "file_types": {
+        ".java": 27,
+        ".js": 5
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "https://github.com/twbs/bootstrap/issues/20280",
+        "http://getbootstrap.com/javascript/#carousel",
+        "localhost:9001",
+        "http://getbootstrap.com/javascript/#tooltip",
+        "http://getbootstrap.com/javascript/#buttons",
+        "http://www.modernizr.com/",
+        "http://getbootstrap.com/javascript/#tabs",
+        "https://github.com/twbs/bootstrap/blob/master/LICENSE",
+        "http://getbootstrap.com/javascript/#scrollspy",
+        "http://localhost:9001/tools.descartes.teastore.registry/rest/services/",
+        "https://github.com/twbs/bootstrap/issues/14093",
+        "http://getbootstrap.com/javascript/#alerts",
+        "http://getbootstrap.com/javascript/#affix",
+        "http://getbootstrap.com/javascript/#transitions",
+        "http://getbootstrap.com/javascript/#popovers",
+        "http://getbootstrap.com/javascript/#collapse",
+        "http://blog.alexmaccaw.com/css-transitions",
+        "http://getbootstrap.com/javascript/#modals",
+        "http://localhost:3000/test/test",
+        "http://www.apache.org/licenses/LICENSE-2.0",
+        "http://getbootstrap.com/javascript/#dropdowns",
+        "http://getbootstrap.com"
+      ],
+      "feign_with_url": false
+    }
+  ],
+  "statistics": {
+    "total_services": 14,
+    "total_files": 241,
+    "total_loc_code": 17933,
+    "total_classes": 323,
+    "total_methods": 1225,
+    "total_constructors": 149
+  }
+}

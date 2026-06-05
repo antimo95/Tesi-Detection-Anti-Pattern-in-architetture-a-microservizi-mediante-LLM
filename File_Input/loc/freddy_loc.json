@@ -1,0 +1,346 @@
+{
+  "metadata": {
+    "project_path": "D:\\Users\\Desktop\\microservices\\Peggiori\\usate\\freddys-bbq-master",
+    "project_name": "freddys-bbq-master",
+    "extraction_timestamp": "2026-02-11T15:30:29.330396",
+    "extractor_version": "2.0.0"
+  },
+  "microservices": [
+    {
+      "name": "microsec-admin-portal",
+      "type": "maven",
+      "path": "microsec-admin-portal",
+      "loc": {
+        "total": 206,
+        "code": 176,
+        "blank": 30,
+        "comment": 0
+      },
+      "classes_count": 2,
+      "methods_count": 16,
+      "constructors_count": 0,
+      "files_count": 2,
+      "stereotype_instances": [
+        "controller"
+      ],
+      "stereotype_counts": {
+        "controller": 1
+      },
+      "languages": {
+        "java": 2
+      },
+      "file_types": {
+        ".java": 2
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "microsec-common",
+      "type": "maven",
+      "path": "microsec-common",
+      "loc": {
+        "total": 471,
+        "code": 379,
+        "blank": 92,
+        "comment": 0
+      },
+      "classes_count": 10,
+      "methods_count": 58,
+      "constructors_count": 1,
+      "files_count": 9,
+      "stereotype_instances": [
+        "configuration",
+        "controller",
+        "entity"
+      ],
+      "stereotype_counts": {
+        "configuration": 3,
+        "controller": 1,
+        "entity": 3
+      },
+      "languages": {
+        "java": 9
+      },
+      "file_types": {
+        ".java": 9
+      },
+      "jpa_tables": [
+        "\\",
+        "MenuItem",
+        "OrderItem"
+      ],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://localhost:8080/uaa"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "microsec-custom-registry",
+      "type": "maven",
+      "path": "microsec-custom-registry",
+      "loc": {
+        "total": 808,
+        "code": 583,
+        "blank": 168,
+        "comment": 57
+      },
+      "classes_count": 15,
+      "methods_count": 78,
+      "constructors_count": 2,
+      "files_count": 15,
+      "stereotype_instances": [
+        "configuration",
+        "component",
+        "controller",
+        "service"
+      ],
+      "stereotype_counts": {
+        "configuration": 3,
+        "component": 2,
+        "controller": 1,
+        "service": 2
+      },
+      "languages": {
+        "java": 15
+      },
+      "file_types": {
+        ".java": 15
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://localhost:8081/oauth/token",
+        "https://blog.codinghorror.com/your-password-is-too-damn-short/"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "microsec-customer-portal",
+      "type": "maven",
+      "path": "microsec-customer-portal",
+      "loc": {
+        "total": 212,
+        "code": 175,
+        "blank": 37,
+        "comment": 0
+      },
+      "classes_count": 4,
+      "methods_count": 17,
+      "constructors_count": 0,
+      "files_count": 3,
+      "stereotype_instances": [
+        "controller"
+      ],
+      "stereotype_counts": {
+        "controller": 1
+      },
+      "languages": {
+        "java": 3
+      },
+      "file_types": {
+        ".java": 3
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://localhost:8080/uaa/oauth/token",
+        "http://localhost:8080/uaa/token_key",
+        "http://localhost:8080/uaa/oauth/authorize"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "microsec-eureka-server",
+      "type": "maven",
+      "path": "microsec-eureka-server",
+      "loc": {
+        "total": 14,
+        "code": 11,
+        "blank": 3,
+        "comment": 0
+      },
+      "classes_count": 1,
+      "methods_count": 1,
+      "constructors_count": 0,
+      "files_count": 1,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "microsec-hystrix-dashboard",
+      "type": "maven",
+      "path": "microsec-hystrix-dashboard",
+      "loc": {
+        "total": 14,
+        "code": 11,
+        "blank": 3,
+        "comment": 0
+      },
+      "classes_count": 1,
+      "methods_count": 1,
+      "constructors_count": 0,
+      "files_count": 1,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "microsec-menu-service",
+      "type": "maven",
+      "path": "microsec-menu-service",
+      "loc": {
+        "total": 166,
+        "code": 121,
+        "blank": 35,
+        "comment": 10
+      },
+      "classes_count": 4,
+      "methods_count": 8,
+      "constructors_count": 0,
+      "files_count": 3,
+      "stereotype_instances": [
+        "entity",
+        "configuration"
+      ],
+      "stereotype_counts": {
+        "entity": 1,
+        "configuration": 1
+      },
+      "languages": {
+        "java": 3
+      },
+      "file_types": {
+        ".java": 3
+      },
+      "jpa_tables": [
+        "MenuApplication"
+      ],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "microsec-order-service",
+      "type": "maven",
+      "path": "microsec-order-service",
+      "loc": {
+        "total": 376,
+        "code": 287,
+        "blank": 67,
+        "comment": 22
+      },
+      "classes_count": 6,
+      "methods_count": 16,
+      "constructors_count": 0,
+      "files_count": 5,
+      "stereotype_instances": [
+        "controller",
+        "configuration",
+        "entity"
+      ],
+      "stereotype_counts": {
+        "controller": 1,
+        "configuration": 2,
+        "entity": 1
+      },
+      "languages": {
+        "java": 5
+      },
+      "file_types": {
+        ".java": 5
+      },
+      "jpa_tables": [
+        "OrderApplication"
+      ],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "microsec-test",
+      "type": "maven",
+      "path": "microsec-test",
+      "loc": {
+        "total": 405,
+        "code": 324,
+        "blank": 68,
+        "comment": 13
+      },
+      "classes_count": 4,
+      "methods_count": 50,
+      "constructors_count": 0,
+      "files_count": 2,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 2
+      },
+      "file_types": {
+        ".java": 2
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "https://localhost"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "uaa",
+      "type": "maven",
+      "path": "uaa",
+      "loc": {
+        "total": 0,
+        "code": 0,
+        "blank": 0,
+        "comment": 0
+      },
+      "classes_count": 0,
+      "methods_count": 0,
+      "constructors_count": 0,
+      "files_count": 0,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {},
+      "file_types": {},
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://localhost:8084/login",
+        "http://localhost:8082/login"
+      ],
+      "feign_with_url": false
+    }
+  ],
+  "statistics": {
+    "total_services": 10,
+    "total_files": 41,
+    "total_loc_code": 2067,
+    "total_classes": 47,
+    "total_methods": 245,
+    "total_constructors": 3
+  }
+}

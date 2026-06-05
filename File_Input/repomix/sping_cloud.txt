@@ -1,0 +1,4552 @@
+================================================================
+Directory Structure
+================================================================
+.gitignore
+cloud-api-gateway/pom.xml
+cloud-api-gateway/src/main/docker/Dockerfile
+cloud-api-gateway/src/main/java/cloud/api/gateway/ApiGatewayApplication.java
+cloud-api-gateway/src/main/java/cloud/api/gateway/filter/AccessFilter.java
+cloud-api-gateway/src/main/java/cloud/api/gateway/security/DynamicOauth2ClientContextFilter.java
+cloud-api-gateway/src/main/java/cloud/api/gateway/security/SecurityConfiguration.java
+cloud-api-gateway/src/main/resources/application.yaml
+cloud-config-server/pom.xml
+cloud-config-server/src/main/docker/Dockerfile
+cloud-config-server/src/main/java/cloud/config/server/ConfigServerApplication.java
+cloud-config-server/src/main/resources/application.yaml
+cloud-dummy-service/pom.xml
+cloud-dummy-service/src/main/java/cloud/dummy/service/CloudDummyService.java
+cloud-dummy-service/src/main/resources/application.yml
+cloud-eureka-server/pom.xml
+cloud-eureka-server/src/main/docker/Dockerfile
+cloud-eureka-server/src/main/java/cloud/eureka/server/EurekaServer.java
+cloud-eureka-server/src/main/resources/application.yaml
+cloud-finagle-commons-thrift/pom.xml
+cloud-finagle-commons-thrift/src/main/java/cloud/finagle/commons/ClusterFactory.java
+cloud-finagle-thrift-api/pom.xml
+cloud-finagle-thrift-api/src/main/thrift/foogenerator.thrift
+cloud-finagle-thrift-client/1
+cloud-finagle-thrift-client/pom.xml
+cloud-finagle-thrift-client/src/main/java/MyAppThriftClient.java
+cloud-finagle-thrift-client/src/main/resources/application.yaml
+cloud-finagle-thrift-server/pom.xml
+cloud-finagle-thrift-server/src/main/java/cloud/finagle/thrift/server/FooServiceHandler.java
+cloud-finagle-thrift-server/src/main/java/cloud/finagle/thrift/server/MyAppThriftServer.java
+cloud-finagle-thrift-server/src/main/resources/application.yaml
+cloud-hystrix-dashboard/pom.xml
+cloud-hystrix-dashboard/src/main/docker/Dockerfile
+cloud-hystrix-dashboard/src/main/java/cloud/hystrix/dashboard/HystrixDashboard.java
+cloud-hystrix-dashboard/src/main/resources/bootstrap.yaml
+cloud-hystrix-turbine/pom.xml
+cloud-hystrix-turbine/src/main/docker/Dockerfile
+cloud-hystrix-turbine/src/main/java/cloud/hystrix/turbine/HystrixTurbine.java
+cloud-hystrix-turbine/src/main/resources/application.yaml
+cloud-hystrix-turbine/src/main/resources/bootstrap.yaml
+cloud-simple-service/pom.xml
+cloud-simple-service/src/main/docker/Dockerfile
+cloud-simple-service/src/main/java/cloud/simple/service/conf/DataSourceProperties.java
+cloud-simple-service/src/main/java/cloud/simple/service/conf/JdbcDataSource.java
+cloud-simple-service/src/main/java/cloud/simple/service/data/User.java
+cloud-simple-service/src/main/java/cloud/simple/service/service/UserService.java
+cloud-simple-service/src/main/java/cloud/simple/service/SimpleService.java
+cloud-simple-service/src/main/java/cloud/simple/service/storage/UserStorage.java
+cloud-simple-service/src/main/java/cloud/simple/service/storage/UserStorageImpl.java
+cloud-simple-service/src/main/java/cloud/simple/service/web/UserController.java
+cloud-simple-service/src/main/resources/application.yaml
+cloud-simple-service/src/main/resources/bootstrap.yaml
+cloud-simple-service/src/main/resources/db.sql
+cloud-simple-serviceB/pom.xml
+cloud-simple-serviceB/src/main/docker/Dockerfile
+cloud-simple-serviceB/src/main/java/cloud/simple/serviceB/controller/UserController.java
+cloud-simple-serviceB/src/main/java/cloud/simple/serviceB/SimpleServiceB.java
+cloud-simple-serviceB/src/main/resources/application.yaml
+cloud-simple-serviceB/src/main/resources/bootstrap.yaml
+cloud-simple-ui/pom.xml
+cloud-simple-ui/src/main/docker/Dockerfile
+cloud-simple-ui/src/main/java/cloud/simple/data/User.java
+cloud-simple-ui/src/main/java/cloud/simple/service/UserService.java
+cloud-simple-ui/src/main/java/cloud/simple/web/UserController.java
+cloud-simple-ui/src/main/java/cloud/simple/WebApplication.java
+cloud-simple-ui/src/main/resources/application.yaml
+cloud-simple-ui/src/main/resources/bootstrap.yaml
+cloud-simple-ui/src/main/resources/log4j.properties
+cloud-simple-ui/src/main/resources/static/favicon.ico
+cloud-simple-ui/src/main/resources/static/index.html
+cloud-simple-ui/src/main/resources/static/js/app.js
+cloud-simple-ui/src/main/resources/static/user-page.html
+cloud-thrift-client/pom.xml
+cloud-thrift-client/src/main/java/cloud/thrift/client/CloudThriftClient.java
+cloud-thrift-client/src/main/java/cloud/thrift/client/config/ZooKeeperConfig.java
+cloud-thrift-client/src/main/java/cloud/thrift/client/controller/UserController.java
+cloud-thrift-client/src/main/java/cloud/thrift/client/provider/UserServiceProvider.java
+cloud-thrift-client/src/main/resources/application.yaml
+cloud-thrift-interface/pom.xml
+cloud-thrift-interface/src/main/java/cloud/thrift/UserDto.java
+cloud-thrift-interface/src/main/java/cloud/thrift/UserService.java
+cloud-thrift-interface/src/main/resources/UserService.thrift
+cloud-thrift-server/pom.xml
+cloud-thrift-server/src/main/java/cloud/thrift/server/CloudThriftServer.java
+cloud-thrift-server/src/main/java/cloud/thrift/server/conf/ThriftConfig.java
+cloud-thrift-server/src/main/java/cloud/thrift/server/conf/ZooKeeperConfig.java
+cloud-thrift-server/src/main/java/cloud/thrift/server/service/UserServiceImpl.java
+cloud-thrift-server/src/main/resources/application.yaml
+cloud-uaa-service/pom.xml
+cloud-uaa-service/src/main/java/cloud/uaa/service/CloudUaaService.java
+cloud-uaa-service/src/main/resources/application.yml
+cloud-uaa-service/src/main/resources/keystore.jks
+cloud-uaa-service/src/main/resources/templates/authorize.ftl
+cloud-uaa-service/src/main/resources/templates/login.ftl
+cloud-zipkin/pom.xml
+cloud-zipkin/src/main/docker/Dockerfile
+cloud-zipkin/src/main/java/cloud/zipkin/zipkin.java
+cloud-zipkin/src/main/resources/application.yaml
+docker/docker-compose.yaml
+pom.xml
+repomix.config.json
+tool/compile_thrift.sh
+
+================================================================
+Files
+================================================================
+
+================
+File: .gitignore
+================
+ 1: .idea/
+ 2: /cloud-config-server/target/
+ 3: /cloud-eureka-server/target/
+ 4: /cloud-simple-service/target/
+ 5: /cloud-simple-ui/target/
+ 6: cloud-simple-serviceB/target/
+ 7: cloud-api-gateway/target/
+ 8: cloud-zipkin/target/
+ 9: cloud-hystrix-dashboard/target/
+10: cloud-hystrix-turbine/target/
+11: cloud-thrift-client/target/
+12: cloud-thrift-interface/target/
+13: cloud-thrift-server/target/
+14: cloud-finagle-commons-thrift/target/
+15: cloud-finagle-thrift-api/target/
+16: cloud-finagle-thrift-client/target/
+17: cloud-finagle-thrift-server/target/
+18: cloud-dummy-service/target/
+19: cloud-uaa-service/target/
+
+================
+File: cloud-api-gateway/pom.xml
+================
+ 1: <?xml version="1.0" encoding="UTF-8"?>
+ 2: <project xmlns="http://maven.apache.org/POM/4.0.0"
+ 3:          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 4:          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 5:     <parent>
+ 6:         <artifactId>spring-cloud-microservice-examples</artifactId>
+ 7:         <groupId>org.zpng</groupId>
+ 8:         <version>1.0-SNAPSHOT</version>
+ 9:     </parent>
+10:     <modelVersion>4.0.0</modelVersion>
+11:     <artifactId>cloud-api-gateway</artifactId>
+12:     <properties>
+13:         <docker.image.prefix>zpng</docker.image.prefix>
+14:     </properties>
+15:     <dependencies>
+16:         <dependency>
+17:             <groupId>org.springframework.cloud</groupId>
+18:             <artifactId>spring-cloud-starter-sleuth</artifactId>
+19:         </dependency>
+20:         <dependency>
+21:             <groupId>org.springframework.cloud</groupId>
+22:             <artifactId>spring-cloud-sleuth-zipkin</artifactId>
+23:         </dependency>
+24:         <dependency>
+25:             <groupId>org.springframework.cloud</groupId>
+26:             <artifactId>spring-cloud-starter-zuul</artifactId>
+27:         </dependency>
+28:         <dependency>
+29:             <groupId>org.springframework.cloud</groupId>
+30:             <artifactId>spring-cloud-starter-eureka</artifactId>
+31:         </dependency>
+32:         <dependency>
+33:             <groupId>org.springframework.cloud</groupId>
+34:             <artifactId>spring-cloud-netflix-hystrix-stream</artifactId>
+35:         </dependency>
+36:         <dependency>
+37:             <groupId>org.springframework.cloud</groupId>
+38:             <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+39:         </dependency>
+40:         <dependency>
+41:             <groupId>org.springframework.cloud</groupId>
+42:             <artifactId>spring-cloud-starter-oauth2</artifactId>
+43:         </dependency>
+44:         <dependency>
+45:             <groupId>org.springframework.cloud</groupId>
+46:             <artifactId>spring-cloud-starter-security</artifactId>
+47:         </dependency>
+48:     </dependencies>
+49:     <build>
+50:         <plugins>
+51:             <plugin>
+52:                 <groupId>org.springframework.boot</groupId>
+53:                 <artifactId>spring-boot-maven-plugin</artifactId>
+54:                 <executions>
+55:                     <execution>
+56:                         <goals>
+57:                             <goal>repackage</goal>
+58:                         </goals>
+59:                     </execution>
+60:                 </executions>
+61:             </plugin>
+62:             <plugin>
+63:                 <groupId>com.spotify</groupId>
+64:                 <artifactId>docker-maven-plugin</artifactId>
+65:                 <version>${docker.plugin.version}</version>
+66:                 <executions>
+67:                     <execution>
+68:                         <phase>package</phase>
+69:                         <goals>
+70:                             <goal>build</goal>
+71:                         </goals>
+72:                     </execution>
+73:                 </executions>
+74:                 <configuration>
+75:                     <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+76:                     <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+77:                     <resources>
+78:                         <resource>
+79:                             <targetPath>/</targetPath>
+80:                             <directory>${project.build.directory}</directory>
+81:                             <include>${project.build.finalName}.jar</include>
+82:                         </resource>
+83:                     </resources>
+84:                 </configuration>
+85:             </plugin>
+86:         </plugins>
+87:     </build>
+88: </project>
+
+================
+File: cloud-api-gateway/src/main/docker/Dockerfile
+================
+1: FROM java:8
+2: VOLUME /tmp
+3: ADD cloud-api-gateway-1.0-SNAPSHOT.jar app.jar
+4: RUN bash -c 'touch /app.jar'
+5: ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+
+================
+File: cloud-api-gateway/src/main/java/cloud/api/gateway/ApiGatewayApplication.java
+================
+ 1: package cloud.api.gateway;
+ 2: import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoRestTemplateCustomizer;
+ 3: import org.springframework.boot.builder.SpringApplicationBuilder;
+ 4: import org.springframework.cloud.client.SpringCloudApplication;
+ 5: import org.springframework.cloud.netflix.ribbon.RibbonClientHttpRequestFactory;
+ 6: import org.springframework.cloud.netflix.ribbon.SpringClientFactory;
+ 7: import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+ 8: import org.springframework.context.annotation.Bean;
+ 9: import org.springframework.security.oauth2.client.token.AccessTokenProviderChain;
+10: import org.springframework.security.oauth2.client.token.grant.client.ClientCredentialsAccessTokenProvider;
+11: import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeAccessTokenProvider;
+12: import org.springframework.security.oauth2.client.token.grant.implicit.ImplicitAccessTokenProvider;
+13: import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordAccessTokenProvider;
+14: import java.util.stream.Collectors;
+15: import java.util.stream.Stream;
+16: @EnableZuulProxy
+17: @SpringCloudApplication
+18: public class ApiGatewayApplication {
+19:     public static void main(String[] args) {
+20:         new SpringApplicationBuilder(ApiGatewayApplication.class).web(true).run(args);
+21:     }
+22:     @Bean
+23:     UserInfoRestTemplateCustomizer userInfoRestTemplateCustomizer(SpringClientFactory springClientFactory) {
+24:         return template -> {
+25:             AccessTokenProviderChain accessTokenProviderChain = Stream
+26:                     .of(new AuthorizationCodeAccessTokenProvider(), new ImplicitAccessTokenProvider(),
+27:                             new ResourceOwnerPasswordAccessTokenProvider(), new ClientCredentialsAccessTokenProvider())
+28:                     .peek(tp -> tp.setRequestFactory(new RibbonClientHttpRequestFactory(springClientFactory)))
+29:                     .collect(Collectors.collectingAndThen(Collectors.toList(), AccessTokenProviderChain::new));
+30:             template.setAccessTokenProvider(accessTokenProviderChain);
+31:         };
+32:     }
+33: }
+
+================
+File: cloud-api-gateway/src/main/java/cloud/api/gateway/filter/AccessFilter.java
+================
+ 1: package cloud.api.gateway.filter;
+ 2: import com.netflix.zuul.ZuulFilter;
+ 3: import org.slf4j.Logger;
+ 4: import org.slf4j.LoggerFactory;
+ 5: public class AccessFilter extends ZuulFilter {
+ 6:     private static Logger log = LoggerFactory.getLogger(AccessFilter.class);
+ 7:     @Override
+ 8:     public String filterType() {
+ 9:         return "pre";
+10:     }
+11:     @Override
+12:     public int filterOrder() {
+13:         return 0;
+14:     }
+15:     @Override
+16:     public boolean shouldFilter() {
+17:         return true;
+18:     }
+19:     @Override
+20:     public Object run() {
+21:         return null;
+22:     }
+23: }
+
+================
+File: cloud-api-gateway/src/main/java/cloud/api/gateway/security/DynamicOauth2ClientContextFilter.java
+================
+ 1: package cloud.api.gateway.security;
+ 2: import org.springframework.security.oauth2.client.filter.OAuth2ClientContextFilter;
+ 3: import org.springframework.security.oauth2.client.resource.UserRedirectRequiredException;
+ 4: import org.springframework.security.web.DefaultRedirectStrategy;
+ 5: import org.springframework.security.web.RedirectStrategy;
+ 6: import org.springframework.web.util.UriComponentsBuilder;
+ 7: import javax.servlet.http.HttpServletRequest;
+ 8: import javax.servlet.http.HttpServletResponse;
+ 9: import java.io.IOException;
+10: import java.util.Map;
+11: class DynamicOauth2ClientContextFilter extends OAuth2ClientContextFilter {
+12:     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+13:     @Override
+14:     protected void redirectUser(UserRedirectRequiredException e, HttpServletRequest request,
+15:                                 HttpServletResponse response) throws IOException {
+16:         String redirectUri = e.getRedirectUri();
+17:         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(redirectUri);
+18:         Map<String, String> requestParams = e.getRequestParams();
+19:         for (Map.Entry<String, String> param : requestParams.entrySet()) {
+20:             builder.queryParam(param.getKey(), param.getValue());
+21:         }
+22:         if (e.getStateKey() != null) {
+23:             builder.queryParam("state", e.getStateKey());
+24:         }
+25:         String url = getBaseUrl(request) + builder.build().encode().toUriString();
+26:         this.redirectStrategy.sendRedirect(request, response, url);
+27:     }
+28:     @Override
+29:     public void setRedirectStrategy(RedirectStrategy redirectStrategy) {
+30:         this.redirectStrategy = redirectStrategy;
+31:     }
+32:     private String getBaseUrl(HttpServletRequest request) {
+33:         StringBuffer url = request.getRequestURL();
+34:         return  url.substring(0, url.length() - request.getRequestURI().length() + request.getContextPath().length());
+35:     }
+36: }
+
+================
+File: cloud-api-gateway/src/main/java/cloud/api/gateway/security/SecurityConfiguration.java
+================
+ 1: package cloud.api.gateway.security;
+ 2: import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
+ 3: import org.springframework.context.annotation.Bean;
+ 4: import org.springframework.context.annotation.Configuration;
+ 5: import org.springframework.context.annotation.Primary;
+ 6: import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+ 7: import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+ 8: import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+ 9: import org.springframework.security.oauth2.client.filter.OAuth2ClientContextFilter;
+10: import org.springframework.security.web.csrf.CsrfFilter;
+11: import org.springframework.security.web.csrf.CsrfToken;
+12: import org.springframework.security.web.csrf.CsrfTokenRepository;
+13: import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
+14: import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+15: import org.springframework.security.web.util.matcher.RequestMatcher;
+16: import org.springframework.web.filter.OncePerRequestFilter;
+17: import javax.servlet.Filter;
+18: import javax.servlet.FilterChain;
+19: import javax.servlet.ServletException;
+20: import javax.servlet.http.Cookie;
+21: import javax.servlet.http.HttpServletRequest;
+22: import javax.servlet.http.HttpServletResponse;
+23: import java.io.IOException;
+24: import java.util.regex.Pattern;
+25: @Configuration
+26: @EnableOAuth2Sso
+27: @EnableWebSecurity
+28: public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+29:     private static final String CSRF_COOKIE_NAME = "XSRF-TOKEN";
+30:     private static final String CSRF_HEADER_NAME = "X-XSRF-TOKEN";
+31:     @Bean
+32:     @Primary
+33:     public OAuth2ClientContextFilter dynamicOauth2ClientContextFilter() {
+34:         return new DynamicOauth2ClientContextFilter();
+35:     }
+36:     @Override
+37:     public void configure(HttpSecurity http) throws Exception {
+38:         http.authorizeRequests().antMatchers("/uaa/**", "/login").permitAll().anyRequest().authenticated()
+39:             .and()
+40:             .csrf().requireCsrfProtectionMatcher(csrfRequestMatcher()).csrfTokenRepository(csrfTokenRepository())
+41:             .and()
+42:             .addFilterAfter(csrfHeaderFilter(), CsrfFilter.class)
+43:             .logout().permitAll()
+44:             .logoutSuccessUrl("/");
+45:     }
+46:     private RequestMatcher csrfRequestMatcher() {
+47:         return new RequestMatcher() {
+48:             private final Pattern allowedMethods = Pattern.compile("^(GET|HEAD|OPTIONS|TRACE)$");
+49:             private final AntPathRequestMatcher[] requestMatchers = { new AntPathRequestMatcher("/uaa/**") };
+50:             @Override
+51:             public boolean matches(HttpServletRequest request) {
+52:                 if (allowedMethods.matcher(request.getMethod()).matches()) {
+53:                     return false;
+54:                 }
+55:                 for (AntPathRequestMatcher matcher : requestMatchers) {
+56:                     if (matcher.matches(request)) {
+57:                         return false;
+58:                     }
+59:                 }
+60:                 return true;
+61:             }
+62:         };
+63:     }
+64:     private static Filter csrfHeaderFilter() {
+65:         return new OncePerRequestFilter() {
+66:             @Override
+67:             protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
+68:                                             FilterChain filterChain) throws ServletException, IOException {
+69:                 CsrfToken csrf = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
+70:                 if (csrf != null) {
+71:                     Cookie cookie = new Cookie(CSRF_COOKIE_NAME, csrf.getToken());
+72:                     cookie.setPath("/");
+73:                     cookie.setSecure(true);
+74:                     response.addCookie(cookie);
+75:                 }
+76:                 filterChain.doFilter(request, response);
+77:             }
+78:         };
+79:     }
+80:     private static CsrfTokenRepository csrfTokenRepository() {
+81:         HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
+82:         repository.setHeaderName(CSRF_HEADER_NAME);
+83:         return repository;
+84:     }
+85: }
+
+================
+File: cloud-api-gateway/src/main/resources/application.yaml
+================
+ 1: spring.application.name: api-gateway
+ 2: server.port: 8765
+ 3: zuul.routes.api-a.path: /cloud-simple-service/**
+ 4: zuul.routes.api-a.serviceId: cloud-simple-service
+ 5: zuul.routes.api-b.path: /cloud-simple-serviceB/**
+ 6: zuul.routes.api-b.serviceId: cloud-simple-serviceB
+ 7: zuul.routes.api-ui.path: /cloud-simple-ui/**
+ 8: zuul.routes.api-ui.serviceId: cloud-simple-ui
+ 9: zuul:
+10:   routes:
+11:     dummy-service: /dummy/**
+12:     uaa-service:
+13:       sensitiveHeaders:
+14:       path: /uaa/**
+15:       stripPrefix: false
+16:   add-proxy-headers: true
+17: eureka.client.serviceUrl.defaultZone: http://localhost:8761/eureka/
+18: security:
+19:   basic:
+20:     enabled: false
+21:   oauth2:
+22:     sso:
+23:       loginPath: /login
+24:     client:
+25:       accessTokenUri: http://uaa-service/uaa/oauth/token
+26:       userAuthorizationUri: /uaa/oauth/authorize
+27:       clientId: acme
+28:       clientSecret: acmesecret
+29:     resource:
+30:       jwt:
+31:         keyValue: |
+32:           -----BEGIN PUBLIC KEY-----
+33:           MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnGp/Q5lh0P8nPL21oMMrt2RrkT9AW5jgYwLfSUnJVc9G6uR3cXRRDCjHqWU5WYwivcF180A6CWp/ireQFFBNowgc5XaA0kPpzEtgsA5YsNX7iSnUibB004iBTfU9hZ2Rbsc8cWqynT0RyN4TP1RYVSeVKvMQk4GT1r7JCEC+TNu1ELmbNwMQyzKjsfBXyIOCFU/E94ktvsTZUHF4Oq44DBylCDsS1k7/sfZC2G5EU7Oz0mhG8+Uz6MSEQHtoIi6mc8u64Rwi3Z3tscuWG2ShtsUFuNSAFNkY7LkLn+/hxLCu2bNISMaESa8dG22CIMuIeRLVcAmEWEWH5EEforTg+QIDAQAB
+34:           -----END PUBLIC KEY-----
+35:       id: openid
+36:       serviceId: ${PREFIX:}resource
+37: logging:
+38:   level.org.springframework.security: DEBUG
+39: spring.zipkin.baseUrl: http://localhost:9411
+40: spring.zipkin.enabled: true
+41: spring:
+42:   sleuth:
+43:     sampler:
+44:       percentage: 1.0
+45:   aop:
+46:     proxy-target-class: true
+
+================
+File: cloud-config-server/pom.xml
+================
+ 1: <?xml version="1.0" encoding="UTF-8"?>
+ 2: <project xmlns="http://maven.apache.org/POM/4.0.0"
+ 3:          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 4:          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 5:     <parent>
+ 6:         <artifactId>spring-cloud-microservice-examples</artifactId>
+ 7:         <groupId>org.zpng</groupId>
+ 8:         <version>1.0-SNAPSHOT</version>
+ 9:     </parent>
+10:     <modelVersion>4.0.0</modelVersion>
+11:     <artifactId>cloud-config-server</artifactId>
+12:     <properties>
+13:         <docker.image.prefix>zpng</docker.image.prefix>
+14:     </properties>
+15:     <dependencies>
+16:         <dependency>
+17:             <groupId>org.springframework.cloud</groupId>
+18:             <artifactId>spring-cloud-config-server</artifactId>
+19:         </dependency>
+20:         <dependency>
+21:             <groupId>org.springframework.cloud</groupId>
+22:             <artifactId>spring-cloud-starter-eureka-server</artifactId>
+23:         </dependency>
+24:         <dependency>
+25:             <groupId>org.springframework.cloud</groupId>
+26:             <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+27:         </dependency>
+28:     </dependencies>
+29:     <build>
+30:         <plugins>
+31:             <plugin>
+32:                 <groupId>org.springframework.boot</groupId>
+33:                 <artifactId>spring-boot-maven-plugin</artifactId>
+34:                 <executions>
+35:                     <execution>
+36:                         <goals>
+37:                             <goal>repackage</goal>
+38:                         </goals>
+39:                     </execution>
+40:                 </executions>
+41:             </plugin>
+42:             <plugin>
+43:                 <groupId>com.spotify</groupId>
+44:                 <artifactId>docker-maven-plugin</artifactId>
+45:                 <version>${docker.plugin.version}</version>
+46:                 <executions>
+47:                     <execution>
+48:                         <phase>package</phase>
+49:                         <goals>
+50:                             <goal>build</goal>
+51:                         </goals>
+52:                     </execution>
+53:                 </executions>
+54:                 <configuration>
+55:                     <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+56:                     <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+57:                     <resources>
+58:                         <resource>
+59:                             <targetPath>/</targetPath>
+60:                             <directory>${project.build.directory}</directory>
+61:                             <include>${project.build.finalName}.jar</include>
+62:                         </resource>
+63:                     </resources>
+64:                 </configuration>
+65:             </plugin>
+66:         </plugins>
+67:     </build>
+68: </project>
+
+================
+File: cloud-config-server/src/main/docker/Dockerfile
+================
+1: FROM java:8
+2: VOLUME /tmp
+3: ADD cloud-config-server-1.0-SNAPSHOT.jar app.jar
+4: RUN bash -c 'touch /app.jar'
+5: ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+
+================
+File: cloud-config-server/src/main/java/cloud/config/server/ConfigServerApplication.java
+================
+ 1: package cloud.config.server;
+ 2: import org.springframework.boot.SpringApplication;
+ 3: import org.springframework.boot.autoconfigure.SpringBootApplication;
+ 4: import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+ 5: import org.springframework.cloud.config.server.EnableConfigServer;
+ 6: @EnableDiscoveryClient
+ 7: @EnableConfigServer
+ 8: @SpringBootApplication
+ 9: public class ConfigServerApplication {
+10:     public static void main(String[] args) {
+11:         SpringApplication.run(ConfigServerApplication.class, args);
+12:     }
+13: }
+
+================
+File: cloud-config-server/src/main/resources/application.yaml
+================
+1: server.port: 8888
+2: spring.cloud.config.server.git.uri: https://github.com/zpng/spring-cloud-config-demo.git
+3: spring.cloud.config.server.git.searchPaths: cloud-config-repo
+4: eureka.client.serviceUrl.defaultZone: http://localhost:8761/eureka/
+5: spring.application.name: cloud-config-server
+
+================
+File: cloud-dummy-service/pom.xml
+================
+ 1: <?xml version="1.0" encoding="UTF-8"?>
+ 2: <project xmlns="http://maven.apache.org/POM/4.0.0"
+ 3:          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 4:          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 5:     <parent>
+ 6:         <artifactId>spring-cloud-microservice-examples</artifactId>
+ 7:         <groupId>org.zpng</groupId>
+ 8:         <version>1.0-SNAPSHOT</version>
+ 9:     </parent>
+10:     <modelVersion>4.0.0</modelVersion>
+11:     <artifactId>cloud-dummy-service</artifactId>
+12:     <properties>
+13:         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+14:         <java.version>1.8</java.version>
+15:     </properties>
+16:     <dependencies>
+17:         <dependency>
+18:             <groupId>org.springframework.cloud</groupId>
+19:             <artifactId>spring-cloud-starter-eureka</artifactId>
+20:         </dependency>
+21:         <dependency>
+22:             <groupId>org.springframework.cloud</groupId>
+23:             <artifactId>spring-cloud-starter-oauth2</artifactId>
+24:         </dependency>
+25:         <dependency>
+26:             <groupId>org.springframework.boot</groupId>
+27:             <artifactId>spring-boot-starter-web</artifactId>
+28:         </dependency>
+29:         <dependency>
+30:             <groupId>org.springframework.boot</groupId>
+31:             <artifactId>spring-boot-starter-test</artifactId>
+32:             <scope>test</scope>
+33:         </dependency>
+34:     </dependencies>
+35:     <build>
+36:         <plugins>
+37:             <plugin>
+38:                 <groupId>org.springframework.boot</groupId>
+39:                 <artifactId>spring-boot-maven-plugin</artifactId>
+40:                 <executions>
+41:                     <execution>
+42:                         <goals>
+43:                             <goal>repackage</goal>
+44:                         </goals>
+45:                     </execution>
+46:                 </executions>
+47:             </plugin>
+48:         </plugins>
+49:     </build>
+50:     <profiles>
+51:         <profile>
+52:             <id>docker</id>
+53:             <build>
+54:                 <plugins>
+55:                     <plugin>
+56:                         <groupId>com.spotify</groupId>
+57:                         <artifactId>docker-maven-plugin</artifactId>
+58:                     </plugin>
+59:                 </plugins>
+60:             </build>
+61:         </profile>
+62:     </profiles>
+63: </project>
+
+================
+File: cloud-dummy-service/src/main/java/cloud/dummy/service/CloudDummyService.java
+================
+ 1: package cloud.dummy.service;
+ 2: import org.springframework.boot.SpringApplication;
+ 3: import org.springframework.boot.autoconfigure.SpringBootApplication;
+ 4: import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+ 5: import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+ 6: import org.springframework.stereotype.Controller;
+ 7: import org.springframework.web.bind.annotation.RequestMapping;
+ 8: import org.springframework.web.bind.annotation.RequestMethod;
+ 9: import org.springframework.web.bind.annotation.ResponseBody;
+10: import java.security.Principal;
+11: @EnableResourceServer
+12: @EnableDiscoveryClient
+13: @SpringBootApplication
+14: public class CloudDummyService {
+15:     public static void main(String[] args) {
+16:         SpringApplication.run(CloudDummyService.class, args);
+17:     }
+18:     @Controller
+19:     @RequestMapping("/")
+20:     public static class DummyController {
+21:         @RequestMapping(method = RequestMethod.GET)
+22:         @ResponseBody
+23:         public String helloWorld(Principal principal) {
+24:             return principal == null ? "Hello anonymous" : "Hello " + principal.getName();
+25:         }
+26:     }
+27: }
+
+================
+File: cloud-dummy-service/src/main/resources/application.yml
+================
+ 1: spring:
+ 2:   application:
+ 3:     name: dummy-service
+ 4: server:
+ 5:   port: 8870
+ 6: eureka:
+ 7:   instance:
+ 8:       hostname: localhost
+ 9:       port: 8761
+10:   client:
+11:     serviceUrl:
+12:       defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
+13: security:
+14:   basic:
+15:     enabled: false
+16:   oauth2:
+17:     resource:
+18:       jwt:
+19:         keyValue: |
+20:           -----BEGIN PUBLIC KEY-----
+21:           MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnGp/Q5lh0P8nPL21oMMrt2RrkT9AW5jgYwLfSUnJVc9G6uR3cXRRDCjHqWU5WYwivcF180A6CWp/ireQFFBNowgc5XaA0kPpzEtgsA5YsNX7iSnUibB004iBTfU9hZ2Rbsc8cWqynT0RyN4TP1RYVSeVKvMQk4GT1r7JCEC+TNu1ELmbNwMQyzKjsfBXyIOCFU/E94ktvsTZUHF4Oq44DBylCDsS1k7/sfZC2G5EU7Oz0mhG8+Uz6MSEQHtoIi6mc8u64Rwi3Z3tscuWG2ShtsUFuNSAFNkY7LkLn+/hxLCu2bNISMaESa8dG22CIMuIeRLVcAmEWEWH5EEforTg+QIDAQAB
+22:           -----END PUBLIC KEY-----
+23:       id: openid
+24:       serviceId: ${PREFIX:}resource
+25: ---
+26: spring:
+27:   profiles: docker
+28: server:
+29:   port: ${SERVICE_PORT}
+30: eureka:
+31:   instance:
+32:     prefer-ip-address: true
+33:   client:
+34:     service-url:
+35:       defaultZone: ${REGISTRY_URL}
+
+================
+File: cloud-eureka-server/pom.xml
+================
+ 1: <?xml version="1.0" encoding="UTF-8"?>
+ 2: <project xmlns="http://maven.apache.org/POM/4.0.0"
+ 3:          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 4:          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 5:     <parent>
+ 6:         <artifactId>spring-cloud-microservice-examples</artifactId>
+ 7:         <groupId>org.zpng</groupId>
+ 8:         <version>1.0-SNAPSHOT</version>
+ 9:     </parent>
+10:     <modelVersion>4.0.0</modelVersion>
+11:     <artifactId>cloud-eureka-server</artifactId>
+12:     <properties>
+13:         <docker.image.prefix>zpng</docker.image.prefix>
+14:     </properties>
+15:     <dependencies>
+16:         <dependency>
+17:             <groupId>org.springframework.cloud</groupId>
+18:             <artifactId>spring-cloud-starter-eureka-server</artifactId>
+19:         </dependency>
+20:         <dependency>
+21:             <groupId>org.springframework.boot</groupId>
+22:             <artifactId>spring-boot-starter-actuator</artifactId>
+23:         </dependency>
+24:     </dependencies>
+25:     <build>
+26:         <plugins>
+27:             <plugin>
+28:                 <groupId>org.springframework.boot</groupId>
+29:                 <artifactId>spring-boot-maven-plugin</artifactId>
+30:                 <executions>
+31:                     <execution>
+32:                         <goals>
+33:                             <goal>repackage</goal>
+34:                         </goals>
+35:                     </execution>
+36:                 </executions>
+37:             </plugin>
+38:             <plugin>
+39:                 <groupId>com.spotify</groupId>
+40:                 <artifactId>docker-maven-plugin</artifactId>
+41:                 <version>${docker.plugin.version}</version>
+42:                 <executions>
+43:                     <execution>
+44:                         <phase>package</phase>
+45:                         <goals>
+46:                             <goal>build</goal>
+47:                         </goals>
+48:                     </execution>
+49:                 </executions>
+50:                 <configuration>
+51:                     <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+52:                     <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+53:                     <resources>
+54:                         <resource>
+55:                             <targetPath>/</targetPath>
+56:                             <directory>${project.build.directory}</directory>
+57:                             <include>${project.build.finalName}.jar</include>
+58:                         </resource>
+59:                     </resources>
+60:                 </configuration>
+61:             </plugin>
+62:         </plugins>
+63:     </build>
+64: </project>
+
+================
+File: cloud-eureka-server/src/main/docker/Dockerfile
+================
+1: FROM java:8
+2: VOLUME /tmp
+3: ADD cloud-eureka-server-1.0-SNAPSHOT.jar app.jar
+4: RUN bash -c 'touch /app.jar'
+5: ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+
+================
+File: cloud-eureka-server/src/main/java/cloud/eureka/server/EurekaServer.java
+================
+ 1: package cloud.eureka.server;
+ 2: import org.springframework.boot.SpringApplication;
+ 3: import org.springframework.boot.autoconfigure.SpringBootApplication;
+ 4: import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+ 5: @SpringBootApplication
+ 6: @EnableEurekaServer
+ 7: public class EurekaServer {
+ 8:     public static void main(String[] args) {
+ 9:         SpringApplication.run(EurekaServer.class, args);
+10:     }
+11: }
+
+================
+File: cloud-eureka-server/src/main/resources/application.yaml
+================
+1: server.port: 8761
+2: eureka.instance.hostname: localhost
+3: eureka.client.registerWithEureka: false
+4: eureka.client.fetchRegistry: false
+5: eureka.client.serviceUrl.defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+6: spring.application.name: cloud-eureka-server
+7: eureka:
+8:   server:
+9:     waitTimeInMsWhenSyncEmpty: 0
+
+================
+File: cloud-finagle-commons-thrift/pom.xml
+================
+ 1: <?xml version="1.0" encoding="UTF-8"?>
+ 2: <project xmlns="http://maven.apache.org/POM/4.0.0"
+ 3:          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 4:          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 5:     <parent>
+ 6:         <artifactId>spring-cloud-microservice-examples</artifactId>
+ 7:         <groupId>org.zpng</groupId>
+ 8:         <version>1.0-SNAPSHOT</version>
+ 9:     </parent>
+10:     <modelVersion>4.0.0</modelVersion>
+11:     <artifactId>cloud-finagle-commons-thrift</artifactId>
+12:     <dependencies>
+13:         <dependency>
+14:             <groupId>com.twitter</groupId>
+15:             <artifactId>finagle-serversets_2.11</artifactId>
+16:             <version>6.27.0</version>
+17:         </dependency>
+18:     </dependencies>
+19: </project>
+
+================
+File: cloud-finagle-commons-thrift/src/main/java/cloud/finagle/commons/ClusterFactory.java
+================
+ 1: package cloud.finagle.commons;
+ 2: import com.google.common.collect.ImmutableSet;
+ 3: import com.twitter.common.net.pool.DynamicHostSet;
+ 4: import com.twitter.common.quantity.Amount;
+ 5: import com.twitter.common.quantity.Time;
+ 6: import com.twitter.common.zookeeper.ServerSet;
+ 7: import com.twitter.common.zookeeper.ServerSetImpl;
+ 8: import com.twitter.common.zookeeper.ZooKeeperClient;
+ 9: import com.twitter.finagle.builder.Server;
+10: import com.twitter.finagle.zookeeper.ZookeeperServerSetCluster;
+11: import com.twitter.thrift.ServiceInstance;
+12: import scala.collection.JavaConversions;
+13: import java.net.InetSocketAddress;
+14: import java.net.SocketAddress;
+15: import java.util.Arrays;
+16: import java.util.List;
+17: public class ClusterFactory {
+18:     static Amount<Integer,Time> sessionTimeout = Amount.of(15, Time.SECONDS);
+19:     static List<InetSocketAddress> nodes = Arrays.asList(
+20:             new InetSocketAddress("localhost", 2181)
+21:     );
+22:     public static ZookeeperServerSetCluster getForService(String clusterName) {
+23:         ServerSet serverSet = new ServerSetImpl(getZooKeeperClient(), getPath(clusterName));
+24:         return new ZookeeperServerSetCluster(serverSet);
+25:     }
+26:     public static void reportServerUpAndRunning(Server server, String clusterName) {
+27:         getForService(clusterName).join(server.localAddress(), new scala.collection.immutable.HashMap());
+28:     }
+29:     public static List<SocketAddress> getOnlineServers(String clusterName) {
+30:         try {
+31:             ZookeeperServerSetCluster cluster = getForService(clusterName);
+32:             new ServerSetImpl(zooKeeperClient, getPath(clusterName)).monitor(new DynamicHostSet.HostChangeMonitor<ServiceInstance>(){
+33:                 public void onChange(ImmutableSet<ServiceInstance> serviceInstances) {
+34:                 }
+35:             });
+36:             return JavaConversions.seqAsJavaList(cluster.snap()._1());
+37:         } catch (DynamicHostSet.MonitorException e) {
+38:             throw new RuntimeException("Couldn't get list of online servers", e);
+39:         }
+40:     }
+41:     private static String getPath(String clusterName) {
+42:         return "/myapp/services/"+clusterName;
+43:     }
+44:     private static ZooKeeperClient zooKeeperClient;
+45:     private static ZooKeeperClient getZooKeeperClient() {
+46:         if (zooKeeperClient == null) {
+47:             zooKeeperClient = new ZooKeeperClient(sessionTimeout, nodes);
+48:         }
+49:         return zooKeeperClient;
+50:     }
+51: }
+
+================
+File: cloud-finagle-thrift-api/pom.xml
+================
+ 1: <?xml version="1.0" encoding="UTF-8"?>
+ 2: <project xmlns="http://maven.apache.org/POM/4.0.0"
+ 3:          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 4:          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 5:     <parent>
+ 6:         <artifactId>spring-cloud-microservice-examples</artifactId>
+ 7:         <groupId>org.zpng</groupId>
+ 8:         <version>1.0-SNAPSHOT</version>
+ 9:     </parent>
+10:     <modelVersion>4.0.0</modelVersion>
+11:     <artifactId>cloud-finagle-thrift-api</artifactId>
+12:     <dependencies>
+13:         <dependency>
+14:             <groupId>com.twitter</groupId>
+15:             <artifactId>scrooge-runtime_2.11</artifactId>
+16:             <version>3.20.0</version>
+17:         </dependency>
+18:     </dependencies>
+19:     <build>
+20:         <plugins>
+21:             <plugin>
+22:                 <groupId>com.twitter</groupId>
+23:                 <artifactId>scrooge-maven-plugin</artifactId>
+24:                 <version>3.1.1</version>
+25:                 <configuration>
+26:                     <language>java</language>
+27:                     <thriftOpts>
+28:                         <thriftOpt>--finagle</thriftOpt>
+29:                         <thriftOpt>--ostrich</thriftOpt>
+30:                     </thriftOpts>
+31:                 </configuration>
+32:                 <executions>
+33:                     <execution>
+34:                         <id>thrift-sources</id>
+35:                         <phase>generate-sources</phase>
+36:                         <goals>
+37:                             <goal>compile</goal>
+38:                         </goals>
+39:                     </execution>
+40:                 </executions>
+41:             </plugin>
+42:         </plugins>
+43:     </build>
+44: </project>
+
+================
+File: cloud-finagle-thrift-api/src/main/thrift/foogenerator.thrift
+================
+ 1: namespace  java com.example.myapp.thrift
+ 2: 
+ 3: struct Foo {
+ 4:     1: string bar;
+ 5:     2: string bazz;
+ 6:     3: i32 squirrel;
+ 7: }
+ 8: 
+ 9: service FooService {
+10:     Foo giveMeSomeFoo(i32 id);
+11: }
+
+================
+File: cloud-finagle-thrift-client/1
+================
+ 1: [INFO] Scanning for projects...
+ 2: [INFO]                                                                         
+ 3: [INFO] ------------------------------------------------------------------------
+ 4: [INFO] Building cloud-finagle-thrift-client 1.0-SNAPSHOT
+ 5: [INFO] ------------------------------------------------------------------------
+ 6: [INFO] ------------------------------------------------------------------------
+ 7: [INFO] BUILD FAILURE
+ 8: [INFO] ------------------------------------------------------------------------
+ 9: [INFO] Total time: 1.620 s
+10: [INFO] Finished at: 2016-11-03T16:45:37+08:00
+11: [INFO] Final Memory: 18M/309M
+12: [INFO] ------------------------------------------------------------------------
+13: [ERROR] Failed to execute goal on project cloud-finagle-thrift-client: Could not resolve dependencies for project org.zpng:cloud-finagle-thrift-client:jar:1.0-SNAPSHOT: Failed to collect dependencies at org.zpng:cloud-finagle-thrift-api:jar:1.0-SNAPSHOT: Failed to read artifact descriptor for org.zpng:cloud-finagle-thrift-api:jar:1.0-SNAPSHOT: Failure to find org.zpng:spring-cloud-microservice-examples:pom:1.0-SNAPSHOT in http://maven.zhenguanyu.com/content/groups/public was cached in the local repository, resolution will not be reattempted until the update interval of nexus has elapsed or updates are forced -> [Help 1]
+14: [ERROR] 
+15: [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+16: [ERROR] Re-run Maven using the -X switch to enable full debug logging.
+17: [ERROR] 
+18: [ERROR] For more information about the errors and possible solutions, please read the following articles:
+19: [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/DependencyResolutionException
+
+================
+File: cloud-finagle-thrift-client/pom.xml
+================
+ 1: <?xml version="1.0" encoding="UTF-8"?>
+ 2: <project xmlns="http://maven.apache.org/POM/4.0.0"
+ 3:          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 4:          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 5:     <parent>
+ 6:         <artifactId>spring-cloud-microservice-examples</artifactId>
+ 7:         <groupId>org.zpng</groupId>
+ 8:         <version>1.0-SNAPSHOT</version>
+ 9:     </parent>
+10:     <modelVersion>4.0.0</modelVersion>
+11:     <artifactId>cloud-finagle-thrift-client</artifactId>
+12:     <properties>
+13:         <scala.binary.version>2.11</scala.binary.version>
+14:     </properties>
+15:     <dependencies>
+16:         <dependency>
+17:             <groupId>com.twitter</groupId>
+18:             <artifactId>finagle-http_${scala.binary.version}</artifactId>
+19:             <version>6.38.0</version>
+20:         </dependency>
+21:         <dependency>
+22:             <groupId>io.zipkin.finagle</groupId>
+23:             <artifactId>zipkin-finagle-http_${scala.binary.version}</artifactId>
+24:             <version>0.3.0</version>
+25:         </dependency>
+26:         <dependency>
+27:             <groupId>com.twitter</groupId>
+28:             <artifactId>finagle-thrift_2.11</artifactId>
+29:             <version>6.38.0</version>
+30:         </dependency>
+31:         <dependency>
+32:             <groupId>org.zpng</groupId>
+33:             <artifactId>cloud-finagle-thrift-api</artifactId>
+34:             <version>1.0-SNAPSHOT</version>
+35:         </dependency>
+36:         <dependency>
+37:             <groupId>org.zpng</groupId>
+38:             <artifactId>cloud-finagle-commons-thrift</artifactId>
+39:             <version>1.0-SNAPSHOT</version>
+40:         </dependency>
+41:     </dependencies>
+42: </project>
+
+================
+File: cloud-finagle-thrift-client/src/main/java/MyAppThriftClient.java
+================
+ 1: import cloud.finagle.commons.ClusterFactory;
+ 2: import com.example.myapp.thrift.Foo;
+ 3: import com.example.myapp.thrift.FooService;
+ 4: import com.twitter.finagle.Service;
+ 5: import com.twitter.finagle.builder.ClientBuilder;
+ 6: import com.twitter.finagle.builder.Cluster;
+ 7: import com.twitter.finagle.stats.InMemoryStatsReceiver;
+ 8: import com.twitter.finagle.stats.JavaLoggerStatsReceiver;
+ 9: import com.twitter.finagle.thrift.ThriftClientFramedCodec;
+10: import com.twitter.finagle.thrift.ThriftClientRequest;
+11: import com.twitter.finagle.tracing.Tracer;
+12: import com.twitter.util.Duration;
+13: import org.apache.thrift.protocol.TBinaryProtocol;
+14: import zipkin.finagle.http.HttpZipkinTracer;
+15: import java.net.SocketAddress;
+16: import java.util.List;
+17: import java.util.concurrent.ExecutionException;
+18: import java.util.concurrent.TimeUnit;
+19: import java.util.logging.Logger;
+20: public class MyAppThriftClient {
+21:     public static void main(String[] args) {
+22:         Cluster cluster = ClusterFactory.getForService("FooService");
+23:         List<SocketAddress> onlineServers = ClusterFactory.getOnlineServers("FooService");
+24:         System.out.println("Online servers: "+onlineServers.toString());
+25:         System.setProperty("zipkin.http.host", "localhost:9411");
+26:         HttpZipkinTracer.Config config = HttpZipkinTracer.Config.builder()
+27:                                                                 .initialSampleRate(1.0f)
+28:                                                                 .host("127.0.0.1:9411").build();
+29:         Tracer tracer = HttpZipkinTracer.create(config,
+30:                 new JavaLoggerStatsReceiver(Logger.getAnonymousLogger()));
+31:         Service<ThriftClientRequest, byte[]> service =
+32:                 ClientBuilder.safeBuild(ClientBuilder.get()
+33:                                                      .cluster(cluster)
+34:                                                      .name("FooService client")
+35:                                                      .codec(ThriftClientFramedCodec.get())
+36:                                                      .tracer(tracer)
+37:                                                      .timeout(Duration.apply(2, TimeUnit.SECONDS))
+38:                                                      .retries(4)
+39:                                                      .hostConnectionLimit(1)
+40:                 );
+41:         FooService.FutureIface client = new FooService.FinagledClient(
+42:                 service,
+43:                 new TBinaryProtocol.Factory(),
+44:                 "FooService",
+45:                 new InMemoryStatsReceiver()
+46:         );
+47:         for (int i = 0; i < 20; i++) {
+48:             Foo foo = null;
+49:             try {
+50:                 foo = client.giveMeSomeFoo(i).toJavaFuture().get();
+51:             } catch (InterruptedException e) {
+52:                 e.printStackTrace();
+53:             } catch (ExecutionException e) {
+54:                 e.printStackTrace();
+55:             }
+56:             System.out.println("Got "+foo.getBazz());
+57:         }
+58:     }
+59: }
+
+================
+File: cloud-finagle-thrift-client/src/main/resources/application.yaml
+================
+1: zipkin.http.host: localhost:9411
+2: zipkin.initialSampleRate: 1.0
+
+================
+File: cloud-finagle-thrift-server/pom.xml
+================
+ 1: <?xml version="1.0" encoding="UTF-8"?>
+ 2: <project xmlns="http://maven.apache.org/POM/4.0.0"
+ 3:          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 4:          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 5:     <parent>
+ 6:         <artifactId>spring-cloud-microservice-examples</artifactId>
+ 7:         <groupId>org.zpng</groupId>
+ 8:         <version>1.0-SNAPSHOT</version>
+ 9:     </parent>
+10:     <modelVersion>4.0.0</modelVersion>
+11:     <artifactId>cloud-finagle-thrift-server</artifactId>
+12:     <properties>
+13:         <scala.binary.version>2.11</scala.binary.version>
+14:     </properties>
+15:     <dependencies>
+16:         <dependency>
+17:             <groupId>com.twitter</groupId>
+18:             <artifactId>finagle-http_${scala.binary.version}</artifactId>
+19:             <version>6.38.0</version>
+20:         </dependency>
+21:         <dependency>
+22:             <groupId>io.zipkin.finagle</groupId>
+23:             <artifactId>zipkin-finagle-http_${scala.binary.version}</artifactId>
+24:             <version>0.3.0</version>
+25:         </dependency>
+26:         <dependency>
+27:             <groupId>com.twitter</groupId>
+28:             <artifactId>finagle-thrift_2.11</artifactId>
+29:             <version>6.38.0</version>
+30:         </dependency>
+31:         <dependency>
+32:             <groupId>org.zpng</groupId>
+33:             <artifactId>cloud-finagle-thrift-api</artifactId>
+34:             <version>1.0-SNAPSHOT</version>
+35:         </dependency>
+36:         <dependency>
+37:             <groupId>org.zpng</groupId>
+38:             <artifactId>cloud-finagle-commons-thrift</artifactId>
+39:             <version>1.0-SNAPSHOT</version>
+40:         </dependency>
+41:     </dependencies>
+42: </project>
+
+================
+File: cloud-finagle-thrift-server/src/main/java/cloud/finagle/thrift/server/FooServiceHandler.java
+================
+ 1: package cloud.finagle.thrift.server;
+ 2: import com.example.myapp.thrift.Foo;
+ 3: import com.example.myapp.thrift.FooService;
+ 4: import com.twitter.util.Future;
+ 5: public class FooServiceHandler implements FooService.FutureIface {
+ 6:     private String bazz;
+ 7:     public FooServiceHandler(String bazz) {
+ 8:         this.bazz = bazz;
+ 9:     }
+10:     public Future<Foo> giveMeSomeFoo(int id) {
+11:         Foo foo = new Foo.Builder()
+12:                 .bar("test")
+13:                 .bazz("hey, this is a response from " + bazz)
+14:                 .squirrel(42)
+15:                 .build();
+16:         return Future.value(foo);
+17:     }
+18: }
+
+================
+File: cloud-finagle-thrift-server/src/main/java/cloud/finagle/thrift/server/MyAppThriftServer.java
+================
+ 1: package cloud.finagle.thrift.server;
+ 2: import cloud.finagle.commons.ClusterFactory;
+ 3: import com.example.myapp.thrift.FooService;
+ 4: import com.twitter.finagle.builder.Server;
+ 5: import com.twitter.finagle.builder.ServerBuilder;
+ 6: import com.twitter.finagle.stats.JavaLoggerStatsReceiver;
+ 7: import com.twitter.finagle.thrift.ThriftServerFramedCodec;
+ 8: import com.twitter.finagle.tracing.Tracer;
+ 9: import org.apache.thrift.protocol.TBinaryProtocol;
+10: import zipkin.finagle.http.HttpZipkinTracer;
+11: import java.net.InetSocketAddress;
+12: import java.util.Random;
+13: import java.util.logging.Logger;
+14: public class MyAppThriftServer {
+15:     public static void main(String[] args) {
+16:         int port = new Random().nextInt(8000)+2000;
+17:         System.setProperty("zipkin.http.host", "localhost:9411");
+18:         FooServiceHandler handler = new FooServiceHandler("port="+port);
+19:         HttpZipkinTracer.Config config = HttpZipkinTracer.Config.builder()
+20:                                                                 .initialSampleRate(1.0f)
+21:                                                                 .host("127.0.0.1:9411").build();
+22:         Tracer tracer = HttpZipkinTracer.create(config,
+23:                 new JavaLoggerStatsReceiver(Logger.getAnonymousLogger()));
+24:         Server server = ServerBuilder.safeBuild(
+25:                 new FooService.FinagledService(handler, new TBinaryProtocol.Factory()),
+26:                 ServerBuilder.get()
+27:                              .name("FooService")
+28:                              .codec(ThriftServerFramedCodec.get())
+29:                              .tracer(tracer)
+30:                              .maxConcurrentRequests(50)
+31:                              .bindTo(new InetSocketAddress(port))
+32:         );
+33:         ClusterFactory.reportServerUpAndRunning(server, "FooService");
+34:         System.out.println("The server, running from port "+port+" joined the FooService cluster.");
+35:     }
+36: }
+
+================
+File: cloud-finagle-thrift-server/src/main/resources/application.yaml
+================
+1: zipkin.http.host: localhost:9411
+2: zipkin.initialSampleRate: 1.0
+
+================
+File: cloud-hystrix-dashboard/pom.xml
+================
+ 1: <?xml version="1.0" encoding="UTF-8"?>
+ 2: <project xmlns="http://maven.apache.org/POM/4.0.0"
+ 3:          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 4:          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 5:     <parent>
+ 6:         <artifactId>spring-cloud-microservice-examples</artifactId>
+ 7:         <groupId>org.zpng</groupId>
+ 8:         <version>1.0-SNAPSHOT</version>
+ 9:     </parent>
+10:     <modelVersion>4.0.0</modelVersion>
+11:     <artifactId>cloud-hystrix-dashboard</artifactId>
+12:     <properties>
+13:         <docker.image.prefix>zpng</docker.image.prefix>
+14:     </properties>
+15:     <dependencies>
+16:         <dependency>
+17:             <groupId>org.springframework.cloud</groupId>
+18:             <artifactId>spring-cloud-starter</artifactId>
+19:         </dependency>
+20:         <dependency>
+21:             <groupId>org.springframework.cloud</groupId>
+22:             <artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
+23:         </dependency>
+24:     </dependencies>
+25:     <build>
+26:         <plugins>
+27:             <plugin>
+28:                 <groupId>org.springframework.boot</groupId>
+29:                 <artifactId>spring-boot-maven-plugin</artifactId>
+30:                 <executions>
+31:                     <execution>
+32:                         <goals>
+33:                             <goal>repackage</goal>
+34:                         </goals>
+35:                     </execution>
+36:                 </executions>
+37:             </plugin>
+38:             <plugin>
+39:                 <groupId>com.spotify</groupId>
+40:                 <artifactId>docker-maven-plugin</artifactId>
+41:                 <version>${docker.plugin.version}</version>
+42:                 <executions>
+43:                     <execution>
+44:                         <phase>package</phase>
+45:                         <goals>
+46:                             <goal>build</goal>
+47:                         </goals>
+48:                     </execution>
+49:                 </executions>
+50:                 <configuration>
+51:                     <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+52:                     <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+53:                     <resources>
+54:                         <resource>
+55:                             <targetPath>/</targetPath>
+56:                             <directory>${project.build.directory}</directory>
+57:                             <include>${project.build.finalName}.jar</include>
+58:                         </resource>
+59:                     </resources>
+60:                 </configuration>
+61:             </plugin>
+62:         </plugins>
+63:     </build>
+64: </project>
+
+================
+File: cloud-hystrix-dashboard/src/main/docker/Dockerfile
+================
+1: FROM java:8
+2: VOLUME /tmp
+3: ADD cloud-hystrix-dashboard-1.0-SNAPSHOT.jar app.jar
+4: RUN bash -c 'touch /app.jar'
+5: ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+
+================
+File: cloud-hystrix-dashboard/src/main/java/cloud/hystrix/dashboard/HystrixDashboard.java
+================
+ 1: package cloud.hystrix.dashboard;
+ 2: import org.springframework.boot.SpringApplication;
+ 3: import org.springframework.boot.autoconfigure.SpringBootApplication;
+ 4: import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
+ 5: import org.springframework.stereotype.Controller;
+ 6: import org.springframework.web.bind.annotation.RequestMapping;
+ 7: @SpringBootApplication
+ 8: @EnableHystrixDashboard
+ 9: @Controller
+10: public class HystrixDashboard {
+11:     @RequestMapping("/")
+12:     public String home() {
+13:         return "forward:/hystrix";
+14:     }
+15:     public static void main(String[] args) {
+16:         SpringApplication.run(HystrixDashboard.class, args);
+17:     }
+18: }
+
+================
+File: cloud-hystrix-dashboard/src/main/resources/bootstrap.yaml
+================
+1: spring.cloud.config.uri: http://127.0.0.1:${config.port:8888}
+2: spring.cloud.config.name: hystrix-dashboard
+3: spring.cloud.config.profile: ${config.profile:dev}
+4: eureka.client.serviceUrl.defaultZone: http\://localhost\:8761/eureka/
+5: server.port: 8022
+6: spring.application.name: hystrix-dashboard
+
+================
+File: cloud-hystrix-turbine/pom.xml
+================
+ 1: <?xml version="1.0" encoding="UTF-8"?>
+ 2: <project xmlns="http://maven.apache.org/POM/4.0.0"
+ 3:          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 4:          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 5:     <parent>
+ 6:         <artifactId>spring-cloud-microservice-examples</artifactId>
+ 7:         <groupId>org.zpng</groupId>
+ 8:         <version>1.0-SNAPSHOT</version>
+ 9:     </parent>
+10:     <modelVersion>4.0.0</modelVersion>
+11:     <artifactId>cloud-hystrix-turbine</artifactId>
+12:     <properties>
+13:         <docker.image.prefix>zpng</docker.image.prefix>
+14:     </properties>
+15:     <dependencies>
+16:         <dependency>
+17:             <groupId>org.springframework.cloud</groupId>
+18:             <artifactId>spring-cloud-starter-turbine-stream</artifactId>
+19:         </dependency>
+20:         <dependency>
+21:             <groupId>org.springframework.cloud</groupId>
+22:             <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+23:         </dependency>
+24:     </dependencies>
+25:     <build>
+26:         <plugins>
+27:             <plugin>
+28:                 <groupId>org.springframework.boot</groupId>
+29:                 <artifactId>spring-boot-maven-plugin</artifactId>
+30:                 <executions>
+31:                     <execution>
+32:                         <goals>
+33:                             <goal>repackage</goal>
+34:                         </goals>
+35:                     </execution>
+36:                 </executions>
+37:             </plugin>
+38:             <plugin>
+39:                 <groupId>com.spotify</groupId>
+40:                 <artifactId>docker-maven-plugin</artifactId>
+41:                 <version>${docker.plugin.version}</version>
+42:                 <executions>
+43:                     <execution>
+44:                         <phase>package</phase>
+45:                         <goals>
+46:                             <goal>build</goal>
+47:                         </goals>
+48:                     </execution>
+49:                 </executions>
+50:                 <configuration>
+51:                     <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+52:                     <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+53:                     <resources>
+54:                         <resource>
+55:                             <targetPath>/</targetPath>
+56:                             <directory>${project.build.directory}</directory>
+57:                             <include>${project.build.finalName}.jar</include>
+58:                         </resource>
+59:                     </resources>
+60:                 </configuration>
+61:             </plugin>
+62:         </plugins>
+63:     </build>
+64: </project>
+
+================
+File: cloud-hystrix-turbine/src/main/docker/Dockerfile
+================
+1: FROM java:8
+2: VOLUME /tmp
+3: ADD cloud-hystrix-turbine-1.0-SNAPSHOT.jar app.jar
+4: RUN bash -c 'touch /app.jar'
+5: ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+
+================
+File: cloud-hystrix-turbine/src/main/java/cloud/hystrix/turbine/HystrixTurbine.java
+================
+ 1: package cloud.hystrix.turbine;
+ 2: import org.springframework.boot.SpringApplication;
+ 3: import org.springframework.boot.autoconfigure.SpringBootApplication;
+ 4: import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+ 5: import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+ 6: import org.springframework.cloud.netflix.turbine.stream.EnableTurbineStream;
+ 7: @SpringBootApplication
+ 8: @EnableEurekaClient
+ 9: @EnableDiscoveryClient
+10: @EnableTurbineStream
+11: public class HystrixTurbine {
+12:     public static void main(String[] args) {
+13:         SpringApplication.run(HystrixTurbine.class, args);
+14:     }
+15: }
+
+================
+File: cloud-hystrix-turbine/src/main/resources/application.yaml
+================
+1: 
+
+================
+File: cloud-hystrix-turbine/src/main/resources/bootstrap.yaml
+================
+ 1: spring.zipkin.baseUrl: http://localhost:9966
+ 2: spring.zipkin.enabled: true
+ 3: server:
+ 4:   port: 8989
+ 5: spring:
+ 6:   application:
+ 7:     name: cloud-hystrix-turbine
+ 8:   cloud:
+ 9:     config:
+10:       enabled: true
+11:       uri: http://localhost:8888
+12: management:
+13:   port: 9222
+14: eureka:
+15:   instance:
+16:     leaseRenewalIntervalInSeconds: 10
+17:   client:
+18:     registerWithEureka: true
+19:     fetchRegistry: true
+20:     serviceUrl:
+21:       defaultZone: http://localhost:8761/eureka/
+
+================
+File: cloud-simple-service/pom.xml
+================
+ 1: <?xml version="1.0" encoding="UTF-8"?>
+ 2: <project xmlns="http://maven.apache.org/POM/4.0.0"
+ 3:          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 4:          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 5:     <parent>
+ 6:         <artifactId>spring-cloud-microservice-examples</artifactId>
+ 7:         <groupId>org.zpng</groupId>
+ 8:         <version>1.0-SNAPSHOT</version>
+ 9:     </parent>
+10:     <modelVersion>4.0.0</modelVersion>
+11:     <artifactId>cloud-simple-service</artifactId>
+12:     <properties>
+13:         <docker.image.prefix>zpng</docker.image.prefix>
+14:     </properties>
+15:     <dependencies>
+16:         <dependency>
+17:             <groupId>org.springframework.cloud</groupId>
+18:             <artifactId>spring-cloud-starter-sleuth</artifactId>
+19:         </dependency>
+20:         <dependency>
+21:             <groupId>org.springframework.cloud</groupId>
+22:             <artifactId>spring-cloud-sleuth-zipkin</artifactId>
+23:         </dependency>
+24:         <dependency>
+25:             <groupId>org.springframework.cloud</groupId>
+26:             <artifactId>spring-cloud-starter-config</artifactId>
+27:         </dependency>
+28:         <dependency>
+29:             <groupId>org.springframework.cloud</groupId>
+30:             <artifactId>spring-cloud-starter-eureka</artifactId>
+31:         </dependency>
+32:         <dependency>
+33:             <groupId>org.springframework</groupId>
+34:             <artifactId>spring-jdbc</artifactId>
+35:         </dependency>
+36:         <dependency>
+37:             <groupId>org.apache.tomcat</groupId>
+38:             <artifactId>tomcat-jdbc</artifactId>
+39:         </dependency>
+40:         <dependency>
+41:             <groupId>mysql</groupId>
+42:             <artifactId>mysql-connector-java</artifactId>
+43:             <version>5.1.34</version>
+44:         </dependency>
+45:         <dependency>
+46:             <groupId>org.springframework.cloud</groupId>
+47:             <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+48:         </dependency>
+49:         <dependency>
+50:             <groupId>org.springframework.cloud</groupId>
+51:             <artifactId>spring-cloud-netflix-hystrix-stream</artifactId>
+52:         </dependency>
+53:         <dependency>
+54:             <groupId>org.springframework.cloud</groupId>
+55:             <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+56:         </dependency>
+57:     </dependencies>
+58:     <build>
+59:         <plugins>
+60:             <plugin>
+61:                 <groupId>org.springframework.boot</groupId>
+62:                 <artifactId>spring-boot-maven-plugin</artifactId>
+63:                 <executions>
+64:                     <execution>
+65:                         <goals>
+66:                             <goal>repackage</goal>
+67:                         </goals>
+68:                     </execution>
+69:                 </executions>
+70:             </plugin>
+71:             <plugin>
+72:                 <groupId>com.spotify</groupId>
+73:                 <artifactId>docker-maven-plugin</artifactId>
+74:                 <version>${docker.plugin.version}</version>
+75:                 <executions>
+76:                     <execution>
+77:                         <phase>package</phase>
+78:                         <goals>
+79:                             <goal>build</goal>
+80:                         </goals>
+81:                     </execution>
+82:                 </executions>
+83:                 <configuration>
+84:                     <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+85:                     <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+86:                     <resources>
+87:                         <resource>
+88:                             <targetPath>/</targetPath>
+89:                             <directory>${project.build.directory}</directory>
+90:                             <include>${project.build.finalName}.jar</include>
+91:                         </resource>
+92:                     </resources>
+93:                 </configuration>
+94:             </plugin>
+95:         </plugins>
+96:     </build>
+97: </project>
+
+================
+File: cloud-simple-service/src/main/docker/Dockerfile
+================
+1: FROM java:8
+2: VOLUME /tmp
+3: ADD cloud-simple-service-1.0-SNAPSHOT.jar app.jar
+4: RUN bash -c 'touch /app.jar'
+5: ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+
+================
+File: cloud-simple-service/src/main/java/cloud/simple/service/conf/DataSourceProperties.java
+================
+ 1: package cloud.simple.service.conf;
+ 2: import org.springframework.boot.context.properties.ConfigurationProperties;
+ 3: @ConfigurationProperties(prefix = DataSourceProperties.DS, ignoreUnknownFields = false)
+ 4: public class DataSourceProperties {
+ 5:     public final static String DS="mysqldb.datasource";
+ 6:     private String driverClassName ="com.mysql.jdbc.Driver";
+ 7:     private String url;
+ 8:     private String username;
+ 9:     private String password;
+10:     private int maxActive = 100;
+11:     private int maxIdle = 8;
+12:     private int minIdle = 8;
+13:     private int initialSize = 10;
+14:     private String validationQuery;
+15:     public String getDriverClassName() {
+16:         return driverClassName;
+17:     }
+18:     public void setDriverClassName(String driverClassName) {
+19:         this.driverClassName = driverClassName;
+20:     }
+21:     public String getUrl() {
+22:         return url;
+23:     }
+24:     public void setUrl(String url) {
+25:         this.url = url;
+26:     }
+27:     public String getUsername() {
+28:         return username;
+29:     }
+30:     public void setUsername(String username) {
+31:         this.username = username;
+32:     }
+33:     public String getPassword() {
+34:         return password;
+35:     }
+36:     public void setPassword(String password) {
+37:         this.password = password;
+38:     }
+39:     public int getMaxActive() {
+40:         return maxActive;
+41:     }
+42:     public void setMaxActive(int maxActive) {
+43:         this.maxActive = maxActive;
+44:     }
+45:     public int getMaxIdle() {
+46:         return maxIdle;
+47:     }
+48:     public void setMaxIdle(int maxIdle) {
+49:         this.maxIdle = maxIdle;
+50:     }
+51:     public int getMinIdle() {
+52:         return minIdle;
+53:     }
+54:     public void setMinIdle(int minIdle) {
+55:         this.minIdle = minIdle;
+56:     }
+57:     public int getInitialSize() {
+58:         return initialSize;
+59:     }
+60:     public void setInitialSize(int initialSize) {
+61:         this.initialSize = initialSize;
+62:     }
+63:     public String getValidationQuery() {
+64:         return validationQuery;
+65:     }
+66:     public void setValidationQuery(String validationQuery) {
+67:         this.validationQuery = validationQuery;
+68:     }
+69:     public boolean isTestOnBorrow() {
+70:         return testOnBorrow;
+71:     }
+72:     public void setTestOnBorrow(boolean testOnBorrow) {
+73:         this.testOnBorrow = testOnBorrow;
+74:     }
+75:     public boolean isTestOnReturn() {
+76:         return testOnReturn;
+77:     }
+78:     public void setTestOnReturn(boolean testOnReturn) {
+79:         this.testOnReturn = testOnReturn;
+80:     }
+81:     private boolean testOnBorrow = false;
+82:     private boolean testOnReturn = false;
+83: }
+
+================
+File: cloud-simple-service/src/main/java/cloud/simple/service/conf/JdbcDataSource.java
+================
+ 1: package cloud.simple.service.conf;
+ 2: import org.apache.tomcat.jdbc.pool.DataSource;
+ 3: import org.springframework.beans.factory.annotation.Autowired;
+ 4: import org.springframework.boot.context.properties.EnableConfigurationProperties;
+ 5: import org.springframework.cloud.context.config.annotation.RefreshScope;
+ 6: import org.springframework.context.annotation.Bean;
+ 7: import org.springframework.context.annotation.Configuration;
+ 8: import javax.annotation.PreDestroy;
+ 9: @Configuration
+10: @EnableConfigurationProperties(DataSourceProperties.class)
+11: public class JdbcDataSource {
+12:     @Autowired
+13:     private DataSourceProperties dataSourceProperties;
+14:     private org.apache.tomcat.jdbc.pool.DataSource pool;
+15:     @RefreshScope
+16:     @Bean(destroyMethod = "close")
+17:     public DataSource dataSource() {
+18:         DataSourceProperties config = dataSourceProperties;
+19:         this.pool = new org.apache.tomcat.jdbc.pool.DataSource();
+20:         this.pool.setDriverClassName(config.getDriverClassName());
+21:         this.pool.setUrl(config.getUrl());
+22:         if (config.getUsername() != null) {
+23:             this.pool.setUsername(config.getUsername());
+24:         }
+25:         if (config.getPassword() != null) {
+26:             this.pool.setPassword(config.getPassword());
+27:         }
+28:         this.pool.setInitialSize(config.getInitialSize());
+29:         this.pool.setMaxActive(config.getMaxActive());
+30:         this.pool.setMaxIdle(config.getMaxIdle());
+31:         this.pool.setMinIdle(config.getMinIdle());
+32:         this.pool.setTestOnBorrow(config.isTestOnBorrow());
+33:         this.pool.setTestOnReturn(config.isTestOnReturn());
+34:         this.pool.setValidationQuery(config.getValidationQuery());
+35:         return this.pool;
+36:     }
+37:     @PreDestroy
+38:     public void close() {
+39:         if (this.pool != null) {
+40:             this.pool.close();
+41:         }
+42:     }
+43: }
+
+================
+File: cloud-simple-service/src/main/java/cloud/simple/service/data/User.java
+================
+ 1: package cloud.simple.service.data;
+ 2: public class User {
+ 3:     private int id;
+ 4:     private String username;
+ 5:     public String getUsername() {
+ 6:         return username;
+ 7:     }
+ 8:     public void setUsername(String username) {
+ 9:         this.username = username;
+10:     }
+11:     public int getId() {
+12:         return id;
+13:     }
+14:     public void setId(int id) {
+15:         this.id = id;
+16:     }
+17: }
+
+================
+File: cloud-simple-service/src/main/java/cloud/simple/service/service/UserService.java
+================
+ 1: package cloud.simple.service.service;
+ 2: import cloud.simple.service.data.User;
+ 3: import cloud.simple.service.storage.UserStorage;
+ 4: import org.springframework.beans.factory.annotation.Autowired;
+ 5: import org.springframework.stereotype.Service;
+ 6: import org.springframework.transaction.annotation.Transactional;
+ 7: import java.util.List;
+ 8: @Service
+ 9: @Transactional
+10: public class UserService {
+11:     @Autowired
+12:     private UserStorage userMapper;
+13:     public List<User> searchAll(){
+14:         List<User> list = userMapper.findAll();
+15:         return list;
+16:     }
+17: }
+
+================
+File: cloud-simple-service/src/main/java/cloud/simple/service/SimpleService.java
+================
+ 1: package cloud.simple.service;
+ 2: import org.springframework.boot.SpringApplication;
+ 3: import org.springframework.boot.autoconfigure.SpringBootApplication;
+ 4: import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+ 5: @EnableDiscoveryClient
+ 6: @SpringBootApplication
+ 7: public class SimpleService {
+ 8:     public static void main(String[] args) {
+ 9:         SpringApplication.run(SimpleService.class, args);
+10:     }
+11: }
+
+================
+File: cloud-simple-service/src/main/java/cloud/simple/service/storage/UserStorage.java
+================
+1: package cloud.simple.service.storage;
+2: import cloud.simple.service.data.User;
+3: import java.util.List;
+4: public interface UserStorage {
+5:     List<User> findAll();
+6: }
+
+================
+File: cloud-simple-service/src/main/java/cloud/simple/service/storage/UserStorageImpl.java
+================
+ 1: package cloud.simple.service.storage;
+ 2: import cloud.simple.service.data.User;
+ 3: import org.springframework.beans.factory.annotation.Autowired;
+ 4: import org.springframework.jdbc.core.JdbcTemplate;
+ 5: import org.springframework.jdbc.core.RowMapper;
+ 6: import org.springframework.stereotype.Repository;
+ 7: import java.util.List;
+ 8: @Repository
+ 9: public class UserStorageImpl implements UserStorage {
+10:     private static final RowMapper<User> USER_ROW_MAPPER = (rs, row) -> {
+11:         User user = new User();
+12:         user.setId(rs.getInt("id"));
+13:         user.setUsername(rs.getString("username"));
+14:         return user;
+15:     };
+16:     @Autowired
+17:     private JdbcTemplate jdbcTemplate;
+18:     @Override
+19:     public List<User> findAll() {
+20:         return jdbcTemplate.query("select * from user ",USER_ROW_MAPPER);
+21:     }
+22: }
+
+================
+File: cloud-simple-service/src/main/java/cloud/simple/service/web/UserController.java
+================
+ 1: package cloud.simple.service.web;
+ 2: import cloud.simple.service.data.User;
+ 3: import cloud.simple.service.service.UserService;
+ 4: import org.slf4j.Logger;
+ 5: import org.slf4j.LoggerFactory;
+ 6: import org.springframework.beans.factory.annotation.Autowired;
+ 7: import org.springframework.web.bind.annotation.RequestMapping;
+ 8: import org.springframework.web.bind.annotation.RequestMethod;
+ 9: import org.springframework.web.bind.annotation.RestController;
+10: import java.util.List;
+11: @RestController
+12: public class UserController {
+13:     private static final Logger LOG = LoggerFactory.getLogger(UserController.class);
+14:     @Autowired
+15:     UserService userService;
+16:     @RequestMapping(value="/user",method= RequestMethod.GET)
+17:     public List<User> readUserInfo(){
+18:         List<User> ls=userService.searchAll();
+19:         LOG.info("request come to here!");
+20:         return ls;
+21:     }
+22: }
+
+================
+File: cloud-simple-service/src/main/resources/application.yaml
+================
+1: spring.zipkin.baseUrl: http://localhost:9411
+2: spring.zipkin.enabled: true
+3: spring:
+4:   sleuth:
+5:     sampler:
+6:       percentage: 1.0
+
+================
+File: cloud-simple-service/src/main/resources/bootstrap.yaml
+================
+1: spring.cloud.config.uri: http://127.0.0.1:${config.port:8888}
+2: spring.cloud.config.name: cloud-simple-service
+3: spring.cloud.config.profile: ${config.profile:dev}
+4: eureka.client.serviceUrl.defaultZone: http://localhost:8761/eureka/
+5: spring.application.name: cloud-simple-service
+6: server.port: 8081
+
+================
+File: cloud-simple-service/src/main/resources/db.sql
+================
+1: CREATE TABLE `user` (
+2:   `id` varchar(50) NOT NULL DEFAULT '',
+3:   `username` varchar(50) DEFAULT NULL,
+4:   PRIMARY KEY (`id`)
+5: ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+================
+File: cloud-simple-serviceB/pom.xml
+================
+ 1: <?xml version="1.0" encoding="UTF-8"?>
+ 2: <project xmlns="http://maven.apache.org/POM/4.0.0"
+ 3:          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 4:          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 5:     <parent>
+ 6:         <artifactId>spring-cloud-microservice-examples</artifactId>
+ 7:         <groupId>org.zpng</groupId>
+ 8:         <version>1.0-SNAPSHOT</version>
+ 9:     </parent>
+10:     <modelVersion>4.0.0</modelVersion>
+11:     <artifactId>cloud-simple-serviceb</artifactId>
+12:     <properties>
+13:         <docker.image.prefix>zpng</docker.image.prefix>
+14:     </properties>
+15:     <dependencies>
+16:         <dependency>
+17:             <groupId>org.springframework.cloud</groupId>
+18:             <artifactId>spring-cloud-starter-sleuth</artifactId>
+19:         </dependency>
+20:         <dependency>
+21:             <groupId>org.springframework.cloud</groupId>
+22:             <artifactId>spring-cloud-sleuth-zipkin</artifactId>
+23:         </dependency>
+24:         <dependency>
+25:             <groupId>org.springframework.cloud</groupId>
+26:             <artifactId>spring-cloud-starter-config</artifactId>
+27:         </dependency>
+28:         <dependency>
+29:             <groupId>org.springframework.cloud</groupId>
+30:             <artifactId>spring-cloud-starter-eureka</artifactId>
+31:         </dependency>
+32:         <dependency>
+33:             <groupId>org.springframework.cloud</groupId>
+34:             <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+35:         </dependency>
+36:         <dependency>
+37:             <groupId>org.springframework.cloud</groupId>
+38:             <artifactId>spring-cloud-netflix-hystrix-stream</artifactId>
+39:         </dependency>
+40:         <dependency>
+41:             <groupId>org.springframework.cloud</groupId>
+42:             <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+43:         </dependency>
+44:     </dependencies>
+45:     <build>
+46:         <plugins>
+47:             <plugin>
+48:                 <groupId>org.springframework.boot</groupId>
+49:                 <artifactId>spring-boot-maven-plugin</artifactId>
+50:                 <executions>
+51:                     <execution>
+52:                         <goals>
+53:                             <goal>repackage</goal>
+54:                         </goals>
+55:                     </execution>
+56:                 </executions>
+57:             </plugin>
+58:             <plugin>
+59:                 <groupId>com.spotify</groupId>
+60:                 <artifactId>docker-maven-plugin</artifactId>
+61:                 <version>${docker.plugin.version}</version>
+62:                 <executions>
+63:                     <execution>
+64:                         <phase>package</phase>
+65:                         <goals>
+66:                             <goal>build</goal>
+67:                         </goals>
+68:                     </execution>
+69:                 </executions>
+70:                 <configuration>
+71:                     <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+72:                     <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+73:                     <resources>
+74:                         <resource>
+75:                             <targetPath>/</targetPath>
+76:                             <directory>${project.build.directory}</directory>
+77:                             <include>${project.build.finalName}.jar</include>
+78:                         </resource>
+79:                     </resources>
+80:                 </configuration>
+81:             </plugin>
+82:         </plugins>
+83:     </build>
+84: </project>
+
+================
+File: cloud-simple-serviceB/src/main/docker/Dockerfile
+================
+1: FROM java:8
+2: VOLUME /tmp
+3: ADD cloud-simple-serviceb-1.0-SNAPSHOT.jar app.jar
+4: RUN bash -c 'touch /app.jar'
+5: ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+
+================
+File: cloud-simple-serviceB/src/main/java/cloud/simple/serviceB/controller/UserController.java
+================
+ 1: package cloud.simple.serviceB.controller;
+ 2: import org.springframework.web.bind.annotation.RequestMapping;
+ 3: import org.springframework.web.bind.annotation.RequestMethod;
+ 4: import org.springframework.web.bind.annotation.RestController;
+ 5: @RestController
+ 6: public class UserController {
+ 7:     @RequestMapping(value="/user",method= RequestMethod.GET)
+ 8:     public String readUserInfo(){
+ 9:         return "Result from simpleserviceB";
+10:     }
+11: }
+
+================
+File: cloud-simple-serviceB/src/main/java/cloud/simple/serviceB/SimpleServiceB.java
+================
+ 1: package cloud.simple.serviceB;
+ 2: import org.springframework.boot.SpringApplication;
+ 3: import org.springframework.boot.autoconfigure.SpringBootApplication;
+ 4: import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+ 5: @EnableDiscoveryClient
+ 6: @SpringBootApplication
+ 7: public class SimpleServiceB {
+ 8:     public static void main(String[] args) {
+ 9:         SpringApplication.run(SimpleServiceB.class, args);
+10:     }
+11: }
+
+================
+File: cloud-simple-serviceB/src/main/resources/application.yaml
+================
+1: spring.zipkin.baseUrl: http://localhost:9411
+2: spring.zipkin.enabled: true
+3: spring:
+4:   sleuth:
+5:     sampler:
+6:       percentage: 1.0
+
+================
+File: cloud-simple-serviceB/src/main/resources/bootstrap.yaml
+================
+1: spring.cloud.config.uri: http://127.0.0.1:${config.port:8888}
+2: spring.cloud.config.name: cloud-simple-serviceB
+3: spring.cloud.config.profile: ${config.profile:dev}
+4: eureka.client.serviceUrl.defaultZone: http://localhost:8761/eureka/
+5: spring.application.name: cloud-simple-serviceB
+6: server.port: 8091
+
+================
+File: cloud-simple-ui/pom.xml
+================
+ 1: <?xml version="1.0" encoding="UTF-8"?>
+ 2: <project xmlns="http://maven.apache.org/POM/4.0.0"
+ 3:          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 4:          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 5:     <parent>
+ 6:         <artifactId>spring-cloud-microservice-examples</artifactId>
+ 7:         <groupId>org.zpng</groupId>
+ 8:         <version>1.0-SNAPSHOT</version>
+ 9:     </parent>
+10:     <modelVersion>4.0.0</modelVersion>
+11:     <artifactId>cloud-simple-ui</artifactId>
+12:     <properties>
+13:         <docker.image.prefix>zpng</docker.image.prefix>
+14:     </properties>
+15:     <dependencies>
+16:         <dependency>
+17:             <groupId>org.springframework.cloud</groupId>
+18:             <artifactId>spring-cloud-starter-sleuth</artifactId>
+19:         </dependency>
+20:         <dependency>
+21:             <groupId>org.springframework.cloud</groupId>
+22:             <artifactId>spring-cloud-sleuth-zipkin</artifactId>
+23:         </dependency>
+24:         <dependency>
+25:             <groupId>org.springframework.cloud</groupId>
+26:             <artifactId>spring-cloud-starter-config</artifactId>
+27:         </dependency>
+28:         <dependency>
+29:             <groupId>org.springframework.cloud</groupId>
+30:             <artifactId>spring-cloud-starter-feign</artifactId>
+31:         </dependency>
+32:         <dependency>
+33:             <groupId>org.springframework.cloud</groupId>
+34:             <artifactId>spring-cloud-starter-eureka</artifactId>
+35:         </dependency>
+36:         <dependency>
+37:             <groupId>org.springframework.cloud</groupId>
+38:             <artifactId>spring-cloud-starter-hystrix</artifactId>
+39:         </dependency>
+40:         <dependency>
+41:             <groupId>org.jolokia</groupId>
+42:             <artifactId>jolokia-core</artifactId>
+43:         </dependency>
+44:         <dependency>
+45:             <groupId>org.springframework.cloud</groupId>
+46:             <artifactId>spring-cloud-netflix-hystrix-stream</artifactId>
+47:         </dependency>
+48:         <dependency>
+49:             <groupId>org.springframework.cloud</groupId>
+50:             <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+51:         </dependency>
+52:         <dependency>
+53:             <groupId>org.springframework.cloud</groupId>
+54:             <artifactId>spring-cloud-starter-ribbon</artifactId>
+55:         </dependency>
+56:     </dependencies>
+57:     <build>
+58:         <plugins>
+59:             <plugin>
+60:                 <groupId>org.springframework.boot</groupId>
+61:                 <artifactId>spring-boot-maven-plugin</artifactId>
+62:                 <executions>
+63:                     <execution>
+64:                         <goals>
+65:                             <goal>repackage</goal>
+66:                         </goals>
+67:                     </execution>
+68:                 </executions>
+69:             </plugin>
+70:             <plugin>
+71:                 <groupId>com.spotify</groupId>
+72:                 <artifactId>docker-maven-plugin</artifactId>
+73:                 <version>${docker.plugin.version}</version>
+74:                 <executions>
+75:                     <execution>
+76:                         <phase>package</phase>
+77:                         <goals>
+78:                             <goal>build</goal>
+79:                         </goals>
+80:                     </execution>
+81:                 </executions>
+82:                 <configuration>
+83:                     <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+84:                     <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+85:                     <resources>
+86:                         <resource>
+87:                             <targetPath>/</targetPath>
+88:                             <directory>${project.build.directory}</directory>
+89:                             <include>${project.build.finalName}.jar</include>
+90:                         </resource>
+91:                     </resources>
+92:                 </configuration>
+93:             </plugin>
+94:         </plugins>
+95:     </build>
+96: </project>
+
+================
+File: cloud-simple-ui/src/main/docker/Dockerfile
+================
+1: FROM java:8
+2: VOLUME /tmp
+3: ADD cloud-simple-ui-1.0-SNAPSHOT.jar app.jar
+4: RUN bash -c 'touch /app.jar'
+5: ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+
+================
+File: cloud-simple-ui/src/main/java/cloud/simple/data/User.java
+================
+ 1: package cloud.simple.data;
+ 2: public class User {
+ 3:     private int id;
+ 4:     private String username;
+ 5:     public String getUsername() {
+ 6:         return username;
+ 7:     }
+ 8:     public void setUsername(String username) {
+ 9:         this.username = username;
+10:     }
+11:     public int getId() {
+12:         return id;
+13:     }
+14:     public void setId(int id) {
+15:         this.id = id;
+16:     }
+17: }
+
+================
+File: cloud-simple-ui/src/main/java/cloud/simple/service/UserService.java
+================
+ 1: package cloud.simple.service;
+ 2: import cloud.simple.data.User;
+ 3: import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+ 4: import org.springframework.beans.factory.annotation.Autowired;
+ 5: import org.springframework.stereotype.Service;
+ 6: import org.springframework.web.client.RestTemplate;
+ 7: import java.util.ArrayList;
+ 8: import java.util.List;
+ 9: @Service
+10: public class UserService {
+11:     @Autowired
+12:     RestTemplate restTemplate;
+13:     final String SERVICE_NAME = "cloud-simple-service";
+14:     @HystrixCommand(fallbackMethod = "fallbackSearchAll")
+15:     public List<User> readUserInfo() {
+16:         return restTemplate.getForObject("http://" + SERVICE_NAME + "/user", List.class);
+17:     }
+18:     private List<User> fallbackSearchAll() {
+19:         System.out.println("HystrixCommand fallbackMethod handle!");
+20:         List<User> ls = new ArrayList<User>();
+21:         User user = new User();
+22:         user.setId(1);
+23:         user.setUsername("TestHystrixCommand");
+24:         ls.add(user);
+25:         return ls;
+26:     }
+27: }
+
+================
+File: cloud-simple-ui/src/main/java/cloud/simple/web/UserController.java
+================
+ 1: package cloud.simple.web;
+ 2: import cloud.simple.data.User;
+ 3: import cloud.simple.service.UserService;
+ 4: import org.springframework.beans.factory.annotation.Autowired;
+ 5: import org.springframework.http.HttpStatus;
+ 6: import org.springframework.http.ResponseEntity;
+ 7: import org.springframework.web.bind.annotation.RequestMapping;
+ 8: import org.springframework.web.bind.annotation.RestController;
+ 9: import java.util.List;
+10: @RestController
+11: public class UserController {
+12:     @Autowired
+13:     UserService userService;
+14:     @RequestMapping(value="/users")
+15:     public ResponseEntity<List<User>> readUserInfo(){
+16:         List<User> users=userService.readUserInfo();
+17:         return new ResponseEntity<List<User>>(users, HttpStatus.OK);
+18:     }
+19: }
+
+================
+File: cloud-simple-ui/src/main/java/cloud/simple/WebApplication.java
+================
+ 1: package cloud.simple;
+ 2: import org.springframework.boot.SpringApplication;
+ 3: import org.springframework.boot.autoconfigure.SpringBootApplication;
+ 4: import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
+ 5: import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+ 6: import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+ 7: import org.springframework.context.annotation.Bean;
+ 8: import org.springframework.web.client.RestTemplate;
+ 9: @SpringBootApplication
+10: @EnableDiscoveryClient
+11: @EnableCircuitBreaker
+12: public class WebApplication {
+13:     public static void main(String[] args) throws Exception {
+14:         SpringApplication.run(WebApplication.class, args);
+15:     }
+16:     @LoadBalanced
+17:     @Bean
+18:     RestTemplate restTemplate() {
+19:         return new RestTemplate();
+20:     }
+21: }
+
+================
+File: cloud-simple-ui/src/main/resources/application.yaml
+================
+1: spring.zipkin.baseUrl: http://localhost:9411
+2: spring.zipkin.enabled: true
+3: spring:
+4:   sleuth:
+5:     sampler:
+6:       percentage: 1.0
+
+================
+File: cloud-simple-ui/src/main/resources/bootstrap.yaml
+================
+1: spring.cloud.config.uri: http://127.0.0.1:${config.port:8888}
+2: spring.cloud.config.name: cloud-simple-service
+3: spring.cloud.config.profile: ${config.profile:dev}
+4: eureka.client.serviceUrl.defaultZone: http://localhost:8761/eureka/
+5: spring.application.name: cloud-simple-ui
+6: cloud-simple-service.ribbon.ConnectTimeout: 5000
+7: cloud-simple-service.ribbon.ReadTimeout: 10000
+8: server.port: 8090
+
+================
+File: cloud-simple-ui/src/main/resources/log4j.properties
+================
+ 1: log4j.rootCategory=INFO, CONSOLE
+ 2: 
+ 3: PID=????
+ 4: LOG_PATTERN=[%d{yyyy-MM-dd HH:mm:ss.SSS}] log4j%X{context} - ${PID} %5p [%t] --- %c{1}: %m%n
+ 5: 
+ 6: # CONSOLE is set to be a ConsoleAppender using a PatternLayout.
+ 7: log4j.appender.CONSOLE=org.apache.log4j.ConsoleAppender
+ 8: log4j.appender.CONSOLE.layout=org.apache.log4j.PatternLayout
+ 9: log4j.appender.CONSOLE.layout.ConversionPattern=${LOG_PATTERN}
+10: 
+11: log4j.category.org.hibernate.validator.internal.util.Version=INFO
+12: log4j.category.org.apache.coyote.http11.Http11NioProtocol=INFO
+13: log4j.category.org.apache.tomcat.util.net.NioSelectorPool=INFO
+14: log4j.category.org.apache.catalina.startup.DigesterFactory=INFO
+15: log4j.logger.org.apache=INFO
+
+================
+File: cloud-simple-ui/src/main/resources/static/index.html
+================
+ 1: <!DOCTYPE html>
+ 2: <html ng-app="users">
+ 3: <head>
+ 4:     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+ 5:     <script src="//cdn.bootcss.com/jquery/2.1.0-rc1/jquery.min.js"></script>
+ 6:     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+ 7:     <script src="http://cdn.bootcss.com/angular.js/1.3.18/angular.min.js"></script>
+ 8:     <script src="http://cdn.bootcss.com/angular.js/1.3.18/angular-route.js"></script>
+ 9:     <script src="js/app.js"></script>
+10: </head>
+11: <body>
+12: <div ng-view class="container">
+13: </div>
+14: </body>
+15: </html>
+
+================
+File: cloud-simple-ui/src/main/resources/static/js/app.js
+================
+ 1: angular.module('users', ['ngRoute']).config(function ($routeProvider) {
+ 2:     $routeProvider.when('/', {
+ 3:         templateUrl: 'user-page.html',
+ 4:         controller: 'userCtr'
+ 5:     })
+ 6: }).controller('userCtr', function ($scope, $http) {
+ 7:     $http.get('users').success(function (data) {
+ 8:         $scope.userList = data;
+ 9:     });
+10: });
+
+================
+File: cloud-simple-ui/src/main/resources/static/user-page.html
+================
+1: <div>
+2:     <ul ng-controller="userCtr">
+3:         <li ng-repeat="item in userList">
+4:             {{item.username}}
+5:         </li>
+6:     </ul>
+7: </div>
+
+================
+File: cloud-thrift-client/pom.xml
+================
+ 1: <?xml version="1.0" encoding="UTF-8"?>
+ 2: <project xmlns="http://maven.apache.org/POM/4.0.0"
+ 3:          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 4:          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 5:     <parent>
+ 6:         <artifactId>spring-cloud-microservice-examples</artifactId>
+ 7:         <groupId>org.zpng</groupId>
+ 8:         <version>1.0-SNAPSHOT</version>
+ 9:     </parent>
+10:     <modelVersion>4.0.0</modelVersion>
+11:     <artifactId>cloud-thrift-client</artifactId>
+12:     <dependencies>
+13:         <dependency>
+14:             <groupId>org.springframework.boot</groupId>
+15:             <artifactId>spring-boot-starter-web</artifactId>
+16:         </dependency>
+17:         <dependency>
+18:             <groupId>org.springframework.boot</groupId>
+19:             <artifactId>spring-boot-starter-actuator</artifactId>
+20:         </dependency>
+21:         <dependency>
+22:             <groupId>org.zpng</groupId>
+23:             <artifactId>cloud-thrift-interface</artifactId>
+24:             <version>1.0-SNAPSHOT</version>
+25:         </dependency>
+26:         <dependency>
+27:             <groupId>org.apache.zookeeper</groupId>
+28:             <artifactId>zookeeper</artifactId>
+29:             <version>3.4.6</version>
+30:         </dependency>
+31:         <dependency>
+32:             <groupId>org.apache.helix</groupId>
+33:             <artifactId>helix-core</artifactId>
+34:             <version>0.6.4</version>
+35:         </dependency>
+36:         <dependency>
+37:             <groupId>org.springframework.cloud</groupId>
+38:             <artifactId>spring-cloud-starter-sleuth</artifactId>
+39:         </dependency>
+40:         <dependency>
+41:             <groupId>org.springframework.cloud</groupId>
+42:             <artifactId>spring-cloud-sleuth-zipkin</artifactId>
+43:         </dependency>
+44:     </dependencies>
+45: </project>
+
+================
+File: cloud-thrift-client/src/main/java/cloud/thrift/client/CloudThriftClient.java
+================
+1: package cloud.thrift.client;
+2: import org.springframework.boot.SpringApplication;
+3: import org.springframework.boot.autoconfigure.SpringBootApplication;
+4: @SpringBootApplication
+5: public class CloudThriftClient {
+6:     public static void main(String[] args) {
+7:         SpringApplication.run(CloudThriftClient.class, args);
+8:     }
+9: }
+
+================
+File: cloud-thrift-client/src/main/java/cloud/thrift/client/config/ZooKeeperConfig.java
+================
+ 1: package cloud.thrift.client.config;
+ 2: import cloud.thrift.UserService;
+ 3: import org.I0Itec.zkclient.IZkChildListener;
+ 4: import org.apache.helix.manager.zk.ZkClient;
+ 5: import org.apache.thrift.protocol.TBinaryProtocol;
+ 6: import org.apache.thrift.transport.TSocket;
+ 7: import org.apache.thrift.transport.TTransportException;
+ 8: import org.springframework.beans.factory.annotation.Value;
+ 9: import org.springframework.context.annotation.Configuration;
+10: import javax.annotation.PostConstruct;
+11: import java.util.ArrayList;
+12: import java.util.HashMap;
+13: import java.util.List;
+14: import java.util.Map;
+15: import java.util.concurrent.ExecutorService;
+16: import java.util.concurrent.Executors;
+17: @Configuration
+18: public class ZooKeeperConfig {
+19:     @Value("${service.name}")
+20:     String serviceName;
+21:     @Value("${zookeeper.server.list}")
+22:     String zookeeperList;
+23:     ExecutorService executor = Executors.newSingleThreadExecutor();
+24:     public static Map<String, UserService.Client> serviceMap = new HashMap<String, UserService.Client>();
+25:     @PostConstruct
+26:     private void init() {
+27:         executor.execute(new Runnable() {
+28:             @Override
+29:             public void run() {
+30:                 startZooKeeper();
+31:                 try {
+32:                     Thread.sleep(1000 * 60 * 60 * 24 * 360 * 10);
+33:                 } catch (InterruptedException e) {
+34:                     e.printStackTrace();
+35:                 }
+36:             }
+37:         });
+38:     }
+39:     private void startZooKeeper() {
+40:         List<String> currChilds = new ArrayList<String>();
+41:         String servicePath = "/" + serviceName;
+42:         ZkClient zkClient = new ZkClient(zookeeperList);
+43:         boolean serviceExists = zkClient.exists(servicePath);
+44:         if (serviceExists) {
+45:             currChilds = zkClient.getChildren(servicePath);
+46:         } else {
+47:             throw new RuntimeException("service not exist!");
+48:         }
+49:         for (String instanceName : currChilds) {
+50:             if (!serviceMap.containsKey(instanceName)) {
+51:                 serviceMap.put(instanceName, createUserService(instanceName));
+52:             }
+53:         }
+54:         zkClient.subscribeChildChanges(servicePath, new IZkChildListener() {
+55:             public void handleChildChange(String parentPath,
+56:                                           List<String> currentChilds) throws Exception {
+57:                 for (String instanceName : currentChilds) {
+58:                     if (!serviceMap.containsKey(instanceName)) {
+59:                         serviceMap.put(instanceName,createUserService(instanceName));
+60:                     }
+61:                 }
+62:                 for (Map.Entry<String, UserService.Client> entry : serviceMap.entrySet()) {
+63:                     if (!currentChilds.contains(entry.getKey())) {
+64:                         UserService.Client c = serviceMap.get(entry.getKey());
+65:                         try {
+66:                             c.getInputProtocol().getTransport().close();
+67:                             c.getOutputProtocol().getTransport().close();
+68:                         } catch (Exception e) {
+69:                             e.printStackTrace();
+70:                         }
+71:                         serviceMap.remove(entry.getKey());
+72:                     }
+73:                 }
+74:                 System.out.println(parentPath + "事件触发");
+75:             }
+76:         });
+77:     }
+78:     private UserService.Client createUserService(String serviceInstanceName) {
+79:         String ip = serviceInstanceName.split("-")[1];
+80:         TSocket transport = new TSocket(ip, 7911);
+81:         try {
+82:             transport.open();
+83:         } catch (TTransportException e) {
+84:             e.printStackTrace();
+85:         }
+86:         return new UserService.Client(new TBinaryProtocol(transport));
+87:     }
+88: }
+
+================
+File: cloud-thrift-client/src/main/java/cloud/thrift/client/controller/UserController.java
+================
+ 1: package cloud.thrift.client.controller;
+ 2: import cloud.thrift.UserDto;
+ 3: import cloud.thrift.UserService;
+ 4: import cloud.thrift.client.provider.UserServiceProvider;
+ 5: import org.apache.thrift.TException;
+ 6: import org.springframework.beans.factory.annotation.Autowired;
+ 7: import org.springframework.stereotype.Controller;
+ 8: import org.springframework.web.bind.annotation.RequestMapping;
+ 9: import org.springframework.web.bind.annotation.ResponseBody;
+10: @Controller
+11: public class UserController {
+12:     @Autowired
+13:     UserServiceProvider userServiceProvider;
+14:     @ResponseBody
+15:     @RequestMapping(value = "/hello")
+16:     String hello() throws TException {
+17:         UserService.Client svr=userServiceProvider.getBalanceUserService();
+18:         UserDto userDto= svr.getUser();
+19:         return "hi "+userDto.getUsername();
+20:     }
+21: }
+
+================
+File: cloud-thrift-client/src/main/java/cloud/thrift/client/provider/UserServiceProvider.java
+================
+ 1: package cloud.thrift.client.provider;
+ 2: import cloud.thrift.UserService;
+ 3: import cloud.thrift.client.config.ZooKeeperConfig;
+ 4: import org.springframework.stereotype.Component;
+ 5: import java.util.Map;
+ 6: import java.util.Random;
+ 7: @Component
+ 8: public class UserServiceProvider {
+ 9:     public UserService.Client getBalanceUserService(){
+10:         Map<String, UserService.Client> serviceMap = ZooKeeperConfig.serviceMap;
+11:         for (Map.Entry<String, UserService.Client> entry : serviceMap.entrySet()) {
+12:             System.out.println("可供选择服务:"+entry.getKey());
+13:         }
+14:         int rand=new Random().nextInt(serviceMap.size());
+15:         String[] mkeys = serviceMap.keySet().toArray(new String[serviceMap.size()]);
+16:         return serviceMap.get(mkeys[rand]);
+17:     }
+18: }
+
+================
+File: cloud-thrift-client/src/main/resources/application.yaml
+================
+ 1: spring.zipkin.baseUrl: http://localhost:9966
+ 2: spring.zipkin.enabled: true
+ 3: spring:
+ 4:   sleuth:
+ 5:     sampler:
+ 6:       percentage: 1.0
+ 7: service.name: cloud-thrift-server
+ 8: zookeeper.server.list: localhost:2181
+ 9: server:
+10:   port: 8070
+
+================
+File: cloud-thrift-interface/pom.xml
+================
+ 1: <?xml version="1.0" encoding="UTF-8"?>
+ 2: <project xmlns="http://maven.apache.org/POM/4.0.0"
+ 3:          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 4:          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 5:     <parent>
+ 6:         <artifactId>spring-cloud-microservice-examples</artifactId>
+ 7:         <groupId>org.zpng</groupId>
+ 8:         <version>1.0-SNAPSHOT</version>
+ 9:     </parent>
+10:     <modelVersion>4.0.0</modelVersion>
+11:     <artifactId>cloud-thrift-interface</artifactId>
+12:     <dependencies>
+13:         <dependency>
+14:             <groupId>org.apache.thrift</groupId>
+15:             <artifactId>libthrift</artifactId>
+16:             <version>0.9.1</version>
+17:         </dependency>
+18:     </dependencies>
+19: </project>
+
+================
+File: cloud-thrift-interface/src/main/java/cloud/thrift/UserDto.java
+================
+  1: package cloud.thrift;
+  2: import org.apache.thrift.scheme.IScheme;
+  3: import org.apache.thrift.scheme.SchemeFactory;
+  4: import org.apache.thrift.scheme.StandardScheme;
+  5: import org.apache.thrift.scheme.TupleScheme;
+  6: import org.apache.thrift.protocol.TTupleProtocol;
+  7: import org.apache.thrift.protocol.TProtocolException;
+  8: import org.apache.thrift.EncodingUtils;
+  9: import org.apache.thrift.TException;
+ 10: import org.apache.thrift.async.AsyncMethodCallback;
+ 11: import org.apache.thrift.server.AbstractNonblockingServer.*;
+ 12: import java.util.List;
+ 13: import java.util.ArrayList;
+ 14: import java.util.Map;
+ 15: import java.util.HashMap;
+ 16: import java.util.EnumMap;
+ 17: import java.util.Set;
+ 18: import java.util.HashSet;
+ 19: import java.util.EnumSet;
+ 20: import java.util.Collections;
+ 21: import java.util.BitSet;
+ 22: import java.nio.ByteBuffer;
+ 23: import java.util.Arrays;
+ 24: import javax.annotation.Generated;
+ 25: import org.slf4j.Logger;
+ 26: import org.slf4j.LoggerFactory;
+ 27: @SuppressWarnings({"cast", "rawtypes", "serial", "unchecked"})
+ 28: @Generated(value = "Autogenerated by Thrift Compiler (0.9.2)", date = "2016-11-2")
+ 29: public class UserDto implements org.apache.thrift.TBase<UserDto, UserDto._Fields>, java.io.Serializable, Cloneable, Comparable<UserDto> {
+ 30:   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("UserDto");
+ 31:   private static final org.apache.thrift.protocol.TField ID_FIELD_DESC = new org.apache.thrift.protocol.TField("id", org.apache.thrift.protocol.TType.I32, (short)1);
+ 32:   private static final org.apache.thrift.protocol.TField USERNAME_FIELD_DESC = new org.apache.thrift.protocol.TField("username", org.apache.thrift.protocol.TType.STRING, (short)2);
+ 33:   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+ 34:   static {
+ 35:     schemes.put(StandardScheme.class, new UserDtoStandardSchemeFactory());
+ 36:     schemes.put(TupleScheme.class, new UserDtoTupleSchemeFactory());
+ 37:   }
+ 38:   private int id;
+ 39:   private String username;
+ 40:   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+ 41:     ID((short)1, "id"),
+ 42:     USERNAME((short)2, "username");
+ 43:     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+ 44:     static {
+ 45:       for (_Fields field : EnumSet.allOf(_Fields.class)) {
+ 46:         byName.put(field.getFieldName(), field);
+ 47:       }
+ 48:     }
+ 49:     public static _Fields findByThriftId(int fieldId) {
+ 50:       switch(fieldId) {
+ 51:         case 1:
+ 52:           return ID;
+ 53:         case 2:
+ 54:           return USERNAME;
+ 55:         default:
+ 56:           return null;
+ 57:       }
+ 58:     }
+ 59:     public static _Fields findByThriftIdOrThrow(int fieldId) {
+ 60:       _Fields fields = findByThriftId(fieldId);
+ 61:       if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+ 62:       return fields;
+ 63:     }
+ 64:     public static _Fields findByName(String name) {
+ 65:       return byName.get(name);
+ 66:     }
+ 67:     private final short _thriftId;
+ 68:     private final String _fieldName;
+ 69:     _Fields(short thriftId, String fieldName) {
+ 70:       _thriftId = thriftId;
+ 71:       _fieldName = fieldName;
+ 72:     }
+ 73:     public short getThriftFieldId() {
+ 74:       return _thriftId;
+ 75:     }
+ 76:     public String getFieldName() {
+ 77:       return _fieldName;
+ 78:     }
+ 79:   }
+ 80:   private static final int __ID_ISSET_ID = 0;
+ 81:   private byte __isset_bitfield = 0;
+ 82:   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+ 83:   static {
+ 84:     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+ 85:     tmpMap.put(_Fields.ID, new org.apache.thrift.meta_data.FieldMetaData("id", org.apache.thrift.TFieldRequirementType.DEFAULT,
+ 86:         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+ 87:     tmpMap.put(_Fields.USERNAME, new org.apache.thrift.meta_data.FieldMetaData("username", org.apache.thrift.TFieldRequirementType.DEFAULT,
+ 88:         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+ 89:     metaDataMap = Collections.unmodifiableMap(tmpMap);
+ 90:     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(UserDto.class, metaDataMap);
+ 91:   }
+ 92:   public UserDto() {
+ 93:   }
+ 94:   public UserDto(
+ 95:     int id,
+ 96:     String username)
+ 97:   {
+ 98:     this();
+ 99:     this.id = id;
+100:     setIdIsSet(true);
+101:     this.username = username;
+102:   }
+103:   public UserDto(UserDto other) {
+104:     __isset_bitfield = other.__isset_bitfield;
+105:     this.id = other.id;
+106:     if (other.isSetUsername()) {
+107:       this.username = other.username;
+108:     }
+109:   }
+110:   public UserDto deepCopy() {
+111:     return new UserDto(this);
+112:   }
+113:   @Override
+114:   public void clear() {
+115:     setIdIsSet(false);
+116:     this.id = 0;
+117:     this.username = null;
+118:   }
+119:   public int getId() {
+120:     return this.id;
+121:   }
+122:   public void setId(int id) {
+123:     this.id = id;
+124:     setIdIsSet(true);
+125:   }
+126:   public void unsetId() {
+127:     __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __ID_ISSET_ID);
+128:   }
+129:   public boolean isSetId() {
+130:     return EncodingUtils.testBit(__isset_bitfield, __ID_ISSET_ID);
+131:   }
+132:   public void setIdIsSet(boolean value) {
+133:     __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __ID_ISSET_ID, value);
+134:   }
+135:   public String getUsername() {
+136:     return this.username;
+137:   }
+138:   public void setUsername(String username) {
+139:     this.username = username;
+140:   }
+141:   public void unsetUsername() {
+142:     this.username = null;
+143:   }
+144:   public boolean isSetUsername() {
+145:     return this.username != null;
+146:   }
+147:   public void setUsernameIsSet(boolean value) {
+148:     if (!value) {
+149:       this.username = null;
+150:     }
+151:   }
+152:   public void setFieldValue(_Fields field, Object value) {
+153:     switch (field) {
+154:     case ID:
+155:       if (value == null) {
+156:         unsetId();
+157:       } else {
+158:         setId((Integer)value);
+159:       }
+160:       break;
+161:     case USERNAME:
+162:       if (value == null) {
+163:         unsetUsername();
+164:       } else {
+165:         setUsername((String)value);
+166:       }
+167:       break;
+168:     }
+169:   }
+170:   public Object getFieldValue(_Fields field) {
+171:     switch (field) {
+172:     case ID:
+173:       return Integer.valueOf(getId());
+174:     case USERNAME:
+175:       return getUsername();
+176:     }
+177:     throw new IllegalStateException();
+178:   }
+179:   public boolean isSet(_Fields field) {
+180:     if (field == null) {
+181:       throw new IllegalArgumentException();
+182:     }
+183:     switch (field) {
+184:     case ID:
+185:       return isSetId();
+186:     case USERNAME:
+187:       return isSetUsername();
+188:     }
+189:     throw new IllegalStateException();
+190:   }
+191:   @Override
+192:   public boolean equals(Object that) {
+193:     if (that == null)
+194:       return false;
+195:     if (that instanceof UserDto)
+196:       return this.equals((UserDto)that);
+197:     return false;
+198:   }
+199:   public boolean equals(UserDto that) {
+200:     if (that == null)
+201:       return false;
+202:     boolean this_present_id = true;
+203:     boolean that_present_id = true;
+204:     if (this_present_id || that_present_id) {
+205:       if (!(this_present_id && that_present_id))
+206:         return false;
+207:       if (this.id != that.id)
+208:         return false;
+209:     }
+210:     boolean this_present_username = true && this.isSetUsername();
+211:     boolean that_present_username = true && that.isSetUsername();
+212:     if (this_present_username || that_present_username) {
+213:       if (!(this_present_username && that_present_username))
+214:         return false;
+215:       if (!this.username.equals(that.username))
+216:         return false;
+217:     }
+218:     return true;
+219:   }
+220:   @Override
+221:   public int hashCode() {
+222:     List<Object> list = new ArrayList<Object>();
+223:     boolean present_id = true;
+224:     list.add(present_id);
+225:     if (present_id)
+226:       list.add(id);
+227:     boolean present_username = true && (isSetUsername());
+228:     list.add(present_username);
+229:     if (present_username)
+230:       list.add(username);
+231:     return list.hashCode();
+232:   }
+233:   @Override
+234:   public int compareTo(UserDto other) {
+235:     if (!getClass().equals(other.getClass())) {
+236:       return getClass().getName().compareTo(other.getClass().getName());
+237:     }
+238:     int lastComparison = 0;
+239:     lastComparison = Boolean.valueOf(isSetId()).compareTo(other.isSetId());
+240:     if (lastComparison != 0) {
+241:       return lastComparison;
+242:     }
+243:     if (isSetId()) {
+244:       lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.id, other.id);
+245:       if (lastComparison != 0) {
+246:         return lastComparison;
+247:       }
+248:     }
+249:     lastComparison = Boolean.valueOf(isSetUsername()).compareTo(other.isSetUsername());
+250:     if (lastComparison != 0) {
+251:       return lastComparison;
+252:     }
+253:     if (isSetUsername()) {
+254:       lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.username, other.username);
+255:       if (lastComparison != 0) {
+256:         return lastComparison;
+257:       }
+258:     }
+259:     return 0;
+260:   }
+261:   public _Fields fieldForId(int fieldId) {
+262:     return _Fields.findByThriftId(fieldId);
+263:   }
+264:   public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+265:     schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+266:   }
+267:   public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+268:     schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+269:   }
+270:   @Override
+271:   public String toString() {
+272:     StringBuilder sb = new StringBuilder("UserDto(");
+273:     boolean first = true;
+274:     sb.append("id:");
+275:     sb.append(this.id);
+276:     first = false;
+277:     if (!first) sb.append(", ");
+278:     sb.append("username:");
+279:     if (this.username == null) {
+280:       sb.append("null");
+281:     } else {
+282:       sb.append(this.username);
+283:     }
+284:     first = false;
+285:     sb.append(")");
+286:     return sb.toString();
+287:   }
+288:   public void validate() throws org.apache.thrift.TException {
+289:   }
+290:   private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+291:     try {
+292:       write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+293:     } catch (org.apache.thrift.TException te) {
+294:       throw new java.io.IOException(te);
+295:     }
+296:   }
+297:   private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+298:     try {
+299:       __isset_bitfield = 0;
+300:       read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+301:     } catch (org.apache.thrift.TException te) {
+302:       throw new java.io.IOException(te);
+303:     }
+304:   }
+305:   private static class UserDtoStandardSchemeFactory implements SchemeFactory {
+306:     public UserDtoStandardScheme getScheme() {
+307:       return new UserDtoStandardScheme();
+308:     }
+309:   }
+310:   private static class UserDtoStandardScheme extends StandardScheme<UserDto> {
+311:     public void read(org.apache.thrift.protocol.TProtocol iprot, UserDto struct) throws org.apache.thrift.TException {
+312:       org.apache.thrift.protocol.TField schemeField;
+313:       iprot.readStructBegin();
+314:       while (true)
+315:       {
+316:         schemeField = iprot.readFieldBegin();
+317:         if (schemeField.type == org.apache.thrift.protocol.TType.STOP) {
+318:           break;
+319:         }
+320:         switch (schemeField.id) {
+321:           case 1:
+322:             if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+323:               struct.id = iprot.readI32();
+324:               struct.setIdIsSet(true);
+325:             } else {
+326:               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+327:             }
+328:             break;
+329:           case 2:
+330:             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+331:               struct.username = iprot.readString();
+332:               struct.setUsernameIsSet(true);
+333:             } else {
+334:               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+335:             }
+336:             break;
+337:           default:
+338:             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+339:         }
+340:         iprot.readFieldEnd();
+341:       }
+342:       iprot.readStructEnd();
+343:       struct.validate();
+344:     }
+345:     public void write(org.apache.thrift.protocol.TProtocol oprot, UserDto struct) throws org.apache.thrift.TException {
+346:       struct.validate();
+347:       oprot.writeStructBegin(STRUCT_DESC);
+348:       oprot.writeFieldBegin(ID_FIELD_DESC);
+349:       oprot.writeI32(struct.id);
+350:       oprot.writeFieldEnd();
+351:       if (struct.username != null) {
+352:         oprot.writeFieldBegin(USERNAME_FIELD_DESC);
+353:         oprot.writeString(struct.username);
+354:         oprot.writeFieldEnd();
+355:       }
+356:       oprot.writeFieldStop();
+357:       oprot.writeStructEnd();
+358:     }
+359:   }
+360:   private static class UserDtoTupleSchemeFactory implements SchemeFactory {
+361:     public UserDtoTupleScheme getScheme() {
+362:       return new UserDtoTupleScheme();
+363:     }
+364:   }
+365:   private static class UserDtoTupleScheme extends TupleScheme<UserDto> {
+366:     @Override
+367:     public void write(org.apache.thrift.protocol.TProtocol prot, UserDto struct) throws org.apache.thrift.TException {
+368:       TTupleProtocol oprot = (TTupleProtocol) prot;
+369:       BitSet optionals = new BitSet();
+370:       if (struct.isSetId()) {
+371:         optionals.set(0);
+372:       }
+373:       if (struct.isSetUsername()) {
+374:         optionals.set(1);
+375:       }
+376:       oprot.writeBitSet(optionals, 2);
+377:       if (struct.isSetId()) {
+378:         oprot.writeI32(struct.id);
+379:       }
+380:       if (struct.isSetUsername()) {
+381:         oprot.writeString(struct.username);
+382:       }
+383:     }
+384:     @Override
+385:     public void read(org.apache.thrift.protocol.TProtocol prot, UserDto struct) throws org.apache.thrift.TException {
+386:       TTupleProtocol iprot = (TTupleProtocol) prot;
+387:       BitSet incoming = iprot.readBitSet(2);
+388:       if (incoming.get(0)) {
+389:         struct.id = iprot.readI32();
+390:         struct.setIdIsSet(true);
+391:       }
+392:       if (incoming.get(1)) {
+393:         struct.username = iprot.readString();
+394:         struct.setUsernameIsSet(true);
+395:       }
+396:     }
+397:   }
+398: }
+
+================
+File: cloud-thrift-interface/src/main/java/cloud/thrift/UserService.java
+================
+  1: package cloud.thrift;
+  2: import org.apache.thrift.scheme.IScheme;
+  3: import org.apache.thrift.scheme.SchemeFactory;
+  4: import org.apache.thrift.scheme.StandardScheme;
+  5: import org.apache.thrift.scheme.TupleScheme;
+  6: import org.apache.thrift.protocol.TTupleProtocol;
+  7: import org.apache.thrift.protocol.TProtocolException;
+  8: import org.apache.thrift.EncodingUtils;
+  9: import org.apache.thrift.TException;
+ 10: import org.apache.thrift.async.AsyncMethodCallback;
+ 11: import org.apache.thrift.server.AbstractNonblockingServer.*;
+ 12: import java.util.List;
+ 13: import java.util.ArrayList;
+ 14: import java.util.Map;
+ 15: import java.util.HashMap;
+ 16: import java.util.EnumMap;
+ 17: import java.util.Set;
+ 18: import java.util.HashSet;
+ 19: import java.util.EnumSet;
+ 20: import java.util.Collections;
+ 21: import java.util.BitSet;
+ 22: import java.nio.ByteBuffer;
+ 23: import java.util.Arrays;
+ 24: import javax.annotation.Generated;
+ 25: import org.slf4j.Logger;
+ 26: import org.slf4j.LoggerFactory;
+ 27: @SuppressWarnings({"cast", "rawtypes", "serial", "unchecked"})
+ 28: @Generated(value = "Autogenerated by Thrift Compiler (0.9.2)", date = "2016-11-2")
+ 29: public class UserService {
+ 30:   public interface Iface {
+ 31:     public UserDto getUser() throws org.apache.thrift.TException;
+ 32:   }
+ 33:   public interface AsyncIface {
+ 34:     public void getUser(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+ 35:   }
+ 36:   public static class Client extends org.apache.thrift.TServiceClient implements Iface {
+ 37:     public static class Factory implements org.apache.thrift.TServiceClientFactory<Client> {
+ 38:       public Factory() {}
+ 39:       public Client getClient(org.apache.thrift.protocol.TProtocol prot) {
+ 40:         return new Client(prot);
+ 41:       }
+ 42:       public Client getClient(org.apache.thrift.protocol.TProtocol iprot, org.apache.thrift.protocol.TProtocol oprot) {
+ 43:         return new Client(iprot, oprot);
+ 44:       }
+ 45:     }
+ 46:     public Client(org.apache.thrift.protocol.TProtocol prot)
+ 47:     {
+ 48:       super(prot, prot);
+ 49:     }
+ 50:     public Client(org.apache.thrift.protocol.TProtocol iprot, org.apache.thrift.protocol.TProtocol oprot) {
+ 51:       super(iprot, oprot);
+ 52:     }
+ 53:     public UserDto getUser() throws org.apache.thrift.TException
+ 54:     {
+ 55:       send_getUser();
+ 56:       return recv_getUser();
+ 57:     }
+ 58:     public void send_getUser() throws org.apache.thrift.TException
+ 59:     {
+ 60:       getUser_args args = new getUser_args();
+ 61:       sendBase("getUser", args);
+ 62:     }
+ 63:     public UserDto recv_getUser() throws org.apache.thrift.TException
+ 64:     {
+ 65:       getUser_result result = new getUser_result();
+ 66:       receiveBase(result, "getUser");
+ 67:       if (result.isSetSuccess()) {
+ 68:         return result.success;
+ 69:       }
+ 70:       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "getUser failed: unknown result");
+ 71:     }
+ 72:   }
+ 73:   public static class AsyncClient extends org.apache.thrift.async.TAsyncClient implements AsyncIface {
+ 74:     public static class Factory implements org.apache.thrift.async.TAsyncClientFactory<AsyncClient> {
+ 75:       private org.apache.thrift.async.TAsyncClientManager clientManager;
+ 76:       private org.apache.thrift.protocol.TProtocolFactory protocolFactory;
+ 77:       public Factory(org.apache.thrift.async.TAsyncClientManager clientManager, org.apache.thrift.protocol.TProtocolFactory protocolFactory) {
+ 78:         this.clientManager = clientManager;
+ 79:         this.protocolFactory = protocolFactory;
+ 80:       }
+ 81:       public AsyncClient getAsyncClient(org.apache.thrift.transport.TNonblockingTransport transport) {
+ 82:         return new AsyncClient(protocolFactory, clientManager, transport);
+ 83:       }
+ 84:     }
+ 85:     public AsyncClient(org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.async.TAsyncClientManager clientManager, org.apache.thrift.transport.TNonblockingTransport transport) {
+ 86:       super(protocolFactory, clientManager, transport);
+ 87:     }
+ 88:     public void getUser(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+ 89:       checkReady();
+ 90:       getUser_call method_call = new getUser_call(resultHandler, this, ___protocolFactory, ___transport);
+ 91:       this.___currentMethod = method_call;
+ 92:       ___manager.call(method_call);
+ 93:     }
+ 94:     public static class getUser_call extends org.apache.thrift.async.TAsyncMethodCall {
+ 95:       public getUser_call(org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+ 96:         super(client, protocolFactory, transport, resultHandler, false);
+ 97:       }
+ 98:       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+ 99:         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("getUser", org.apache.thrift.protocol.TMessageType.CALL, 0));
+100:         getUser_args args = new getUser_args();
+101:         args.write(prot);
+102:         prot.writeMessageEnd();
+103:       }
+104:       public UserDto getResult() throws org.apache.thrift.TException {
+105:         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+106:           throw new IllegalStateException("Method call not finished!");
+107:         }
+108:         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+109:         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+110:         return (new Client(prot)).recv_getUser();
+111:       }
+112:     }
+113:   }
+114:   public static class Processor<I extends Iface> extends org.apache.thrift.TBaseProcessor<I> implements org.apache.thrift.TProcessor {
+115:     private static final Logger LOGGER = LoggerFactory.getLogger(Processor.class.getName());
+116:     public Processor(I iface) {
+117:       super(iface, getProcessMap(new HashMap<String, org.apache.thrift.ProcessFunction<I, ? extends org.apache.thrift.TBase>>()));
+118:     }
+119:     protected Processor(I iface, Map<String,  org.apache.thrift.ProcessFunction<I, ? extends  org.apache.thrift.TBase>> processMap) {
+120:       super(iface, getProcessMap(processMap));
+121:     }
+122:     private static <I extends Iface> Map<String,  org.apache.thrift.ProcessFunction<I, ? extends  org.apache.thrift.TBase>> getProcessMap(Map<String,  org.apache.thrift.ProcessFunction<I, ? extends  org.apache.thrift.TBase>> processMap) {
+123:       processMap.put("getUser", new getUser());
+124:       return processMap;
+125:     }
+126:     public static class getUser<I extends Iface> extends org.apache.thrift.ProcessFunction<I, getUser_args> {
+127:       public getUser() {
+128:         super("getUser");
+129:       }
+130:       public getUser_args getEmptyArgsInstance() {
+131:         return new getUser_args();
+132:       }
+133:       protected boolean isOneway() {
+134:         return false;
+135:       }
+136:       public getUser_result getResult(I iface, getUser_args args) throws org.apache.thrift.TException {
+137:         getUser_result result = new getUser_result();
+138:         result.success = iface.getUser();
+139:         return result;
+140:       }
+141:     }
+142:   }
+143:   public static class AsyncProcessor<I extends AsyncIface> extends org.apache.thrift.TBaseAsyncProcessor<I> {
+144:     private static final Logger LOGGER = LoggerFactory.getLogger(AsyncProcessor.class.getName());
+145:     public AsyncProcessor(I iface) {
+146:       super(iface, getProcessMap(new HashMap<String, org.apache.thrift.AsyncProcessFunction<I, ? extends org.apache.thrift.TBase, ?>>()));
+147:     }
+148:     protected AsyncProcessor(I iface, Map<String,  org.apache.thrift.AsyncProcessFunction<I, ? extends  org.apache.thrift.TBase, ?>> processMap) {
+149:       super(iface, getProcessMap(processMap));
+150:     }
+151:     private static <I extends AsyncIface> Map<String,  org.apache.thrift.AsyncProcessFunction<I, ? extends  org.apache.thrift.TBase,?>> getProcessMap(Map<String,  org.apache.thrift.AsyncProcessFunction<I, ? extends  org.apache.thrift.TBase, ?>> processMap) {
+152:       processMap.put("getUser", new getUser());
+153:       return processMap;
+154:     }
+155:     public static class getUser<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, getUser_args, UserDto> {
+156:       public getUser() {
+157:         super("getUser");
+158:       }
+159:       public getUser_args getEmptyArgsInstance() {
+160:         return new getUser_args();
+161:       }
+162:       public AsyncMethodCallback<UserDto> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+163:         final org.apache.thrift.AsyncProcessFunction fcall = this;
+164:         return new AsyncMethodCallback<UserDto>() {
+165:           public void onComplete(UserDto o) {
+166:             getUser_result result = new getUser_result();
+167:             result.success = o;
+168:             try {
+169:               fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+170:               return;
+171:             } catch (Exception e) {
+172:               LOGGER.error("Exception writing to internal frame buffer", e);
+173:             }
+174:             fb.close();
+175:           }
+176:           public void onError(Exception e) {
+177:             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+178:             org.apache.thrift.TBase msg;
+179:             getUser_result result = new getUser_result();
+180:             {
+181:               msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+182:               msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+183:             }
+184:             try {
+185:               fcall.sendResponse(fb,msg,msgType,seqid);
+186:               return;
+187:             } catch (Exception ex) {
+188:               LOGGER.error("Exception writing to internal frame buffer", ex);
+189:             }
+190:             fb.close();
+191:           }
+192:         };
+193:       }
+194:       protected boolean isOneway() {
+195:         return false;
+196:       }
+197:       public void start(I iface, getUser_args args, org.apache.thrift.async.AsyncMethodCallback<UserDto> resultHandler) throws TException {
+198:         iface.getUser(resultHandler);
+199:       }
+200:     }
+201:   }
+202:   public static class getUser_args implements org.apache.thrift.TBase<getUser_args, getUser_args._Fields>, java.io.Serializable, Cloneable, Comparable<getUser_args>   {
+203:     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("getUser_args");
+204:     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+205:     static {
+206:       schemes.put(StandardScheme.class, new getUser_argsStandardSchemeFactory());
+207:       schemes.put(TupleScheme.class, new getUser_argsTupleSchemeFactory());
+208:     }
+209:     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+210: ;
+211:       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+212:       static {
+213:         for (_Fields field : EnumSet.allOf(_Fields.class)) {
+214:           byName.put(field.getFieldName(), field);
+215:         }
+216:       }
+217:       public static _Fields findByThriftId(int fieldId) {
+218:         switch(fieldId) {
+219:           default:
+220:             return null;
+221:         }
+222:       }
+223:       public static _Fields findByThriftIdOrThrow(int fieldId) {
+224:         _Fields fields = findByThriftId(fieldId);
+225:         if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+226:         return fields;
+227:       }
+228:       public static _Fields findByName(String name) {
+229:         return byName.get(name);
+230:       }
+231:       private final short _thriftId;
+232:       private final String _fieldName;
+233:       _Fields(short thriftId, String fieldName) {
+234:         _thriftId = thriftId;
+235:         _fieldName = fieldName;
+236:       }
+237:       public short getThriftFieldId() {
+238:         return _thriftId;
+239:       }
+240:       public String getFieldName() {
+241:         return _fieldName;
+242:       }
+243:     }
+244:     public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+245:     static {
+246:       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+247:       metaDataMap = Collections.unmodifiableMap(tmpMap);
+248:       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getUser_args.class, metaDataMap);
+249:     }
+250:     public getUser_args() {
+251:     }
+252:     public getUser_args(getUser_args other) {
+253:     }
+254:     public getUser_args deepCopy() {
+255:       return new getUser_args(this);
+256:     }
+257:     @Override
+258:     public void clear() {
+259:     }
+260:     public void setFieldValue(_Fields field, Object value) {
+261:       switch (field) {
+262:       }
+263:     }
+264:     public Object getFieldValue(_Fields field) {
+265:       switch (field) {
+266:       }
+267:       throw new IllegalStateException();
+268:     }
+269:     public boolean isSet(_Fields field) {
+270:       if (field == null) {
+271:         throw new IllegalArgumentException();
+272:       }
+273:       switch (field) {
+274:       }
+275:       throw new IllegalStateException();
+276:     }
+277:     @Override
+278:     public boolean equals(Object that) {
+279:       if (that == null)
+280:         return false;
+281:       if (that instanceof getUser_args)
+282:         return this.equals((getUser_args)that);
+283:       return false;
+284:     }
+285:     public boolean equals(getUser_args that) {
+286:       if (that == null)
+287:         return false;
+288:       return true;
+289:     }
+290:     @Override
+291:     public int hashCode() {
+292:       List<Object> list = new ArrayList<Object>();
+293:       return list.hashCode();
+294:     }
+295:     @Override
+296:     public int compareTo(getUser_args other) {
+297:       if (!getClass().equals(other.getClass())) {
+298:         return getClass().getName().compareTo(other.getClass().getName());
+299:       }
+300:       int lastComparison = 0;
+301:       return 0;
+302:     }
+303:     public _Fields fieldForId(int fieldId) {
+304:       return _Fields.findByThriftId(fieldId);
+305:     }
+306:     public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+307:       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+308:     }
+309:     public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+310:       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+311:     }
+312:     @Override
+313:     public String toString() {
+314:       StringBuilder sb = new StringBuilder("getUser_args(");
+315:       boolean first = true;
+316:       sb.append(")");
+317:       return sb.toString();
+318:     }
+319:     public void validate() throws org.apache.thrift.TException {
+320:     }
+321:     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+322:       try {
+323:         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+324:       } catch (org.apache.thrift.TException te) {
+325:         throw new java.io.IOException(te);
+326:       }
+327:     }
+328:     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+329:       try {
+330:         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+331:       } catch (org.apache.thrift.TException te) {
+332:         throw new java.io.IOException(te);
+333:       }
+334:     }
+335:     private static class getUser_argsStandardSchemeFactory implements SchemeFactory {
+336:       public getUser_argsStandardScheme getScheme() {
+337:         return new getUser_argsStandardScheme();
+338:       }
+339:     }
+340:     private static class getUser_argsStandardScheme extends StandardScheme<getUser_args> {
+341:       public void read(org.apache.thrift.protocol.TProtocol iprot, getUser_args struct) throws org.apache.thrift.TException {
+342:         org.apache.thrift.protocol.TField schemeField;
+343:         iprot.readStructBegin();
+344:         while (true)
+345:         {
+346:           schemeField = iprot.readFieldBegin();
+347:           if (schemeField.type == org.apache.thrift.protocol.TType.STOP) {
+348:             break;
+349:           }
+350:           switch (schemeField.id) {
+351:             default:
+352:               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+353:           }
+354:           iprot.readFieldEnd();
+355:         }
+356:         iprot.readStructEnd();
+357:         struct.validate();
+358:       }
+359:       public void write(org.apache.thrift.protocol.TProtocol oprot, getUser_args struct) throws org.apache.thrift.TException {
+360:         struct.validate();
+361:         oprot.writeStructBegin(STRUCT_DESC);
+362:         oprot.writeFieldStop();
+363:         oprot.writeStructEnd();
+364:       }
+365:     }
+366:     private static class getUser_argsTupleSchemeFactory implements SchemeFactory {
+367:       public getUser_argsTupleScheme getScheme() {
+368:         return new getUser_argsTupleScheme();
+369:       }
+370:     }
+371:     private static class getUser_argsTupleScheme extends TupleScheme<getUser_args> {
+372:       @Override
+373:       public void write(org.apache.thrift.protocol.TProtocol prot, getUser_args struct) throws org.apache.thrift.TException {
+374:         TTupleProtocol oprot = (TTupleProtocol) prot;
+375:       }
+376:       @Override
+377:       public void read(org.apache.thrift.protocol.TProtocol prot, getUser_args struct) throws org.apache.thrift.TException {
+378:         TTupleProtocol iprot = (TTupleProtocol) prot;
+379:       }
+380:     }
+381:   }
+382:   public static class getUser_result implements org.apache.thrift.TBase<getUser_result, getUser_result._Fields>, java.io.Serializable, Cloneable, Comparable<getUser_result>   {
+383:     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("getUser_result");
+384:     private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
+385:     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+386:     static {
+387:       schemes.put(StandardScheme.class, new getUser_resultStandardSchemeFactory());
+388:       schemes.put(TupleScheme.class, new getUser_resultTupleSchemeFactory());
+389:     }
+390:     private UserDto success;
+391:     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+392:       SUCCESS((short)0, "success");
+393:       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+394:       static {
+395:         for (_Fields field : EnumSet.allOf(_Fields.class)) {
+396:           byName.put(field.getFieldName(), field);
+397:         }
+398:       }
+399:       public static _Fields findByThriftId(int fieldId) {
+400:         switch(fieldId) {
+401:           case 0:
+402:             return SUCCESS;
+403:           default:
+404:             return null;
+405:         }
+406:       }
+407:       public static _Fields findByThriftIdOrThrow(int fieldId) {
+408:         _Fields fields = findByThriftId(fieldId);
+409:         if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+410:         return fields;
+411:       }
+412:       public static _Fields findByName(String name) {
+413:         return byName.get(name);
+414:       }
+415:       private final short _thriftId;
+416:       private final String _fieldName;
+417:       _Fields(short thriftId, String fieldName) {
+418:         _thriftId = thriftId;
+419:         _fieldName = fieldName;
+420:       }
+421:       public short getThriftFieldId() {
+422:         return _thriftId;
+423:       }
+424:       public String getFieldName() {
+425:         return _fieldName;
+426:       }
+427:     }
+428:     public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+429:     static {
+430:       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+431:       tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT,
+432:           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, UserDto.class)));
+433:       metaDataMap = Collections.unmodifiableMap(tmpMap);
+434:       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getUser_result.class, metaDataMap);
+435:     }
+436:     public getUser_result() {
+437:     }
+438:     public getUser_result(
+439:       UserDto success)
+440:     {
+441:       this();
+442:       this.success = success;
+443:     }
+444:     public getUser_result(getUser_result other) {
+445:       if (other.isSetSuccess()) {
+446:         this.success = new UserDto(other.success);
+447:       }
+448:     }
+449:     public getUser_result deepCopy() {
+450:       return new getUser_result(this);
+451:     }
+452:     @Override
+453:     public void clear() {
+454:       this.success = null;
+455:     }
+456:     public UserDto getSuccess() {
+457:       return this.success;
+458:     }
+459:     public void setSuccess(UserDto success) {
+460:       this.success = success;
+461:     }
+462:     public void unsetSuccess() {
+463:       this.success = null;
+464:     }
+465:     public boolean isSetSuccess() {
+466:       return this.success != null;
+467:     }
+468:     public void setSuccessIsSet(boolean value) {
+469:       if (!value) {
+470:         this.success = null;
+471:       }
+472:     }
+473:     public void setFieldValue(_Fields field, Object value) {
+474:       switch (field) {
+475:       case SUCCESS:
+476:         if (value == null) {
+477:           unsetSuccess();
+478:         } else {
+479:           setSuccess((UserDto)value);
+480:         }
+481:         break;
+482:       }
+483:     }
+484:     public Object getFieldValue(_Fields field) {
+485:       switch (field) {
+486:       case SUCCESS:
+487:         return getSuccess();
+488:       }
+489:       throw new IllegalStateException();
+490:     }
+491:     public boolean isSet(_Fields field) {
+492:       if (field == null) {
+493:         throw new IllegalArgumentException();
+494:       }
+495:       switch (field) {
+496:       case SUCCESS:
+497:         return isSetSuccess();
+498:       }
+499:       throw new IllegalStateException();
+500:     }
+501:     @Override
+502:     public boolean equals(Object that) {
+503:       if (that == null)
+504:         return false;
+505:       if (that instanceof getUser_result)
+506:         return this.equals((getUser_result)that);
+507:       return false;
+508:     }
+509:     public boolean equals(getUser_result that) {
+510:       if (that == null)
+511:         return false;
+512:       boolean this_present_success = true && this.isSetSuccess();
+513:       boolean that_present_success = true && that.isSetSuccess();
+514:       if (this_present_success || that_present_success) {
+515:         if (!(this_present_success && that_present_success))
+516:           return false;
+517:         if (!this.success.equals(that.success))
+518:           return false;
+519:       }
+520:       return true;
+521:     }
+522:     @Override
+523:     public int hashCode() {
+524:       List<Object> list = new ArrayList<Object>();
+525:       boolean present_success = true && (isSetSuccess());
+526:       list.add(present_success);
+527:       if (present_success)
+528:         list.add(success);
+529:       return list.hashCode();
+530:     }
+531:     @Override
+532:     public int compareTo(getUser_result other) {
+533:       if (!getClass().equals(other.getClass())) {
+534:         return getClass().getName().compareTo(other.getClass().getName());
+535:       }
+536:       int lastComparison = 0;
+537:       lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
+538:       if (lastComparison != 0) {
+539:         return lastComparison;
+540:       }
+541:       if (isSetSuccess()) {
+542:         lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+543:         if (lastComparison != 0) {
+544:           return lastComparison;
+545:         }
+546:       }
+547:       return 0;
+548:     }
+549:     public _Fields fieldForId(int fieldId) {
+550:       return _Fields.findByThriftId(fieldId);
+551:     }
+552:     public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+553:       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+554:     }
+555:     public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+556:       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+557:       }
+558:     @Override
+559:     public String toString() {
+560:       StringBuilder sb = new StringBuilder("getUser_result(");
+561:       boolean first = true;
+562:       sb.append("success:");
+563:       if (this.success == null) {
+564:         sb.append("null");
+565:       } else {
+566:         sb.append(this.success);
+567:       }
+568:       first = false;
+569:       sb.append(")");
+570:       return sb.toString();
+571:     }
+572:     public void validate() throws org.apache.thrift.TException {
+573:       if (success != null) {
+574:         success.validate();
+575:       }
+576:     }
+577:     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+578:       try {
+579:         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+580:       } catch (org.apache.thrift.TException te) {
+581:         throw new java.io.IOException(te);
+582:       }
+583:     }
+584:     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+585:       try {
+586:         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+587:       } catch (org.apache.thrift.TException te) {
+588:         throw new java.io.IOException(te);
+589:       }
+590:     }
+591:     private static class getUser_resultStandardSchemeFactory implements SchemeFactory {
+592:       public getUser_resultStandardScheme getScheme() {
+593:         return new getUser_resultStandardScheme();
+594:       }
+595:     }
+596:     private static class getUser_resultStandardScheme extends StandardScheme<getUser_result> {
+597:       public void read(org.apache.thrift.protocol.TProtocol iprot, getUser_result struct) throws org.apache.thrift.TException {
+598:         org.apache.thrift.protocol.TField schemeField;
+599:         iprot.readStructBegin();
+600:         while (true)
+601:         {
+602:           schemeField = iprot.readFieldBegin();
+603:           if (schemeField.type == org.apache.thrift.protocol.TType.STOP) {
+604:             break;
+605:           }
+606:           switch (schemeField.id) {
+607:             case 0:
+608:               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+609:                 struct.success = new UserDto();
+610:                 struct.success.read(iprot);
+611:                 struct.setSuccessIsSet(true);
+612:               } else {
+613:                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+614:               }
+615:               break;
+616:             default:
+617:               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+618:           }
+619:           iprot.readFieldEnd();
+620:         }
+621:         iprot.readStructEnd();
+622:         struct.validate();
+623:       }
+624:       public void write(org.apache.thrift.protocol.TProtocol oprot, getUser_result struct) throws org.apache.thrift.TException {
+625:         struct.validate();
+626:         oprot.writeStructBegin(STRUCT_DESC);
+627:         if (struct.success != null) {
+628:           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+629:           struct.success.write(oprot);
+630:           oprot.writeFieldEnd();
+631:         }
+632:         oprot.writeFieldStop();
+633:         oprot.writeStructEnd();
+634:       }
+635:     }
+636:     private static class getUser_resultTupleSchemeFactory implements SchemeFactory {
+637:       public getUser_resultTupleScheme getScheme() {
+638:         return new getUser_resultTupleScheme();
+639:       }
+640:     }
+641:     private static class getUser_resultTupleScheme extends TupleScheme<getUser_result> {
+642:       @Override
+643:       public void write(org.apache.thrift.protocol.TProtocol prot, getUser_result struct) throws org.apache.thrift.TException {
+644:         TTupleProtocol oprot = (TTupleProtocol) prot;
+645:         BitSet optionals = new BitSet();
+646:         if (struct.isSetSuccess()) {
+647:           optionals.set(0);
+648:         }
+649:         oprot.writeBitSet(optionals, 1);
+650:         if (struct.isSetSuccess()) {
+651:           struct.success.write(oprot);
+652:         }
+653:       }
+654:       @Override
+655:       public void read(org.apache.thrift.protocol.TProtocol prot, getUser_result struct) throws org.apache.thrift.TException {
+656:         TTupleProtocol iprot = (TTupleProtocol) prot;
+657:         BitSet incoming = iprot.readBitSet(1);
+658:         if (incoming.get(0)) {
+659:           struct.success = new UserDto();
+660:           struct.success.read(iprot);
+661:           struct.setSuccessIsSet(true);
+662:         }
+663:       }
+664:     }
+665:   }
+666: }
+
+================
+File: cloud-thrift-interface/src/main/resources/UserService.thrift
+================
+ 1: namespace java cloud.thrift
+ 2: 
+ 3: struct UserDto {
+ 4:   1: i32 id
+ 5:   2: string username
+ 6: }
+ 7: 
+ 8: service UserService {
+ 9:   UserDto getUser()
+10: }
+
+================
+File: cloud-thrift-server/pom.xml
+================
+ 1: <?xml version="1.0" encoding="UTF-8"?>
+ 2: <project xmlns="http://maven.apache.org/POM/4.0.0"
+ 3:          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 4:          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 5:     <parent>
+ 6:         <artifactId>spring-cloud-microservice-examples</artifactId>
+ 7:         <groupId>org.zpng</groupId>
+ 8:         <version>1.0-SNAPSHOT</version>
+ 9:     </parent>
+10:     <modelVersion>4.0.0</modelVersion>
+11:     <artifactId>cloud-thrift-server</artifactId>
+12:     <dependencies>
+13:         <dependency>
+14:             <groupId>org.springframework.boot</groupId>
+15:             <artifactId>spring-boot-starter-actuator</artifactId>
+16:         </dependency>
+17:         <dependency>
+18:             <groupId>org.springframework.boot</groupId>
+19:             <artifactId>spring-boot-starter-test</artifactId>
+20:             <scope>test</scope>
+21:         </dependency>
+22:         <dependency>
+23:             <groupId>org.apache.thrift</groupId>
+24:             <artifactId>libthrift</artifactId>
+25:             <version>0.9.1</version>
+26:         </dependency>
+27:         <dependency>
+28:             <groupId>org.apache.commons</groupId>
+29:             <artifactId>commons-lang3</artifactId>
+30:             <version>3.1</version>
+31:         </dependency>
+32:         <dependency>
+33:             <groupId>org.zpng</groupId>
+34:             <artifactId>cloud-thrift-interface</artifactId>
+35:             <version>1.0-SNAPSHOT</version>
+36:         </dependency>
+37:         <dependency>
+38:             <groupId>org.apache.zookeeper</groupId>
+39:             <artifactId>zookeeper</artifactId>
+40:             <version>3.4.6</version>
+41:         </dependency>
+42:         <dependency>
+43:             <groupId>org.apache.helix</groupId>
+44:             <artifactId>helix-core</artifactId>
+45:             <version>0.6.4</version>
+46:         </dependency>
+47:         <dependency>
+48:             <groupId>org.springframework.cloud</groupId>
+49:             <artifactId>spring-cloud-starter-sleuth</artifactId>
+50:         </dependency>
+51:         <dependency>
+52:             <groupId>org.springframework.cloud</groupId>
+53:             <artifactId>spring-cloud-sleuth-zipkin</artifactId>
+54:         </dependency>
+55:     </dependencies>
+56: </project>
+
+================
+File: cloud-thrift-server/src/main/java/cloud/thrift/server/CloudThriftServer.java
+================
+1: package cloud.thrift.server;
+2: import org.springframework.boot.SpringApplication;
+3: import org.springframework.boot.autoconfigure.SpringBootApplication;
+4: @SpringBootApplication
+5: public class CloudThriftServer{
+6:     public static void main(String[] args) {
+7:         SpringApplication.run(CloudThriftServer.class, args);
+8:     }
+9: }
+
+================
+File: cloud-thrift-server/src/main/java/cloud/thrift/server/conf/ThriftConfig.java
+================
+ 1: package cloud.thrift.server.conf;
+ 2: import cloud.thrift.UserService;
+ 3: import cloud.thrift.server.service.UserServiceImpl;
+ 4: import org.apache.thrift.server.TServer;
+ 5: import org.apache.thrift.server.TThreadPoolServer;
+ 6: import org.apache.thrift.transport.TServerSocket;
+ 7: import org.apache.thrift.transport.TServerTransport;
+ 8: import org.apache.thrift.transport.TTransportException;
+ 9: import org.springframework.context.annotation.Bean;
+10: import org.springframework.context.annotation.Configuration;
+11: import javax.annotation.PostConstruct;
+12: import java.util.concurrent.ExecutorService;
+13: import java.util.concurrent.Executors;
+14: @Configuration
+15: public class ThriftConfig {
+16:     ExecutorService executor = Executors.newSingleThreadExecutor();
+17:     @Bean
+18:     public TServerTransport tServerTransport() {
+19:         try {
+20:             return new TServerSocket(7911);
+21:         } catch (TTransportException e) {
+22:             e.printStackTrace();
+23:         }
+24:         return null;
+25:     }
+26:     @Bean
+27:     public TServer tServer() {
+28:         UserService.Processor processor = new UserService.Processor(
+29:                 new UserServiceImpl());
+30:         TServer server = new TThreadPoolServer(new TThreadPoolServer.Args(
+31:                 tServerTransport()).processor(processor));
+32:         return server;
+33:     }
+34:     @PostConstruct
+35:     public void init(){
+36:         executor.execute(new Runnable() {
+37:             @Override
+38:             public void run() {
+39:                 tServer().serve();
+40:             }
+41:         });
+42:     }
+43: }
+
+================
+File: cloud-thrift-server/src/main/java/cloud/thrift/server/conf/ZooKeeperConfig.java
+================
+ 1: package cloud.thrift.server.conf;
+ 2: import org.I0Itec.zkclient.ZkClient;
+ 3: import org.springframework.beans.factory.annotation.Value;
+ 4: import org.springframework.context.annotation.Configuration;
+ 5: import javax.annotation.PostConstruct;
+ 6: import java.net.InetAddress;
+ 7: import java.net.UnknownHostException;
+ 8: import java.util.concurrent.ExecutorService;
+ 9: import java.util.concurrent.Executors;
+10: @Configuration
+11: public class ZooKeeperConfig {
+12:     @Value("${service.name}")
+13:     String serviceName;
+14:     @Value("${zookeeper.server.list}")
+15:     String serverList;
+16:     ExecutorService executor = Executors.newSingleThreadExecutor();
+17:     @PostConstruct
+18:     public void init(){
+19:         executor.execute(new Runnable() {
+20:             @Override
+21:             public void run() {
+22:                 registService();
+23:                 try {
+24:                     Thread.sleep(1000*60*60*24*360*10);
+25:                 } catch (InterruptedException e) {
+26:                     e.printStackTrace();
+27:                 }
+28:             }
+29:         });
+30:     }
+31:     public ZkClient registService() {
+32:         String servicePath = "/"+serviceName ;
+33:         ZkClient zkClient = new ZkClient(serverList);
+34:         boolean rootExists = zkClient.exists(servicePath);
+35:         if (!rootExists) {
+36:             zkClient.createPersistent(servicePath);
+37:         }
+38:         InetAddress addr = null;
+39:         try {
+40:             addr = InetAddress.getLocalHost();
+41:         } catch (UnknownHostException e) {
+42:             e.printStackTrace();
+43:         }
+44:         String ip = addr.getHostAddress().toString();
+45:         String serviceInstance = System.nanoTime() +"-"+ ip;
+46:         zkClient.createEphemeral(servicePath + "/" + serviceInstance);
+47:         System.out.println("提供的服务为：" + servicePath + "/" + serviceInstance);
+48:         return zkClient;
+49:     }
+50: }
+
+================
+File: cloud-thrift-server/src/main/java/cloud/thrift/server/service/UserServiceImpl.java
+================
+ 1: package cloud.thrift.server.service;
+ 2: import cloud.thrift.UserDto;
+ 3: import cloud.thrift.UserService;
+ 4: import org.apache.thrift.TException;
+ 5: public class UserServiceImpl implements UserService.Iface{
+ 6:     @Override
+ 7:     public UserDto getUser() throws TException
+ 8:     {
+ 9:         UserDto user = new UserDto(1000,"david");
+10:         return user;
+11:     }
+12: }
+
+================
+File: cloud-thrift-server/src/main/resources/application.yaml
+================
+ 1: spring.zipkin.baseUrl: http://localhost:9966
+ 2: spring.zipkin.enabled: true
+ 3: spring:
+ 4:   sleuth:
+ 5:     sampler:
+ 6:       percentage: 1.0
+ 7: service.name: cloud-thrift-server
+ 8: zookeeper.server.list: localhost:2181
+ 9: server:
+10:   port: 8071
+
+================
+File: cloud-uaa-service/pom.xml
+================
+ 1: <?xml version="1.0" encoding="UTF-8"?>
+ 2: <project xmlns="http://maven.apache.org/POM/4.0.0"
+ 3:          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 4:          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 5:     <parent>
+ 6:         <artifactId>spring-cloud-microservice-examples</artifactId>
+ 7:         <groupId>org.zpng</groupId>
+ 8:         <version>1.0-SNAPSHOT</version>
+ 9:     </parent>
+10:     <modelVersion>4.0.0</modelVersion>
+11:     <artifactId>cloud-uaa-service</artifactId>
+12:     <properties>
+13:         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+14:         <java.version>1.8</java.version>
+15:     </properties>
+16:     <dependencies>
+17:         <dependency>
+18:             <groupId>org.springframework.cloud</groupId>
+19:             <artifactId>spring-cloud-starter-eureka</artifactId>
+20:         </dependency>
+21:         <dependency>
+22:             <groupId>org.springframework.cloud</groupId>
+23:             <artifactId>spring-cloud-starter-oauth2</artifactId>
+24:         </dependency>
+25:         <dependency>
+26:             <groupId>org.springframework.cloud</groupId>
+27:             <artifactId>spring-cloud-starter-security</artifactId>
+28:         </dependency>
+29:         <dependency>
+30:             <groupId>org.springframework.boot</groupId>
+31:             <artifactId>spring-boot-starter-freemarker</artifactId>
+32:         </dependency>
+33:         <dependency>
+34:             <groupId>org.springframework.security</groupId>
+35:             <artifactId>spring-security-jwt</artifactId>
+36:         </dependency>
+37:         <dependency>
+38:             <groupId>org.springframework.boot</groupId>
+39:             <artifactId>spring-boot-starter-web</artifactId>
+40:         </dependency>
+41:         <dependency>
+42:             <groupId>org.springframework.boot</groupId>
+43:             <artifactId>spring-boot-starter-actuator</artifactId>
+44:         </dependency>
+45:         <dependency>
+46:             <groupId>org.springframework.boot</groupId>
+47:             <artifactId>spring-boot-starter-test</artifactId>
+48:             <scope>test</scope>
+49:         </dependency>
+50:     </dependencies>
+51:     <build>
+52:         <plugins>
+53:             <plugin>
+54:                 <groupId>org.springframework.boot</groupId>
+55:                 <artifactId>spring-boot-maven-plugin</artifactId>
+56:                 <executions>
+57:                     <execution>
+58:                         <goals>
+59:                             <goal>repackage</goal>
+60:                         </goals>
+61:                     </execution>
+62:                 </executions>
+63:             </plugin>
+64:         </plugins>
+65:     </build>
+66:     <profiles>
+67:         <profile>
+68:             <id>docker</id>
+69:             <build>
+70:                 <plugins>
+71:                     <plugin>
+72:                         <groupId>com.spotify</groupId>
+73:                         <artifactId>docker-maven-plugin</artifactId>
+74:                     </plugin>
+75:                 </plugins>
+76:             </build>
+77:         </profile>
+78:     </profiles>
+79: </project>
+
+================
+File: cloud-uaa-service/src/main/java/cloud/uaa/service/CloudUaaService.java
+================
+ 1: package cloud.uaa.service;
+ 2: import org.springframework.beans.factory.annotation.Autowired;
+ 3: import org.springframework.boot.SpringApplication;
+ 4: import org.springframework.boot.actuate.autoconfigure.ManagementServerProperties;
+ 5: import org.springframework.boot.autoconfigure.SpringBootApplication;
+ 6: import org.springframework.boot.web.servlet.FilterRegistrationBean;
+ 7: import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+ 8: import org.springframework.context.annotation.Bean;
+ 9: import org.springframework.context.annotation.Configuration;
+10: import org.springframework.core.Ordered;
+11: import org.springframework.core.annotation.Order;
+12: import org.springframework.core.io.ClassPathResource;
+13: import org.springframework.security.authentication.AuthenticationManager;
+14: import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+15: import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+16: import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+17: import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+18: import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
+19: import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
+20: import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
+21: import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+22: import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+23: import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+24: import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
+25: import org.springframework.web.filter.ForwardedHeaderFilter;
+26: import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+27: import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+28: import java.security.KeyPair;
+29: @SpringBootApplication
+30: @EnableDiscoveryClient
+31: @EnableWebSecurity
+32: public class CloudUaaService extends WebMvcConfigurerAdapter {
+33:     public static void main(String[] args) {
+34:         SpringApplication.run(CloudUaaService.class, args);
+35:     }
+36:     @Bean
+37:     FilterRegistrationBean forwardedHeaderFilter() {
+38:         FilterRegistrationBean filterRegBean = new FilterRegistrationBean();
+39:         filterRegBean.setFilter(new ForwardedHeaderFilter());
+40:         filterRegBean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+41:         return filterRegBean;
+42:     }
+43:     @Override
+44:     public void addViewControllers(ViewControllerRegistry registry) {
+45:         registry.addViewController("/login").setViewName("login");
+46:         registry.addViewController("/oauth/confirm_access").setViewName("authorize");
+47:     }
+48:     @Order(ManagementServerProperties.ACCESS_OVERRIDE_ORDER)
+49:     @Configuration
+50:     protected static class LoginConfiguration extends WebSecurityConfigurerAdapter {
+51:         @Autowired
+52:         private AuthenticationManager authenticationManager;
+53:         @Override
+54:         protected void configure(HttpSecurity http) throws Exception {
+55:             http.formLogin().loginPage("/login").permitAll().and().authorizeRequests()
+56:                 .anyRequest().authenticated();
+57:         }
+58:         @Override
+59:         protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+60:             auth.parentAuthenticationManager(authenticationManager);
+61:         }
+62:     }
+63:     @Configuration
+64:     @EnableAuthorizationServer
+65:     protected static class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
+66:         @Autowired
+67:         private AuthenticationManager authenticationManager;
+68:         @Bean
+69:         public JwtAccessTokenConverter jwtAccessTokenConverter() {
+70:             JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+71:             KeyPair keyPair = new KeyStoreKeyFactory(new ClassPathResource("keystore.jks"), "foobar".toCharArray())
+72:                     .getKeyPair("test");
+73:             converter.setKeyPair(keyPair);
+74:             return converter;
+75:         }
+76:         @Override
+77:         public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+78:             clients.inMemory()
+79:                    .withClient("acme")
+80:                    .secret("acmesecret")
+81:                    .authorizedGrantTypes("authorization_code", "refresh_token","password")
+82:                    .scopes("openid");
+83:         }
+84:         @Override
+85:         public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+86:             endpoints.authenticationManager(authenticationManager).accessTokenConverter(jwtAccessTokenConverter());
+87:         }
+88:         @Override
+89:         public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
+90:             oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
+91:         }
+92:     }
+93: }
+
+================
+File: cloud-uaa-service/src/main/resources/application.yml
+================
+ 1: spring:
+ 2:   application:
+ 3:     name: uaa-service
+ 4: server:
+ 5:   port: 8769
+ 6:   context-path: /uaa
+ 7:   use-forward-headers: false
+ 8: eureka:
+ 9:   instance:
+10:       hostname: localhost
+11:       port: 8761
+12:   client:
+13:     serviceUrl:
+14:       defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
+15: security:
+16:   basic:
+17:     enabled: false
+18:   user:
+19:     password: password
+20:   ignored: /css/**,/js/**,/favicon.ico,/webjars/**
+21: logging:
+22:   level.org.springframework.security: DEBUG
+23: ---
+24: spring:
+25:   profiles: docker
+26: server:
+27:   port: ${SERVICE_PORT}
+28: eureka:
+29:   instance:
+30:     prefer-ip-address: true
+31:   client:
+32:     service-url:
+33:       defaultZone: ${REGISTRY_URL}
+
+================
+File: cloud-uaa-service/src/main/resources/templates/authorize.ftl
+================
+ 1: <html>
+ 2: <head>
+ 3: </head>
+ 4: <body>
+ 5: <div class="container">
+ 6:     <h2>Please Confirm</h2>
+ 7: 
+ 8:     <p>
+ 9:         Do you authorize "${authorizationRequest.clientId}" at "${authorizationRequest.redirectUri}" to access your
+10:         protected resources
+11:         with scope ${authorizationRequest.scope?join(", ")}.
+12:     </p>
+13:     <form id="confirmationForm" name="confirmationForm"
+14:           action="../oauth/authorize" method="post">
+15:         <input name="user_oauth_approval" value="true" type="hidden"/>
+16:         <input type="hidden" id="csrf_token" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+17:         <button class="btn btn-primary" type="submit">Approve</button>
+18:     </form>
+19:     <form id="denyForm" name="confirmationForm"
+20:           action="../oauth/authorize" method="post">
+21:         <input name="user_oauth_approval" value="false" type="hidden"/>
+22:         <input type="hidden" id="csrf_token" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+23:         <button class="btn btn-primary" type="submit">Deny</button>
+24:     </form>
+25: </div>
+26: </body>
+27: </html>
+
+================
+File: cloud-uaa-service/src/main/resources/templates/login.ftl
+================
+ 1: <html>
+ 2: <head>
+ 3: </head>
+ 4: <body>
+ 5: <div class="container">
+ 6:     <form role="form" action="login" method="post">
+ 7:         <div class="form-group">
+ 8:             <label for="username">Username:</label>
+ 9:             <input type="text" class="form-control" id="username" name="username"/>
+10:         </div>
+11:         <div class="form-group">
+12:             <label for="password">Password:</label>
+13:             <input type="password" class="form-control" id="password" name="password"/>
+14:         </div>
+15:         <input type="hidden" id="csrf_token" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+16:         <button type="submit" class="btn btn-primary">Submit</button>
+17:     </form>
+18: </div>
+19: </body>
+20: </html>
+
+================
+File: cloud-zipkin/pom.xml
+================
+ 1: <?xml version="1.0" encoding="UTF-8"?>
+ 2: <project xmlns="http://maven.apache.org/POM/4.0.0"
+ 3:          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 4:          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 5:     <parent>
+ 6:         <artifactId>spring-cloud-microservice-examples</artifactId>
+ 7:         <groupId>org.zpng</groupId>
+ 8:         <version>1.0-SNAPSHOT</version>
+ 9:     </parent>
+10:     <modelVersion>4.0.0</modelVersion>
+11:     <artifactId>cloud-zipkin</artifactId>
+12:     <properties>
+13:         <docker.image.prefix>zpng</docker.image.prefix>
+14:     </properties>
+15: <dependencies>
+16:     <dependency>
+17:         <groupId>org.springframework.boot</groupId>
+18:         <artifactId>spring-boot-starter</artifactId>
+19:     </dependency>
+20:     <dependency>
+21:         <groupId>io.zipkin.java</groupId>
+22:         <artifactId>zipkin-server</artifactId>
+23:     </dependency>
+24:     <dependency>
+25:         <groupId>org.springframework.cloud</groupId>
+26:         <artifactId>spring-cloud-starter-sleuth</artifactId>
+27:     </dependency>
+28:     <dependency>
+29:         <groupId>org.springframework.cloud</groupId>
+30:         <artifactId>spring-cloud-sleuth-zipkin</artifactId>
+31:     </dependency>
+32:     <dependency>
+33:         <groupId>io.zipkin.java</groupId>
+34:         <artifactId>zipkin-autoconfigure-ui</artifactId>
+35:     </dependency>
+36: </dependencies>
+37:     <build>
+38:         <plugins>
+39:             <plugin>
+40:                 <groupId>org.springframework.boot</groupId>
+41:                 <artifactId>spring-boot-maven-plugin</artifactId>
+42:                 <executions>
+43:                     <execution>
+44:                         <goals>
+45:                             <goal>repackage</goal>
+46:                         </goals>
+47:                     </execution>
+48:                 </executions>
+49:             </plugin>
+50:             <plugin>
+51:                 <groupId>com.spotify</groupId>
+52:                 <artifactId>docker-maven-plugin</artifactId>
+53:                 <version>${docker.plugin.version}</version>
+54:                 <executions>
+55:                     <execution>
+56:                         <phase>package</phase>
+57:                         <goals>
+58:                             <goal>build</goal>
+59:                         </goals>
+60:                     </execution>
+61:                 </executions>
+62:                 <configuration>
+63:                     <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+64:                     <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+65:                     <resources>
+66:                         <resource>
+67:                             <targetPath>/</targetPath>
+68:                             <directory>${project.build.directory}</directory>
+69:                             <include>${project.build.finalName}.jar</include>
+70:                         </resource>
+71:                     </resources>
+72:                 </configuration>
+73:             </plugin>
+74:         </plugins>
+75:     </build>
+76: </project>
+
+================
+File: cloud-zipkin/src/main/docker/Dockerfile
+================
+1: FROM java:8
+2: VOLUME /tmp
+3: ADD cloud-zipkin-1.0-SNAPSHOT.jar app.jar
+4: RUN bash -c 'touch /app.jar'
+5: ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+
+================
+File: cloud-zipkin/src/main/java/cloud/zipkin/zipkin.java
+================
+ 1: package cloud.zipkin;
+ 2: import org.springframework.boot.SpringApplication;
+ 3: import org.springframework.boot.autoconfigure.SpringBootApplication;
+ 4: import zipkin.server.EnableZipkinServer;
+ 5: @SpringBootApplication
+ 6: @EnableZipkinServer
+ 7: public class Zipkin {
+ 8:     public static void main(String[] args) {
+ 9:         SpringApplication.run(Zipkin.class, args);
+10:     }
+11: }
+
+================
+File: cloud-zipkin/src/main/resources/application.yaml
+================
+1: server.port: 9411
+
+================
+File: docker/docker-compose.yaml
+================
+ 1: hystrix:
+ 2:   image: zpng/cloud-hystrix-dashboard
+ 3:   ports:
+ 4:    - "8022:8022"
+ 5:   links:
+ 6:    - gateway
+ 7:    - discovery
+ 8: turbine:
+ 9:   image: zpng/cloud-hystrix-turbine
+10:   ports:
+11:    - "8989:8989"
+12:   links:
+13:    - gateway
+14:    - discovery
+15: discovery:
+16:   image: zpng/cloud-eureka-server
+17:   ports:
+18:    - "8761:8761"
+19: configserver:
+20:   image: zpng/cloud-config-server
+21:   ports:
+22:    - "8888:8888"
+23:   links:
+24:    - discovery
+25: gateway:
+26:   image: zpng/cloud-api-gateway
+27:   ports:
+28:    - "5555:5555"
+29:   links:
+30:    - discovery
+31:    - configserver
+32:    - simple-service
+33:    - simple-service2
+34:    - simple-serviceb
+35:    - simple-ui
+36:    - zipkin
+37: simple-service:
+38:   image: zpng/cloud-simple-service
+39:   links:
+40:    - discovery
+41:    - configserver
+42:    - zipkin
+43:   ports:
+44:    - "8081:8081"
+45: simple-service2:
+46:   image: zpng/cloud-simple-service
+47:   links:
+48:    - discovery
+49:    - configserver
+50:    - zipkin
+51:   ports:
+52:    - "8082:8082"
+53: simple-serviceb:
+54:   image: zpng/cloud-simple-serviceb
+55:   links:
+56:    - discovery
+57:    - configserver
+58:    - zipkin
+59:   ports:
+60:    - "8091:8091"
+61: simple-ui:
+62:   image: zpng/cloud-simple-ui
+63:   links:
+64:    - discovery
+65:    - configserver
+66:    - zipkin
+67:   ports:
+68:    - "8090:8090"
+69: zipkin:
+70:   image: zpng/cloud-zipkin
+71:   links:
+72:    - discovery
+73:    - configserver
+74:   ports:
+75:    - "9411:9411"
+
+
+
+
+================
+File: pom.xml
+================
+  1: <?xml version="1.0" encoding="UTF-8"?>
+  2: <project xmlns="http://maven.apache.org/POM/4.0.0"
+  3:          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  4:          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  5:     <modelVersion>4.0.0</modelVersion>
+  6:     <groupId>org.zpng</groupId>
+  7:     <artifactId>spring-cloud-microservice-examples</artifactId>
+  8:     <packaging>pom</packaging>
+  9:     <version>1.0-SNAPSHOT</version>
+ 10:     <modules>
+ 11:         <module>cloud-config-server</module>
+ 12:         <module>cloud-eureka-server</module>
+ 13:         <module>cloud-simple-service</module>
+ 14:         <module>cloud-simple-ui</module>
+ 15:         <module>cloud-api-gateway</module>
+ 16:         <module>cloud-simple-serviceB</module>
+ 17:         <module>cloud-zipkin</module>
+ 18:         <module>cloud-hystrix-dashboard</module>
+ 19:         <module>cloud-hystrix-turbine</module>
+ 20:         <module>cloud-thrift-client</module>
+ 21:         <module>cloud-thrift-interface</module>
+ 22:         <module>cloud-thrift-server</module>
+ 23:         <module>cloud-finagle-thrift-client</module>
+ 24:         <module>cloud-finagle-thrift-api</module>
+ 25:         <module>cloud-finagle-thrift-server</module>
+ 26:         <module>cloud-finagle-commons-thrift</module>
+ 27:         <module>cloud-uaa-service</module>
+ 28:         <module>cloud-dummy-service</module>
+ 29:     </modules>
+ 30:     <parent>
+ 31:         <groupId>org.springframework.boot</groupId>
+ 32:         <artifactId>spring-boot-starter-parent</artifactId>
+ 33:         <version>1.4.1.RELEASE</version>
+ 34:         <relativePath/>
+ 35:     </parent>
+ 36:     <properties>
+ 37:         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+ 38:         <java.version>1.8</java.version>
+ 39:         <docker.plugin.version>0.3.258</docker.plugin.version>
+ 40:     </properties>
+ 41:     <dependencies>
+ 42:         <dependency>
+ 43:             <groupId>org.springframework.boot</groupId>
+ 44:             <artifactId>spring-boot-starter-web</artifactId>
+ 45:         </dependency>
+ 46:         <dependency>
+ 47:             <groupId>org.springframework.boot</groupId>
+ 48:             <artifactId>spring-boot-starter-actuator</artifactId>
+ 49:         </dependency>
+ 50:         <dependency>
+ 51:             <groupId>org.springframework.boot</groupId>
+ 52:             <artifactId>spring-boot-starter-test</artifactId>
+ 53:             <scope>test</scope>
+ 54:         </dependency>
+ 55: </dependencies>
+ 56:     <dependencyManagement>
+ 57:         <dependencies>
+ 58:             <dependency>
+ 59:                 <groupId>org.springframework.cloud</groupId>
+ 60:                 <artifactId>spring-cloud-starter-parent</artifactId>
+ 61:                 <version>Camden.SR1</version>
+ 62:                 <type>pom</type>
+ 63:                 <scope>import</scope>
+ 64:             </dependency>
+ 65:         </dependencies>
+ 66:     </dependencyManagement>
+ 67:     <repositories>
+ 68:         <repository>
+ 69:             <id>spring-snapshots</id>
+ 70:             <name>Spring Snapshots</name>
+ 71:             <url>http://repo.spring.io/libs-snapshot-local</url>
+ 72:             <snapshots>
+ 73:                 <enabled>true</enabled>
+ 74:             </snapshots>
+ 75:         </repository>
+ 76:         <repository>
+ 77:             <id>spring-snapshots-continuous</id>
+ 78:             <name>Spring Snapshots Continuous</name>
+ 79:             <url>http://repo.spring.io/libs-snapshot-continuous-local</url>
+ 80:             <snapshots>
+ 81:                 <enabled>true</enabled>
+ 82:             </snapshots>
+ 83:         </repository>
+ 84:         <repository>
+ 85:             <id>spring-milestones</id>
+ 86:             <name>Spring Milestones</name>
+ 87:             <url>http://repo.spring.io/libs-milestone-local</url>
+ 88:             <snapshots>
+ 89:                 <enabled>false</enabled>
+ 90:             </snapshots>
+ 91:         </repository>
+ 92:         <repository>
+ 93:             <id>spring-releases</id>
+ 94:             <name>Spring Releases</name>
+ 95:             <url>http://repo.spring.io/libs-release-local</url>
+ 96:             <snapshots>
+ 97:                 <enabled>false</enabled>
+ 98:             </snapshots>
+ 99:         </repository>
+100:         <repository>
+101:             <id>Twitter</id>
+102:             <url>http://maven.twttr.com/</url>
+103:         </repository>
+104:     </repositories>
+105:     <pluginRepositories>
+106:         <pluginRepository>
+107:             <id>spring-snapshots</id>
+108:             <name>Spring Snapshots</name>
+109:             <url>http://repo.spring.io/libs-snapshot-local</url>
+110:             <snapshots>
+111:                 <enabled>true</enabled>
+112:             </snapshots>
+113:         </pluginRepository>
+114:         <pluginRepository>
+115:             <id>spring-milestones</id>
+116:             <name>Spring Milestones</name>
+117:             <url>http://repo.spring.io/libs-milestone-local</url>
+118:             <snapshots>
+119:                 <enabled>false</enabled>
+120:             </snapshots>
+121:         </pluginRepository>
+122:     </pluginRepositories>
+123: </project>
+
+================
+File: repomix.config.json
+================
+  1: {
+  2:   "$schema": "https://repomix.com/schemas/latest/schema.json",
+  3:   "input": {
+  4:     "maxFileSize": 52428800
+  5:   },
+  6:   "output": {
+  7:     "filePath": "repo_scan.txt",
+  8:     "style": "plain",
+  9:     "parsableStyle": false,
+ 10:     "fileSummary": false,
+ 11:     "directoryStructure": true,
+ 12:     "files": true,
+ 13:     "removeComments": true,
+ 14:     "removeEmptyLines": true,
+ 15:     "compress": false,
+ 16:     "topFilesLength": 5,
+ 17:     "showLineNumbers": true,
+ 18:     "truncateBase64": false,
+ 19:     "copyToClipboard": false,
+ 20:     "includeFullDirectoryStructure": false,
+ 21:     "tokenCountTree": false,
+ 22:     "git": {
+ 23:       "sortByChanges": true,
+ 24:       "sortByChangesMaxCommits": 100,
+ 25:       "includeDiffs": false,
+ 26:       "includeLogs": false,
+ 27:       "includeLogsCount": 50
+ 28:     }
+ 29:   },
+ 30:   "ignore": {
+ 31:     "useGitignore": false,
+ 32:     "useDotIgnore": true,
+ 33:     "useDefaultPatterns": true,
+ 34:     "customPatterns": [
+ 35:       "**/*.png",
+ 36:       "**/*.jpg",
+ 37:       "**/*.jpeg",
+ 38:       "**/*.gif",
+ 39:       "**/*.svg",
+ 40:       "**/*.pdf",
+ 41:       "**/*.ipynb",
+ 42:       "**/*.jar",
+ 43:       "**/*.exe",
+ 44:       "**/*.dll",
+ 45:       "**/*.zip",
+ 46:       "**/*.tar",
+ 47:       "**/*.gz",
+ 48:       "**/*.7z",
+ 49:       "**/*.class",
+ 50:       "**/*.o",
+ 51:       "**/*.so",
+ 52:       "**/*.dylib",
+ 53:       "**/*.bin",
+ 54:       "**/*.npy",
+ 55:       "**/*.pickle",
+ 56:       "**/*.pb",
+ 57:       "**/*.index",
+ 58:       "**/*.min.js",
+ 59:       "**/*.min.css",
+ 60:       "**/*.map",
+ 61:       "**/*.woff",
+ 62:       "**/*.woff2",
+ 63:       "**/*.ttf",
+ 64:       "**/*.eot",
+ 65:       "**/*.otf",
+ 66:       "**/.idea/**",
+ 67:       "**/.vscode/**",
+ 68:       "**/*.iml",
+ 69:       "**/.DS_Store",
+ 70:       "**/__pycache__/**",
+ 71:       "**/.pytest_cache/**",
+ 72:       "**/.cache/**",
+ 73:       //"**/.gradle/**",
+ 74:       //"**/.mvn/**",
+ 75:       "node_modules/**/*",
+ 76:       "build/**/*",
+ 77:       "dist/**/*",
+ 78:       "**/target/**",
+ 79:       "**/out/**",
+ 80:       "**/bin/**",
+ 81:       "**/static/lib/**",
+ 82:       "**/static/vendor/**",
+ 83:       "**/vendor/**",
+ 84:       "**/bower_components/**",
+ 85:       "**/src/main/resources/static/**/bootstrap/**",
+ 86:       "**/microsec-test/**",
+ 87:       "tests/**/*",
+ 88:       "**/tests/**",
+ 89:       "**/test/**",
+ 90:       "**/testing/**",
+ 91:       "**/__tests__/**",
+ 92:       "**/src/test/**",
+ 93:       "**/src/**/test/**",
+ 94:       "**/*-test/**",
+ 95:       "**/*_test/**",
+ 96:       "**/test-*/**",
+ 97:       "**/tests-*/**",
+ 98:       "**/*.log",
+ 99:       "**/*.patch",
+100:       "**/*.bak",
+101:       "**/*.swp",
+102:       "**/*.tmp",
+103:       "**/coverage/**",
+104:       "**/.nyc_output/**",
+105:       "**/surefire-reports/**",
+106:       "**/failsafe-reports/**",
+107:       "**/*.md",
+108:       "**/*.adoc",
+109:       "**/*.rst",
+110:       "**/*/cnn/**/*",
+111:       "**/package-lock.json",
+112:       "**/yarn.lock",
+113:       "**/pnpm-lock.yaml",
+114:       "**/*.spec.ts",
+115:       "**/*.test.ts",
+116:       "**/*.spec.js",
+117:       "**/*.test.js",
+118:       "**/*Test.java",
+119:       "**/*Tests.java",
+120:       "**/*IT.java"
+121:     ]
+122:   },
+123:   "security": {
+124:     "enableSecurityCheck": false
+125:   },
+126:   "tokenCount": {
+127:     "encoding": "o200k_base"
+128:   }
+129: }
+
+================
+File: tool/compile_thrift.sh
+================
+1: DIR=`cd \`dirname ${BASH_SOURCE[0]}\`/.. && pwd`
+2: rm -fr ${DIR}/cloud-thrift-interface/src/main/java/cloud/thrift/
+3: thrift --gen java:beans -out ${DIR}/cloud-thrift-interface/src/main/java cloud-thrift-interface/src/main/resources/UserService.thrift
+
+
+
+
+
+================================================================
+End of Codebase
+================================================================

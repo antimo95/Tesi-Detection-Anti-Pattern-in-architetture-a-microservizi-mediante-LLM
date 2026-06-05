@@ -1,0 +1,242 @@
+{
+  "metadata": {
+    "project_path": "D:\\Users\\Desktop\\microservices\\Peggiori\\usate\\microservice-demo",
+    "project_name": "microservice-demo",
+    "extraction_timestamp": "2026-02-18T10:36:02.698819",
+    "extractor_version": "2.1.0"
+  },
+  "microservices": [
+    {
+      "name": "microservice-demo-catalog",
+      "type": "docker",
+      "path": "microservice-demo-catalog",
+      "loc": {
+        "total": 562,
+        "code": 433,
+        "blank": 129,
+        "comment": 0
+      },
+      "classes_count": 12,
+      "methods_count": 46,
+      "constructors_count": 7,
+      "files_count": 11,
+      "stereotype_instances": [
+        "component",
+        "entity",
+        "repository",
+        "configuration",
+        "controller"
+      ],
+      "stereotype_counts": {
+        "component": 2,
+        "entity": 1,
+        "repository": 1,
+        "configuration": 1,
+        "controller": 1
+      },
+      "languages": {
+        "java": 11
+      },
+      "file_types": {
+        ".java": 11
+      },
+      "jpa_tables": [
+        "Item"
+      ],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://eureka:8761/eureka/",
+        "http://localhost:"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "microservice-demo-customer",
+      "type": "docker",
+      "path": "microservice-demo-customer",
+      "loc": {
+        "total": 656,
+        "code": 508,
+        "blank": 148,
+        "comment": 0
+      },
+      "classes_count": 11,
+      "methods_count": 57,
+      "constructors_count": 7,
+      "files_count": 10,
+      "stereotype_instances": [
+        "component",
+        "entity",
+        "repository",
+        "configuration",
+        "controller"
+      ],
+      "stereotype_counts": {
+        "component": 3,
+        "entity": 1,
+        "repository": 1,
+        "configuration": 1,
+        "controller": 1
+      },
+      "languages": {
+        "java": 10
+      },
+      "file_types": {
+        ".java": 10
+      },
+      "jpa_tables": [
+        "Customer"
+      ],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://eureka:8761/eureka/",
+        "http://localhost:"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "microservice-demo-eureka-server",
+      "type": "docker",
+      "path": "microservice-demo-eureka-server",
+      "loc": {
+        "total": 52,
+        "code": 41,
+        "blank": 11,
+        "comment": 0
+      },
+      "classes_count": 2,
+      "methods_count": 3,
+      "constructors_count": 0,
+      "files_count": 2,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 2
+      },
+      "file_types": {
+        ".java": 2
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://localhost:"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "microservice-demo-order",
+      "type": "docker",
+      "path": "microservice-demo-order",
+      "loc": {
+        "total": 1046,
+        "code": 825,
+        "blank": 221,
+        "comment": 0
+      },
+      "classes_count": 19,
+      "methods_count": 88,
+      "constructors_count": 12,
+      "files_count": 17,
+      "stereotype_instances": [
+        "controller",
+        "component",
+        "entity",
+        "repository",
+        "service",
+        "configuration"
+      ],
+      "stereotype_counts": {
+        "controller": 3,
+        "component": 2,
+        "entity": 2,
+        "repository": 1,
+        "service": 1,
+        "configuration": 1
+      },
+      "languages": {
+        "java": 17
+      },
+      "file_types": {
+        ".java": 17
+      },
+      "jpa_tables": [
+        "ORDERTABLE",
+        "OrderLine"
+      ],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://%s:%s/customer/",
+        "http://eureka:8761/eureka/",
+        "http://%s:%s/catalog/",
+        "http://localhost:"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "microservice-demo-turbine-server",
+      "type": "docker",
+      "path": "microservice-demo-turbine-server",
+      "loc": {
+        "total": 19,
+        "code": 15,
+        "blank": 4,
+        "comment": 0
+      },
+      "classes_count": 1,
+      "methods_count": 1,
+      "constructors_count": 0,
+      "files_count": 1,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://eureka:8761/eureka/"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "microservice-demo-zuul-server",
+      "type": "docker",
+      "path": "microservice-demo-zuul-server",
+      "loc": {
+        "total": 15,
+        "code": 11,
+        "blank": 4,
+        "comment": 0
+      },
+      "classes_count": 1,
+      "methods_count": 1,
+      "constructors_count": 0,
+      "files_count": 1,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://eureka:8761/eureka/"
+      ],
+      "feign_with_url": false
+    }
+  ],
+  "statistics": {
+    "total_services": 6,
+    "total_files": 42,
+    "total_loc_code": 1833,
+    "total_classes": 46,
+    "total_methods": 196,
+    "total_constructors": 26
+  }
+}

@@ -1,0 +1,647 @@
+{
+  "metadata": {
+    "project_path": "D:\\Users\\Desktop\\microservices\\Peggiori\\usate\\apollo-de05540e6c9a18cdf370ae95ca5e544d7b8d04bf",
+    "project_name": "apollo-de05540e6c9a18cdf370ae95ca5e544d7b8d04bf",
+    "extraction_timestamp": "2026-02-16T16:57:23.746200",
+    "extractor_version": "2.1.0"
+  },
+  "microservices": [
+    {
+      "name": "alpine-bash-3.8-image",
+      "type": "docker",
+      "path": "scripts\\apollo-on-kubernetes\\alpine-bash-3.8-image",
+      "loc": {
+        "total": 0,
+        "code": 0,
+        "blank": 0,
+        "comment": 0
+      },
+      "classes_count": 0,
+      "methods_count": 0,
+      "constructors_count": 0,
+      "files_count": 0,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {},
+      "file_types": {},
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "apollo-admin-server",
+      "type": "docker",
+      "path": "scripts\\apollo-on-kubernetes\\apollo-admin-server",
+      "loc": {
+        "total": 0,
+        "code": 0,
+        "blank": 0,
+        "comment": 0
+      },
+      "classes_count": 0,
+      "methods_count": 0,
+      "constructors_count": 0,
+      "files_count": 0,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {},
+      "file_types": {},
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "apollo-adminservice",
+      "type": "maven",
+      "path": "apollo-adminservice",
+      "loc": {
+        "total": 3872,
+        "code": 3062,
+        "blank": 726,
+        "comment": 84
+      },
+      "classes_count": 39,
+      "methods_count": 171,
+      "constructors_count": 18,
+      "files_count": 39,
+      "stereotype_instances": [
+        "component",
+        "configuration",
+        "controller"
+      ],
+      "stereotype_counts": {
+        "component": 5,
+        "configuration": 4,
+        "controller": 14
+      },
+      "languages": {
+        "java": 39
+      },
+      "file_types": {
+        ".java": 39
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://localhost:",
+        "http://localhost:%d/apps/%s/appnamespaces",
+        "http://$"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "apollo-assembly",
+      "type": "maven",
+      "path": "apollo-assembly",
+      "loc": {
+        "total": 123,
+        "code": 81,
+        "blank": 18,
+        "comment": 24
+      },
+      "classes_count": 2,
+      "methods_count": 2,
+      "constructors_count": 0,
+      "files_count": 2,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 2
+      },
+      "file_types": {
+        ".java": 2
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://$"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "apollo-biz",
+      "type": "maven",
+      "path": "apollo-biz",
+      "loc": {
+        "total": 8084,
+        "code": 6037,
+        "blank": 1714,
+        "comment": 333
+      },
+      "classes_count": 93,
+      "methods_count": 483,
+      "constructors_count": 30,
+      "files_count": 92,
+      "stereotype_instances": [
+        "component",
+        "configuration",
+        "entity",
+        "service"
+      ],
+      "stereotype_counts": {
+        "component": 8,
+        "configuration": 3,
+        "entity": 15,
+        "service": 16
+      },
+      "languages": {
+        "java": 92
+      },
+      "file_types": {
+        ".java": 92
+      },
+      "jpa_tables": [
+        "Audit",
+        "ServerConfig",
+        "GrayReleaseRule",
+        "Cluster",
+        "ReleaseHistory",
+        "Commit",
+        "Release",
+        "NamespaceLock",
+        "ReleaseMessage",
+        "Namespace",
+        "Instance",
+        "AccessKey",
+        "Privilege",
+        "InstanceConfig",
+        "Item"
+      ],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "apollo-buildtools",
+      "type": "maven",
+      "path": "apollo-buildtools",
+      "loc": {
+        "total": 0,
+        "code": 0,
+        "blank": 0,
+        "comment": 0
+      },
+      "classes_count": 0,
+      "methods_count": 0,
+      "constructors_count": 0,
+      "files_count": 0,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {},
+      "file_types": {},
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "apollo-client",
+      "type": "maven",
+      "path": "apollo-client",
+      "loc": {
+        "total": 17720,
+        "code": 12894,
+        "blank": 3461,
+        "comment": 1365
+      },
+      "classes_count": 257,
+      "methods_count": 1022,
+      "constructors_count": 51,
+      "files_count": 128,
+      "stereotype_instances": [
+        "configuration",
+        "component"
+      ],
+      "stereotype_counts": {
+        "configuration": 5,
+        "component": 2
+      },
+      "languages": {
+        "java": 128
+      },
+      "file_types": {
+        ".java": 128
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "https://github.com/ctripcorp/apollo/pull/2861",
+        "https://docs.oracle.com/javase/7/docs/technotes/guides/net/http-keepalive.html,",
+        "http://localhost:",
+        "http://someServer",
+        "http://www.kersbergen.com/flump/religion.html",
+        "http://localhost",
+        "http://someServer/configs/someAppId/someCluster+%20&.-_someSign/"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "apollo-common",
+      "type": "maven",
+      "path": "apollo-common",
+      "loc": {
+        "total": 2959,
+        "code": 2131,
+        "blank": 665,
+        "comment": 163
+      },
+      "classes_count": 63,
+      "methods_count": 300,
+      "constructors_count": 19,
+      "files_count": 58,
+      "stereotype_instances": [
+        "configuration",
+        "component",
+        "controller",
+        "entity"
+      ],
+      "stereotype_counts": {
+        "configuration": 5,
+        "component": 4,
+        "controller": 2,
+        "entity": 2
+      },
+      "languages": {
+        "java": 58
+      },
+      "file_types": {
+        ".java": 58
+      },
+      "jpa_tables": [
+        "App",
+        "AppNamespace"
+      ],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "https://github.com/Netflix/eureka/issues/702"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "apollo-config-server",
+      "type": "docker",
+      "path": "scripts\\apollo-on-kubernetes\\apollo-config-server",
+      "loc": {
+        "total": 0,
+        "code": 0,
+        "blank": 0,
+        "comment": 0
+      },
+      "classes_count": 0,
+      "methods_count": 0,
+      "constructors_count": 0,
+      "files_count": 0,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {},
+      "file_types": {},
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "apollo-configservice",
+      "type": "maven",
+      "path": "apollo-configservice",
+      "loc": {
+        "total": 8680,
+        "code": 6760,
+        "blank": 1506,
+        "comment": 414
+      },
+      "classes_count": 66,
+      "methods_count": 353,
+      "constructors_count": 26,
+      "files_count": 60,
+      "stereotype_instances": [
+        "component",
+        "configuration",
+        "controller",
+        "service"
+      ],
+      "stereotype_counts": {
+        "component": 7,
+        "configuration": 7,
+        "controller": 6,
+        "service": 8
+      },
+      "languages": {
+        "java": 60
+      },
+      "file_types": {
+        ".java": 60
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://some-host/some-path",
+        "http://$",
+        "http://another-host/another-path",
+        "http://2.3.4.5:9090/anotherPath",
+        "http://kailing.pub",
+        "http://1.2.3.4:8080/",
+        "http://1.2.3.4:8080/some-path/"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "apollo-core",
+      "type": "maven",
+      "path": "apollo-core",
+      "loc": {
+        "total": 5015,
+        "code": 3195,
+        "blank": 755,
+        "comment": 1065
+      },
+      "classes_count": 96,
+      "methods_count": 308,
+      "constructors_count": 18,
+      "files_count": 75,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 75
+      },
+      "file_types": {
+        ".java": 75
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "https://docs.oracle.com/javase/7/docs/technotes/guides/net/http-keepalive.html,",
+        "http://localhost:8080",
+        "http://www.apache.org/licenses/LICENSE-2.0",
+        "http://config.xxx.com",
+        "https://github.com/mongodb/mongo-java-driver/blob/master/bson/src/main/org/bson/types/ObjectId.java",
+        "http://10.0.0.1:8080/configs/100004458/default/application?ip=10.0.0.1",
+        "http://localhost:",
+        "http://apollo.meta",
+        "http://1.2.3.4:8080,http://2.3.4.5:8080.",
+        "https://github.com/ctripcorp/apollo/pull/1986",
+        "http://www.w3.org/TR/2006/REC-xml-20060816/#sec-guessing",
+        "http://unicode.org/faq/utf_bom.html#BOM",
+        "http://dev:8080",
+        "http://en.wikipedia.org/wiki/Byte_order_mark",
+        "http://1.2.3.4:8080,http://2.3.4.5:8080"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "apollo-demo",
+      "type": "maven",
+      "path": "apollo-demo",
+      "loc": {
+        "total": 601,
+        "code": 442,
+        "blank": 81,
+        "comment": 78
+      },
+      "classes_count": 12,
+      "methods_count": 32,
+      "constructors_count": 3,
+      "files_count": 11,
+      "stereotype_instances": [
+        "component",
+        "configuration"
+      ],
+      "stereotype_counts": {
+        "component": 3,
+        "configuration": 3
+      },
+      "languages": {
+        "java": 11
+      },
+      "file_types": {
+        ".java": 11
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "apollo-mockserver",
+      "type": "maven",
+      "path": "apollo-mockserver",
+      "loc": {
+        "total": 439,
+        "code": 339,
+        "blank": 81,
+        "comment": 19
+      },
+      "classes_count": 6,
+      "methods_count": 29,
+      "constructors_count": 0,
+      "files_count": 3,
+      "stereotype_instances": [
+        "configuration"
+      ],
+      "stereotype_counts": {
+        "configuration": 1
+      },
+      "languages": {
+        "java": 3
+      },
+      "file_types": {
+        ".java": 3
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://localhost:"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "apollo-openapi",
+      "type": "maven",
+      "path": "apollo-openapi",
+      "loc": {
+        "total": 2246,
+        "code": 1637,
+        "blank": 522,
+        "comment": 87
+      },
+      "classes_count": 31,
+      "methods_count": 202,
+      "constructors_count": 7,
+      "files_count": 29,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 29
+      },
+      "file_types": {
+        ".java": 29
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://someBaseUrl",
+        "https://ctripcorp.github.io/apollo/#/zh/usage/apollo-open-api-platform",
+        "http://someUrl",
+        "http://localhost:8070"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "apollo-portal",
+      "type": "maven",
+      "path": "apollo-portal",
+      "loc": {
+        "total": 35554,
+        "code": 28266,
+        "blank": 5374,
+        "comment": 1914
+      },
+      "classes_count": 273,
+      "methods_count": 3108,
+      "constructors_count": 99,
+      "files_count": 323,
+      "stereotype_instances": [
+        "configuration",
+        "component",
+        "service",
+        "controller",
+        "entity"
+      ],
+      "stereotype_counts": {
+        "configuration": 11,
+        "component": 23,
+        "service": 22,
+        "controller": 31,
+        "entity": 11
+      },
+      "languages": {
+        "java": 235,
+        "javascript": 88
+      },
+      "file_types": {
+        ".java": 235,
+        ".js": 88
+      },
+      "jpa_tables": [
+        "ServerConfig",
+        "ConsumerAudit",
+        "ConsumerToken",
+        "ConsumerRole",
+        "Consumer",
+        "RolePermission",
+        "Permission",
+        "UserRole",
+        "Role",
+        "Users",
+        "Favorite"
+      ],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "https://raw.githubusercontent.com/CreoArt/jquery.textareafullscreen/master/LICENSE",
+        "http://config.xxx.com",
+        "http://unknown.com",
+        "http://getbootstrap.com",
+        "http://localhost:",
+        "http://github.com/CreoArt",
+        "http://code.google.com/p/google-diff-match-patch/wiki/API",
+        "https://github.com/chieffancypants/angular-loading-bar/pull/50",
+        "http://10.0.0.3",
+        "http://1.2.3.4:8080,http://2.3.4.5:8080",
+        "https://docs.angularjs.org/api/ngSanitize",
+        "http://errors.angularjs.org/1.5.1/",
+        "http://www.opensource.org/licenses/MIT",
+        "1.1.1.1:389",
+        "http://apollo.meta",
+        "http://angular-ui.github.com/",
+        "http://www.w3.org/1999/xhtml",
+        "https://ctripcorp.github.io/apollo",
+        "http://someurl",
+        "https://host:port/auth/realms/apollo/.well-known/openid-configuration,",
+        "http://localhost:8080",
+        "http://www.w3.org/XML/1998/namespace",
+        "https://github.com/ajaxorg/ace-builds/tree/ba3b91e04a5aa559d56ac70964f9054baa0f4caf/src-min",
+        "http://bootboxjs.com/license.txt",
+        "https://chieffancypants.github.io/angular-loading-bar",
+        "http://server.com:8080",
+        "https://github.com/select2/select2/blob/master/LICENSE.md",
+        "http://github.com/CreoArt/jquery.textareafullscreen",
+        "http://www.w3.org/2000/xmlns/",
+        "https://zenorocha.github.io/clipboard.js",
+        "http://getbootstrap.com/javascript/",
+        "localhost:389",
+        "http://10.0.0.2",
+        "https://github.com/angular/angular.js/commit/8863b9d04c722b278fa93c5d66ad1e578ad6eb1f",
+        "https://gist.github.com/822d18dc2e4e823a577b",
+        "http://10.0.0.1",
+        "http://another-server.com:8080",
+        "http://angular-ui.github.io/bootstrap/",
+        "http://angular-ui.github.com",
+        "https://github.com/twbs/bootstrap/blob/master/LICENSE",
+        "http://v3.bootcss.com/customize/?id=822d18dc2e4e823a577b",
+        "http://angularjs.org",
+        "http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.4.6927",
+        "https://host:port/auth/realms/apollo",
+        "http://localhost",
+        "http://angular-translate.github.io/docs/#/guide/19_security",
+        "localhost:10389"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "apollo-portal-server",
+      "type": "docker",
+      "path": "scripts\\apollo-on-kubernetes\\apollo-portal-server",
+      "loc": {
+        "total": 0,
+        "code": 0,
+        "blank": 0,
+        "comment": 0
+      },
+      "classes_count": 0,
+      "methods_count": 0,
+      "constructors_count": 0,
+      "files_count": 0,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {},
+      "file_types": {},
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "docker",
+      "type": "docker",
+      "path": "apollo-adminservice\\src\\main\\docker",
+      "loc": {
+        "total": 0,
+        "code": 0,
+        "blank": 0,
+        "comment": 0
+      },
+      "classes_count": 0,
+      "methods_count": 0,
+      "constructors_count": 0,
+      "files_count": 0,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {},
+      "file_types": {},
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    }
+  ],
+  "statistics": {
+    "total_services": 17,
+    "total_files": 820,
+    "total_loc_code": 64844,
+    "total_classes": 938,
+    "total_methods": 6010,
+    "total_constructors": 271
+  }
+}

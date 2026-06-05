@@ -1,0 +1,398 @@
+{
+  "metadata": {
+    "project_path": "D:\\Users\\Desktop\\microservices\\Peggiori\\usate\\warehouse-microservice-master",
+    "project_name": "warehouse-microservice-master",
+    "extraction_timestamp": "2026-02-12T21:12:20.065014",
+    "extractor_version": "2.0.0"
+  },
+  "microservices": [
+    {
+      "name": "account-service",
+      "type": "maven",
+      "path": "account-service",
+      "loc": {
+        "total": 1487,
+        "code": 1039,
+        "blank": 396,
+        "comment": 52
+      },
+      "classes_count": 53,
+      "methods_count": 65,
+      "constructors_count": 15,
+      "files_count": 50,
+      "stereotype_instances": [
+        "component",
+        "entity",
+        "controller",
+        "service",
+        "configuration"
+      ],
+      "stereotype_counts": {
+        "component": 5,
+        "entity": 9,
+        "controller": 2,
+        "service": 3,
+        "configuration": 3
+      },
+      "languages": {
+        "java": 50
+      },
+      "file_types": {
+        ".java": 50
+      },
+      "jpa_tables": [
+        "Account"
+      ],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "api-gateway",
+      "type": "maven",
+      "path": "api-gateway",
+      "loc": {
+        "total": 34,
+        "code": 27,
+        "blank": 7,
+        "comment": 0
+      },
+      "classes_count": 2,
+      "methods_count": 2,
+      "constructors_count": 0,
+      "files_count": 2,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 2
+      },
+      "file_types": {
+        ".java": 2
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "authentication-server",
+      "type": "maven",
+      "path": "authentication-server",
+      "loc": {
+        "total": 322,
+        "code": 228,
+        "blank": 71,
+        "comment": 23
+      },
+      "classes_count": 12,
+      "methods_count": 17,
+      "constructors_count": 0,
+      "files_count": 12,
+      "stereotype_instances": [
+        "configuration",
+        "controller",
+        "service"
+      ],
+      "stereotype_counts": {
+        "configuration": 6,
+        "controller": 1,
+        "service": 1
+      },
+      "languages": {
+        "java": 12
+      },
+      "file_types": {
+        ".java": 12
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "config-server",
+      "type": "maven",
+      "path": "config-server",
+      "loc": {
+        "total": 34,
+        "code": 27,
+        "blank": 7,
+        "comment": 0
+      },
+      "classes_count": 2,
+      "methods_count": 2,
+      "constructors_count": 0,
+      "files_count": 2,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 2
+      },
+      "file_types": {
+        ".java": 2
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "https://github.com/HienNguyen711/warehouse-microservice"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "eureka-server",
+      "type": "maven",
+      "path": "eureka-server",
+      "loc": {
+        "total": 30,
+        "code": 23,
+        "blank": 7,
+        "comment": 0
+      },
+      "classes_count": 2,
+      "methods_count": 2,
+      "constructors_count": 0,
+      "files_count": 2,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 2
+      },
+      "file_types": {
+        ".java": 2
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "order-service",
+      "type": "maven",
+      "path": "order-service",
+      "loc": {
+        "total": 1300,
+        "code": 904,
+        "blank": 384,
+        "comment": 12
+      },
+      "classes_count": 57,
+      "methods_count": 34,
+      "constructors_count": 25,
+      "files_count": 55,
+      "stereotype_instances": [
+        "configuration",
+        "controller",
+        "component",
+        "entity",
+        "service"
+      ],
+      "stereotype_counts": {
+        "configuration": 4,
+        "controller": 2,
+        "component": 4,
+        "entity": 2,
+        "service": 3
+      },
+      "languages": {
+        "java": 55
+      },
+      "file_types": {
+        ".java": 55
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "product-catalog-management-website",
+      "type": "maven",
+      "path": "product-catalog-management-website",
+      "loc": {
+        "total": 101,
+        "code": 73,
+        "blank": 22,
+        "comment": 6
+      },
+      "classes_count": 5,
+      "methods_count": 5,
+      "constructors_count": 0,
+      "files_count": 5,
+      "stereotype_instances": [
+        "configuration"
+      ],
+      "stereotype_counts": {
+        "configuration": 3
+      },
+      "languages": {
+        "java": 5
+      },
+      "file_types": {
+        ".java": 5
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "product-catalog-service",
+      "type": "maven",
+      "path": "product-catalog-service",
+      "loc": {
+        "total": 1683,
+        "code": 1180,
+        "blank": 449,
+        "comment": 54
+      },
+      "classes_count": 51,
+      "methods_count": 68,
+      "constructors_count": 17,
+      "files_count": 50,
+      "stereotype_instances": [
+        "configuration",
+        "component",
+        "controller",
+        "service",
+        "entity"
+      ],
+      "stereotype_counts": {
+        "configuration": 3,
+        "component": 6,
+        "controller": 2,
+        "service": 3,
+        "entity": 4
+      },
+      "languages": {
+        "java": 50
+      },
+      "file_types": {
+        ".java": 50
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "spring-boot-admin",
+      "type": "maven",
+      "path": "spring-boot-admin",
+      "loc": {
+        "total": 32,
+        "code": 25,
+        "blank": 7,
+        "comment": 0
+      },
+      "classes_count": 2,
+      "methods_count": 2,
+      "constructors_count": 0,
+      "files_count": 2,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 2
+      },
+      "file_types": {
+        ".java": 2
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "turbine-server",
+      "type": "maven",
+      "path": "turbine-server",
+      "loc": {
+        "total": 37,
+        "code": 25,
+        "blank": 9,
+        "comment": 3
+      },
+      "classes_count": 2,
+      "methods_count": 2,
+      "constructors_count": 0,
+      "files_count": 2,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 2
+      },
+      "file_types": {
+        ".java": 2
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "website",
+      "type": "maven",
+      "path": "website",
+      "loc": {
+        "total": 78,
+        "code": 53,
+        "blank": 17,
+        "comment": 8
+      },
+      "classes_count": 4,
+      "methods_count": 4,
+      "constructors_count": 0,
+      "files_count": 4,
+      "stereotype_instances": [
+        "configuration"
+      ],
+      "stereotype_counts": {
+        "configuration": 2
+      },
+      "languages": {
+        "java": 4
+      },
+      "file_types": {
+        ".java": 4
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "zipkin-server",
+      "type": "maven",
+      "path": "zipkin-server",
+      "loc": {
+        "total": 32,
+        "code": 25,
+        "blank": 7,
+        "comment": 0
+      },
+      "classes_count": 2,
+      "methods_count": 2,
+      "constructors_count": 0,
+      "files_count": 2,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 2
+      },
+      "file_types": {
+        ".java": 2
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    }
+  ],
+  "statistics": {
+    "total_services": 12,
+    "total_files": 188,
+    "total_loc_code": 3629,
+    "total_classes": 194,
+    "total_methods": 205,
+    "total_constructors": 57
+  }
+}

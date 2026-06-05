@@ -1,0 +1,3557 @@
+================================================================
+Directory Structure
+================================================================
+.gitignore
+manifest.yml
+microsec-admin-portal/pom.xml
+microsec-admin-portal/src/main/java/microsec/freddysbbq/admin_app/AdminApplication.java
+microsec-admin-portal/src/main/resources/application.yml
+microsec-admin-portal/src/main/resources/templates/index.html
+microsec-admin-portal/src/main/resources/templates/menu.html
+microsec-admin-portal/src/main/resources/templates/menuItem.html
+microsec-admin-portal/src/main/resources/templates/orders.html
+microsec-common/pom.xml
+microsec-common/src/main/java/microsec/common/Branding.java
+microsec-common/src/main/java/microsec/common/DumpTokenEndpointConfig.java
+microsec-common/src/main/java/microsec/common/MenuBootstrap.java
+microsec-common/src/main/java/microsec/common/TokenRelayingRestTemplate.java
+microsec-common/src/main/java/microsec/common/Utils.java
+microsec-common/src/main/java/microsec/freddysbbq/menu/model/v1/MenuItem.java
+microsec-common/src/main/java/microsec/freddysbbq/order/model/v1/Order.java
+microsec-common/src/main/java/microsec/freddysbbq/order/model/v1/OrderItem.java
+microsec-common/src/main/java/microsec/uaa/model/v2/UserInfo.java
+microsec-common/src/main/resources/config/application.yml
+microsec-common/src/main/resources/templates/dump_token.html
+microsec-custom-registry/pom.xml
+microsec-custom-registry/src/main/java/microsec/freddysbbq/customregistry/AuthorizationServerConfiguration.java
+microsec-custom-registry/src/main/java/microsec/freddysbbq/customregistry/CustomRegistryApplication.java
+microsec-custom-registry/src/main/java/microsec/freddysbbq/customregistry/JwtTokenKeys.java
+microsec-custom-registry/src/main/java/microsec/freddysbbq/customregistry/mainframe/MainframeUser.java
+microsec-custom-registry/src/main/java/microsec/freddysbbq/customregistry/mainframe/MainframeUserService.java
+microsec-custom-registry/src/main/java/microsec/freddysbbq/customregistry/mainframe/MockMainframeService.java
+microsec-custom-registry/src/main/java/microsec/freddysbbq/customregistry/openid/IdToken.java
+microsec-custom-registry/src/main/java/microsec/freddysbbq/customregistry/openid/IdTokenEhnancer.java
+microsec-custom-registry/src/main/java/microsec/freddysbbq/customregistry/PageControllers.java
+microsec-custom-registry/src/main/java/microsec/freddysbbq/customregistry/provider/AuthenticatedMainframeUser.java
+microsec-custom-registry/src/main/java/microsec/freddysbbq/customregistry/provider/MainframeAuthenticationProvider.java
+microsec-custom-registry/src/main/java/microsec/freddysbbq/customregistry/SecurityConfig.java
+microsec-custom-registry/src/main/java/microsec/freddysbbq/customregistry/util/JacksonUtils.java
+microsec-custom-registry/src/main/java/microsec/freddysbbq/customregistry/util/SpringSecurityUtils.java
+microsec-custom-registry/src/main/resources/application.yml
+microsec-custom-registry/src/main/resources/templates/home.html
+microsec-custom-registry/src/main/resources/templates/login.html
+microsec-customer-portal/pom.xml
+microsec-customer-portal/src/main/java/microsec/freddysbbq/customer_app/CustomerApplication.java
+microsec-customer-portal/src/main/java/microsec/freddysbbq/customer_app/CustomerController.java
+microsec-customer-portal/src/main/resources/application.yml
+microsec-customer-portal/src/main/resources/templates/index.html
+microsec-customer-portal/src/main/resources/templates/menu.html
+microsec-customer-portal/src/main/resources/templates/myorders.html
+microsec-eureka-server/pom.xml
+microsec-eureka-server/src/main/java/microsec/freddysbbq/eureka_server/EurekaServer.java
+microsec-eureka-server/src/main/resources/application.yml
+microsec-hystrix-dashboard/pom.xml
+microsec-hystrix-dashboard/src/main/java/microsec/freddysbbq/hystrix_dashboard/HystrixDashboard.java
+microsec-hystrix-dashboard/src/main/resources/application.yml
+microsec-menu-service/pom.xml
+microsec-menu-service/src/main/java/microsec/freddysbbq/menu/MenuApplication.java
+microsec-menu-service/src/main/java/microsec/freddysbbq/menu/MenuItemRepository.java
+microsec-menu-service/src/main/resources/application.yml
+microsec-order-service/pom.xml
+microsec-order-service/src/main/java/microsec/freddysbbq/order/CustomerOrderController.java
+microsec-order-service/src/main/java/microsec/freddysbbq/order/MethodSecurityConfig.java
+microsec-order-service/src/main/java/microsec/freddysbbq/order/OrderApplication.java
+microsec-order-service/src/main/java/microsec/freddysbbq/order/OrderRepository.java
+microsec-order-service/src/main/resources/application.yml
+pom.xml
+repomix.config.json
+uaa/pom.xml
+uaa/UAA.postman_collection.json
+uaa/uaa.yml
+uaa/zoneadmin.sh
+uaa/zoneusers.sh
+
+================================================================
+Files
+================================================================
+
+================
+File: .gitignore
+================
+1: build
+2: bin
+3: target
+4: .settings
+5: .project
+6: .classpath
+7: .gradle
+8: .springBeans
+9: .factorypath
+
+================
+File: manifest.yml
+================
+ 1: ---
+ 2: buildpack: java_buildpack_offline
+ 3: services:
+ 4:   - sso
+ 5:   - service-registry
+ 6: applications:
+ 7:  - name: custom-registry
+ 8:    path: microsec-custom-registry/target/microsec-custom-registry.jar
+ 9:  - name: customer-portal
+10:    path: microsec-customer-portal/target/microsec-customer-portal.jar
+11:    services:
+12:    - config-server
+13:    - circuit-breaker
+14:  - name: menu-service
+15:    path: microsec-menu-service/target/microsec-menu-service.jar
+16:    services:
+17:    - config-server
+18:    - mysql
+19:    env:
+20:      GRANT_TYPE: client_credentials
+21:  - name: admin-portal
+22:    path: microsec-admin-portal/target/microsec-admin-portal.jar
+23:    services:
+24:    - config-server
+25:    - circuit-breaker
+26:  - name: order-service
+27:    path: microsec-order-service/target/microsec-order-service.jar
+28:    services:
+29:    - mysql
+30:    env:
+31:      GRANT_TYPE: client_credentials
+
+================
+File: microsec-admin-portal/pom.xml
+================
+ 1: <?xml version="1.0" encoding="UTF-8"?>
+ 2: <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 3:   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 4:   <modelVersion>4.0.0</modelVersion>
+ 5:   <artifactId>microsec-admin-portal</artifactId>
+ 6:   <parent>
+ 7:     <groupId>com.willtran.springone2gx</groupId>
+ 8:     <artifactId>microsec-parent</artifactId>
+ 9:     <version>0.0.1-SNAPSHOT</version>
+10:   </parent>
+11:   <dependencies>
+12:     <dependency>
+13:       <groupId>com.willtran.springone2gx</groupId>
+14:       <artifactId>microsec-common</artifactId>
+15:       <version>${project.version}</version>
+16:     </dependency>
+17:     <dependency>
+18:       <groupId>com.willtran.springone2gx</groupId>
+19:       <artifactId>microsec-test</artifactId>
+20:       <version>${project.version}</version>
+21:     </dependency>
+22:     <dependency>
+23:       <groupId>org.springframework.boot</groupId>
+24:       <artifactId>spring-boot-starter-thymeleaf</artifactId>
+25:     </dependency>
+26:     <dependency>
+27:       <groupId>org.springframework.boot</groupId>
+28:       <artifactId>spring-boot-starter-hateoas</artifactId>
+29:     </dependency>
+30:     <dependency>
+31:       <groupId>org.springframework.cloud</groupId>
+32:       <artifactId>spring-cloud-starter-oauth2</artifactId>
+33:     </dependency>
+34:     <dependency>
+35:       <groupId>io.pivotal.spring.cloud</groupId>
+36:       <artifactId>spring-cloud-services-starter-config-client</artifactId>
+37:     </dependency>
+38:     <dependency>
+39:       <groupId>io.pivotal.spring.cloud</groupId>
+40:       <artifactId>spring-cloud-services-starter-service-registry</artifactId>
+41:     </dependency>
+42:     <dependency>
+43:       <groupId>io.pivotal.spring.cloud</groupId>
+44:       <artifactId>spring-cloud-services-starter-circuit-breaker</artifactId>
+45:     </dependency>
+46:   </dependencies>
+47: </project>
+
+================
+File: microsec-admin-portal/src/main/java/microsec/freddysbbq/admin_app/AdminApplication.java
+================
+  1: package microsec.freddysbbq.admin_app;
+  2: import java.security.Principal;
+  3: import org.springframework.beans.factory.annotation.Autowired;
+  4: import org.springframework.beans.factory.annotation.Qualifier;
+  5: import org.springframework.boot.SpringApplication;
+  6: import org.springframework.boot.autoconfigure.SpringBootApplication;
+  7: import org.springframework.boot.autoconfigure.security.SecurityProperties;
+  8: import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
+  9: import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
+ 10: import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+ 11: import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+ 12: import org.springframework.context.annotation.Bean;
+ 13: import org.springframework.context.annotation.Import;
+ 14: import org.springframework.core.ParameterizedTypeReference;
+ 15: import org.springframework.hateoas.PagedResources;
+ 16: import org.springframework.hateoas.Resource;
+ 17: import org.springframework.http.HttpMethod;
+ 18: import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+ 19: import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+ 20: import org.springframework.security.oauth2.client.OAuth2ClientContext;
+ 21: import org.springframework.security.oauth2.client.OAuth2RestTemplate;
+ 22: import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
+ 23: import org.springframework.security.oauth2.provider.expression.OAuth2WebSecurityExpressionHandler;
+ 24: import org.springframework.stereotype.Controller;
+ 25: import org.springframework.ui.Model;
+ 26: import org.springframework.web.bind.annotation.ModelAttribute;
+ 27: import org.springframework.web.bind.annotation.PathVariable;
+ 28: import org.springframework.web.bind.annotation.RequestMapping;
+ 29: import org.springframework.web.bind.annotation.RequestMethod;
+ 30: import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+ 31: import microsec.common.Branding;
+ 32: import microsec.common.DumpTokenEndpointConfig;
+ 33: import microsec.freddysbbq.menu.model.v1.MenuItem;
+ 34: import microsec.freddysbbq.order.model.v1.Order;
+ 35: @SpringBootApplication
+ 36: @Controller
+ 37: @EnableOAuth2Sso
+ 38: @EnableDiscoveryClient
+ 39: @EnableCircuitBreaker
+ 40: @Import(DumpTokenEndpointConfig.class)
+ 41: public class AdminApplication extends WebSecurityConfigurerAdapter {
+ 42:     public static void main(String[] args) {
+ 43:         SpringApplication.run(AdminApplication.class, args);
+ 44:     }
+ 45:     @Autowired
+ 46:     private SecurityProperties securityProperties;
+ 47:     @Override
+ 48:     public void configure(HttpSecurity http) throws Exception {
+ 49:         if (securityProperties.isRequireSsl()) {
+ 50:             http.requiresChannel().anyRequest().requiresSecure();
+ 51:         }
+ 52:         http.authorizeRequests()
+ 53:                 .expressionHandler(new OAuth2WebSecurityExpressionHandler())
+ 54:                 .anyRequest().access("#oauth2.hasScope('menu.write')");
+ 55:     }
+ 56:     @Autowired
+ 57:     @Qualifier("loadBalancedOauth2RestTemplate")
+ 58:     private OAuth2RestTemplate restTemplate;
+ 59:     @Bean
+ 60:     public Branding branding() {
+ 61:         return new Branding();
+ 62:     }
+ 63:     @LoadBalanced
+ 64:     @Bean
+ 65:     public OAuth2RestTemplate loadBalancedOauth2RestTemplate(
+ 66:             OAuth2ProtectedResourceDetails resource,
+ 67:             OAuth2ClientContext oauth2Context) {
+ 68:         OAuth2RestTemplate oauth2RestTemplate = new OAuth2RestTemplate(resource, oauth2Context);
+ 69:         return oauth2RestTemplate;
+ 70:     }
+ 71:     @RequestMapping("/")
+ 72:     public String index(Model model, Principal principal) {
+ 73:         model.addAttribute("username", principal.getName());
+ 74:         return "index";
+ 75:     }
+ 76:     @HystrixCommand
+ 77:     @RequestMapping("/menuItems")
+ 78:     public String menu(Model model) throws Exception {
+ 79:         PagedResources<MenuItem> menu = restTemplate
+ 80:                 .exchange(
+ 81:                         "//menu-service/menuItems",
+ 82:                         HttpMethod.GET, null,
+ 83:                         new ParameterizedTypeReference<PagedResources<MenuItem>>() {
+ 84:                         })
+ 85:                 .getBody();
+ 86:         model.addAttribute("menu", menu.getContent());
+ 87:         return "menu";
+ 88:     }
+ 89:     @RequestMapping("/menuItems/new")
+ 90:     public String newMenuItem(Model model) throws Exception {
+ 91:         model.addAttribute(new MenuItem());
+ 92:         return "menuItem";
+ 93:     }
+ 94:     @HystrixCommand
+ 95:     @RequestMapping(method = RequestMethod.POST, value = "/menuItems/new/")
+ 96:     public String saveNewMenuItem(@ModelAttribute MenuItem menuItem) throws Exception {
+ 97:         restTemplate
+ 98:                 .postForEntity("//menu-service/menuItems/", menuItem, Void.class);
+ 99:         return "redirect:..";
+100:     }
+101:     @HystrixCommand
+102:     @RequestMapping("/menuItems/{id}")
+103:     public String viewMenuItem(Model model, @PathVariable String id) throws Exception {
+104:         Resource<MenuItem> item = restTemplate
+105:                 .exchange(
+106:                         "//menu-service/menuItems/{id}",
+107:                         HttpMethod.GET, null,
+108:                         new ParameterizedTypeReference<Resource<MenuItem>>() {
+109:                         }, id)
+110:                 .getBody();
+111:         model.addAttribute("menuItem", item.getContent());
+112:         return "menuItem";
+113:     }
+114:     @HystrixCommand
+115:     @RequestMapping(method = RequestMethod.POST, value = "/menuItems/{id}")
+116:     public String saveMenuItem(@PathVariable String id, @ModelAttribute MenuItem menuItem) throws Exception {
+117:         restTemplate.put("//menu-service/menuItems/{id}", menuItem, id);
+118:         return "redirect:..";
+119:     }
+120:     @HystrixCommand
+121:     @RequestMapping(method = RequestMethod.POST, value = "/menuItems/{id}/delete")
+122:     public String deleteMenuItem(@PathVariable String id, @ModelAttribute MenuItem menuItem) throws Exception {
+123:         restTemplate.delete("//menu-service/menuItems/{id}", id);
+124:         return "redirect:..";
+125:     }
+126:     @HystrixCommand
+127:     @RequestMapping("/orders/")
+128:     public String viewOrders(Model model) {
+129:         PagedResources<Order> orders = restTemplate
+130:                 .exchange(
+131:                         "//order-service/orders",
+132:                         HttpMethod.GET, null,
+133:                         new ParameterizedTypeReference<PagedResources<Order>>() {
+134:                         })
+135:                 .getBody();
+136:         model.addAttribute("orders", orders.getContent());
+137:         return "orders";
+138:     }
+139:     @HystrixCommand
+140:     @RequestMapping(method = RequestMethod.POST, value = "/orders/{id}/delete")
+141:     public String deleteOrder(@PathVariable String id) {
+142:         restTemplate.delete("//order-service/orders/{id}", id);
+143:         return "redirect:..";
+144:     }
+145: }
+
+================
+File: microsec-admin-portal/src/main/resources/application.yml
+================
+ 1: spring.application.name: admin-portal
+ 2: server.port: 8084
+ 3: security:
+ 4:   basic:
+ 5:     enabled: false
+ 6:   oauth2:
+ 7:     client:
+ 8:       accessTokenUri: ${targets.uaa}/oauth/token
+ 9:       userAuthorizationUri: ${targets.uaa}/oauth/authorize
+10:       clientId: admin-portal
+11:       clientSecret: secret
+12:       scope: openid,menu.read,menu.write,order.admin
+13:     resource:
+14:       jwt.keyUri: ${targets.uaa}/token_key
+
+================
+File: microsec-admin-portal/src/main/resources/templates/index.html
+================
+ 1: <!DOCTYPE HTML>
+ 2: <html xmlns:th="http://www.thymeleaf.org">
+ 3: <head>
+ 4:     <title th:text="|${@branding.restaurantName} Administration Portal|">Restaurant | Administration Portal</title>
+ 5:     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ 6: 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+ 7: 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+ 8: 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+ 9: </head>
+10: <body>
+11: 	<div class="container">
+12: 		<div class="page-header">
+13: 			<h1 th:text="|Hi ${username}! Welcome to ${@branding.restaurantName} Administration Portal|">Welcome to Restaurant Administration Portal</h1>
+14: 		</div>
+15: 		<div class="row">
+16: 			<div class="col-md-4">
+17: 				<h2>What do you want to do?</h2>
+18: 			</div>
+19: 			<div class="col-md-8">
+20: 				<table class="table table-hover">
+21: 					<tr>
+22: 						<td>
+23: 							<a href="/menuItems/">
+24:                 <img src="../static/images/menu.png" th:src="@{images/menu.png}" />
+25: 								<h3>View and edit the menu</h3>
+26: 							</a>
+27: 						</td>
+28: 					</tr>
+29: 		      <tr>
+30: 						<td>
+31: 							<a href="/orders/">
+32:                 <img src="../static/images/orders.png" th:src="@{images/orders.png}" />
+33: 								<h3>View and close orders</h3>
+34: 							</a>
+35: 						</td>
+36: 		      </tr>
+37: 		      <tr>
+38: 						<td>
+39: 			        <a href="/dump_token">
+40:                 <img src="../static/images/access.png" th:src="@{images/access.png}" />
+41: 								<h3>View your access token</h3>
+42: 							</a>
+43: 						</td>
+44: 		      </tr>
+45: 				</table>
+46: 			</div>
+47: 		</div>
+48: 	</div>
+49: </body>
+50: </html>
+
+================
+File: microsec-admin-portal/src/main/resources/templates/menu.html
+================
+ 1: <!DOCTYPE HTML>
+ 2: <html xmlns:th="http://www.thymeleaf.org">
+ 3: <head>
+ 4:   <title th:text="${@branding.restaurantName} + ' | Menu'">Restaurant | Menu</title>
+ 5:   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ 6:   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+ 7:   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+ 8:   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+ 9: </head>
+10: <body>
+11:   <div class="container">
+12:     <div class="page-header">
+13:       <h1 th:text="|${@branding.menuTitle}|">The Menu</h1>
+14:     </div>
+15:     <div class="row">
+16:       <div class="col-md-12">
+17:         <table class="table table-hover">
+18:           <thead>
+19:             <tr>
+20:               <td>Item</td><td>Price</td><td>Action</td>
+21:             </tr>
+22:           </thead>
+23:           <tbody>
+24:             <tr th:each="item : ${menu}">
+25:               <td th:text="${item.name}">Something</td><td th:text="${item.price}">$1.00</td><td><a th:href="|${item.id}/|" href="#">Edit</a></td>
+26:             </tr>
+27:           </tbody>
+28:         </table>
+29:         <a href="new/">Add a new Item</a><br/>
+30:         <a href="/">Back to home</a>
+31:       </div>
+32:     </div>
+33:   </div>
+34: </body>
+35: </html>
+
+================
+File: microsec-admin-portal/src/main/resources/templates/menuItem.html
+================
+ 1: <!DOCTYPE HTML>
+ 2: <html xmlns:th="http://www.thymeleaf.org">
+ 3: <head>
+ 4:   <title th:text="${@branding.restaurantName} + ' | Menu'">Restaurant | Menu</title>
+ 5:   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ 6:   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+ 7:   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+ 8:   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+ 9: </head>
+10: <body>
+11:   <div class="container">
+12:     <div class="page-header">
+13:       <h1 th:text="|${@branding.menuTitle}|">The Menu Item</h1>
+14:     </div>
+15:     <div class="row">
+16:       <div class="col-md-12">
+17:         <form method="POST" th:action=".">
+18:           <table class="table">
+19:             <tr>
+20:               <td><label for="name">Name</label></td>
+21:               <td><input type="text" th:field="*{menuItem.name}" id="name" /></td>
+22:             </tr>
+23:             <tr>
+24:               <td><label for="name">Price</label></td>
+25:               <td><input type="text" th:field="*{menuItem.price}" id="price" /></td>
+26:             </tr>
+27:             <tr>
+28:               <td colspan="2"><input type="submit" value="save"/></td>
+29:             </tr>
+30:           </table>
+31:         </form>
+32:         <form method="POST" th:action="delete">
+33:           <input type="submit" value="delete"/>
+34:         </form>
+35:         <a href="..">Back</a>
+36:       </div>
+37:     </div>
+38:   </div>
+39: </body>
+40: </html>
+
+================
+File: microsec-admin-portal/src/main/resources/templates/orders.html
+================
+ 1: <!DOCTYPE HTML>
+ 2: <html xmlns:th="http://www.thymeleaf.org">
+ 3: <head>
+ 4:   <title th:text="${@branding.restaurantName} + ' | Orders'">Restaurant | Orders</title>
+ 5:   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ 6:   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+ 7:   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+ 8:   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+ 9: </head>
+10: <body>
+11:   <div class="container">
+12:     <div class="page-header">
+13:       <h1>Current Orders</h1>
+14:     </div>
+15:     <div class="row" th:each="order : ${orders}">
+16:       <h3>Order number: <span th:text="${order.id}">1</span></h3>
+17:       <div class="col-md-5">
+18:         <h4>Summary</h4>
+19:         <table class="table table-striped">
+20:           <tr>
+21:             <td>Order placed</td>
+22:             <td th:text="${order.placed}">Today</td>
+23:           </tr>
+24:           <tr>
+25:             <td>Total</td>
+26:             <td th:text="${order.total}">$ 5.00</td>
+27:           </tr>
+28:           <tr>
+29:             <td>First Name</td>
+30:             <td th:text="${order.firstName}">First</td>
+31:           </tr>
+32:           <tr>
+33:             <td>Last Name</td>
+34:             <td th:text="${order.lastName}">Last</td>
+35:           </tr>
+36:           <tr>
+37:             <td>Email</td>
+38:             <td th:text="${order.email}">first.last@email.com</td>
+39:           </tr>
+40:           <tr>
+41:             <td colspan="2">
+42:               <form method="post" th:action="|${order.id}/delete|">
+43:                 <input type="submit" value="Close this order" />
+44:               </form>
+45:               <a href="/">Back to home</a>
+46:             </td>
+47:           </tr>
+48:         </table>
+49:       </div>
+50:       <div class="col-md-7">
+51:         <h4>Items Ordered</h4>
+52:         <table class="table table-striped">
+53:           <thead>
+54:             <tr>
+55:               <th>Item</th>
+56:               <th>Price</th>
+57:               <th>Quantity</th>
+58:             </tr>
+59:           </thead>
+60:           <tbody>
+61:             <tr th:each="item : ${order.orderItems}">
+62:               <td th:text="${item.name}">Something</td>
+63:               <td th:text="${item.price}">$1.00</td>
+64:               <td th:text="${item.quantity}">1</td>
+65:             </tr>
+66:           </tbody>
+67:         </table>
+68:       </div>
+69:     </div>
+70:   </div>
+71: </body>
+72: </html>
+
+================
+File: microsec-common/pom.xml
+================
+ 1: <?xml version="1.0" encoding="UTF-8"?>
+ 2: <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 3:   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 4:   <modelVersion>4.0.0</modelVersion>
+ 5:   <artifactId>microsec-common</artifactId>
+ 6:   <parent>
+ 7:     <groupId>com.willtran.springone2gx</groupId>
+ 8:     <artifactId>microsec-parent</artifactId>
+ 9:     <version>0.0.1-SNAPSHOT</version>
+10:   </parent>
+11:   <dependencies>
+12:     <dependency>
+13:       <groupId>org.springframework.security.oauth</groupId>
+14:       <artifactId>spring-security-oauth2</artifactId>
+15:     </dependency>
+16:     <dependency>
+17:       <groupId>commons-codec</groupId>
+18:       <artifactId>commons-codec</artifactId>
+19:       <version>1.6</version>
+20:     </dependency>
+21:     <dependency>
+22:       <groupId>org.springframework.boot</groupId>
+23:       <artifactId>spring-boot-starter-web</artifactId>
+24:     </dependency>
+25:     <dependency>
+26:       <groupId>org.hibernate.javax.persistence</groupId>
+27:       <artifactId>hibernate-jpa-2.1-api</artifactId>
+28:       <version>1.0.0.Final</version>
+29:     </dependency>
+30:     <dependency>
+31:       <groupId>org.springframework.boot</groupId>
+32:       <artifactId>spring-boot-configuration-processor</artifactId>
+33:       <optional>true</optional>
+34:     </dependency>
+35:     <dependency>
+36:       <groupId>io.pivotal.spring.cloud</groupId>
+37:       <artifactId>spring-cloud-sso-connector</artifactId>
+38:       <version>1.1.0.RELEASE</version>
+39:     </dependency>
+40:     <dependency>
+41:       <groupId>io.pivotal.spring.cloud</groupId>
+42:       <artifactId>cloudfoundry-certificate-truster</artifactId>
+43:     </dependency>
+44:   </dependencies>
+45:   <build>
+46:     <plugins>
+47:       <plugin>
+48:         <groupId>org.springframework.boot</groupId>
+49:         <artifactId>spring-boot-maven-plugin</artifactId>
+50:         <configuration>
+51:           <skip>true</skip>
+52:         </configuration>
+53:       </plugin>
+54:     </plugins>
+55:   </build>
+56: </project>
+
+================
+File: microsec-common/src/main/java/microsec/common/Branding.java
+================
+ 1: package microsec.common;
+ 2: import org.springframework.boot.context.properties.ConfigurationProperties;
+ 3: @ConfigurationProperties("branding")
+ 4: public class Branding {
+ 5:     private String restaurantName;
+ 6:     private String menuTitle;
+ 7:     public String getRestaurantName() {
+ 8:         return restaurantName;
+ 9:     }
+10:     public void setRestaurantName(String restaurantName) {
+11:         this.restaurantName = restaurantName;
+12:     }
+13:     public String getMenuTitle() {
+14:         return menuTitle;
+15:     }
+16:     public void setMenuTitle(String menuTitle) {
+17:         this.menuTitle = menuTitle;
+18:     }
+19: }
+
+================
+File: microsec-common/src/main/java/microsec/common/DumpTokenEndpointConfig.java
+================
+ 1: package microsec.common;
+ 2: import org.springframework.beans.factory.annotation.Autowired;
+ 3: import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+ 4: import org.springframework.context.annotation.Bean;
+ 5: import org.springframework.context.annotation.Configuration;
+ 6: import org.springframework.security.oauth2.client.OAuth2ClientContext;
+ 7: import org.springframework.stereotype.Controller;
+ 8: import org.springframework.ui.Model;
+ 9: import org.springframework.web.bind.annotation.RequestMapping;
+10: @Configuration
+11: public class DumpTokenEndpointConfig {
+12:     @Bean
+13:     public DumpTokenController dumpTokenController() {
+14:         return new DumpTokenController();
+15:     }
+16:     @Controller
+17:     @ConditionalOnBean(DumpTokenEndpointConfig.class)
+18:     public static class DumpTokenController {
+19:         @Autowired
+20:         private OAuth2ClientContext oAuth2ClientContext;
+21:         @RequestMapping("/dump_token")
+22:         public String dumpToken(Model model) {
+23:             String rawToken = oAuth2ClientContext.getAccessToken().getValue();
+24:             String decodedToken = null;
+25:             try {
+26:                 decodedToken = Utils.toPrettyJsonString(Utils.getToken(oAuth2ClientContext));
+27:             } catch (Exception e) {
+28:             }
+29:             model.addAttribute("decodedToken", decodedToken);
+30:             model.addAttribute("rawToken", rawToken);
+31:             return "dump_token";
+32:         }
+33:     }
+34: }
+
+================
+File: microsec-common/src/main/java/microsec/common/MenuBootstrap.java
+================
+ 1: package microsec.common;
+ 2: import java.util.List;
+ 3: import org.springframework.boot.context.properties.ConfigurationProperties;
+ 4: import microsec.freddysbbq.menu.model.v1.MenuItem;
+ 5: @ConfigurationProperties("menuBootstrap")
+ 6: public class MenuBootstrap {
+ 7:     private List<MenuItem> items;
+ 8:     public List<MenuItem> getItems() {
+ 9:         return items;
+10:     }
+11:     public void setItems(List<MenuItem> items) {
+12:         this.items = items;
+13:     }
+14: }
+
+================
+File: microsec-common/src/main/java/microsec/common/TokenRelayingRestTemplate.java
+================
+ 1: package microsec.common;
+ 2: import org.springframework.security.core.Authentication;
+ 3: import org.springframework.security.core.context.SecurityContextHolder;
+ 4: import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
+ 5: import org.springframework.security.oauth2.client.OAuth2RestTemplate;
+ 6: import org.springframework.security.oauth2.client.resource.BaseOAuth2ProtectedResourceDetails;
+ 7: import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
+ 8: import org.springframework.security.oauth2.common.OAuth2AccessToken;
+ 9: import org.springframework.security.oauth2.provider.OAuth2Authentication;
+10: import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
+11: public class TokenRelayingRestTemplate extends OAuth2RestTemplate {
+12: 	public TokenRelayingRestTemplate() {
+13: 		super(new BaseOAuth2ProtectedResourceDetails(), new DefaultOAuth2ClientContext() {
+14: 			private static final long serialVersionUID = 1L;
+15: 			@Override
+16: 			public OAuth2AccessToken getAccessToken() {
+17: 				Authentication principal = SecurityContextHolder.getContext()
+18: 						.getAuthentication();
+19: 				if (principal instanceof OAuth2Authentication) {
+20: 					OAuth2Authentication authentication = (OAuth2Authentication) principal;
+21: 					Object details = authentication.getDetails();
+22: 					if (details instanceof OAuth2AuthenticationDetails) {
+23: 						OAuth2AuthenticationDetails oauthsDetails = (OAuth2AuthenticationDetails) details;
+24: 						String token = oauthsDetails.getTokenValue();
+25: 						return new DefaultOAuth2AccessToken(token);
+26: 					}
+27: 				}
+28: 				return super.getAccessToken();
+29: 			}
+30: 		});
+31: 	}
+32: }
+
+================
+File: microsec-common/src/main/java/microsec/common/Utils.java
+================
+ 1: package microsec.common;
+ 2: import java.util.Map;
+ 3: import org.apache.commons.codec.binary.Base64;
+ 4: import org.springframework.security.oauth2.client.OAuth2ClientContext;
+ 5: import com.fasterxml.jackson.core.type.TypeReference;
+ 6: import com.fasterxml.jackson.databind.ObjectMapper;
+ 7: public class Utils {
+ 8:     private static final ObjectMapper objectMapper = new ObjectMapper();
+ 9:     public static String toPrettyJsonString(Object object) throws Exception {
+10:         return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(object);
+11:     }
+12:     public static Map<String, ?> getToken(OAuth2ClientContext clientContext) throws Exception {
+13:         if (clientContext.getAccessToken() != null) {
+14:             String tokenBase64 = clientContext.getAccessToken().getValue().split("\\.")[1];
+15:             return objectMapper.readValue(Base64.decodeBase64(tokenBase64), new TypeReference<Map<String, ?>>() {
+16:             });
+17:         }
+18:         return null;
+19:     }
+20: }
+
+================
+File: microsec-common/src/main/java/microsec/freddysbbq/menu/model/v1/MenuItem.java
+================
+ 1: package microsec.freddysbbq.menu.model.v1;
+ 2: import java.math.BigDecimal;
+ 3: import javax.persistence.Entity;
+ 4: import javax.persistence.GeneratedValue;
+ 5: import javax.persistence.GenerationType;
+ 6: import javax.persistence.Id;
+ 7: @Entity
+ 8: public class MenuItem {
+ 9:     @Id
+10:     @GeneratedValue(strategy = GenerationType.AUTO)
+11:     private long id;
+12:     private String name;
+13:     private BigDecimal price;
+14:     public long getId() {
+15:         return id;
+16:     }
+17:     public void setId(long id) {
+18:         this.id = id;
+19:     }
+20:     public String getName() {
+21:         return name;
+22:     }
+23:     public void setName(String name) {
+24:         this.name = name;
+25:     }
+26:     public BigDecimal getPrice() {
+27:         return price;
+28:     }
+29:     public void setPrice(BigDecimal price) {
+30:         this.price = price;
+31:     }
+32: }
+
+================
+File: microsec-common/src/main/java/microsec/freddysbbq/order/model/v1/Order.java
+================
+ 1: package microsec.freddysbbq.order.model.v1;
+ 2: import java.math.BigDecimal;
+ 3: import java.util.Date;
+ 4: import java.util.Set;
+ 5: import javax.persistence.CascadeType;
+ 6: import javax.persistence.Entity;
+ 7: import javax.persistence.GeneratedValue;
+ 8: import javax.persistence.GenerationType;
+ 9: import javax.persistence.Id;
+10: import javax.persistence.JoinColumn;
+11: import javax.persistence.OneToMany;
+12: import javax.persistence.Table;
+13: @Entity
+14: @Table(name = "\"Order\"")
+15: public class Order {
+16:     @Id
+17:     @GeneratedValue(strategy = GenerationType.AUTO)
+18:     private long id;
+19:     private String customerId;
+20:     private String firstName;
+21:     private String lastName;
+22:     private String email;
+23:     private Date placed;
+24:     private BigDecimal total;
+25:     @OneToMany(cascade = CascadeType.ALL)
+26:     @JoinColumn(name = "order_id")
+27:     private Set<OrderItem> orderItems;
+28:     public long getId() {
+29:         return id;
+30:     }
+31:     public void setId(long id) {
+32:         this.id = id;
+33:     }
+34:     public String getCustomerId() {
+35:         return customerId;
+36:     }
+37:     public void setCustomerId(String customerId) {
+38:         this.customerId = customerId;
+39:     }
+40:     public String getFirstName() {
+41:         return firstName;
+42:     }
+43:     public void setFirstName(String firstName) {
+44:         this.firstName = firstName;
+45:     }
+46:     public String getLastName() {
+47:         return lastName;
+48:     }
+49:     public void setLastName(String lastName) {
+50:         this.lastName = lastName;
+51:     }
+52:     public String getEmail() {
+53:         return email;
+54:     }
+55:     public void setEmail(String email) {
+56:         this.email = email;
+57:     }
+58:     public Date getPlaced() {
+59:         return placed;
+60:     }
+61:     public void setPlaced(Date placed) {
+62:         this.placed = placed;
+63:     }
+64:     public BigDecimal getTotal() {
+65:         return total;
+66:     }
+67:     public void setTotal(BigDecimal total) {
+68:         this.total = total;
+69:     }
+70:     public Set<OrderItem> getOrderItems() {
+71:         return orderItems;
+72:     }
+73:     public void setOrderItems(Set<OrderItem> orderItems) {
+74:         this.orderItems = orderItems;
+75:     }
+76: }
+
+================
+File: microsec-common/src/main/java/microsec/freddysbbq/order/model/v1/OrderItem.java
+================
+  1: package microsec.freddysbbq.order.model.v1;
+  2: import java.math.BigDecimal;
+  3: import javax.persistence.Column;
+  4: import javax.persistence.Entity;
+  5: import javax.persistence.GeneratedValue;
+  6: import javax.persistence.GenerationType;
+  7: import javax.persistence.Id;
+  8: import javax.persistence.JoinColumn;
+  9: import javax.persistence.ManyToOne;
+ 10: import javax.persistence.Table;
+ 11: import javax.persistence.UniqueConstraint;
+ 12: import com.fasterxml.jackson.annotation.JsonIgnore;
+ 13: @Entity
+ 14: @Table(uniqueConstraints = {
+ 15:         @UniqueConstraint(columnNames = { "order_id", "menu_item_id" })
+ 16: })
+ 17: public class OrderItem {
+ 18:     @Id
+ 19:     @GeneratedValue(strategy = GenerationType.AUTO)
+ 20:     private long id;
+ 21:     @ManyToOne(targetEntity = Order.class)
+ 22:     @JoinColumn(name = "order_id", insertable = false, updatable = false)
+ 23:     @JsonIgnore
+ 24:     private Order order;
+ 25:     @Column(name = "menu_item_id")
+ 26:     private long menuItemId;
+ 27:     private String name;
+ 28:     private BigDecimal price;
+ 29:     private int quantity;
+ 30:     @Override
+ 31:     public int hashCode() {
+ 32:         final int prime = 31;
+ 33:         int result = 1;
+ 34:         result = prime * result + (int) (id ^ (id >>> 32));
+ 35:         result = prime * result + (int) (menuItemId ^ (menuItemId >>> 32));
+ 36:         result = prime * result + ((name == null) ? 0 : name.hashCode());
+ 37:         result = prime * result + ((price == null) ? 0 : price.hashCode());
+ 38:         result = prime * result + quantity;
+ 39:         return result;
+ 40:     }
+ 41:     @Override
+ 42:     public boolean equals(Object obj) {
+ 43:         if (this == obj)
+ 44:             return true;
+ 45:         if (obj == null)
+ 46:             return false;
+ 47:         if (getClass() != obj.getClass())
+ 48:             return false;
+ 49:         OrderItem other = (OrderItem) obj;
+ 50:         if (id != other.id)
+ 51:             return false;
+ 52:         if (menuItemId != other.menuItemId)
+ 53:             return false;
+ 54:         if (name == null) {
+ 55:             if (other.name != null)
+ 56:                 return false;
+ 57:         } else if (!name.equals(other.name))
+ 58:             return false;
+ 59:         if (price == null) {
+ 60:             if (other.price != null)
+ 61:                 return false;
+ 62:         } else if (!price.equals(other.price))
+ 63:             return false;
+ 64:         if (quantity != other.quantity)
+ 65:             return false;
+ 66:         return true;
+ 67:     }
+ 68:     public long getId() {
+ 69:         return id;
+ 70:     }
+ 71:     public void setId(long id) {
+ 72:         this.id = id;
+ 73:     }
+ 74:     public Order getOrder() {
+ 75:         return order;
+ 76:     }
+ 77:     public void setOrder(Order order) {
+ 78:         this.order = order;
+ 79:     }
+ 80:     public long getMenuItemId() {
+ 81:         return menuItemId;
+ 82:     }
+ 83:     public void setMenuItemId(long menuItemId) {
+ 84:         this.menuItemId = menuItemId;
+ 85:     }
+ 86:     public String getName() {
+ 87:         return name;
+ 88:     }
+ 89:     public void setName(String name) {
+ 90:         this.name = name;
+ 91:     }
+ 92:     public BigDecimal getPrice() {
+ 93:         return price;
+ 94:     }
+ 95:     public void setPrice(BigDecimal price) {
+ 96:         this.price = price;
+ 97:     }
+ 98:     public int getQuantity() {
+ 99:         return quantity;
+100:     }
+101:     public void setQuantity(int quantity) {
+102:         this.quantity = quantity;
+103:     }
+104: }
+
+================
+File: microsec-common/src/main/java/microsec/uaa/model/v2/UserInfo.java
+================
+ 1: package microsec.uaa.model.v2;
+ 2: import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
+ 3: import com.fasterxml.jackson.databind.annotation.JsonNaming;
+ 4: @JsonNaming(SnakeCaseStrategy.class)
+ 5: public class UserInfo {
+ 6:     private String userId;
+ 7:     private String userName;
+ 8:     private String givenName;
+ 9:     private String familyName;
+10:     private String name;
+11:     private String email;
+12:     public String getUserId() {
+13:         return userId;
+14:     }
+15:     public void setUserId(String userId) {
+16:         this.userId = userId;
+17:     }
+18:     public String getUserName() {
+19:         return userName;
+20:     }
+21:     public void setUserName(String userName) {
+22:         this.userName = userName;
+23:     }
+24:     public String getGivenName() {
+25:         return givenName;
+26:     }
+27:     public void setGivenName(String givenName) {
+28:         this.givenName = givenName;
+29:     }
+30:     public String getFamilyName() {
+31:         return familyName;
+32:     }
+33:     public void setFamilyName(String familyName) {
+34:         this.familyName = familyName;
+35:     }
+36:     public String getName() {
+37:         return name;
+38:     }
+39:     public void setName(String name) {
+40:         this.name = name;
+41:     }
+42:     public String getEmail() {
+43:         return email;
+44:     }
+45:     public void setEmail(String email) {
+46:         this.email = email;
+47:     }
+48: }
+
+================
+File: microsec-common/src/main/resources/config/application.yml
+================
+ 1: server:
+ 2:   tomcat:
+ 3:     remote_ip_header: x-forwarded-for
+ 4:     protocol_header: x-forwarded-proto
+ 5:     internal_proxies: 10\.\d{1,3}\.\d{1,3}\.\d{1,3}|192\.168\.\d{1,3}\.\d{1,3}|169\.254\.\d{1,3}\.\d{1,3}|127\.\d{1,3}\.\d{1,3}\.\d{1,3}|172\.1[6-9]{1}\.\d{1,3}\.\d{1,3}|172\.2[0-9]{1}\.\d{1,3}\.\d{1,3}|172\.3[0-1]{1}\.\d{1,3}\.\d{1,3}
+ 6: security.user.password: password
+ 7: spring.thymeleaf.cache: false
+ 8: targets:
+ 9:   uaa: http://localhost:8080/uaa
+10: branding:
+11:   restaurantName: Freddy's BBQ Joint
+12:   menuTitle: Freddy's Menu
+13: menuBootstrap:
+14:   items:
+15:     - name: Full Rack of Ribs
+16:       price: 20
+17:     - name: 1/2 Rack
+18:       price: 12
+19: hystrix.command.default.execution.isolation.strategy: SEMAPHORE
+20: ---
+21: spring:
+22:   profiles: cloud
+23: security.require_ssl: true
+
+================
+File: microsec-common/src/main/resources/templates/dump_token.html
+================
+ 1: <html xmlns:th="http://www.thymeleaf.org">
+ 2: <head>
+ 3: <title>Dump Token</title>
+ 4: </head>
+ 5: <body>
+ 6:   <div th:if="${decodedToken}">
+ 7:     <p>This is the decoded token</p>
+ 8:     <pre th:text="${decodedToken}"></pre>
+ 9:   </div>
+10:   <div>
+11:     <p>This is the raw token</p>
+12:     <textarea style="width: 40em; height:12em;" th:text="${rawToken}"></textarea>
+13:     <p>its <b th:text="${rawToken.length()}">0</b> characters long</p>
+14:   </div>
+15: </body>
+16: </html>
+
+================
+File: microsec-custom-registry/pom.xml
+================
+ 1: <?xml version="1.0" encoding="UTF-8"?>
+ 2: <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 3: 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 4: 	<modelVersion>4.0.0</modelVersion>
+ 5: 	<groupId>com.exmple</groupId>
+ 6: 	<artifactId>microsec-custom-registry</artifactId>
+ 7: 	<packaging>jar</packaging>
+ 8: 	<name>microsec-custom-registry</name>
+ 9: 	<description>Example Custom User Registry Based on OpenId Connect </description>
+10: 	<parent>
+11: 		<groupId>com.willtran.springone2gx</groupId>
+12: 		<artifactId>microsec-parent</artifactId>
+13: 		<version>0.0.1-SNAPSHOT</version>
+14: 	</parent>
+15: 	<dependencies>
+16: 		<dependency>
+17: 			<groupId>com.fasterxml.jackson.core</groupId>
+18: 			<artifactId>jackson-databind</artifactId>
+19: 		</dependency>
+20: 		<dependency>
+21: 			<groupId>org.springframework.boot</groupId>
+22: 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+23: 		</dependency>
+24: 		<dependency>
+25: 			<groupId>org.springframework.boot</groupId>
+26: 			<artifactId>spring-boot-starter-web</artifactId>
+27: 			<exclusions>
+28: 				<exclusion>
+29: 					<groupId>com.fasterxml.jackson.core</groupId>
+30: 					<artifactId>jackson-databind</artifactId>
+31: 				</exclusion>
+32: 			</exclusions>
+33: 		</dependency>
+34: 		<dependency>
+35: 			<groupId>org.springframework.cloud</groupId>
+36: 			<artifactId>spring-cloud-starter-oauth2</artifactId>
+37: 			<exclusions>
+38: 				<exclusion>
+39: 					<groupId>com.fasterxml.jackson.core</groupId>
+40: 					<artifactId>jackson-databind</artifactId>
+41: 				</exclusion>
+42: 			</exclusions>
+43: 		</dependency>
+44: 		<dependency>
+45: 			<groupId>org.springframework.boot</groupId>
+46: 			<artifactId>spring-boot-starter-test</artifactId>
+47: 			<scope>test</scope>
+48: 		</dependency>
+49: 		<dependency>
+50: 			<groupId>org.springframework.boot</groupId>
+51: 			<artifactId>spring-boot-configuration-processor</artifactId>
+52: 			<optional>true</optional>
+53: 		</dependency>
+54: 	</dependencies>
+55: </project>
+
+================
+File: microsec-custom-registry/src/main/java/microsec/freddysbbq/customregistry/AuthorizationServerConfiguration.java
+================
+ 1: package microsec.freddysbbq.customregistry;
+ 2: import java.util.Arrays;
+ 3: import org.springframework.beans.factory.annotation.Autowired;
+ 4: import org.springframework.beans.factory.annotation.Qualifier;
+ 5: import org.springframework.context.annotation.Bean;
+ 6: import org.springframework.context.annotation.Configuration;
+ 7: import org.springframework.security.authentication.AuthenticationManager;
+ 8: import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
+ 9: import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
+10: import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+11: import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+12: import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
+13: import org.springframework.security.oauth2.provider.token.TokenStore;
+14: import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+15: import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+16: import microsec.freddysbbq.customregistry.openid.IdTokenEhnancer;
+17: @Configuration
+18: public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
+19: 	@Autowired
+20: 	private IdTokenEhnancer enhancer;
+21: 	@Autowired
+22: 	private TokenStore tokenStore;
+23: 	@Autowired
+24: 	@Qualifier("authenticationManagerBean")
+25: 	private AuthenticationManager authenticationManager;
+26: 	@Autowired
+27: 	private JwtAccessTokenConverter accessTokenConverter;
+28: 	@Bean
+29: 	public JwtAccessTokenConverter accessTokenConverter(JwtTokenKeys jwtTokenKeys) {
+30: 		 JwtAccessTokenConverter convertor = new JwtAccessTokenConverter();
+31: 		 String signingKey = jwtTokenKeys.getSigningKey();
+32: 		 convertor.setSigningKey(signingKey);
+33: 		 convertor.setVerifierKey(jwtTokenKeys.getVerificationKey());
+34: 		 return convertor;
+35: 	}
+36: 	@Override
+37: 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+38: 		clients.inMemory()
+39: 		        .withClient("uaa")
+40: 		        .secret("password")
+41: 		        .authorizedGrantTypes("authorization_code")
+42: 				.authorities("ROLE_CLIENT")
+43: 				.scopes("openid")
+44: 				.autoApprove(true)
+45: 				.accessTokenValiditySeconds(60)
+46: 	            .refreshTokenValiditySeconds(3600);
+47: 	}
+48: 	@Bean
+49: 	public TokenStore tokenStore(JwtAccessTokenConverter accessTokenConverter) {
+50: 		return new JwtTokenStore(accessTokenConverter);
+51: 	}
+52: 	@Override
+53: 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+54: 	TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+55: 		    tokenEnhancerChain.setTokenEnhancers(Arrays.asList(this.accessTokenConverter,this.enhancer));
+56: 		endpoints.tokenStore(this.tokenStore)
+57: 		         .authenticationManager(this.authenticationManager)
+58: 		         .accessTokenConverter(this.accessTokenConverter)
+59: 				 .tokenEnhancer(tokenEnhancerChain);
+60: 	}
+61: 	@Override
+62: 	public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
+63: 		oauthServer.tokenKeyAccess("isAnonymous() || hasAuthority('ROLE_CLIENT')").checkTokenAccess(
+64: 				"hasAuthority('ROLE_CLIENT')");
+65: 	}
+66: }
+
+================
+File: microsec-custom-registry/src/main/java/microsec/freddysbbq/customregistry/CustomRegistryApplication.java
+================
+ 1: package microsec.freddysbbq.customregistry;
+ 2: import org.springframework.boot.SpringApplication;
+ 3: import org.springframework.boot.autoconfigure.SpringBootApplication;
+ 4: import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+ 5: import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
+ 6: @SpringBootApplication
+ 7: @EnableAuthorizationServer
+ 8: @EnableWebSecurity
+ 9: public class CustomRegistryApplication {
+10: 	public static void main(String[] args) {
+11: 		SpringApplication.run(CustomRegistryApplication.class, args);
+12: 	}
+13: }
+
+================
+File: microsec-custom-registry/src/main/java/microsec/freddysbbq/customregistry/JwtTokenKeys.java
+================
+ 1: package microsec.freddysbbq.customregistry;
+ 2: import org.springframework.boot.context.properties.ConfigurationProperties;
+ 3: import org.springframework.stereotype.Component;
+ 4: @Component
+ 5: @ConfigurationProperties(prefix = "jwt.token")
+ 6: public class JwtTokenKeys {
+ 7: 	private String verificationKey;
+ 8: 	private String signingKey;
+ 9: 	public String getVerificationKey() {
+10: 		return verificationKey;
+11: 	}
+12: 	public void setVerificationKey(String verificationKey) {
+13: 		this.verificationKey = verificationKey;
+14: 	}
+15: 	public String getSigningKey() {
+16: 		return signingKey;
+17: 	}
+18: 	public void setSigningKey(String signingKey) {
+19: 		this.signingKey = signingKey;
+20: 	}
+21: }
+
+================
+File: microsec-custom-registry/src/main/java/microsec/freddysbbq/customregistry/mainframe/MainframeUser.java
+================
+ 1: package microsec.freddysbbq.customregistry.mainframe;
+ 2: public class MainframeUser {
+ 3: 	private String username;
+ 4: 	private String password;
+ 5: 	private String firstName;
+ 6: 	private String lastName;
+ 7: 	private String email;
+ 8: 	private boolean employee;
+ 9: 	public String getUsername() {
+10: 		return username;
+11: 	}
+12: 	public void setUsername(String username) {
+13: 		this.username = username;
+14: 	}
+15: 	public String getFirstName() {
+16: 		return firstName;
+17: 	}
+18: 	public void setFirstName(String firstName) {
+19: 		this.firstName = firstName;
+20: 	}
+21: 	public String getLastName() {
+22: 		return lastName;
+23: 	}
+24: 	public void setLastName(String lastName) {
+25: 		this.lastName = lastName;
+26: 	}
+27: 	public String getEmail() {
+28: 		return email;
+29: 	}
+30: 	public void setEmail(String email) {
+31: 		this.email = email;
+32: 	}
+33: 	public boolean isEmployee() {
+34: 		return employee;
+35: 	}
+36: 	public void setEmployee(boolean employee) {
+37: 		this.employee = employee;
+38: 	}
+39: 	public String getPassword() {
+40: 		return password;
+41: 	}
+42: 	public void setPassword(String password) {
+43: 		this.password = password;
+44: 	}
+45: }
+
+================
+File: microsec-custom-registry/src/main/java/microsec/freddysbbq/customregistry/mainframe/MainframeUserService.java
+================
+1: package microsec.freddysbbq.customregistry.mainframe;
+2: import java.util.Optional;
+3: public interface MainframeUserService {
+4: 	public Optional<MainframeUser> getUserDetails(String username);
+5: }
+
+================
+File: microsec-custom-registry/src/main/java/microsec/freddysbbq/customregistry/mainframe/MockMainframeService.java
+================
+ 1: package microsec.freddysbbq.customregistry.mainframe;
+ 2: import java.util.HashMap;
+ 3: import java.util.Map;
+ 4: import java.util.Optional;
+ 5: import javax.annotation.PostConstruct;
+ 6: import org.springframework.stereotype.Service;
+ 7: @Service
+ 8: public class MockMainframeService implements MainframeUserService {
+ 9: 	private Map<String,MainframeUser> users = new HashMap<>();
+10: 	@PostConstruct
+11: 	private void init()
+12: 	{
+13: 		MainframeUser frank = new MainframeUser();
+14: 		frank.setFirstName("Frank");
+15: 		frank.setLastName("Underwood");
+16: 		frank.setUsername("frank");
+17: 		frank.setPassword("demo");
+18: 		frank.setEmail("frank@whitehouse.gov");
+19: 		frank.setEmployee(false);
+20: 		users.put("frank", frank);
+21: 		MainframeUser freddy = new MainframeUser();
+22: 		freddy.setUsername("freddy");
+23: 		freddy.setPassword("demo");
+24: 		freddy.setFirstName("Freddy");
+25: 		freddy.setLastName("Hayes");
+26: 		freddy.setEmail("freddy@freddybbq.com");
+27: 		freddy.setEmployee(true);
+28: 		users.put("freddy", freddy);
+29: 	}
+30: 	@Override
+31: 	public Optional<MainframeUser> getUserDetails(String username) {
+32: 		return Optional.ofNullable(this.users.get(username));
+33: 	}
+34: }
+
+================
+File: microsec-custom-registry/src/main/java/microsec/freddysbbq/customregistry/openid/IdToken.java
+================
+ 1: package microsec.freddysbbq.customregistry.openid;
+ 2: import java.util.List;
+ 3: import com.fasterxml.jackson.annotation.JsonProperty;
+ 4: public class IdToken {
+ 5: 	@JsonProperty("iss")
+ 6: 	private String issuer;
+ 7: 	@JsonProperty("sub")
+ 8: 	private String subject;
+ 9: 	@JsonProperty("user_name")
+10: 	private String username;
+11: 	@JsonProperty("given_name")
+12: 	private String givenName;
+13: 	@JsonProperty("family_name")
+14: 	private String familyName;
+15: 	@JsonProperty("aud")
+16: 	private String audience;
+17: 	@JsonProperty("exp")
+18: 	private Long expireAt;
+19: 	@JsonProperty("iat")
+20: 	private Long issuedAt;
+21: 	@JsonProperty("name")
+22: 	private String name;
+23: 	@JsonProperty("email")
+24: 	private String email;
+25: 	@JsonProperty("scope")
+26: 	private List<String> scope;
+27: 	public String getIssuer() {
+28: 		return issuer;
+29: 	}
+30: 	public void setIssuer(String issuer) {
+31: 		this.issuer = issuer;
+32: 	}
+33: 	public String getSubject() {
+34: 		return subject;
+35: 	}
+36: 	public void setSubject(String subject) {
+37: 		this.subject = subject;
+38: 	}
+39: 	public String getAudience() {
+40: 		return audience;
+41: 	}
+42: 	public void setAudience(String audience) {
+43: 		this.audience = audience;
+44: 	}
+45: 	public Long getExpireAt() {
+46: 		return expireAt;
+47: 	}
+48: 	public void setExpireAt(Long expireAt) {
+49: 		this.expireAt = expireAt;
+50: 	}
+51: 	public Long getIssuedAt() {
+52: 		return issuedAt;
+53: 	}
+54: 	public void setIssuedAt(Long issuedAt) {
+55: 		this.issuedAt = issuedAt;
+56: 	}
+57: 	public String getName() {
+58: 		return name;
+59: 	}
+60: 	public void setName(String name) {
+61: 		this.name = name;
+62: 	}
+63: 	public String getEmail() {
+64: 		return email;
+65: 	}
+66: 	public void setEmail(String email) {
+67: 		this.email = email;
+68: 	}
+69: 	public List<String> getScope() {
+70: 		return scope;
+71: 	}
+72: 	public void setScope(List<String> scope) {
+73: 		this.scope = scope;
+74: 	}
+75: 	public String getUsername() {
+76: 		return username;
+77: 	}
+78: 	public void setUsername(String username) {
+79: 		this.username = username;
+80: 	}
+81: 	public String getGivenName() {
+82: 		return givenName;
+83: 	}
+84: 	public void setGivenName(String givenName) {
+85: 		this.givenName = givenName;
+86: 	}
+87: 	public String getFamilyName() {
+88: 		return familyName;
+89: 	}
+90: 	public void setFamilyName(String familyName) {
+91: 		this.familyName = familyName;
+92: 	}
+93: }
+
+================
+File: microsec-custom-registry/src/main/java/microsec/freddysbbq/customregistry/openid/IdTokenEhnancer.java
+================
+ 1: package microsec.freddysbbq.customregistry.openid;
+ 2: import static java.util.stream.Collectors.toList;
+ 3: import java.time.Instant;
+ 4: import java.util.HashMap;
+ 5: import java.util.List;
+ 6: import java.util.Map;
+ 7: import org.springframework.beans.factory.annotation.Autowired;
+ 8: import org.springframework.security.jwt.Jwt;
+ 9: import org.springframework.security.jwt.JwtHelper;
+10: import org.springframework.security.jwt.crypto.sign.RsaSigner;
+11: import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
+12: import org.springframework.security.oauth2.common.OAuth2AccessToken;
+13: import org.springframework.security.oauth2.provider.OAuth2Authentication;
+14: import org.springframework.security.oauth2.provider.token.TokenEnhancer;
+15: import org.springframework.stereotype.Component;
+16: import com.fasterxml.jackson.core.JsonProcessingException;
+17: import com.fasterxml.jackson.databind.ObjectMapper;
+18: import microsec.freddysbbq.customregistry.JwtTokenKeys;
+19: import microsec.freddysbbq.customregistry.provider.AuthenticatedMainframeUser;
+20: @Component
+21: public class IdTokenEhnancer implements TokenEnhancer {
+22: 	private final RsaSigner rsaSigner;
+23: 	private final ObjectMapper mapper;
+24: 	@Autowired
+25: 	public IdTokenEhnancer(JwtTokenKeys jwtTokenKeys) {
+26: 		this.rsaSigner = new RsaSigner(jwtTokenKeys.getSigningKey());
+27: 		this.mapper = new ObjectMapper();
+28: 	}
+29: 	@Override
+30: 	public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
+31: 		IdToken idToken = createIdToken(accessToken, authentication);
+32: 		String jws = signToken(idToken);
+33: 		addIdToken(accessToken,jws);
+34: 		return accessToken;
+35: 	}
+36: 	private IdToken createIdToken(OAuth2AccessToken accessToken, OAuth2Authentication authentication)
+37: 	{
+38: 		AuthenticatedMainframeUser mainframeUser = (AuthenticatedMainframeUser) authentication.getUserAuthentication();
+39: 		Instant issuedAt = Instant.now();
+40: 		Instant expiresAt = issuedAt.plusSeconds(3600);
+41: 		IdToken idToken = new IdToken();
+42: 		idToken.setIssuer("http://localhost:8081/oauth/token");
+43: 		idToken.setAudience("uaa");
+44: 		idToken.setGivenName(mainframeUser.getFirstName());
+45: 		idToken.setFamilyName(mainframeUser.getLastName());
+46: 		idToken.setName(mainframeUser.getName());
+47: 		idToken.setSubject(mainframeUser.getUsername());
+48: 		idToken.setUsername(mainframeUser.getUsername());
+49: 		idToken.setEmail(mainframeUser.getEmail());
+50: 		idToken.setIssuedAt(issuedAt.toEpochMilli() / 1000);
+51: 		idToken.setExpireAt( expiresAt.toEpochMilli() / 1000);
+52: 		List<String> scopes = mainframeUser.getAuthorities().stream().map( o -> o.getAuthority()).collect(toList());
+53: 		scopes.add("order.me");
+54: 		scopes.add("menu.read");
+55: 		idToken.setScope(scopes);
+56: 		return idToken;
+57: 	}
+58: 	private String signToken(IdToken token) {
+59: 		String body = this.toJson(token);
+60: 		Jwt jwt = JwtHelper.encode(body, rsaSigner);
+61: 		String jws = jwt.getEncoded();
+62: 		return jws;
+63: 	}
+64: 	private void addIdToken(OAuth2AccessToken accessToken, String jws) {
+65: 		DefaultOAuth2AccessToken token = (DefaultOAuth2AccessToken) accessToken;
+66: 		Map<String,Object> additionalInfo = new HashMap<>();
+67: 		additionalInfo.put("id_token", jws);
+68: 		token.setAdditionalInformation(additionalInfo);
+69: 	}
+70: 	private String toJson(Object object) {
+71: 		try {
+72: 			return this.mapper.writeValueAsString(object);
+73: 		} catch (JsonProcessingException e) {
+74: 			throw new RuntimeException(e);
+75: 		}
+76: 	}
+77: }
+
+================
+File: microsec-custom-registry/src/main/java/microsec/freddysbbq/customregistry/PageControllers.java
+================
+ 1: package microsec.freddysbbq.customregistry;
+ 2: import org.springframework.stereotype.Controller;
+ 3: import org.springframework.ui.Model;
+ 4: import org.springframework.web.bind.annotation.RequestMapping;
+ 5: import microsec.freddysbbq.customregistry.provider.AuthenticatedMainframeUser;
+ 6: import microsec.freddysbbq.customregistry.util.JacksonUtils;
+ 7: @Controller
+ 8: public class PageControllers {
+ 9: 	@RequestMapping("/login")
+10: 	public String login()
+11: 	{
+12: 		return "login";
+13: 	}
+14: 	@RequestMapping("/")
+15: 	public String root(Model model, AuthenticatedMainframeUser user)
+16: 	{
+17: 		model.addAttribute("userJson", JacksonUtils.toJSON(user));
+18: 		return "home";
+19: 	}
+20: }
+
+================
+File: microsec-custom-registry/src/main/java/microsec/freddysbbq/customregistry/provider/AuthenticatedMainframeUser.java
+================
+ 1: package microsec.freddysbbq.customregistry.provider;
+ 2: import java.util.ArrayList;
+ 3: import java.util.Collection;
+ 4: import java.util.Collections;
+ 5: import java.util.List;
+ 6: import org.springframework.security.core.Authentication;
+ 7: import org.springframework.security.core.GrantedAuthority;
+ 8: import org.springframework.security.core.authority.SimpleGrantedAuthority;
+ 9: import microsec.freddysbbq.customregistry.mainframe.MainframeUser;
+10: public final class AuthenticatedMainframeUser implements Authentication {
+11: 	private static final long serialVersionUID = 1L;
+12: 	private final String username;
+13: 	private final String firstName;
+14: 	private final String lastName;
+15: 	private final String email;
+16: 	private final Collection<GrantedAuthority> authorities;
+17: 	AuthenticatedMainframeUser(MainframeUser user) {
+18: 		this.username = user.getUsername();
+19: 		this.firstName=user.getFirstName();
+20: 		this.lastName = user.getLastName();
+21: 		this.email = user.getEmail();
+22: 		List<GrantedAuthority> rights = new ArrayList<>();
+23: 		if(user.isEmployee()) {
+24: 			rights.add( new SimpleGrantedAuthority("employee"));
+25: 		} else {
+26: 			rights.add( new SimpleGrantedAuthority("customer"));
+27: 		}
+28: 		this.authorities = Collections.unmodifiableList(rights);
+29: 	}
+30: 	@Override
+31: 	public String getName() {
+32: 		return this.getFirstName() + " " + this.getLastName();
+33: 	}
+34: 	@Override
+35: 	public Object getPrincipal() {
+36: 		return this.getUsername();
+37: 	}
+38: 	@Override
+39: 	public Collection<? extends GrantedAuthority> getAuthorities() {
+40: 		return this.authorities;
+41: 	}
+42: 	@Override
+43: 	public Object getDetails() {
+44: 		return null;
+45: 	}
+46: 	@Override
+47: 	public boolean isAuthenticated() {
+48: 		return true;
+49: 	}
+50: 	@Override
+51: 	public Object getCredentials() {
+52: 		return null;
+53: 	}
+54: 	@Override
+55: 	public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
+56: 		throw new UnsupportedOperationException();
+57: 	}
+58: 	public String getEmail() {
+59: 		return email;
+60: 	}
+61: 	public String getFirstName() {
+62: 		return firstName;
+63: 	}
+64: 	public String getLastName() {
+65: 		return lastName;
+66: 	}
+67: 	public String getUsername() {
+68: 		return username;
+69: 	}
+70: }
+
+================
+File: microsec-custom-registry/src/main/java/microsec/freddysbbq/customregistry/provider/MainframeAuthenticationProvider.java
+================
+ 1: package microsec.freddysbbq.customregistry.provider;
+ 2: import org.springframework.beans.factory.annotation.Autowired;
+ 3: import org.springframework.security.authentication.AuthenticationProvider;
+ 4: import org.springframework.security.authentication.BadCredentialsException;
+ 5: import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+ 6: import org.springframework.security.core.Authentication;
+ 7: import org.springframework.security.core.AuthenticationException;
+ 8: import org.springframework.security.core.userdetails.UsernameNotFoundException;
+ 9: import org.springframework.stereotype.Service;
+10: import microsec.freddysbbq.customregistry.mainframe.MainframeUser;
+11: import microsec.freddysbbq.customregistry.mainframe.MainframeUserService;
+12: @Service
+13: public class MainframeAuthenticationProvider implements AuthenticationProvider {
+14: 	private final MainframeUserService mainframeUserService;
+15: 	@Autowired
+16: 	public MainframeAuthenticationProvider(MainframeUserService mainframeUserService) {
+17: 		this.mainframeUserService = mainframeUserService;
+18: 	}
+19: 	@Override
+20: 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+21: 		UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
+22: 		MainframeUser user = getUser(token);
+23: 		validatePassword(token, user);
+24: 		AuthenticatedMainframeUser result =  new AuthenticatedMainframeUser(user);
+25: 		return result;
+26: 	}
+27: 	private void validatePassword(UsernamePasswordAuthenticationToken token, MainframeUser user) {
+28: 		String password = (String) token.getCredentials();
+29: 		if(!password.equals(user.getPassword())){
+30: 			throw new BadCredentialsException("Wrong password");
+31: 		}
+32: 	}
+33: 	private MainframeUser getUser(UsernamePasswordAuthenticationToken token) {
+34: 		String username = (String) token.getPrincipal();
+35: 		return this.mainframeUserService.getUserDetails(username)
+36: 				                          .orElseThrow( () -> new UsernameNotFoundException("User '" + username + "' not found"));
+37: 	}
+38: 	@Override
+39: 	public boolean supports(Class<?> authentication) {
+40: 		return (UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication));
+41: 	}
+42: }
+
+================
+File: microsec-custom-registry/src/main/java/microsec/freddysbbq/customregistry/SecurityConfig.java
+================
+ 1: package microsec.freddysbbq.customregistry;
+ 2: import org.springframework.beans.factory.annotation.Autowired;
+ 3: import org.springframework.context.annotation.Bean;
+ 4: import org.springframework.context.annotation.Configuration;
+ 5: import org.springframework.security.authentication.AuthenticationManager;
+ 6: import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+ 7: import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+ 8: import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+ 9: import microsec.freddysbbq.customregistry.mainframe.MainframeUserService;
+10: import microsec.freddysbbq.customregistry.provider.MainframeAuthenticationProvider;
+11: @Configuration
+12: public class SecurityConfig extends WebSecurityConfigurerAdapter {
+13: 	@Autowired
+14: 	public void configureGlobal(AuthenticationManagerBuilder auth, MainframeUserService mainframeUserService)
+15: 			throws Exception {
+16: 		auth.authenticationProvider(new MainframeAuthenticationProvider(mainframeUserService));
+17: 	}
+18: 	@Override
+19: 	@Bean
+20: 	public AuthenticationManager authenticationManagerBean() throws Exception {
+21: 		return super.authenticationManagerBean();
+22: 	}
+23: 	@Override
+24: 	protected void configure(HttpSecurity http) throws Exception {
+25: 		http.authorizeRequests()
+26: 			.antMatchers("/static/**", "/logout", "/lib/**", "/oauth/token_key").permitAll()
+27: 			.anyRequest().authenticated()
+28: 			.and()
+29: 			.formLogin().loginPage("/login").permitAll()
+30: 			.and()
+31: 			.logout().permitAll()
+32: 			.and()
+33: 			.csrf().disable();
+34: 	}
+35: }
+
+================
+File: microsec-custom-registry/src/main/java/microsec/freddysbbq/customregistry/util/JacksonUtils.java
+================
+ 1: package microsec.freddysbbq.customregistry.util;
+ 2: import java.io.IOException;
+ 3: import java.text.DateFormat;
+ 4: import com.fasterxml.jackson.databind.ObjectMapper;
+ 5: import com.fasterxml.jackson.databind.SerializationFeature;
+ 6: public class JacksonUtils {
+ 7: 	private static final ObjectMapper mapper;
+ 8: 	static {
+ 9: 		mapper = new ObjectMapper();
+10: 		mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+11: 		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
+12: 		mapper.setDateFormat(df);
+13: 	}
+14: 	public static <T> T fromJSON(String json, Class<T> type) {
+15: 		try {
+16: 			return mapper.readValue(json, type);
+17: 		} catch (IOException e) {
+18: 			throw new RuntimeException(e);
+19: 		}
+20: 	}
+21: 	public static String toJSON(Object o) {
+22: 		try {
+23: 			String json = mapper.writeValueAsString(o);
+24: 			return json;
+25: 		} catch (IOException e) {
+26: 			throw new RuntimeException(e);
+27: 		}
+28: 	}
+29: }
+
+================
+File: microsec-custom-registry/src/main/java/microsec/freddysbbq/customregistry/util/SpringSecurityUtils.java
+================
+ 1: package microsec.freddysbbq.customregistry.util;
+ 2: import org.springframework.security.authentication.AuthenticationTrustResolver;
+ 3: import org.springframework.security.authentication.AuthenticationTrustResolverImpl;
+ 4: import org.springframework.security.core.Authentication;
+ 5: import org.springframework.security.core.context.SecurityContextHolder;
+ 6: import org.springframework.security.core.userdetails.UserDetails;
+ 7: public class SpringSecurityUtils
+ 8: {
+ 9: 	private static final AuthenticationTrustResolver trustResolver = new AuthenticationTrustResolverImpl();
+10: 	public static boolean isAuthenticated()
+11: 	{
+12: 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+13: 		return !trustResolver.isAnonymous(authentication);
+14: 	}
+15: 	public static boolean isFullyAuthenticated()
+16: 	{
+17: 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+18: 		return !trustResolver.isAnonymous(authentication) && !trustResolver.isRememberMe(authentication);
+19: 	}
+20: 	public static UserDetails getCurrentUserDetails()
+21: 	{
+22: 		Object object = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+23: 		if (object instanceof UserDetails)
+24: 			return (UserDetails) object;
+25: 		return null;
+26: 	}
+27: }
+
+================
+File: microsec-custom-registry/src/main/resources/application.yml
+================
+ 1: server:
+ 2:   port: 8081
+ 3: jwt:
+ 4:   token:
+ 5:     verification-key: |
+ 6:       -----BEGIN PUBLIC KEY-----
+ 7:       MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0m59l2u9iDnMbrXHfqkO
+ 8:       rn2dVQ3vfBJqcDuFUK03d+1PZGbVlNCqnkpIJ8syFppW8ljnWweP7+LiWpRoz0I7
+ 9:       fYb3d8TjhV86Y997Fl4DBrxgM6KTJOuE/uxnoDhZQ14LgOU2ckXjOzOdTsnGMKQB
+10:       LCl0vpcXBtFLMaSbpv1ozi8h7DJyVZ6EnFQZUWGdgTMhDrmqevfx95U/16c5WBDO
+11:       kqwIn7Glry9n9Suxygbf8g5AzpWcusZgDLIIZ7JTUldBb8qU2a0Dl4mvLZOn4wPo
+12:       jfj9Cw2QICsc5+Pwf21fP+hzf+1WSRHbnYv8uanRO0gZ8ekGaghM/2H6gqJbo2nI
+13:       JwIDAQAB
+14:       -----END PUBLIC KEY-----
+15:     signing-key: |
+16:       -----BEGIN RSA PRIVATE KEY-----
+17:       MIIEowIBAAKCAQEA0m59l2u9iDnMbrXHfqkOrn2dVQ3vfBJqcDuFUK03d+1PZGbV
+18:       lNCqnkpIJ8syFppW8ljnWweP7+LiWpRoz0I7fYb3d8TjhV86Y997Fl4DBrxgM6KT
+19:       JOuE/uxnoDhZQ14LgOU2ckXjOzOdTsnGMKQBLCl0vpcXBtFLMaSbpv1ozi8h7DJy
+20:       VZ6EnFQZUWGdgTMhDrmqevfx95U/16c5WBDOkqwIn7Glry9n9Suxygbf8g5AzpWc
+21:       usZgDLIIZ7JTUldBb8qU2a0Dl4mvLZOn4wPojfj9Cw2QICsc5+Pwf21fP+hzf+1W
+22:       SRHbnYv8uanRO0gZ8ekGaghM/2H6gqJbo2nIJwIDAQABAoIBAHPV9rSfzllq16op
+23:       zoNetIJBC5aCcU4vJQBbA2wBrgMKUyXFpdSheQphgY7GP/BJTYtifRiS9RzsHAYY
+24:       pAlTQEQ9Q4RekZAdd5r6rlsFrUzL7Xj/CVjNfQyHPhPocNqwrkxp4KrO5eL06qcw
+25:       UzT7UtnoiCdSLI7IL0hIgJZP8J1uPNdXH+kkDEHE9xzU1q0vsi8nBLlim+ioYfEa
+26:       Q/Q/ovMNviLKVs+ZUz+wayglDbCzsevuU+dh3Gmfc98DJw6n6iClpd4fDPqvhxUO
+27:       BDeQT1mFeHxexDse/kH9nygxT6E4wlU1sw0TQANcT6sHReyHT1TlwnWlCQzoR3l2
+28:       RmkzUsECgYEA8W/VIkfyYdUd5ri+yJ3iLdYF2tDvkiuzVmJeA5AK2KO1fNc7cSPK
+29:       /sShHruc0WWZKWiR8Tp3d1XwA2rHMFHwC78RsTds+NpROs3Ya5sWd5mvmpEBbL+z
+30:       cl3AU9NLHVvsZjogmgI9HIMTTl4ld7GDsFMt0qlCDztqG6W/iguQCx8CgYEA3x/j
+31:       UkP45/PaFWd5c1DkWvmfmi9UxrIM7KeyBtDExGIkffwBMWFMCWm9DODw14bpnqAA
+32:       jH5AhQCzVYaXIdp12b+1+eOOckYHwzjWOFpJ3nLgNK3wi067jVp0N0UfgV5nfYw/
+33:       +YoHfYRCGsM91fowh7wLcyPPwmSAbQAKwbOZKfkCgYEAnccDdZ+m2iA3pitdIiVr
+34:       RaDzuoeHx/IfBHjMD2/2ZpS1aZwOEGXfppZA5KCeXokSimj31rjqkWXrr4/8E6u4
+35:       PzTiDvm1kPq60r7qi4eSKx6YD15rm/G7ByYVJbKTB+CmoDekToDgBt3xo+kKeyna
+36:       cUQqUdyieunM8bxja4ca3ukCgYAfrDAhomJ30qa3eRvFYcs4msysH2HiXq30/g0I
+37:       aKQ12FSjyZ0FvHEFuQvMAzZM8erByKarStSvzJyoXFWhyZgHE+6qDUJQOF6ruKq4
+38:       DyEDQb1P3Q0TSVbYRunOWrKRM6xvJvSB4LUVfSvBDsv9TumKqwfZDVFVn9yXHHVq
+39:       b6sjSQKBgDkcyYkAjpOHoG3XKMw06OE4OKpP9N6qU8uZOuA8ZF9ZyR7vFf4bCsKv
+40:       QH+xY/4h8tgL+eASz5QWhj8DItm8wYGI5lKJr8f36jk0JLPUXODyDAeN6ekXY9LI
+41:       fudkijw0dnh28LJqbkFF5wLNtATzyCfzjp+czrPMn9uqLNKt/iVD
+42:       -----END RSA PRIVATE KEY-----
+43: spring:
+44:   thymeleaf:
+45:     cache: false
+
+================
+File: microsec-custom-registry/src/main/resources/templates/home.html
+================
+ 1: <!DOCTYPE html>
+ 2: <html>
+ 3: <head>
+ 4: 	<meta charset="UTF-8"/>
+ 5: 	<title>Sample Application</title>
+ 6: 	<script type="text/javascript" src="/lib/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+ 7: 	<script src="/lib/lodash.js"></script>
+ 8: 	<style>
+ 9: 		pre {
+10: 			min-height: 250px;
+11: 		}
+12: 	</style>
+13: </head>
+14: <body>
+15: <br/>
+16: <br/>
+17: <div class="container section1">
+18: 	<h1 class="page-header " id="page-header">Login Server - <a href="/logout" class="btn btn-default expireBtn">Logout</a></h1>
+19: 	<p>
+20: 		Currently LoggedIn User (AuthenticatedMainframeUser):
+21: 	</p>
+22: 	<pre th:text="${userJson}">
+23: 	</pre>
+24: </div>
+25: </body>
+26: </html>
+
+================
+File: microsec-custom-registry/src/main/resources/templates/login.html
+================
+ 1: <!DOCTYPE html>
+ 2: <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+ 3:   <head>
+ 4:     <title>Login page</title>
+ 5: 	<link rel="stylesheet" href="/lib/bootstrap/3.2.0/css/bootstrap.min.css" />
+ 6: 	<link rel="stylesheet" href="/lib/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
+ 7: 	<script type="text/javascript" src="/lib/jquery-2.1.1.js"></script>
+ 8: 	<script type="text/javascript" src="/lib/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+ 9:   </head>
+10:   <body>
+11:     <div class="container" style="margin-top:20%;">
+12: 	    <div class="col-md-4 col-md-offset-4">
+13: 	    <h2>Custom User Registry</h2>
+14: 		    <div class="login-panel panel panel-default">
+15: 			    <div class="panel-heading">
+16: 				    <h3 class="panel-title">Sign In</h3>
+17: 			    </div>
+18: 			    <div class="panel-body">
+19: 				    <p th:if="${loginError}" class="text-error">Wrong user or password</p>
+20: 				    <form th:action="@{/login}" method="post">
+21: 					    <fieldset>
+22: 						    <div class="form-group">
+23: 							    <input class="form-control" placeholder="Username" name="username" type="text" autofocus="" />
+24: 						    </div>
+25: 						    <div class="form-group">
+26: 							    <input class="form-control" placeholder="Password" name="password" type="password"  />
+27: 						    </div>
+28: 						    <input type="submit" value="Log in" />
+29: 					    </fieldset>
+30: 				    </form>
+31: 			    </div>
+32: 		    </div>
+33: 	    </div>
+34:     </div>
+35:   </body>
+36: </html>
+
+================
+File: microsec-customer-portal/pom.xml
+================
+ 1: <?xml version="1.0" encoding="UTF-8"?>
+ 2: <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 3:   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 4:   <modelVersion>4.0.0</modelVersion>
+ 5:   <artifactId>microsec-customer-portal</artifactId>
+ 6:   <parent>
+ 7:     <groupId>com.willtran.springone2gx</groupId>
+ 8:     <artifactId>microsec-parent</artifactId>
+ 9:     <version>0.0.1-SNAPSHOT</version>
+10:   </parent>
+11:   <dependencies>
+12:     <dependency>
+13:       <groupId>com.willtran.springone2gx</groupId>
+14:       <artifactId>microsec-common</artifactId>
+15:       <version>${project.version}</version>
+16:     </dependency>
+17:     <dependency>
+18:       <groupId>com.willtran.springone2gx</groupId>
+19:       <artifactId>microsec-test</artifactId>
+20:       <version>${project.version}</version>
+21:       <scope>test</scope>
+22:     </dependency>
+23:     <dependency>
+24:       <groupId>org.springframework.cloud</groupId>
+25:       <artifactId>spring-cloud-starter-oauth2</artifactId>
+26:     </dependency>
+27:     <dependency>
+28:       <groupId>org.springframework.boot</groupId>
+29:       <artifactId>spring-boot-starter-thymeleaf</artifactId>
+30:     </dependency>
+31:     <dependency>
+32:       <groupId>org.springframework.boot</groupId>
+33:       <artifactId>spring-boot-starter-hateoas</artifactId>
+34:     </dependency>
+35:     <dependency>
+36:       <groupId>io.pivotal.spring.cloud</groupId>
+37:       <artifactId>spring-cloud-services-starter-config-client</artifactId>
+38:     </dependency>
+39:     <dependency>
+40:       <groupId>io.pivotal.spring.cloud</groupId>
+41:       <artifactId>spring-cloud-services-starter-service-registry</artifactId>
+42:     </dependency>
+43:     <dependency>
+44:       <groupId>io.pivotal.spring.cloud</groupId>
+45:       <artifactId>spring-cloud-services-starter-circuit-breaker</artifactId>
+46:     </dependency>
+47:   </dependencies>
+48: </project>
+
+================
+File: microsec-customer-portal/src/main/java/microsec/freddysbbq/customer_app/CustomerApplication.java
+================
+ 1: package microsec.freddysbbq.customer_app;
+ 2: import java.util.Arrays;
+ 3: import org.springframework.beans.factory.annotation.Autowired;
+ 4: import org.springframework.boot.SpringApplication;
+ 5: import org.springframework.boot.autoconfigure.SpringBootApplication;
+ 6: import org.springframework.boot.autoconfigure.security.SecurityProperties;
+ 7: import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
+ 8: import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
+ 9: import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+10: import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+11: import org.springframework.context.annotation.Bean;
+12: import org.springframework.context.annotation.Import;
+13: import org.springframework.hateoas.hal.Jackson2HalModule;
+14: import org.springframework.http.MediaType;
+15: import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+16: import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+17: import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+18: import org.springframework.security.oauth2.client.OAuth2ClientContext;
+19: import org.springframework.security.oauth2.client.OAuth2RestTemplate;
+20: import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
+21: import com.fasterxml.jackson.databind.DeserializationFeature;
+22: import com.fasterxml.jackson.databind.ObjectMapper;
+23: import microsec.common.Branding;
+24: import microsec.common.DumpTokenEndpointConfig;
+25: import microsec.common.MenuBootstrap;
+26: @SpringBootApplication
+27: @EnableOAuth2Sso
+28: @EnableDiscoveryClient
+29: @EnableCircuitBreaker
+30: @Import(DumpTokenEndpointConfig.class)
+31: public class CustomerApplication extends WebSecurityConfigurerAdapter {
+32:     public static void main(String[] args) {
+33:         SpringApplication.run(CustomerApplication.class, args);
+34:     }
+35:     @Autowired
+36:     private SecurityProperties securityProperties;
+37:     @Override
+38:     public void configure(HttpSecurity http) throws Exception {
+39:         if (securityProperties.isRequireSsl()) {
+40:             http.requiresChannel().anyRequest().requiresSecure();
+41:         }
+42:         http.authorizeRequests().anyRequest().authenticated();
+43:     }
+44:     @Bean
+45:     public Branding branding() {
+46:         return new Branding();
+47:     }
+48:     @Bean
+49:     public MenuBootstrap menuBootstrap() {
+50:         return new MenuBootstrap();
+51:     }
+52:     @LoadBalanced
+53:     @Bean
+54:     public OAuth2RestTemplate loadBalancedOauth2RestTemplate(
+55:             OAuth2ProtectedResourceDetails resource,
+56:             OAuth2ClientContext oauth2Context) {
+57:         OAuth2RestTemplate oauth2RestTemplate = new OAuth2RestTemplate(resource, oauth2Context);
+58:         return oauth2RestTemplate;
+59:     }
+60: }
+
+================
+File: microsec-customer-portal/src/main/java/microsec/freddysbbq/customer_app/CustomerController.java
+================
+ 1: package microsec.freddysbbq.customer_app;
+ 2: import java.security.Principal;
+ 3: import java.util.Collection;
+ 4: import java.util.Collections;
+ 5: import java.util.LinkedHashMap;
+ 6: import org.springframework.beans.factory.annotation.Autowired;
+ 7: import org.springframework.beans.factory.annotation.Qualifier;
+ 8: import org.springframework.core.ParameterizedTypeReference;
+ 9: import org.springframework.hateoas.PagedResources;
+10: import org.springframework.http.HttpMethod;
+11: import org.springframework.security.oauth2.client.OAuth2RestTemplate;
+12: import org.springframework.stereotype.Controller;
+13: import org.springframework.ui.Model;
+14: import org.springframework.web.bind.annotation.ModelAttribute;
+15: import org.springframework.web.bind.annotation.RequestMapping;
+16: import org.springframework.web.bind.annotation.RequestMethod;
+17: import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+18: import microsec.common.MenuBootstrap;
+19: import microsec.freddysbbq.menu.model.v1.MenuItem;
+20: import microsec.freddysbbq.order.model.v1.Order;
+21: @Controller
+22: public class CustomerController {
+23:     @Autowired
+24:     @Qualifier("loadBalancedOauth2RestTemplate")
+25:     private OAuth2RestTemplate oauth2RestTemplate;
+26:     @Autowired
+27:     private MenuBootstrap menuBootstrap;
+28:     @RequestMapping("/")
+29:     public String index(Model model, Principal principal) {
+30:         model.addAttribute("username", principal.getName());
+31:         return "index";
+32:     }
+33:     @RequestMapping("/menu")
+34:     @HystrixCommand(fallbackMethod = "menuFallback")
+35:     public String menu(Model model) throws Exception {
+36:         PagedResources<MenuItem> menu = oauth2RestTemplate
+37:                 .exchange(
+38:                         "//menu-service/menuItems",
+39:                         HttpMethod.GET, null,
+40:                         new ParameterizedTypeReference<PagedResources<MenuItem>>() {
+41:                         })
+42:                 .getBody();
+43:         model.addAttribute("menu", menu.getContent());
+44:         return "menu";
+45:     }
+46:     public String menuFallback(Model model) {
+47:         model.addAttribute("menu", menuBootstrap.getItems());
+48:         model.addAttribute("menuServiceDown", true);
+49:         return "menu";
+50:     }
+51:     @RequestMapping("/myorders")
+52:     @HystrixCommand(fallbackMethod = "myOrdersFallback")
+53:     public String myOrders(Model model) throws Exception {
+54:         Collection<Order> orders = oauth2RestTemplate
+55:                 .exchange(
+56:                         "//order-service/myorders",
+57:                         HttpMethod.GET, null,
+58:                         new ParameterizedTypeReference<Collection<Order>>() {
+59:                         })
+60:                 .getBody();
+61:         model.addAttribute("orders", orders);
+62:         return "myorders";
+63:     }
+64:     public String myOrdersFallback(Model model) throws Exception {
+65:         model.addAttribute("orders", Collections.emptySet());
+66:         model.addAttribute("orderServiceDown", true);
+67:         return "myorders";
+68:     }
+69:     @RequestMapping(method = RequestMethod.POST, value = "/myorders")
+70:     @HystrixCommand(fallbackMethod = "placeOrderFallback")
+71:     public String placeOrder(Model model, @ModelAttribute OrderForm orderForm) throws Exception {
+72:         oauth2RestTemplate
+73:                 .postForObject("//order-service/myorders", orderForm.getOrder(), Void.class);
+74:         return "redirect:.";
+75:     }
+76:     public String placeOrderFallback(Model model, OrderForm orderForm) throws Exception {
+77:         return myOrdersFallback(model);
+78:     }
+79:     public static class OrderForm {
+80:         private LinkedHashMap<Long, Integer> order = new LinkedHashMap<Long, Integer>();
+81:         public LinkedHashMap<Long, Integer> getOrder() {
+82:             return order;
+83:         }
+84:         public void setOrder(LinkedHashMap<Long, Integer> order) {
+85:             this.order = order;
+86:         }
+87:     }
+88: }
+
+================
+File: microsec-customer-portal/src/main/resources/application.yml
+================
+ 1: spring.application.name: customer-portal
+ 2: server.port: 8082
+ 3: security:
+ 4:   ignored: /favicon.ico
+ 5:   basic:
+ 6:     enabled: false
+ 7:   oauth2:
+ 8:     client:
+ 9:       accessTokenUri: http://localhost:8080/uaa/oauth/token
+10:       userAuthorizationUri: http://localhost:8080/uaa/oauth/authorize
+11:       clientId: customer-portal
+12:       clientSecret: secret
+13:       scope: openid,menu.read,order.me
+14:     resource:
+15:       jwt.keyUri: http://localhost:8080/uaa/token_key
+
+================
+File: microsec-customer-portal/src/main/resources/templates/index.html
+================
+ 1: <!DOCTYPE HTML>
+ 2: <html xmlns:th="http://www.thymeleaf.org">
+ 3: 	<head>
+ 4:     <title th:text="${@branding.restaurantName}">Restaurant</title>
+ 5:     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ 6: 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+ 7: 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+ 8: 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+ 9: 	</head>
+10: 	<body>
+11: 		<div class="container">
+12: 			<div class="page-header">
+13: 				<h1 th:text="|Hi ${username}! Welcome to ${@branding.restaurantName}|">Hi Jim! Welcome to Restaurant</h1>
+14: 			</div>
+15: 			<div class="row">
+16: 				<div class="col-md-4">
+17: 					<h2>What do you want to do?</h2>
+18: 				</div>
+19: 				<div class="col-md-8">
+20: 					<table class="table table-hover">
+21: 						<tr>
+22: 							<td>
+23: 								<a href="menu.html" th:href="@{/menu/}">
+24: 									<img src="../static/images/menu.png" th:src="@{images/menu.png}" />
+25: 									<h3>View the menu and place your order</h3>
+26: 								</a>
+27: 							</td>
+28: 						</tr>
+29: 						<tr>
+30: 							<td>
+31: 								<a href="myorders.html" th:href="@{/myorders/}">
+32: 									<img src="../static/images/orders.png" th:src="@{images/orders.png}" />
+33: 									<h3>Your orders</h3>
+34: 								</a>
+35: 							</td>
+36: 						</tr>
+37: 						<tr>
+38: 							<td>
+39: 								<a href="/dump_token">
+40: 									<img src="../static/images/access.png" th:src="@{images/access.png}" />
+41: 									<h3>View your access token</h3>
+42: 								</a>
+43: 							</td>
+44: 						</tr>
+45: 					</table>
+46: 				</div>
+47: 			</div>
+48: 		</div>
+49: 	</body>
+50: </html>
+
+================
+File: microsec-customer-portal/src/main/resources/templates/menu.html
+================
+ 1: <!DOCTYPE HTML>
+ 2: <html xmlns:th="http://www.thymeleaf.org">
+ 3: <head>
+ 4:   <title th:text="${@branding.restaurantName} + ' | Menu'">Restaurant | Menu</title>
+ 5:   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ 6:   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+ 7:   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+ 8:   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+ 9: </head>
+10: <body>
+11:   <div class="container">
+12:     <div class="page-header">
+13:       <h1 th:text="|${@branding.menuTitle}|">The Menu</h1>
+14:       <h2 th:if="${menuServiceDown}">The Menu Service is currently offline but here is a sample of some of the items we serve! To place an order, please call the restaurant.</h2>
+15:     </div>
+16:     <div class="row">
+17:       <div class="col-md-12">
+18:         <form method="POST" th:action="@{/myorders/}">
+19:           <table class="table table-striped">
+20:             <thead>
+21:               <tr th:if="!${menuServiceDown}">
+22:                 <th>Item</th>
+23:                 <th>Price</th>
+24:                 <th>Quantity</th>
+25:               </tr>
+26:             </thead>
+27:             <tbody>
+28:               <tr th:each="item : ${menu}">
+29:                 <td th:text="${item.name}">Something</td>
+30:                 <td th:if="!${menuServiceDown}" th:text="${item.price}">$1.00</td>
+31:                 <td th:if="!${menuServiceDown}"><input type="text" th:name="|order[${item.id}]|"/></td>
+32:               </tr>
+33:             </tbody>
+34:           </table>
+35:           <input th:if="!${menuServiceDown}" type="submit" value="Place Order"/>
+36:         </form>
+37:         <a href="/">Back to home</a>
+38:       </div>
+39:     </div>
+40:   </div>
+41: </body>
+42: </html>
+
+================
+File: microsec-customer-portal/src/main/resources/templates/myorders.html
+================
+ 1: <!DOCTYPE HTML>
+ 2: <html xmlns:th="http://www.thymeleaf.org">
+ 3: <head>
+ 4:   <title th:text="${@branding.restaurantName}">Restaurant</title>
+ 5:   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ 6:   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+ 7:   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+ 8:   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+ 9: </head>
+10: <body>
+11:   <div class="container">
+12:     <div class="page-header">
+13:       <h1>Your Orders</h1>
+14:       <h2 th:if="${orderServiceDown}">The Order Service is currently offline, please call the restaurant to place an order.</h2>
+15:     </div>
+16:     <div class="row" th:if="!${orderServiceDown}" th:each="order : ${orders}">
+17:       <div class="col-md-12">
+18:         <h3>Order placed on <b th:text="${order.placed}">Friday</b> for <b th:text="|$ ${order.total}|">$ 20.00</b></h3>
+19:         <table class="table table-striped">
+20:           <thead>
+21:             <tr>
+22:               <td>Item</td><td>Price</td><td>Quantity</td>
+23:             </tr>
+24:           </thead>
+25:           <tbody>
+26:             <tr th:each="item : ${order.orderItems}">
+27:               <td th:text="${item.name}">Something</td>
+28:               <td th:text="${item.price}">$1.00</td>
+29:               <td th:text="${item.quantity}">1</td>
+30:             </tr>
+31:           </tbody>
+32:         </table>
+33:         <a href="/">Back to home</a>
+34:       </div>
+35:     </div>
+36:   </div>
+37: </body>
+38: </html>
+
+================
+File: microsec-eureka-server/pom.xml
+================
+ 1: <?xml version="1.0" encoding="UTF-8"?>
+ 2: <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 3:   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 4:   <modelVersion>4.0.0</modelVersion>
+ 5:   <artifactId>microsec-eureka-server</artifactId>
+ 6:   <parent>
+ 7:     <groupId>com.willtran.springone2gx</groupId>
+ 8:     <artifactId>microsec-parent</artifactId>
+ 9:     <version>0.0.1-SNAPSHOT</version>
+10:   </parent>
+11:   <dependencies>
+12:     <dependency>
+13:       <groupId>org.springframework.cloud</groupId>
+14:       <artifactId>spring-cloud-starter-eureka-server</artifactId>
+15:     </dependency>
+16:   </dependencies>
+17: </project>
+
+================
+File: microsec-eureka-server/src/main/java/microsec/freddysbbq/eureka_server/EurekaServer.java
+================
+ 1: package microsec.freddysbbq.eureka_server;
+ 2: import org.springframework.boot.SpringApplication;
+ 3: import org.springframework.boot.autoconfigure.SpringBootApplication;
+ 4: import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+ 5: @SpringBootApplication
+ 6: @EnableEurekaServer
+ 7: public class EurekaServer {
+ 8:     public static void main(String[] args) {
+ 9:         SpringApplication.run(EurekaServer.class, args);
+10:     }
+11: }
+
+================
+File: microsec-eureka-server/src/main/resources/application.yml
+================
+1: server:
+2:   port: ${PORT:8761}
+3: eureka:
+4:   client:
+5:     registerWithEureka: false
+6:     fetchRegistry: false
+7:     server:
+8:       waitTimeInMsWhenSyncEmpty: 0
+
+================
+File: microsec-hystrix-dashboard/pom.xml
+================
+ 1: <?xml version="1.0" encoding="UTF-8"?>
+ 2: <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 3:   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 4:   <modelVersion>4.0.0</modelVersion>
+ 5:   <artifactId>microsec-hystrix-dashboard</artifactId>
+ 6:   <parent>
+ 7:     <groupId>com.willtran.springone2gx</groupId>
+ 8:     <artifactId>microsec-parent</artifactId>
+ 9:     <version>0.0.1-SNAPSHOT</version>
+10:   </parent>
+11:   <dependencies>
+12:     <dependency>
+13:       <groupId>org.springframework.cloud</groupId>
+14:       <artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
+15:     </dependency>
+16:   </dependencies>
+17: </project>
+
+================
+File: microsec-hystrix-dashboard/src/main/java/microsec/freddysbbq/hystrix_dashboard/HystrixDashboard.java
+================
+ 1: package microsec.freddysbbq.hystrix_dashboard;
+ 2: import org.springframework.boot.SpringApplication;
+ 3: import org.springframework.boot.autoconfigure.SpringBootApplication;
+ 4: import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
+ 5: @SpringBootApplication
+ 6: @EnableHystrixDashboard
+ 7: public class HystrixDashboard {
+ 8:     public static void main(String[] args) {
+ 9:         SpringApplication.run(HystrixDashboard.class, args);
+10:     }
+11: }
+
+================
+File: microsec-hystrix-dashboard/src/main/resources/application.yml
+================
+1: server:
+2:   port: ${PORT:9999}
+
+================
+File: microsec-menu-service/pom.xml
+================
+ 1: <?xml version="1.0" encoding="UTF-8"?>
+ 2: <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 3:   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 4:   <modelVersion>4.0.0</modelVersion>
+ 5:   <artifactId>microsec-menu-service</artifactId>
+ 6:   <parent>
+ 7:     <groupId>com.willtran.springone2gx</groupId>
+ 8:     <artifactId>microsec-parent</artifactId>
+ 9:     <version>0.0.1-SNAPSHOT</version>
+10:   </parent>
+11:   <dependencies>
+12:     <dependency>
+13:       <groupId>com.willtran.springone2gx</groupId>
+14:       <artifactId>microsec-common</artifactId>
+15:       <version>${project.version}</version>
+16:     </dependency>
+17:     <dependency>
+18:       <groupId>com.willtran.springone2gx</groupId>
+19:       <artifactId>microsec-test</artifactId>
+20:       <version>${project.version}</version>
+21:       <scope>test</scope>
+22:     </dependency>
+23:     <dependency>
+24:       <groupId>org.springframework.cloud</groupId>
+25:       <artifactId>spring-cloud-starter-oauth2</artifactId>
+26:     </dependency>
+27:     <dependency>
+28:       <groupId>org.springframework.boot</groupId>
+29:       <artifactId>spring-boot-starter-data-rest</artifactId>
+30:     </dependency>
+31:     <dependency>
+32:       <groupId>org.springframework.boot</groupId>
+33:       <artifactId>spring-boot-starter-data-jpa</artifactId>
+34:     </dependency>
+35:     <dependency>
+36:       <groupId>com.h2database</groupId>
+37:       <artifactId>h2</artifactId>
+38:     </dependency>
+39:     <dependency>
+40:       <groupId>io.pivotal.spring.cloud</groupId>
+41:       <artifactId>spring-cloud-services-starter-config-client</artifactId>
+42:     </dependency>
+43:     <dependency>
+44:       <groupId>io.pivotal.spring.cloud</groupId>
+45:       <artifactId>spring-cloud-services-starter-service-registry</artifactId>
+46:     </dependency>
+47:   </dependencies>
+48: </project>
+
+================
+File: microsec-menu-service/src/main/java/microsec/freddysbbq/menu/MenuApplication.java
+================
+ 1: package microsec.freddysbbq.menu;
+ 2: import javax.annotation.PostConstruct;
+ 3: import org.springframework.beans.factory.annotation.Autowired;
+ 4: import org.springframework.boot.SpringApplication;
+ 5: import org.springframework.boot.autoconfigure.SpringBootApplication;
+ 6: import org.springframework.boot.autoconfigure.domain.EntityScan;
+ 7: import org.springframework.boot.autoconfigure.security.SecurityProperties;
+ 8: import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+ 9: import org.springframework.context.annotation.Bean;
+10: import org.springframework.context.annotation.Configuration;
+11: import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
+12: import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
+13: import org.springframework.http.HttpMethod;
+14: import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+15: import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+16: import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurer;
+17: import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+18: import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+19: import microsec.common.MenuBootstrap;
+20: import microsec.freddysbbq.menu.model.v1.MenuItem;
+21: @SpringBootApplication
+22: @EntityScan(basePackageClasses = MenuItem.class)
+23: @EnableResourceServer
+24: @EnableDiscoveryClient
+25: public class MenuApplication {
+26:     public static void main(String[] args) {
+27:         SpringApplication.run(MenuApplication.class, args);
+28:     }
+29:     @Autowired
+30:     private MenuItemRepository menuRepository;
+31:     @Bean
+32:     public MenuBootstrap menuBootstrap() {
+33:         return new MenuBootstrap();
+34:     }
+35:     @PostConstruct
+36:     public void bootstrap() {
+37:         if (menuRepository.count() == 0) {
+38:             menuRepository.save(menuBootstrap().getItems());
+39:         }
+40:     }
+41:     @Configuration
+42:     public static class RepositoryConfig extends RepositoryRestConfigurerAdapter {
+43:         @Override
+44:         public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
+45:             config.exposeIdsFor(MenuItem.class);
+46:         }
+47:     }
+48:     @Bean
+49:     public ResourceServerConfigurer resourceServer(SecurityProperties securityProperties) {
+50:         return new ResourceServerConfigurerAdapter() {
+51:             @Override
+52:             public void configure(ResourceServerSecurityConfigurer resources) {
+53:                 resources.resourceId("menu");
+54:             }
+55:             @Override
+56:             public void configure(HttpSecurity http) throws Exception {
+57:                 if (securityProperties.isRequireSsl()) {
+58:                     http.requiresChannel().anyRequest().requiresSecure();
+59:                 }
+60:                 http
+61:                         .authorizeRequests()
+62:                         .antMatchers(HttpMethod.GET, "/**").access("#oauth2.hasScope('menu.read')")
+63:                         .antMatchers(HttpMethod.POST, "/**").access("#oauth2.hasScope('menu.write')")
+64:                         .antMatchers(HttpMethod.PUT, "/**").access("#oauth2.hasScope('menu.write')")
+65:                         .antMatchers(HttpMethod.DELETE, "/**").access("#oauth2.hasScope('menu.write')");
+66:             }
+67:         };
+68:     }
+69: }
+
+================
+File: microsec-menu-service/src/main/java/microsec/freddysbbq/menu/MenuItemRepository.java
+================
+1: package microsec.freddysbbq.menu;
+2: import org.springframework.data.repository.PagingAndSortingRepository;
+3: import microsec.freddysbbq.menu.model.v1.MenuItem;
+4: public interface MenuItemRepository extends PagingAndSortingRepository<MenuItem, Long> {
+5: }
+
+================
+File: microsec-menu-service/src/main/resources/application.yml
+================
+1: spring.application.name: menu-service
+2: server.port: 8083
+3: security:
+4:   basic:
+5:     enabled: false
+6:   oauth2:
+7:     resource:
+8:       jwt.keyUri: ${targets.uaa}/token_key
+9: spring.jpa.hibernate.ddl-auto: update
+
+================
+File: microsec-order-service/pom.xml
+================
+ 1: <?xml version="1.0" encoding="UTF-8"?>
+ 2: <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 3:   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 4:   <modelVersion>4.0.0</modelVersion>
+ 5:   <artifactId>microsec-order-service</artifactId>
+ 6:   <parent>
+ 7:     <groupId>com.willtran.springone2gx</groupId>
+ 8:     <artifactId>microsec-parent</artifactId>
+ 9:     <version>0.0.1-SNAPSHOT</version>
+10:   </parent>
+11:   <dependencies>
+12:     <dependency>
+13:       <groupId>com.willtran.springone2gx</groupId>
+14:       <artifactId>microsec-common</artifactId>
+15:       <version>${project.version}</version>
+16:     </dependency>
+17:     <dependency>
+18:       <groupId>com.willtran.springone2gx</groupId>
+19:       <artifactId>microsec-test</artifactId>
+20:       <version>${project.version}</version>
+21:     </dependency>
+22:     <dependency>
+23:       <groupId>org.springframework.boot</groupId>
+24:       <artifactId>spring-boot-starter-data-rest</artifactId>
+25:     </dependency>
+26:     <dependency>
+27:       <groupId>org.springframework.boot</groupId>
+28:       <artifactId>spring-boot-starter-data-jpa</artifactId>
+29:     </dependency>
+30:     <dependency>
+31:       <groupId>com.h2database</groupId>
+32:       <artifactId>h2</artifactId>
+33:     </dependency>
+34:     <dependency>
+35:       <groupId>org.springframework.cloud</groupId>
+36:       <artifactId>spring-cloud-starter-oauth2</artifactId>
+37:     </dependency>
+38:     <dependency>
+39:       <groupId>io.pivotal.spring.cloud</groupId>
+40:       <artifactId>spring-cloud-services-starter-service-registry</artifactId>
+41:     </dependency>
+42:   </dependencies>
+43: </project>
+
+================
+File: microsec-order-service/src/main/java/microsec/freddysbbq/order/CustomerOrderController.java
+================
+ 1: package microsec.freddysbbq.order;
+ 2: import java.math.BigDecimal;
+ 3: import java.security.Principal;
+ 4: import java.util.Collection;
+ 5: import java.util.Date;
+ 6: import java.util.LinkedHashSet;
+ 7: import java.util.Map;
+ 8: import java.util.Map.Entry;
+ 9: import java.util.Set;
+10: import org.springframework.beans.factory.annotation.Autowired;
+11: import org.springframework.beans.factory.annotation.Qualifier;
+12: import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
+13: import org.springframework.http.HttpStatus;
+14: import org.springframework.http.ResponseEntity;
+15: import org.springframework.security.access.prepost.PreAuthorize;
+16: import org.springframework.security.oauth2.client.OAuth2RestTemplate;
+17: import org.springframework.web.bind.annotation.RequestBody;
+18: import org.springframework.web.bind.annotation.RequestMapping;
+19: import org.springframework.web.bind.annotation.RequestMethod;
+20: import org.springframework.web.bind.annotation.RestController;
+21: import org.springframework.web.client.HttpClientErrorException;
+22: import microsec.common.TokenRelayingRestTemplate;
+23: import microsec.freddysbbq.menu.model.v1.MenuItem;
+24: import microsec.freddysbbq.order.model.v1.Order;
+25: import microsec.freddysbbq.order.model.v1.OrderItem;
+26: import microsec.uaa.model.v2.UserInfo;
+27: @RestController
+28: public class CustomerOrderController {
+29:     @Autowired
+30:     private OrderRepository orderRepository;
+31:     @Autowired
+32:     @Qualifier("loadBalancedTokenRelayingRestTemplate")
+33:     private OAuth2RestTemplate loadBalancedTokenRelayingRestTemplate;
+34:     private OAuth2RestTemplate tokenRelayingRestTemplate = new TokenRelayingRestTemplate();
+35:     @Autowired
+36:     private ResourceServerProperties resourceServerProperties;
+37:     @PreAuthorize("#oauth2.hasScope('order.me')")
+38:     @RequestMapping("/myorders")
+39:     public Collection<Order> getMyOrders(Principal principal) {
+40:         return orderRepository.findByCustomerId(principal.getName());
+41:     }
+42:     @PreAuthorize("#oauth2.hasScope('order.me')")
+43:     @RequestMapping(value = "/myorders", method = RequestMethod.POST)
+44:     public ResponseEntity<Void> placeOrder(Principal principal, @RequestBody Map<Long, Integer> itemsAndQuantites) {
+45:         if (itemsAndQuantites.isEmpty()) {
+46:             return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+47:         }
+48:         UserInfo userInfo = tokenRelayingRestTemplate
+49:                 .getForObject(resourceServerProperties.getUserInfoUri(), UserInfo.class);
+50:         Order order = new Order();
+51:         order.setCustomerId(principal.getName());
+52:         order.setEmail(userInfo.getEmail());
+53:         order.setFirstName(userInfo.getGivenName());
+54:         order.setLastName(userInfo.getFamilyName());
+55:         order.setPlaced(new Date());
+56:         Set<OrderItem> items = new LinkedHashSet<>();
+57:         BigDecimal total = new BigDecimal(0);
+58:         for (Entry<Long, Integer> itemAndQuantity : itemsAndQuantites.entrySet()) {
+59:             Long itemId = itemAndQuantity.getKey();
+60:             Integer quantity = itemAndQuantity.getValue();
+61:             if (itemId == null || quantity != null && quantity < 0) {
+62:                 return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+63:             } else if (quantity == null || quantity == 0) {
+64:                 continue;
+65:             }
+66:             try {
+67:                 MenuItem item = loadBalancedTokenRelayingRestTemplate
+68:                         .getForObject("//menu-service/menuItems/{id}", MenuItem.class, itemId);
+69:                 OrderItem orderItem = new OrderItem();
+70:                 orderItem.setOrder(order);
+71:                 orderItem.setMenuItemId(itemId);
+72:                 orderItem.setName(item.getName());
+73:                 orderItem.setPrice(item.getPrice());
+74:                 orderItem.setQuantity(quantity);
+75:                 items.add(orderItem);
+76:                 total = total.add(item.getPrice().multiply(new BigDecimal(quantity)));
+77:             } catch (HttpClientErrorException e) {
+78:                 if (e.getStatusCode() == HttpStatus.NOT_FOUND) {
+79:                     return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+80:                 }
+81:             }
+82:         }
+83:         order.setTotal(total);
+84:         order.setOrderItems(items);
+85:         orderRepository.save(order);
+86:         return new ResponseEntity<Void>(HttpStatus.CREATED);
+87:     }
+88:     public void setLoadBalancedTokenRelayingRestTemplate(OAuth2RestTemplate oAuth2RestTemplate) {
+89:         this.loadBalancedTokenRelayingRestTemplate = oAuth2RestTemplate;
+90:     }
+91:     public void setTokenRelayingRestTemplate(OAuth2RestTemplate userInfoRestTemplate) {
+92:         this.tokenRelayingRestTemplate = userInfoRestTemplate;
+93:     }
+94: }
+
+================
+File: microsec-order-service/src/main/java/microsec/freddysbbq/order/MethodSecurityConfig.java
+================
+ 1: package microsec.freddysbbq.order;
+ 2: import org.springframework.context.annotation.Configuration;
+ 3: import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
+ 4: import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+ 5: import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
+ 6: import org.springframework.security.oauth2.provider.expression.OAuth2MethodSecurityExpressionHandler;
+ 7: @Configuration
+ 8: @EnableGlobalMethodSecurity(prePostEnabled = true, proxyTargetClass = true)
+ 9: public class MethodSecurityConfig extends GlobalMethodSecurityConfiguration {
+10:     @Override
+11:     protected MethodSecurityExpressionHandler createExpressionHandler() {
+12:         return new OAuth2MethodSecurityExpressionHandler();
+13:     }
+14: }
+
+================
+File: microsec-order-service/src/main/java/microsec/freddysbbq/order/OrderApplication.java
+================
+ 1: package microsec.freddysbbq.order;
+ 2: import org.springframework.boot.SpringApplication;
+ 3: import org.springframework.boot.autoconfigure.SpringBootApplication;
+ 4: import org.springframework.boot.autoconfigure.domain.EntityScan;
+ 5: import org.springframework.boot.autoconfigure.security.SecurityProperties;
+ 6: import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+ 7: import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+ 8: import org.springframework.context.annotation.Bean;
+ 9: import org.springframework.context.annotation.Configuration;
+10: import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
+11: import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
+12: import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+13: import org.springframework.security.oauth2.client.OAuth2RestTemplate;
+14: import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+15: import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurer;
+16: import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+17: import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+18: import microsec.common.TokenRelayingRestTemplate;
+19: import microsec.freddysbbq.order.model.v1.Order;
+20: @SpringBootApplication
+21: @EntityScan(basePackageClasses = Order.class)
+22: @EnableResourceServer
+23: @EnableDiscoveryClient
+24: public class OrderApplication {
+25:     public static void main(String[] args) {
+26:         SpringApplication.run(OrderApplication.class, args);
+27:     }
+28:     @Configuration
+29:     public static class RepositoryConfig extends RepositoryRestConfigurerAdapter {
+30:         @Override
+31:         public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
+32:             config.exposeIdsFor(Order.class);
+33:         }
+34:     }
+35:     @Bean
+36:     public ResourceServerConfigurer resourceServer(SecurityProperties securityProperties) {
+37:         return new ResourceServerConfigurerAdapter() {
+38:             @Override
+39:             public void configure(ResourceServerSecurityConfigurer resources) {
+40:                 resources.resourceId("order");
+41:             }
+42:             @Override
+43:             public void configure(HttpSecurity http) throws Exception {
+44:                 if (securityProperties.isRequireSsl()) {
+45:                     http.requiresChannel().anyRequest().requiresSecure();
+46:                 }
+47:                 http.authorizeRequests()
+48:                         .antMatchers("/orders/**").access("#oauth2.hasScope('order.admin')");
+49:             }
+50:         };
+51:     }
+52:     @LoadBalanced
+53:     @Bean
+54:     public OAuth2RestTemplate loadBalancedTokenRelayingRestTemplate() {
+55:         return new TokenRelayingRestTemplate();
+56:     }
+57: }
+
+================
+File: microsec-order-service/src/main/java/microsec/freddysbbq/order/OrderRepository.java
+================
+1: package microsec.freddysbbq.order;
+2: import java.util.Collection;
+3: import org.springframework.data.repository.PagingAndSortingRepository;
+4: import org.springframework.data.repository.query.Param;
+5: import microsec.freddysbbq.order.model.v1.Order;
+6: public interface OrderRepository extends PagingAndSortingRepository<Order, Long> {
+7:     Collection<Order> findByCustomerId(@Param("customerId") String customerId);
+8: }
+
+================
+File: microsec-order-service/src/main/resources/application.yml
+================
+ 1: spring.application.name: order-service
+ 2: server.port: 8085
+ 3: security:
+ 4:   basic:
+ 5:     enabled: false
+ 6:   oauth2:
+ 7:     resource:
+ 8:       id: order
+ 9:       jwt.keyUri: ${targets.uaa}/token_key
+10:       userInfoUri: ${targets.uaa}/userinfo
+11: spring.jpa.hibernate.ddl-auto: update
+
+================
+File: pom.xml
+================
+ 1: <?xml version="1.0" encoding="UTF-8"?>
+ 2: <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 3:   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 4:   <modelVersion>4.0.0</modelVersion>
+ 5:   <groupId>com.willtran.springone2gx</groupId>
+ 6:   <artifactId>microsec-parent</artifactId>
+ 7:   <version>0.0.1-SNAPSHOT</version>
+ 8:   <packaging>pom</packaging>
+ 9:   <parent>
+10:     <groupId>org.springframework.boot</groupId>
+11:     <artifactId>spring-boot-starter-parent</artifactId>
+12:     <version>1.5.3.RELEASE</version>
+13:     <relativePath />
+14:   </parent>
+15:   <modules>
+16:     <module>microsec-common</module>
+17:     <module>microsec-customer-portal</module>
+18:     <module>microsec-custom-registry</module>
+19:     <module>microsec-test</module>
+20:     <module>microsec-menu-service</module>
+21:     <module>microsec-admin-portal</module>
+22:     <module>microsec-order-service</module>
+23:     <module>microsec-eureka-server</module>
+24:     <module>microsec-hystrix-dashboard</module>
+25:   </modules>
+26:   <properties>
+27:     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+28:     <java.version>1.8</java.version>
+29:   </properties>
+30:   <dependencies>
+31:   </dependencies>
+32:   <dependencyManagement>
+33:     <dependencies>
+34:       <dependency>
+35:         <groupId>io.pivotal.spring.cloud</groupId>
+36:         <artifactId>spring-cloud-services-dependencies</artifactId>
+37:         <version>1.2.0.RELEASE</version>
+38:         <type>pom</type>
+39:         <scope>import</scope>
+40:       </dependency>
+41:       <dependency>
+42:         <groupId>org.springframework.cloud</groupId>
+43:         <artifactId>spring-cloud-dependencies</artifactId>
+44:         <version>Dalston.RELEASE</version>
+45:         <type>pom</type>
+46:         <scope>import</scope>
+47:       </dependency>
+48:     </dependencies>
+49:   </dependencyManagement>
+50:   <build>
+51:     <finalName>${project.artifactId}</finalName>
+52:     <plugins>
+53:       <plugin>
+54:         <groupId>org.springframework.boot</groupId>
+55:         <artifactId>spring-boot-maven-plugin</artifactId>
+56:       </plugin>
+57:       <plugin>
+58:         <groupId>org.apache.maven.plugins</groupId>
+59:         <artifactId>maven-compiler-plugin</artifactId>
+60:         <configuration>
+61:           <source>1.8</source>
+62:           <target>1.8</target>
+63:         </configuration>
+64:       </plugin>
+65:     </plugins>
+66:   </build>
+67:   <repositories>
+68:     <repository>
+69:       <id>spring-release</id>
+70:       <url>https://repo.spring.io/libs-release</url>
+71:     </repository>
+72:     <repository>
+73:         <id>spring-milestones</id>
+74:         <name>Spring Milestones</name>
+75:         <url>https://repo.spring.io/libs-milestone</url>
+76:     </repository>
+77:     <repository>
+78:         <id>spring-snapshots</id>
+79:         <name>Spring Snapshots</name>
+80:         <url>https://repo.spring.io/libs-snapshot</url>
+81:         <snapshots>
+82:             <enabled>true</enabled>
+83:         </snapshots>
+84:     </repository>
+85:   </repositories>
+86: </project>
+
+================
+File: repomix.config.json
+================
+  1: {
+  2:   "$schema": "https://repomix.com/schemas/latest/schema.json",
+  3:   "input": {
+  4:     "maxFileSize": 52428800
+  5:   },
+  6:   "output": {
+  7:     "filePath": "repo_scan.txt",
+  8:     "style": "plain",
+  9:     "parsableStyle": false,
+ 10:     "fileSummary": false,
+ 11:     "directoryStructure": true,
+ 12:     "files": true,
+ 13:     "removeComments": true,
+ 14:     "removeEmptyLines": true,
+ 15:     "compress": false,
+ 16:     "topFilesLength": 5,
+ 17:     "showLineNumbers": true,
+ 18:     "truncateBase64": false,
+ 19:     "copyToClipboard": false,
+ 20:     "includeFullDirectoryStructure": false,
+ 21:     "tokenCountTree": false,
+ 22:     "git": {
+ 23:       "sortByChanges": true,
+ 24:       "sortByChangesMaxCommits": 100,
+ 25:       "includeDiffs": false,
+ 26:       "includeLogs": false,
+ 27:       "includeLogsCount": 50
+ 28:     }
+ 29:   },
+ 30:   "ignore": {
+ 31:     "useGitignore": false,
+ 32:     "useDotIgnore": true,
+ 33:     "useDefaultPatterns": true,
+ 34:     "customPatterns": [
+ 35:       "**/*.png",
+ 36:       "**/*.jpg",
+ 37:       "**/*.jpeg",
+ 38:       "**/*.gif",
+ 39:       "**/*.svg",
+ 40:       "**/*.pdf",
+ 41:       "**/*.ipynb",
+ 42:       "**/*.jar",
+ 43:       "**/*.exe",
+ 44:       "**/*.dll",
+ 45:       "**/*.zip",
+ 46:       "**/*.tar",
+ 47:       "**/*.gz",
+ 48:       "**/*.7z",
+ 49:       "**/*.class",
+ 50:       "**/*.o",
+ 51:       "**/*.so",
+ 52:       "**/*.dylib",
+ 53:       "**/*.bin",
+ 54:       "**/*.npy",
+ 55:       "**/*.pickle",
+ 56:       "**/*.pb",
+ 57:       "**/*.index",
+ 58:       "**/*.min.js",
+ 59:       "**/*.min.css",
+ 60:       "**/*.map",
+ 61:       "**/*.woff",
+ 62:       "**/*.woff2",
+ 63:       "**/*.ttf",
+ 64:       "**/*.eot",
+ 65:       "**/*.otf",
+ 66:       "**/.idea/**",
+ 67:       "**/.vscode/**",
+ 68:       "**/*.iml",
+ 69:       "**/.DS_Store",
+ 70:       "**/__pycache__/**",
+ 71:       "**/.pytest_cache/**",
+ 72:       "**/.cache/**",
+ 73:       //"**/.gradle/**",
+ 74:       //"**/.mvn/**",
+ 75:       "node_modules/**/*",
+ 76:       "build/**/*",
+ 77:       "dist/**/*",
+ 78:       "**/target/**",
+ 79:       "**/out/**",
+ 80:       "**/bin/**",
+ 81:       "**/static/lib/**",
+ 82:       "**/static/vendor/**",
+ 83:       "**/vendor/**",
+ 84:       "**/bower_components/**",
+ 85:       "**/src/main/resources/static/**/bootstrap/**",
+ 86:       "**/microsec-test/**",
+ 87:       "tests/**/*",
+ 88:       "**/tests/**",
+ 89:       "**/test/**",
+ 90:       "**/testing/**",
+ 91:       "**/__tests__/**",
+ 92:       "**/src/test/**",
+ 93:       "**/src/**/test/**",
+ 94:       "**/*-test/**",
+ 95:       "**/*_test/**",
+ 96:       "**/test-*/**",
+ 97:       "**/tests-*/**",
+ 98:       "**/*.log",
+ 99:       "**/*.patch",
+100:       "**/*.bak",
+101:       "**/*.swp",
+102:       "**/*.tmp",
+103:       "**/coverage/**",
+104:       "**/.nyc_output/**",
+105:       "**/surefire-reports/**",
+106:       "**/failsafe-reports/**",
+107:       "**/*.md",
+108:       "**/*.adoc",
+109:       "**/*.rst",
+110:       "**/*/cnn/**/*",
+111:       "**/package-lock.json",
+112:       "**/yarn.lock",
+113:       "**/pnpm-lock.yaml",
+114:       "**/*.spec.ts",
+115:       "**/*.test.ts",
+116:       "**/*.spec.js",
+117:       "**/*.test.js",
+118:       "**/*Test.java",
+119:       "**/*Tests.java",
+120:       "**/*IT.java"
+121:     ]
+122:   },
+123:   "security": {
+124:     "enableSecurityCheck": false
+125:   },
+126:   "tokenCount": {
+127:     "encoding": "o200k_base"
+128:   }
+129: }
+
+================
+File: uaa/pom.xml
+================
+ 1: <?xml version="1.0" encoding="UTF-8"?>
+ 2: <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 3:   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 4:   <modelVersion>4.0.0</modelVersion>
+ 5:   <groupId>com.willtran.springone2gx</groupId>
+ 6:   <artifactId>microsec-uaa</artifactId>
+ 7:   <version>0.0.1-SNAPSHOT</version>
+ 8:   <dependencies>
+ 9:     <dependency>
+10:       <groupId>org.cloudfoundry.identity</groupId>
+11:       <artifactId>cloudfoundry-identity-uaa</artifactId>
+12:       <version>3.16.0</version>
+13:       <type>war</type>
+14:     </dependency>
+15:   </dependencies>
+16:   <build>
+17:     <plugins>
+18:       <plugin>
+19:         <groupId>org.codehaus.cargo</groupId>
+20:         <artifactId>cargo-maven2-plugin</artifactId>
+21:         <configuration>
+22:           <container>
+23:             <containerId>tomcat8x</containerId>
+24:             <type>embedded</type>
+25:             <systemProperties>
+26:               <UAA_CONFIG_PATH>${project.basedir}</UAA_CONFIG_PATH>
+27:             </systemProperties>
+28:           </container>
+29:           <deployables>
+30:             <deployable>
+31:               <groupId>org.cloudfoundry.identity</groupId>
+32:               <artifactId>cloudfoundry-identity-uaa</artifactId>
+33:               <type>war</type>
+34:               <properties>
+35:                 <context>uaa</context>
+36:               </properties>
+37:             </deployable>
+38:           </deployables>
+39:         </configuration>
+40:       </plugin>
+41:     </plugins>
+42:   </build>
+43: </project>
+
+================
+File: uaa/UAA.postman_collection.json
+================
+  1: {
+  2: 	"variables": [],
+  3: 	"info": {
+  4: 		"name": "UAA",
+  5: 		"_postman_id": "ecbbb019-bc0d-3ac9-fa7f-095d3a05433e",
+  6: 		"description": "",
+  7: 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  8: 	},
+  9: 	"item": [
+ 10: 		{
+ 11: 			"name": "Information",
+ 12: 			"description": "",
+ 13: 			"item": [
+ 14: 				{
+ 15: 					"name": "/info",
+ 16: 					"request": {
+ 17: 						"url": "{{uaaUrl}}/info",
+ 18: 						"method": "GET",
+ 19: 						"header": [
+ 20: 							{
+ 21: 								"key": "Accept",
+ 22: 								"value": "application/json",
+ 23: 								"description": ""
+ 24: 							}
+ 25: 						],
+ 26: 						"body": {
+ 27: 							"mode": "formdata",
+ 28: 							"formdata": []
+ 29: 						},
+ 30: 						"description": ""
+ 31: 					},
+ 32: 					"response": []
+ 33: 				},
+ 34: 				{
+ 35: 					"name": "/login",
+ 36: 					"request": {
+ 37: 						"url": "{{uaaUrl}}/login",
+ 38: 						"method": "GET",
+ 39: 						"header": [
+ 40: 							{
+ 41: 								"key": "Accept",
+ 42: 								"value": "application/json",
+ 43: 								"description": ""
+ 44: 							}
+ 45: 						],
+ 46: 						"body": {
+ 47: 							"mode": "formdata",
+ 48: 							"formdata": []
+ 49: 						},
+ 50: 						"description": ""
+ 51: 					},
+ 52: 					"response": []
+ 53: 				}
+ 54: 			]
+ 55: 		},
+ 56: 		{
+ 57: 			"name": "admin-requests",
+ 58: 			"description": "",
+ 59: 			"item": [
+ 60: 				{
+ 61: 					"name": "Login Admin",
+ 62: 					"event": [
+ 63: 						{
+ 64: 							"listen": "test",
+ 65: 							"script": {
+ 66: 								"type": "text/javascript",
+ 67: 								"exec": "var jsonData = JSON.parse(responseBody);\npostman.setEnvironmentVariable(\"admin_access_token\", \"Bearer \" + jsonData.access_token);"
+ 68: 							}
+ 69: 						}
+ 70: 					],
+ 71: 					"request": {
+ 72: 						"url": "{{uaaUrl}}/oauth/token?grant_type=client_credentials",
+ 73: 						"method": "POST",
+ 74: 						"header": [
+ 75: 							{
+ 76: 								"key": "Accept",
+ 77: 								"value": "application/json",
+ 78: 								"description": ""
+ 79: 							},
+ 80: 							{
+ 81: 								"key": "Authorization",
+ 82: 								"value": "Basic YWRtaW46YWRtaW5zZWNyZXQ=",
+ 83: 								"description": ""
+ 84: 							}
+ 85: 						],
+ 86: 						"body": {
+ 87: 							"mode": "urlencoded",
+ 88: 							"urlencoded": []
+ 89: 						},
+ 90: 						"description": ""
+ 91: 					},
+ 92: 					"response": []
+ 93: 				},
+ 94: 				{
+ 95: 					"name": "/identity-providers",
+ 96: 					"event": [
+ 97: 						{
+ 98: 							"listen": "test",
+ 99: 							"script": {
+100: 								"type": "text/javascript",
+101: 								"exec": "var jsonData = JSON.parse(responseBody);\nfor (let s of jsonData) {\n if( s.originKey === \"testoidc\") {\n     postman.setEnvironmentVariable(\"oidcId\", s.id);\n }\n}"
+102: 							}
+103: 						}
+104: 					],
+105: 					"request": {
+106: 						"url": "{{uaaUrl}}/identity-providers/",
+107: 						"method": "GET",
+108: 						"header": [
+109: 							{
+110: 								"key": "Authorization",
+111: 								"value": "{{admin_access_token}}",
+112: 								"description": ""
+113: 							}
+114: 						],
+115: 						"body": {
+116: 							"mode": "formdata",
+117: 							"formdata": []
+118: 						},
+119: 						"description": ""
+120: 					},
+121: 					"response": []
+122: 				},
+123: 				{
+124: 					"name": "OIDC idenity Provider",
+125: 					"request": {
+126: 						"url": "{{uaaUrl}}/identity-providers/{{oidcId}}",
+127: 						"method": "GET",
+128: 						"header": [
+129: 							{
+130: 								"key": "Authorization",
+131: 								"value": "{{admin_access_token}}",
+132: 								"description": ""
+133: 							}
+134: 						],
+135: 						"body": {
+136: 							"mode": "formdata",
+137: 							"formdata": []
+138: 						},
+139: 						"description": ""
+140: 					},
+141: 					"response": []
+142: 				},
+143: 				{
+144: 					"name": "Update OIDC provider",
+145: 					"request": {
+146: 						"url": "{{uaaUrl}}/identity-providers/{{oidcId}}",
+147: 						"method": "PUT",
+148: 						"header": [
+149: 							{
+150: 								"key": "Authorization",
+151: 								"value": "{{admin_access_token}}",
+152: 								"description": ""
+153: 							},
+154: 							{
+155: 								"key": "Content-Type",
+156: 								"value": "application/json",
+157: 								"description": ""
+158: 							}
+159: 						],
+160: 						"body": {
+161: 							"mode": "raw",
+162: 							"raw": " {\n  \"type\": \"oidc1.0\",\n  \"config\": {\n   \"emailDomain\" : null,\n   \"providerDescription\" : \"Mainframe Auth\",\n   \"attributeMappings\" : {\"email\":\"mail\",\"user_name\":\"user_name\",\"scope\":\"scope\",\"external_groups\":[\"scope\"]},\n   \"authUrl\" : \"http://localhost:8081/oauth/authorize\",\n   \"tokenUrl\" : \"http://localhost:8081/oauth/token\",\n   \"tokenKeyUrl\" : \"http://localhost:8081/oauth/token_key\",\n   \"tokenKey\" : null,\n   \"linkText\" : \"TEST OIDC\",\n   \"showLinkText\" : true,\n   \"skipSslValidation\" : true,\n   \"relyingPartyId\" : \"uaa\",\n   \"relyingPartySecret\" : \"password\",\n   \"scopes\" : [\"openid\"] ,\n   \"addShadowUserOnLogin\" : true\n } ,\n  \"id\": \"1277e0f6-77de-477c-8b81-08185b43af7d\",\n  \"originKey\": \"testoidc\",\n  \"name\": \"MainFrame Provider\",\n  \"version\": 0,\n  \"created\": 1470630916645,\n  \"last_modified\": 1470630916645,\n  \"active\": true,\n  \"identityZoneId\": \"uaa\"\n}"
+163: 						},
+164: 						"description": ""
+165: 					},
+166: 					"response": []
+167: 				},
+168: 				{
+169: 					"name": "/userinfo",
+170: 					"request": {
+171: 						"url": "{{uaaUrl}}/userinfo",
+172: 						"method": "GET",
+173: 						"header": [
+174: 							{
+175: 								"key": "Authorization",
+176: 								"value": "{{admin_access_token}}",
+177: 								"description": ""
+178: 							},
+179: 							{
+180: 								"key": "Accept",
+181: 								"value": "application/json",
+182: 								"description": ""
+183: 							}
+184: 						],
+185: 						"body": {
+186: 							"mode": "formdata",
+187: 							"formdata": []
+188: 						},
+189: 						"description": ""
+190: 					},
+191: 					"response": []
+192: 				},
+193: 				{
+194: 					"name": "/identity-zones",
+195: 					"request": {
+196: 						"url": "{{uaaUrl}}/identity-zones",
+197: 						"method": "GET",
+198: 						"header": [
+199: 							{
+200: 								"key": "Authorization",
+201: 								"value": "{{admin_access_token}}",
+202: 								"description": ""
+203: 							}
+204: 						],
+205: 						"body": {
+206: 							"mode": "formdata",
+207: 							"formdata": []
+208: 						},
+209: 						"description": ""
+210: 					},
+211: 					"response": []
+212: 				},
+213: 				{
+214: 					"name": "/oauth/clients",
+215: 					"request": {
+216: 						"url": "{{uaaUrl}}/oauth/clients",
+217: 						"method": "GET",
+218: 						"header": [
+219: 							{
+220: 								"key": "Authorization",
+221: 								"value": "{{admin_access_token}}",
+222: 								"description": ""
+223: 							}
+224: 						],
+225: 						"body": {
+226: 							"mode": "formdata",
+227: 							"formdata": []
+228: 						},
+229: 						"description": ""
+230: 					},
+231: 					"response": []
+232: 				},
+233: 				{
+234: 					"name": "oauth/clients/customer-portal",
+235: 					"request": {
+236: 						"url": "{{uaaUrl}}/oauth/clients/customer-portal",
+237: 						"method": "GET",
+238: 						"header": [
+239: 							{
+240: 								"key": "Authorization",
+241: 								"value": "{{admin_access_token}}",
+242: 								"description": ""
+243: 							}
+244: 						],
+245: 						"body": {
+246: 							"mode": "formdata",
+247: 							"formdata": []
+248: 						},
+249: 						"description": ""
+250: 					},
+251: 					"response": []
+252: 				},
+253: 				{
+254: 					"name": "oauth/clients/customer-portal",
+255: 					"request": {
+256: 						"url": "{{uaaUrl}}/oauth/clients/customer-portal",
+257: 						"method": "PUT",
+258: 						"header": [
+259: 							{
+260: 								"key": "Authorization",
+261: 								"value": "{{admin_access_token}}",
+262: 								"description": ""
+263: 							},
+264: 							{
+265: 								"key": "Content-Type",
+266: 								"value": "application/json",
+267: 								"description": ""
+268: 							}
+269: 						],
+270: 						"body": {
+271: 							"mode": "raw",
+272: 							"raw": "{\n  \"scope\": [\n    \"openid\",\n    \"menu.read\",\n    \"order.me\"\n  ],\n  \"client_id\": \"customer-portal\",\n  \"resource_ids\": [\n    \"none\"\n  ],\n  \"authorized_grant_types\": [\n    \"authorization_code\",\n    \"refresh_token\"\n  ],\n  \"redirect_uri\": [\n    \"http://localhost:8082/login\"\n  ],\n  \"autoapprove\": [],\n  \"authorities\": [\n    \"uaa.resource\"\n  ],\n  \"allowedproviders\":[\"testoidc\"],\n  \"lastModified\": 1470547286528\n}"
+273: 						},
+274: 						"description": ""
+275: 					},
+276: 					"response": []
+277: 				}
+278: 			]
+279: 		},
+280: 		{
+281: 			"name": "frank-requests",
+282: 			"description": "",
+283: 			"item": [
+284: 				{
+285: 					"name": "Login In Frank",
+286: 					"event": [
+287: 						{
+288: 							"listen": "test",
+289: 							"script": {
+290: 								"type": "text/javascript",
+291: 								"exec": "var jsonData = JSON.parse(responseBody);\npostman.setEnvironmentVariable(\"frank_access_token\", \"Bearer \" + jsonData.access_token);"
+292: 							}
+293: 						}
+294: 					],
+295: 					"request": {
+296: 						"url": "{{uaaUrl}}/oauth/token",
+297: 						"method": "POST",
+298: 						"header": [
+299: 							{
+300: 								"key": "Accept",
+301: 								"value": "application/json",
+302: 								"description": ""
+303: 							},
+304: 							{
+305: 								"key": "scope",
+306: 								"value": "openid",
+307: 								"description": ""
+308: 							}
+309: 						],
+310: 						"body": {
+311: 							"mode": "urlencoded",
+312: 							"urlencoded": [
+313: 								{
+314: 									"key": "username",
+315: 									"value": "frank",
+316: 									"type": "text",
+317: 									"enabled": true
+318: 								},
+319: 								{
+320: 									"key": "password",
+321: 									"value": "demo",
+322: 									"type": "text",
+323: 									"enabled": true
+324: 								},
+325: 								{
+326: 									"key": "grant_type",
+327: 									"value": "password",
+328: 									"type": "text",
+329: 									"enabled": true
+330: 								},
+331: 								{
+332: 									"key": "client_id",
+333: 									"value": "mobile-app",
+334: 									"type": "text",
+335: 									"enabled": true
+336: 								},
+337: 								{
+338: 									"key": "client_secret",
+339: 									"value": "secret",
+340: 									"type": "text",
+341: 									"enabled": true
+342: 								}
+343: 							]
+344: 						},
+345: 						"description": ""
+346: 					},
+347: 					"response": []
+348: 				},
+349: 				{
+350: 					"name": "/userinfo",
+351: 					"request": {
+352: 						"url": "{{uaaUrl}}/userinfo",
+353: 						"method": "GET",
+354: 						"header": [
+355: 							{
+356: 								"key": "Authorization",
+357: 								"value": "{{frank_access_token}}",
+358: 								"description": ""
+359: 							},
+360: 							{
+361: 								"key": "Accept",
+362: 								"value": "application/json",
+363: 								"description": ""
+364: 							}
+365: 						],
+366: 						"body": {
+367: 							"mode": "formdata",
+368: 							"formdata": []
+369: 						},
+370: 						"description": ""
+371: 					},
+372: 					"response": []
+373: 				}
+374: 			]
+375: 		}
+376: 	]
+377: }
+
+================
+File: uaa/uaa.yml
+================
+  1: oauth:
+  2:   user:
+  3:     authorities:
+  4:       - openid
+  5:       - scim.me
+  6:       - password.write
+  7:       - scim.userids
+  8:       - uaa.user
+  9:       - approvals.me
+ 10:       - oauth.approvals
+ 11:   clients:
+ 12:     customer-portal:
+ 13:       secret: secret
+ 14:       authorized-grant-types: authorization_code
+ 15:       scope: openid,menu.read,order.me
+ 16:       authorities: uaa.resource
+ 17:       redirect-uri: http://localhost:8082/login
+ 18:     admin-portal:
+ 19:       secret: secret
+ 20:       authorized-grant-types: authorization_code
+ 21:       scope: openid,menu.read,menu.write,order.admin
+ 22:       authorities: uaa.resource
+ 23:       redirect-uri: http://localhost:8084/login
+ 24:     mobile-app:
+ 25:       secret: secret
+ 26:       authorized-grant-types: password
+ 27:       scope: openid,menu.read,order.me
+ 28: scim:
+ 29:   users:
+ 30:     - wtran|demo|wtran@pivotal.io|Will|Tran|menu.read,order.me
+ 31:     - frank|demo|frank@whitehouse.gov|Frank|Underwood|menu.read,order.me
+ 32:     - freddy|demo|freddy@freddysbbq.com|Freddy|Hayes|menu.read,menu.write,order.admin
+ 33: jwt:
+ 34:   token:
+ 35:     verification-key: |
+ 36:       -----BEGIN PUBLIC KEY-----
+ 37:       MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0m59l2u9iDnMbrXHfqkO
+ 38:       rn2dVQ3vfBJqcDuFUK03d+1PZGbVlNCqnkpIJ8syFppW8ljnWweP7+LiWpRoz0I7
+ 39:       fYb3d8TjhV86Y997Fl4DBrxgM6KTJOuE/uxnoDhZQ14LgOU2ckXjOzOdTsnGMKQB
+ 40:       LCl0vpcXBtFLMaSbpv1ozi8h7DJyVZ6EnFQZUWGdgTMhDrmqevfx95U/16c5WBDO
+ 41:       kqwIn7Glry9n9Suxygbf8g5AzpWcusZgDLIIZ7JTUldBb8qU2a0Dl4mvLZOn4wPo
+ 42:       jfj9Cw2QICsc5+Pwf21fP+hzf+1WSRHbnYv8uanRO0gZ8ekGaghM/2H6gqJbo2nI
+ 43:       JwIDAQAB
+ 44:       -----END PUBLIC KEY-----
+ 45:     policy:
+ 46:       activeKeyId: key-id-1
+ 47:       keys:
+ 48:         key-id-1:
+ 49:           signingKey: |
+ 50:             -----BEGIN RSA PRIVATE KEY-----
+ 51:             MIIEowIBAAKCAQEA0m59l2u9iDnMbrXHfqkOrn2dVQ3vfBJqcDuFUK03d+1PZGbV
+ 52:             lNCqnkpIJ8syFppW8ljnWweP7+LiWpRoz0I7fYb3d8TjhV86Y997Fl4DBrxgM6KT
+ 53:             JOuE/uxnoDhZQ14LgOU2ckXjOzOdTsnGMKQBLCl0vpcXBtFLMaSbpv1ozi8h7DJy
+ 54:             VZ6EnFQZUWGdgTMhDrmqevfx95U/16c5WBDOkqwIn7Glry9n9Suxygbf8g5AzpWc
+ 55:             usZgDLIIZ7JTUldBb8qU2a0Dl4mvLZOn4wPojfj9Cw2QICsc5+Pwf21fP+hzf+1W
+ 56:             SRHbnYv8uanRO0gZ8ekGaghM/2H6gqJbo2nIJwIDAQABAoIBAHPV9rSfzllq16op
+ 57:             zoNetIJBC5aCcU4vJQBbA2wBrgMKUyXFpdSheQphgY7GP/BJTYtifRiS9RzsHAYY
+ 58:             pAlTQEQ9Q4RekZAdd5r6rlsFrUzL7Xj/CVjNfQyHPhPocNqwrkxp4KrO5eL06qcw
+ 59:             UzT7UtnoiCdSLI7IL0hIgJZP8J1uPNdXH+kkDEHE9xzU1q0vsi8nBLlim+ioYfEa
+ 60:             Q/Q/ovMNviLKVs+ZUz+wayglDbCzsevuU+dh3Gmfc98DJw6n6iClpd4fDPqvhxUO
+ 61:             BDeQT1mFeHxexDse/kH9nygxT6E4wlU1sw0TQANcT6sHReyHT1TlwnWlCQzoR3l2
+ 62:             RmkzUsECgYEA8W/VIkfyYdUd5ri+yJ3iLdYF2tDvkiuzVmJeA5AK2KO1fNc7cSPK
+ 63:             /sShHruc0WWZKWiR8Tp3d1XwA2rHMFHwC78RsTds+NpROs3Ya5sWd5mvmpEBbL+z
+ 64:             cl3AU9NLHVvsZjogmgI9HIMTTl4ld7GDsFMt0qlCDztqG6W/iguQCx8CgYEA3x/j
+ 65:             UkP45/PaFWd5c1DkWvmfmi9UxrIM7KeyBtDExGIkffwBMWFMCWm9DODw14bpnqAA
+ 66:             jH5AhQCzVYaXIdp12b+1+eOOckYHwzjWOFpJ3nLgNK3wi067jVp0N0UfgV5nfYw/
+ 67:             +YoHfYRCGsM91fowh7wLcyPPwmSAbQAKwbOZKfkCgYEAnccDdZ+m2iA3pitdIiVr
+ 68:             RaDzuoeHx/IfBHjMD2/2ZpS1aZwOEGXfppZA5KCeXokSimj31rjqkWXrr4/8E6u4
+ 69:             PzTiDvm1kPq60r7qi4eSKx6YD15rm/G7ByYVJbKTB+CmoDekToDgBt3xo+kKeyna
+ 70:             cUQqUdyieunM8bxja4ca3ukCgYAfrDAhomJ30qa3eRvFYcs4msysH2HiXq30/g0I
+ 71:             aKQ12FSjyZ0FvHEFuQvMAzZM8erByKarStSvzJyoXFWhyZgHE+6qDUJQOF6ruKq4
+ 72:             DyEDQb1P3Q0TSVbYRunOWrKRM6xvJvSB4LUVfSvBDsv9TumKqwfZDVFVn9yXHHVq
+ 73:             b6sjSQKBgDkcyYkAjpOHoG3XKMw06OE4OKpP9N6qU8uZOuA8ZF9ZyR7vFf4bCsKv
+ 74:             QH+xY/4h8tgL+eASz5QWhj8DItm8wYGI5lKJr8f36jk0JLPUXODyDAeN6ekXY9LI
+ 75:             fudkijw0dnh28LJqbkFF5wLNtATzyCfzjp+czrPMn9uqLNKt/iVD
+ 76:             -----END RSA PRIVATE KEY-----
+ 77: login:
+ 78:   serviceProviderKey: |
+ 79:     -----BEGIN RSA PRIVATE KEY-----
+ 80:     MIICXQIBAAKBgQDHtC5gUXxBKpEqZTLkNvFwNGnNIkggNOwOQVNbpO0WVHIivig5
+ 81:     L39WqS9u0hnA+O7MCA/KlrAR4bXaeVVhwfUPYBKIpaaTWFQR5cTR1UFZJL/OF9vA
+ 82:     fpOwznoD66DDCnQVpbCjtDYWX+x6imxn8HCYxhMol6ZnTbSsFW6VZjFMjQIDAQAB
+ 83:     AoGAVOj2Yvuigi6wJD99AO2fgF64sYCm/BKkX3dFEw0vxTPIh58kiRP554Xt5ges
+ 84:     7ZCqL9QpqrChUikO4kJ+nB8Uq2AvaZHbpCEUmbip06IlgdA440o0r0CPo1mgNxGu
+ 85:     lhiWRN43Lruzfh9qKPhleg2dvyFGQxy5Gk6KW/t8IS4x4r0CQQD/dceBA+Ndj3Xp
+ 86:     ubHfxqNz4GTOxndc/AXAowPGpge2zpgIc7f50t8OHhG6XhsfJ0wyQEEvodDhZPYX
+ 87:     kKBnXNHzAkEAyCA76vAwuxqAd3MObhiebniAU3SnPf2u4fdL1EOm92dyFs1JxyyL
+ 88:     gu/DsjPjx6tRtn4YAalxCzmAMXFSb1qHfwJBAM3qx3z0gGKbUEWtPHcP7BNsrnWK
+ 89:     vw6By7VC8bk/ffpaP2yYspS66Le9fzbFwoDzMVVUO/dELVZyBnhqSRHoXQcCQQCe
+ 90:     A2WL8S5o7Vn19rC0GVgu3ZJlUrwiZEVLQdlrticFPXaFrn3Md82ICww3jmURaKHS
+ 91:     N+l4lnMda79eSp3OMmq9AkA0p79BvYsLshUJJnvbk76pCjR28PK4dV1gSDUEqQMB
+ 92:     qy45ptdwJLqLJCeNoR0JUcDNIRhOCuOPND7pcMtX6hI/
+ 93:     -----END RSA PRIVATE KEY-----
+ 94:   serviceProviderKeyPassword: password
+ 95:   serviceProviderCertificate: |
+ 96:     -----BEGIN CERTIFICATE-----
+ 97:     MIIDSTCCArKgAwIBAgIBADANBgkqhkiG9w0BAQQFADB8MQswCQYDVQQGEwJhdzEO
+ 98:     MAwGA1UECBMFYXJ1YmExDjAMBgNVBAoTBWFydWJhMQ4wDAYDVQQHEwVhcnViYTEO
+ 99:     MAwGA1UECxMFYXJ1YmExDjAMBgNVBAMTBWFydWJhMR0wGwYJKoZIhvcNAQkBFg5h
+100:     cnViYUBhcnViYS5hcjAeFw0xNTExMjAyMjI2MjdaFw0xNjExMTkyMjI2MjdaMHwx
+101:     CzAJBgNVBAYTAmF3MQ4wDAYDVQQIEwVhcnViYTEOMAwGA1UEChMFYXJ1YmExDjAM
+102:     BgNVBAcTBWFydWJhMQ4wDAYDVQQLEwVhcnViYTEOMAwGA1UEAxMFYXJ1YmExHTAb
+103:     BgkqhkiG9w0BCQEWDmFydWJhQGFydWJhLmFyMIGfMA0GCSqGSIb3DQEBAQUAA4GN
+104:     ADCBiQKBgQDHtC5gUXxBKpEqZTLkNvFwNGnNIkggNOwOQVNbpO0WVHIivig5L39W
+105:     qS9u0hnA+O7MCA/KlrAR4bXaeVVhwfUPYBKIpaaTWFQR5cTR1UFZJL/OF9vAfpOw
+106:     znoD66DDCnQVpbCjtDYWX+x6imxn8HCYxhMol6ZnTbSsFW6VZjFMjQIDAQABo4Ha
+107:     MIHXMB0GA1UdDgQWBBTx0lDzjH/iOBnOSQaSEWQLx1syGDCBpwYDVR0jBIGfMIGc
+108:     gBTx0lDzjH/iOBnOSQaSEWQLx1syGKGBgKR+MHwxCzAJBgNVBAYTAmF3MQ4wDAYD
+109:     VQQIEwVhcnViYTEOMAwGA1UEChMFYXJ1YmExDjAMBgNVBAcTBWFydWJhMQ4wDAYD
+110:     VQQLEwVhcnViYTEOMAwGA1UEAxMFYXJ1YmExHTAbBgkqhkiG9w0BCQEWDmFydWJh
+111:     QGFydWJhLmFyggEAMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEEBQADgYEAYvBJ
+112:     0HOZbbHClXmGUjGs+GS+xC1FO/am2suCSYqNB9dyMXfOWiJ1+TLJk+o/YZt8vuxC
+113:     KdcZYgl4l/L6PxJ982SRhc83ZW2dkAZI4M0/Ud3oePe84k8jm3A7EvH5wi5hvCkK
+114:     RpuRBwn3Ei+jCRouxTbzKPsuCVB+1sNyxMTXzf0=
+115:     -----END CERTIFICATE-----
+
+================
+File: uaa/zoneadmin.sh
+================
+ 1: set -e
+ 2: set -x
+ 3: uaac target $UAA_ENDPOINT --skip-ssl-validation
+ 4: uaac token client get $ADMIN_CLIENT_ID -s $ADMIN_CLIENT_SECRET
+ 5: uaac client add temp --authorities zones.write,scim.zones --scope zones.$IDENTITY_ZONE_ID.admin --authorized_grant_types client_credentials,password -s $ZONEADMIN_CLIENT_SECRET
+ 6: uaac user add temp --email cf-spring-cloud-services@pivotal.io -p $ZONEADMIN_CLIENT_SECRET
+ 7: uaac member add zones.$IDENTITY_ZONE_ID.admin temp
+ 8: uaac token owner get temp temp -p $ZONEADMIN_CLIENT_SECRET -s $ZONEADMIN_CLIENT_SECRET
+ 9: uaac curl /oauth/clients -k -H "Content-type:application/json" -H "X-Identity-Zone-Id:$IDENTITY_ZONE_ID" -X POST -d "{\"client_id\":\"$ZONEADMIN_CLIENT_ID\",\"client_secret\":\"$ZONEADMIN_CLIENT_SECRET\",\"scope\":[\"uaa.none\"],\"resource_ids\":[\"none\"],\"authorities\":[\"uaa.admin\",\"clients.read\",\"clients.write\",\"scim.read\",\"scim.write\",\"clients.secret\"],\"authorized_grant_types\":[\"client_credentials\"]}"
+10: uaac token client get $ADMIN_CLIENT_ID -s $ADMIN_CLIENT_SECRET
+11: uaac user delete temp
+12: uaac client delete temp
+
+================
+File: uaa/zoneusers.sh
+================
+ 1: set -ex
+ 2: uaac target $ZONE_ENDPOINT --skip-ssl-validation
+ 3: uaac token client get $ZONEADMIN_CLIENT_ID -s $ZONEADMIN_CLIENT_SECRET
+ 4: uaac user add frank --email frank@whitehouse.gov --given_name Frank --family_name Underwood -p password
+ 5: uaac user add freddy --email freddy@freddysbbq.com --given_name Freddy --family_name Hayes -p password
+ 6: uaac group add menu.read
+ 7: uaac group add menu.write
+ 8: uaac group add order.admin
+ 9: uaac group add order.me
+10: uaac member add menu.read frank
+11: uaac member add menu.read freddy
+12: uaac member add menu.write freddy
+13: uaac member add order.admin freddy
+14: uaac member add order.me frank
+
+
+
+
+
+================================================================
+End of Codebase
+================================================================

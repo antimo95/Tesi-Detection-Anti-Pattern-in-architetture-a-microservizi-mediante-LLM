@@ -1,0 +1,526 @@
+{
+  "metadata": {
+    "project_path": "D:\\Users\\Desktop\\microservices\\Peggiori\\usate\\LakesideMutual-bdc6d30135149563c057dd30f21b7df68608c500",
+    "project_name": "LakesideMutual-bdc6d30135149563c057dd30f21b7df68608c500",
+    "extraction_timestamp": "2026-02-17T21:21:36.295764",
+    "extractor_version": "2.1.0"
+  },
+  "microservices": [
+    {
+      "name": "customer-core",
+      "type": "docker",
+      "path": "customer-core",
+      "loc": {
+        "total": 3863,
+        "code": 2321,
+        "blank": 619,
+        "comment": 923
+      },
+      "classes_count": 81,
+      "methods_count": 199,
+      "constructors_count": 24,
+      "files_count": 53,
+      "stereotype_instances": [
+        "component",
+        "controller",
+        "configuration",
+        "service",
+        "entity"
+      ],
+      "stereotype_counts": {
+        "component": 6,
+        "controller": 5,
+        "configuration": 6,
+        "service": 1,
+        "entity": 2
+      },
+      "languages": {
+        "java": 53
+      },
+      "file_types": {
+        ".java": 53
+      },
+      "jpa_tables": [
+        "customers",
+        "addresses"
+      ],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://localhost:8110/customers/ce4btlyluu,rgpp0wkpec?fields=",
+        "https://www.baeldung.com/spring-http-logging",
+        "https://mockaroo.com/",
+        "http://localhost:9000",
+        "https://www.microservice-api-patterns.org/patterns/quality/dataTransferParsimony/WishList",
+        "http://lm.com/ccore",
+        "http://localhost:8110/customers?limit=2&offset=2",
+        "http://localhost:8110/customers/ce4btlyluu,rgpp0wkpec?fields=firstname,lastname",
+        "https://www.microservice-api-patterns.org/patterns/quality/qualityManagementAndGovernance/APIKey",
+        "https://www.microservice-api-patterns.org/patterns/quality/dataTransferParsimony/RequestBundle",
+        "https://www.microservice-api-patterns.org/patterns/structure/representationElements/ParameterTree",
+        "http://java.sun.com/xml/jaxb",
+        "https://www.microservice-api-patterns.org/patterns/structure/representationElements/ParameterForest",
+        "https://spring.io/guides/gs/producing-web-service/",
+        "https://www.microservice-api-patterns.org/patterns/responsibility/endpointRoles/InformationHolderResource",
+        "https://www.microservice-api-patterns.org/patterns/structure/compositeRepresentations/Pagination",
+        "http://lakesdemutual.com/interfaces/xsd",
+        "http://localhost:8110/ws",
+        "https://www.microservice-api-patterns.org/patterns/quality/qualityManagementAndGovernance/ErrorReport",
+        "http://localhost:8761/eureka",
+        "https://www.microservice-api-patterns.org/patterns/responsibility/informationHolderEndpointTypes/MasterDataHolder",
+        "http://localhost:8110/customers/ce4btlyluu,rgpp0wkpec",
+        "https://github.com/googlei18n/libphonenumber",
+        "https://microservice-api-patterns.org/patterns/structure/elementStereotypes/MetadataElement",
+        "https://www.microservice-api-patterns.org/patterns/structure/representationElements/AtomicParameter",
+        "https://docs.spring.io/spring-data/jpa/docs/current/reference/html/",
+        "http://www.w3.org/2001/XMLSchema",
+        "https://www.microservice-api-patterns.org/patterns/responsibility/informationHolderEndpointTypes/ReferenceDataHolder",
+        "https://spring.io/guides/gs/consuming-web-service/",
+        "http://localhost:8110/customers?limit=2&offset=0&fields=",
+        "http://lm.com/ccore/GetCustomerRequest",
+        "https://www.microservice-api-patterns.org/patterns/structure/representationElements/AtomicParameterList",
+        "http://localhost:8110/customers?limit=2&offset=4&fields=",
+        "http://localhost:8110/customers?limit=2&offset=2&fields=",
+        "http://localhost:8110/ws/customers",
+        "https://github.com/spring-projects/spring-hateoas/issues/352",
+        "localhost:8110"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "customer-management-backend",
+      "type": "docker",
+      "path": "customer-management-backend",
+      "loc": {
+        "total": 1615,
+        "code": 1154,
+        "blank": 287,
+        "comment": 174
+      },
+      "classes_count": 53,
+      "methods_count": 108,
+      "constructors_count": 24,
+      "files_count": 35,
+      "stereotype_instances": [
+        "component",
+        "feign_client",
+        "configuration",
+        "controller",
+        "entity"
+      ],
+      "stereotype_counts": {
+        "component": 4,
+        "feign_client": 1,
+        "configuration": 7,
+        "controller": 5,
+        "entity": 2
+      },
+      "languages": {
+        "java": 35
+      },
+      "file_types": {
+        ".java": 35
+      },
+      "jpa_tables": [
+        "interactionlogs",
+        "interactions"
+      ],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://localhost:9000",
+        "http://customer-core",
+        "https://www.microservice-api-patterns.org/patterns/responsibility/endpointRoles/InformationHolderResource",
+        "https://docs.spring.io/spring-hateoas/docs/current/reference/html/",
+        "https://www.microservice-api-patterns.org/patterns/structure/compositeRepresentations/Pagination",
+        "http://localhost:8110",
+        "https://docs.spring.io/spring-data/jpa/docs/current/reference/html/",
+        "https://www.microservice-api-patterns.org/patterns/quality/qualityManagementAndGovernance/ErrorReport",
+        "http://localhost:8761/eureka",
+        "https://www.microservice-api-patterns.org/patterns/responsibility/informationHolderEndpointTypes/MasterDataHolder"
+      ],
+      "feign_with_url": true
+    },
+    {
+      "name": "customer-management-frontend",
+      "type": "docker",
+      "path": "customer-management-frontend",
+      "loc": {
+        "total": 10658,
+        "code": 9029,
+        "blank": 1357,
+        "comment": 272
+      },
+      "classes_count": 26,
+      "methods_count": 32,
+      "constructors_count": 0,
+      "files_count": 40,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "javascript": 40
+      },
+      "file_types": {
+        ".js": 40
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "https://github.com/WigoHunter/react-chatapp",
+        "https://github.com/paularmstrong/normalizr/blob/6c5af279cc890a94fb7cde53a32811ccc7c2e28b/index.d.ts",
+        "http://localhost:3010/customers/$",
+        "https://github.com/flowtype/flow-typed"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "customer-self-service-backend",
+      "type": "docker",
+      "path": "customer-self-service-backend",
+      "loc": {
+        "total": 4546,
+        "code": 3207,
+        "blank": 852,
+        "comment": 487
+      },
+      "classes_count": 108,
+      "methods_count": 340,
+      "constructors_count": 68,
+      "files_count": 74,
+      "stereotype_instances": [
+        "component",
+        "controller",
+        "configuration",
+        "entity"
+      ],
+      "stereotype_counts": {
+        "component": 12,
+        "controller": 7,
+        "configuration": 6,
+        "entity": 7
+      },
+      "languages": {
+        "java": 74
+      },
+      "file_types": {
+        ".java": 74
+      },
+      "jpa_tables": [
+        "requeststatuschanges",
+        "insuranceoptions",
+        "addresses",
+        "customerinfos",
+        "insurancequotes",
+        "insurancequoterequests",
+        "user_logins"
+      ],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://customer-core",
+        "https://www.microservice-api-patterns.org/patterns/quality/qualityManagementAndGovernance/RateLimit",
+        "https://mockaroo.com/",
+        "http://localhost:9000",
+        "http://www.wirfs-brock.com/PDFs/A_Brief-Tour-of-RDD.pdf",
+        "localhost:61616",
+        "http://localhost:8110",
+        "http://localhost:8080/customers",
+        "https://www.microservice-api-patterns.org/patterns/responsibility/endpointRoles/ProcessingResource",
+        "https://www.microservice-api-patterns.org/patterns/responsibility/endpointRoles/InformationHolderResource",
+        "https://www.microservice-api-patterns.org/patterns/responsibility/informationHolderEndpointTypes/OperationalDataHolder",
+        "https://www.microservice-api-patterns.org/patterns/quality/qualityManagementAndGovernance/ErrorReport",
+        "http://localhost:8761/eureka",
+        "https://www.microservice-api-patterns.org/patterns/responsibility/informationHolderEndpointTypes/MasterDataHolder",
+        "https://github.com/googlei18n/libphonenumber",
+        "https://docs.spring.io/spring-hateoas/docs/current/reference/html/",
+        "https://www.microservice-api-patterns.org/patterns/structure/representationElements/AtomicParameter",
+        "https://docs.spring.io/spring-data/jpa/docs/current/reference/html/",
+        "https://www.microservice-api-patterns.org/patterns/responsibility/informationHolderEndpointTypes/ReferenceDataHolder",
+        "https://github.com/spring-projects/spring-hateoas/issues/352"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "customer-self-service-frontend",
+      "type": "docker",
+      "path": "customer-self-service-frontend",
+      "loc": {
+        "total": 11566,
+        "code": 9957,
+        "blank": 1344,
+        "comment": 265
+      },
+      "classes_count": 32,
+      "methods_count": 40,
+      "constructors_count": 0,
+      "files_count": 47,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "javascript": 47
+      },
+      "file_types": {
+        ".js": 47
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://localhost:8090",
+        "https://github.com/WigoHunter/react-chatapp",
+        "http://localhost:8080",
+        "https://github.com/flowtype/flow-typed",
+        "http://localhost:8100"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "eureka-server",
+      "type": "docker",
+      "path": "eureka-server",
+      "loc": {
+        "total": 15,
+        "code": 11,
+        "blank": 4,
+        "comment": 0
+      },
+      "classes_count": 1,
+      "methods_count": 1,
+      "constructors_count": 0,
+      "files_count": 1,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "nginx",
+      "type": "docker",
+      "path": "customer-core\\nginx-loadbalancing\\nginx",
+      "loc": {
+        "total": 0,
+        "code": 0,
+        "blank": 0,
+        "comment": 0
+      },
+      "classes_count": 0,
+      "methods_count": 0,
+      "constructors_count": 0,
+      "files_count": 0,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {},
+      "file_types": {},
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "policy-management-backend",
+      "type": "docker",
+      "path": "policy-management-backend",
+      "loc": {
+        "total": 5426,
+        "code": 3857,
+        "blank": 946,
+        "comment": 623
+      },
+      "classes_count": 117,
+      "methods_count": 379,
+      "constructors_count": 91,
+      "files_count": 80,
+      "stereotype_instances": [
+        "component",
+        "configuration",
+        "controller",
+        "entity"
+      ],
+      "stereotype_counts": {
+        "component": 10,
+        "configuration": 7,
+        "controller": 7,
+        "entity": 9
+      },
+      "languages": {
+        "java": 80
+      },
+      "file_types": {
+        ".java": 80
+      },
+      "jpa_tables": [
+        "insuranceagreementitems",
+        "requeststatuschanges",
+        "insuringagreements",
+        "insuranceoptions",
+        "insurancepolicies",
+        "addresses",
+        "customerinfos",
+        "insurancequotes",
+        "insurancequoterequests"
+      ],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "0.0.0.0:61616",
+        "http://customer-core",
+        "https://docs.spring.io/spring-javaconfig/docs/1.0.0.M4/reference/html/ch02s02.html",
+        "http://localhost:8090/policies/h3riovf4xq/",
+        "http://localhost:9000",
+        "https://www.microservice-api-patterns.org/patterns/quality/dataTransferParsimony/WishList",
+        "http://www.wirfs-brock.com/PDFs/A_Brief-Tour-of-RDD.pdf",
+        "http://localhost:8090/customers/rgpp0wkpec",
+        "localhost:61616",
+        "http://localhost:8110",
+        "https://www.microservice-api-patterns.org/patterns/quality/referenceManagement/LinkedInformationHolder",
+        "https://docs.spring.io/spring/docs/3.1.x/spring-framework-reference/html/jms.html",
+        "https://www.microservice-api-patterns.org/patterns/responsibility/endpointRoles/ProcessingResource",
+        "https://www.microservice-api-patterns.org/patterns/responsibility/endpointRoles/InformationHolderResource",
+        "https://www.microservice-api-patterns.org/patterns/structure/compositeRepresentations/Pagination",
+        "https://www.microservice-api-patterns.org/patterns/responsibility/informationHolderEndpointTypes/OperationalDataHolder",
+        "https://www.microservice-api-patterns.org/patterns/quality/qualityManagementAndGovernance/ErrorReport",
+        "http://localhost:8761/eureka",
+        "https://www.microservice-api-patterns.org/patterns/responsibility/operationResponsibilities/ComputationFunction",
+        "https://www.microservice-api-patterns.org/patterns/responsibility/informationHolderEndpointTypes/MasterDataHolder",
+        "http://localhost:8090/customers/123",
+        "https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/jms/core/JmsTemplate.html",
+        "https://docs.spring.io/spring-hateoas/docs/current/reference/html/",
+        "https://docs.spring.io/spring-data/jpa/docs/current/reference/html/",
+        "0.0.0.0:61613",
+        "http://localhost:8090/policies/h3riovf4xq/?expand=customer",
+        "https://json-schema.org/",
+        "https://github.com/spring-projects/spring-hateoas/issues/352",
+        "http://localhost:8090/v2/api-docs"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "policy-management-frontend",
+      "type": "docker",
+      "path": "policy-management-frontend",
+      "loc": {
+        "total": 358,
+        "code": 326,
+        "blank": 29,
+        "comment": 3
+      },
+      "classes_count": 1,
+      "methods_count": 19,
+      "constructors_count": 0,
+      "files_count": 6,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "javascript": 6
+      },
+      "file_types": {
+        ".js": 6
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "risk-management-client",
+      "type": "node",
+      "path": "risk-management-client",
+      "loc": {
+        "total": 62,
+        "code": 53,
+        "blank": 9,
+        "comment": 0
+      },
+      "classes_count": 0,
+      "methods_count": 1,
+      "constructors_count": 0,
+      "files_count": 1,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "javascript": 1
+      },
+      "file_types": {
+        ".js": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "risk-management-server",
+      "type": "docker",
+      "path": "risk-management-server",
+      "loc": {
+        "total": 503,
+        "code": 436,
+        "blank": 51,
+        "comment": 16
+      },
+      "classes_count": 2,
+      "methods_count": 4,
+      "constructors_count": 0,
+      "files_count": 4,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "javascript": 3,
+        "proto": 1
+      },
+      "file_types": {
+        ".js": 3,
+        ".proto": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "spring-boot-admin",
+      "type": "docker",
+      "path": "spring-boot-admin",
+      "loc": {
+        "total": 20,
+        "code": 13,
+        "blank": 5,
+        "comment": 2
+      },
+      "classes_count": 1,
+      "methods_count": 1,
+      "constructors_count": 0,
+      "files_count": 1,
+      "stereotype_instances": [
+        "configuration"
+      ],
+      "stereotype_counts": {
+        "configuration": 1
+      },
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "https://github.com/codecentric/spring-boot-admin",
+        "http://localhost:8761/eureka"
+      ],
+      "feign_with_url": false
+    }
+  ],
+  "statistics": {
+    "total_services": 12,
+    "total_files": 342,
+    "total_loc_code": 30364,
+    "total_classes": 422,
+    "total_methods": 1124,
+    "total_constructors": 207
+  }
+}

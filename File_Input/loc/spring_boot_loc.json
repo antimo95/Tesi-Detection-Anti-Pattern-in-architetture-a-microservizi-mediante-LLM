@@ -1,0 +1,154 @@
+{
+  "metadata": {
+    "project_path": "D:\\Users\\Desktop\\microservices\\Peggiori\\spring-boot-microservices-example-602770fe7ebd502e2fc66b475ee77d16d3ad6a2f",
+    "project_name": "spring-boot-microservices-example-602770fe7ebd502e2fc66b475ee77d16d3ad6a2f",
+    "extraction_timestamp": "2026-02-16T16:31:43.301593",
+    "extractor_version": "2.1.0"
+  },
+  "microservices": [
+    {
+      "name": "beer-catalog-service",
+      "type": "maven",
+      "path": "beer-catalog-service",
+      "loc": {
+        "total": 80,
+        "code": 62,
+        "blank": 18,
+        "comment": 0
+      },
+      "classes_count": 5,
+      "methods_count": 3,
+      "constructors_count": 1,
+      "files_count": 2,
+      "stereotype_instances": [
+        "repository",
+        "entity",
+        "component"
+      ],
+      "stereotype_counts": {
+        "repository": 1,
+        "entity": 1,
+        "component": 1
+      },
+      "languages": {
+        "java": 2
+      },
+      "file_types": {
+        ".java": 2
+      },
+      "jpa_tables": [
+        "BeerCatalogServiceApplication"
+      ],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "client",
+      "type": "node",
+      "path": "client",
+      "loc": {
+        "total": 368,
+        "code": 254,
+        "blank": 49,
+        "comment": 65
+      },
+      "classes_count": 6,
+      "methods_count": 0,
+      "constructors_count": 0,
+      "files_count": 19,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "javascript": 2,
+        "typescript": 17
+      },
+      "file_types": {
+        ".js": 2,
+        ".ts": 17
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "https://github.com/angular/protractor/blob/master/lib/config.ts",
+        "http://localhost:8081/good-beers",
+        "http://tutorials.pluralsight.com/front-end-javascript/getting-started-with-angular-2-by-building-a-giphy-search-application",
+        "http://localhost:4200/",
+        "https://media.giphy.com/media/YaOxRsmrv9IeA/giphy.gif",
+        "https://karma-runner.github.io/1.0/config/configuration-file.html",
+        "https://angular.io/docs/ts/latest/guide/browser-support.html",
+        "http://caniuse.com/#feat=web-animation",
+        "https://github.com/Giphy/GiphyAPI#public-beta-key"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "edge-service",
+      "type": "maven",
+      "path": "edge-service",
+      "loc": {
+        "total": 88,
+        "code": 71,
+        "blank": 17,
+        "comment": 0
+      },
+      "classes_count": 5,
+      "methods_count": 5,
+      "constructors_count": 1,
+      "files_count": 2,
+      "stereotype_instances": [
+        "controller",
+        "feign_client"
+      ],
+      "stereotype_counts": {
+        "controller": 1,
+        "feign_client": 1
+      },
+      "languages": {
+        "java": 2
+      },
+      "file_types": {
+        ".java": 2
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "eureka-service",
+      "type": "maven",
+      "path": "eureka-service",
+      "loc": {
+        "total": 31,
+        "code": 23,
+        "blank": 8,
+        "comment": 0
+      },
+      "classes_count": 2,
+      "methods_count": 2,
+      "constructors_count": 0,
+      "files_count": 2,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 2
+      },
+      "file_types": {
+        ".java": 2
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    }
+  ],
+  "statistics": {
+    "total_services": 4,
+    "total_files": 25,
+    "total_loc_code": 410,
+    "total_classes": 18,
+    "total_methods": 10,
+    "total_constructors": 2
+  }
+}

@@ -1,0 +1,558 @@
+{
+  "metadata": {
+    "project_path": "D:\\Users\\Desktop\\microservices\\Peggiori\\spring-cloud-microservice-examples-master",
+    "project_name": "spring-cloud-microservice-examples-master",
+    "extraction_timestamp": "2026-02-09T09:48:21.521463",
+    "extractor_version": "2.0.0"
+  },
+  "microservices": [
+    {
+      "name": "cloud-api-gateway",
+      "type": "maven",
+      "path": "cloud-api-gateway",
+      "loc": {
+        "total": 255,
+        "code": 123,
+        "blank": 34,
+        "comment": 98
+      },
+      "classes_count": 4,
+      "methods_count": 16,
+      "constructors_count": 0,
+      "files_count": 4,
+      "stereotype_instances": [
+        "configuration"
+      ],
+      "stereotype_counts": {
+        "configuration": 1
+      },
+      "languages": {
+        "java": 4
+      },
+      "file_types": {
+        ".java": 4
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "cloud-config-server",
+      "type": "maven",
+      "path": "cloud-config-server",
+      "loc": {
+        "total": 25,
+        "code": 13,
+        "blank": 3,
+        "comment": 9
+      },
+      "classes_count": 1,
+      "methods_count": 1,
+      "constructors_count": 0,
+      "files_count": 1,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "cloud-dummy-service",
+      "type": "maven",
+      "path": "cloud-dummy-service",
+      "loc": {
+        "total": 42,
+        "code": 27,
+        "blank": 6,
+        "comment": 9
+      },
+      "classes_count": 2,
+      "methods_count": 2,
+      "constructors_count": 0,
+      "files_count": 1,
+      "stereotype_instances": [
+        "controller"
+      ],
+      "stereotype_counts": {
+        "controller": 1
+      },
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://$"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "cloud-eureka-server",
+      "type": "maven",
+      "path": "cloud-eureka-server",
+      "loc": {
+        "total": 22,
+        "code": 11,
+        "blank": 2,
+        "comment": 9
+      },
+      "classes_count": 1,
+      "methods_count": 1,
+      "constructors_count": 0,
+      "files_count": 1,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "cloud-finagle-commons-thrift",
+      "type": "maven",
+      "path": "cloud-finagle-commons-thrift",
+      "loc": {
+        "total": 78,
+        "code": 51,
+        "blank": 9,
+        "comment": 18
+      },
+      "classes_count": 1,
+      "methods_count": 6,
+      "constructors_count": 0,
+      "files_count": 1,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "cloud-finagle-thrift-api",
+      "type": "maven",
+      "path": "cloud-finagle-thrift-api",
+      "loc": {
+        "total": 0,
+        "code": 0,
+        "blank": 0,
+        "comment": 0
+      },
+      "classes_count": 0,
+      "methods_count": 0,
+      "constructors_count": 0,
+      "files_count": 0,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {},
+      "file_types": {},
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "cloud-finagle-thrift-client",
+      "type": "maven",
+      "path": "cloud-finagle-thrift-client",
+      "loc": {
+        "total": 92,
+        "code": 59,
+        "blank": 11,
+        "comment": 22
+      },
+      "classes_count": 1,
+      "methods_count": 1,
+      "constructors_count": 0,
+      "files_count": 1,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "127.0.0.1:9411",
+        "localhost:9411"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "cloud-finagle-thrift-server",
+      "type": "maven",
+      "path": "cloud-finagle-thrift-server",
+      "loc": {
+        "total": 104,
+        "code": 54,
+        "blank": 15,
+        "comment": 35
+      },
+      "classes_count": 2,
+      "methods_count": 2,
+      "constructors_count": 1,
+      "files_count": 2,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 2
+      },
+      "file_types": {
+        ".java": 2
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "127.0.0.1:9411",
+        "localhost:9411"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "cloud-hystrix-dashboard",
+      "type": "maven",
+      "path": "cloud-hystrix-dashboard",
+      "loc": {
+        "total": 31,
+        "code": 18,
+        "blank": 4,
+        "comment": 9
+      },
+      "classes_count": 1,
+      "methods_count": 2,
+      "constructors_count": 0,
+      "files_count": 1,
+      "stereotype_instances": [
+        "controller"
+      ],
+      "stereotype_counts": {
+        "controller": 1
+      },
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "cloud-hystrix-turbine",
+      "type": "maven",
+      "path": "cloud-hystrix-turbine",
+      "loc": {
+        "total": 28,
+        "code": 15,
+        "blank": 4,
+        "comment": 9
+      },
+      "classes_count": 1,
+      "methods_count": 1,
+      "constructors_count": 0,
+      "files_count": 1,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "cloud-simple-service",
+      "type": "maven",
+      "path": "cloud-simple-service",
+      "loc": {
+        "total": 367,
+        "code": 221,
+        "blank": 68,
+        "comment": 78
+      },
+      "classes_count": 8,
+      "methods_count": 33,
+      "constructors_count": 0,
+      "files_count": 8,
+      "stereotype_instances": [
+        "configuration",
+        "service",
+        "repository",
+        "controller"
+      ],
+      "stereotype_counts": {
+        "configuration": 2,
+        "service": 1,
+        "repository": 1,
+        "controller": 1
+      },
+      "languages": {
+        "java": 8
+      },
+      "file_types": {
+        ".java": 8
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "cloud-simple-serviceB",
+      "type": "maven",
+      "path": "cloud-simple-serviceB",
+      "loc": {
+        "total": 46,
+        "code": 22,
+        "blank": 6,
+        "comment": 18
+      },
+      "classes_count": 2,
+      "methods_count": 2,
+      "constructors_count": 0,
+      "files_count": 2,
+      "stereotype_instances": [
+        "controller"
+      ],
+      "stereotype_counts": {
+        "controller": 1
+      },
+      "languages": {
+        "java": 2
+      },
+      "file_types": {
+        ".java": 2
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "cloud-simple-ui",
+      "type": "maven",
+      "path": "cloud-simple-ui",
+      "loc": {
+        "total": 162,
+        "code": 84,
+        "blank": 24,
+        "comment": 54
+      },
+      "classes_count": 4,
+      "methods_count": 8,
+      "constructors_count": 0,
+      "files_count": 4,
+      "stereotype_instances": [
+        "service",
+        "controller"
+      ],
+      "stereotype_counts": {
+        "service": 1,
+        "controller": 1
+      },
+      "languages": {
+        "java": 4
+      },
+      "file_types": {
+        ".java": 4
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "cloud-thrift-client",
+      "type": "maven",
+      "path": "cloud-thrift-client",
+      "loc": {
+        "total": 209,
+        "code": 136,
+        "blank": 27,
+        "comment": 46
+      },
+      "classes_count": 4,
+      "methods_count": 5,
+      "constructors_count": 0,
+      "files_count": 4,
+      "stereotype_instances": [
+        "configuration",
+        "controller",
+        "component"
+      ],
+      "stereotype_counts": {
+        "configuration": 1,
+        "controller": 1,
+        "component": 1
+      },
+      "languages": {
+        "java": 4
+      },
+      "file_types": {
+        ".java": 4
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "cloud-thrift-interface",
+      "type": "maven",
+      "path": "cloud-thrift-interface",
+      "loc": {
+        "total": 1354,
+        "code": 1064,
+        "blank": 221,
+        "comment": 69
+      },
+      "classes_count": 30,
+      "methods_count": 112,
+      "constructors_count": 20,
+      "files_count": 2,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 2
+      },
+      "file_types": {
+        ".java": 2
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "cloud-thrift-server",
+      "type": "maven",
+      "path": "cloud-thrift-server",
+      "loc": {
+        "total": 181,
+        "code": 114,
+        "blank": 28,
+        "comment": 39
+      },
+      "classes_count": 4,
+      "methods_count": 9,
+      "constructors_count": 0,
+      "files_count": 4,
+      "stereotype_instances": [
+        "configuration"
+      ],
+      "stereotype_counts": {
+        "configuration": 2
+      },
+      "languages": {
+        "java": 4
+      },
+      "file_types": {
+        ".java": 4
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "cloud-uaa-service",
+      "type": "maven",
+      "path": "cloud-uaa-service",
+      "loc": {
+        "total": 120,
+        "code": 93,
+        "blank": 18,
+        "comment": 9
+      },
+      "classes_count": 3,
+      "methods_count": 8,
+      "constructors_count": 0,
+      "files_count": 1,
+      "stereotype_instances": [
+        "configuration"
+      ],
+      "stereotype_counts": {
+        "configuration": 1
+      },
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://$"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "cloud-zipkin",
+      "type": "maven",
+      "path": "cloud-zipkin",
+      "loc": {
+        "total": 24,
+        "code": 11,
+        "blank": 3,
+        "comment": 10
+      },
+      "classes_count": 1,
+      "methods_count": 1,
+      "constructors_count": 0,
+      "files_count": 1,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    }
+  ],
+  "statistics": {
+    "total_services": 18,
+    "total_files": 39,
+    "total_loc_code": 2116,
+    "total_classes": 70,
+    "total_methods": 210,
+    "total_constructors": 21
+  }
+}

@@ -1,0 +1,859 @@
+{
+  "metadata": {
+    "project_path": "D:\\Users\\Desktop\\microservices\\Peggiori\\usate\\micro-company-8f4a2189403c13af66a964d31d7dc5228e489a0b",
+    "project_name": "micro-company-8f4a2189403c13af66a964d31d7dc5228e489a0b",
+    "extraction_timestamp": "2026-02-18T12:05:19.666986",
+    "extractor_version": "2.1.0"
+  },
+  "microservices": [
+    {
+      "name": "adminserver",
+      "type": "maven",
+      "path": "adminserver",
+      "loc": {
+        "total": 17,
+        "code": 13,
+        "blank": 4,
+        "comment": 0
+      },
+      "classes_count": 1,
+      "methods_count": 1,
+      "constructors_count": 0,
+      "files_count": 1,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://configserver:8888",
+        "http://localhost:8888"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "api-gateway",
+      "type": "maven",
+      "path": "api-gateway",
+      "loc": {
+        "total": 3142,
+        "code": 2311,
+        "blank": 388,
+        "comment": 443
+      },
+      "classes_count": 6,
+      "methods_count": 27,
+      "constructors_count": 0,
+      "files_count": 7,
+      "stereotype_instances": [
+        "configuration",
+        "component"
+      ],
+      "stereotype_counts": {
+        "configuration": 3,
+        "component": 1
+      },
+      "languages": {
+        "javascript": 2,
+        "java": 5
+      },
+      "file_types": {
+        ".js": 2,
+        ".java": 5
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-EventTarget",
+        "http://stevesouders.com/misc/test-postmessage.php",
+        "http://configserver:8888",
+        "https://github.com/LearnBoost/socket.io/blob/0.6.17/lib/socket.io/transports/jsonp-polling.js",
+        "http://bugs.jquery.com/ticket/5280",
+        "https://gist.github.com/1133122/2121c601c5549155483f50be3da5305e83b8c5df",
+        "http://sockjs.org,",
+        "http://ajaxian.com/archives/100-line-ajax-wrapper",
+        "https://code.google.com/p/jquery-jsonp/source/browse/trunk/core/jquery.jsonp.js",
+        "http://asdasd:111/asd",
+        "http://hacks.mozilla.org/2009/07/cross-site-xmlhttprequest-with-cors/",
+        "http://localhost:8888",
+        "http://msdn.microsoft.com/en-us/library/cc197015",
+        "http://localhost:80/abc",
+        "http://msdn.microsoft.com/en-us/library/cc288060",
+        "http://host.com:9999/ticker/12/basd",
+        "https://code.google.com/p/chromium/issues/detail?id=89155",
+        "http://abc",
+        "http://www.erg.abdn.ac.uk/~gerrit/dccp/notes/ccid2/rto_estimator/",
+        "http://en.wikipedia.org/wiki/Mapping_of_Unicode_characters#Surrogates",
+        "https://github.com/sockjs/sockjs-client/issues/28",
+        "http://fusesource.com",
+        "https://github.com/douglascrockford/JSON-js/blob/47a9882cddeb1e8529e07af9736218075372b8ac/json2.js#L196",
+        "http://stackoverflow.com/questions/1641507/detect-browser-support-for-cross-domain-xmlhttprequests",
+        "http://jmesnil.net/",
+        "http://jaubourg.net/2010/07/loading-script-as-onclick-handler-of.html",
+        "http://wiki.whatwg.org/wiki/Dynamic_Script_Execution_Order",
+        "https://bugzilla.mozilla.org/show_bug.cgi?id=696085",
+        "https://developer.mozilla.org/en/XMLHttpRequest",
+        "http://www.jmesnil.net/stomp-websocket/doc/",
+        "https://developer.mozilla.org/en/HTML/Element/script",
+        "http://bugs.jquery.com/ticket/1450"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "authserver",
+      "type": "maven",
+      "path": "authserver",
+      "loc": {
+        "total": 113,
+        "code": 95,
+        "blank": 17,
+        "comment": 1
+      },
+      "classes_count": 3,
+      "methods_count": 9,
+      "constructors_count": 0,
+      "files_count": 1,
+      "stereotype_instances": [
+        "controller",
+        "component",
+        "configuration"
+      ],
+      "stereotype_counts": {
+        "controller": 1,
+        "component": 1,
+        "configuration": 1
+      },
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://configserver:8888",
+        "http://localhost:8888"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "circuit-breaker",
+      "type": "maven",
+      "path": "circuit-breaker",
+      "loc": {
+        "total": 14,
+        "code": 11,
+        "blank": 3,
+        "comment": 0
+      },
+      "classes_count": 1,
+      "methods_count": 1,
+      "constructors_count": 0,
+      "files_count": 1,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://configserver:8888",
+        "http://localhost:8888"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "command-side-blog",
+      "type": "maven",
+      "path": "command-side-blog",
+      "loc": {
+        "total": 527,
+        "code": 352,
+        "blank": 104,
+        "comment": 71
+      },
+      "classes_count": 8,
+      "methods_count": 47,
+      "constructors_count": 12,
+      "files_count": 8,
+      "stereotype_instances": [
+        "controller"
+      ],
+      "stereotype_counts": {
+        "controller": 1
+      },
+      "languages": {
+        "java": 8
+      },
+      "file_types": {
+        ".java": 8
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "command-side-blog-service",
+      "type": "maven",
+      "path": "command-side-blog-service",
+      "loc": {
+        "total": 251,
+        "code": 191,
+        "blank": 49,
+        "comment": 11
+      },
+      "classes_count": 6,
+      "methods_count": 12,
+      "constructors_count": 1,
+      "files_count": 6,
+      "stereotype_instances": [
+        "controller",
+        "configuration"
+      ],
+      "stereotype_counts": {
+        "controller": 1,
+        "configuration": 3
+      },
+      "languages": {
+        "java": 6
+      },
+      "file_types": {
+        ".java": 6
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://configserver:8888",
+        "http://127.0.0.1:",
+        "http://localhost:8888"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "command-side-project",
+      "type": "maven",
+      "path": "command-side-project",
+      "loc": {
+        "total": 697,
+        "code": 482,
+        "blank": 141,
+        "comment": 74
+      },
+      "classes_count": 9,
+      "methods_count": 72,
+      "constructors_count": 10,
+      "files_count": 8,
+      "stereotype_instances": [
+        "controller"
+      ],
+      "stereotype_counts": {
+        "controller": 1
+      },
+      "languages": {
+        "java": 8
+      },
+      "file_types": {
+        ".java": 8
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "command-side-project-service",
+      "type": "maven",
+      "path": "command-side-project-service",
+      "loc": {
+        "total": 247,
+        "code": 187,
+        "blank": 49,
+        "comment": 11
+      },
+      "classes_count": 6,
+      "methods_count": 12,
+      "constructors_count": 1,
+      "files_count": 6,
+      "stereotype_instances": [
+        "controller",
+        "configuration"
+      ],
+      "stereotype_counts": {
+        "controller": 1,
+        "configuration": 3
+      },
+      "languages": {
+        "java": 6
+      },
+      "file_types": {
+        ".java": 6
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://configserver:8888",
+        "http://127.0.0.1:",
+        "http://localhost:8888"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "common",
+      "type": "maven",
+      "path": "common",
+      "loc": {
+        "total": 155,
+        "code": 91,
+        "blank": 40,
+        "comment": 24
+      },
+      "classes_count": 6,
+      "methods_count": 12,
+      "constructors_count": 9,
+      "files_count": 4,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 4
+      },
+      "file_types": {
+        ".java": 4
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "common-blog",
+      "type": "maven",
+      "path": "common-blog",
+      "loc": {
+        "total": 128,
+        "code": 94,
+        "blank": 34,
+        "comment": 0
+      },
+      "classes_count": 3,
+      "methods_count": 13,
+      "constructors_count": 4,
+      "files_count": 3,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 3
+      },
+      "file_types": {
+        ".java": 3
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "common-project",
+      "type": "maven",
+      "path": "common-project",
+      "loc": {
+        "total": 92,
+        "code": 67,
+        "blank": 25,
+        "comment": 0
+      },
+      "classes_count": 2,
+      "methods_count": 9,
+      "constructors_count": 4,
+      "files_count": 2,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 2
+      },
+      "file_types": {
+        ".java": 2
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "configserver",
+      "type": "maven",
+      "path": "configserver",
+      "loc": {
+        "total": 14,
+        "code": 11,
+        "blank": 3,
+        "comment": 0
+      },
+      "classes_count": 1,
+      "methods_count": 1,
+      "constructors_count": 0,
+      "files_count": 1,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "https://github.com/idugalic/micro-company-config.git"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "docker",
+      "type": "docker",
+      "path": "adminserver\\src\\main\\docker",
+      "loc": {
+        "total": 0,
+        "code": 0,
+        "blank": 0,
+        "comment": 0
+      },
+      "classes_count": 0,
+      "methods_count": 0,
+      "constructors_count": 0,
+      "files_count": 0,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {},
+      "file_types": {},
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "frontend",
+      "type": "node",
+      "path": "monolithic\\src\\main\\frontend",
+      "loc": {
+        "total": 1477,
+        "code": 1222,
+        "blank": 212,
+        "comment": 43
+      },
+      "classes_count": 27,
+      "methods_count": 2,
+      "constructors_count": 0,
+      "files_count": 48,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "javascript": 2,
+        "typescript": 46
+      },
+      "file_types": {
+        ".js": 2,
+        ".ts": 46
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "https://www.typescriptlang.org/docs/handbook/writing-declaration-files.html",
+        "https://karma-runner.github.io/0.13/config/configuration-file.html",
+        "https://github.com/angular/protractor/blob/master/docs/referenceConf.js",
+        "http://localhost:4200/"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "monolithic",
+      "type": "maven",
+      "path": "monolithic",
+      "loc": {
+        "total": 106946,
+        "code": 77548,
+        "blank": 5985,
+        "comment": 23413
+      },
+      "classes_count": 170,
+      "methods_count": 2873,
+      "constructors_count": 1,
+      "files_count": 14,
+      "stereotype_instances": [
+        "controller",
+        "configuration"
+      ],
+      "stereotype_counts": {
+        "controller": 1,
+        "configuration": 4
+      },
+      "languages": {
+        "java": 11,
+        "javascript": 3
+      },
+      "file_types": {
+        ".java": 11,
+        ".js": 3
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://plnkr.co/edit/ePOccA?p=preview",
+        "http://plnkr.co/edit/jzjec0?p=preview",
+        "http://docs.oasis-open.org/xliff/v1.2/xliff-profile-html/xliff-profile-html-1.2.html",
+        "https://bugzilla.mozilla.org/show_bug.cgi?id=1128054",
+        "http://hammerjs.github.io/recognizer-press/",
+        "https://github.com/zloirock/core-js/issues/86#issuecomment-115759028",
+        "http://plnkr.co/edit/oyBoEvNtDhOSfi9YxaVb?p=preview",
+        "https://github.com/angular-ui/bootstrap/blob/07c31d0731f7cb068a1932b8e01d2312b796b4ec/src/position/position.js",
+        "https://github.com/Microsoft/TypeScript/issues/3164",
+        "http://plnkr.co/edit/Ys9ezXpj2Mnoy3Uc8KBp?p=preview",
+        "http://www.w3.org/TR/DOM-Level-3-Events-key/",
+        "https://fetch.spec.whatwg.org/#responseinit",
+        "https://github.com/webcomponents/webcomponentsjs/blob/4efecd7e0e/src/ShadowCSS/ShadowCSS.js",
+        "http://www.opensource.org/licenses/mit-license.php",
+        "http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#crossDocumentMessages",
+        "http://plnkr.co/edit/LEKVSx?p=preview",
+        "http://momentjs.com/guides/#/warnings/min-max/",
+        "http://plnkr.co/edit/KrSMci?p=preview",
+        "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map",
+        "https://en.wikipedia.org/wiki/Uniform_Resource_Locator#Syntax",
+        "https://google.com",
+        "http://momentjs.com/guides/#/warnings/dst-shifted/",
+        "http://plnkr.co/edit/GU72mJrk1fiodChcmiDR?p=preview",
+        "https://code.google.com/p/v8/issues/detail?id=3509",
+        "http://simon.html5.org/html-elements",
+        "http://dev.w3.org/html5/spec/Overview.html#optional-tags",
+        "https://fetch.spec.whatwg.org/#body",
+        "http://www.gbiv.com/protocols/uri/rfc/rfc3986.html#RFC2234",
+        "http://example.com#/foo`,",
+        "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#iterable",
+        "http://plnkr.co/edit/RX8sJnQYl9FWuSCWme5z?p=preview",
+        "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter",
+        "http://plnkr.co/edit/7aWYdcqTQsP0eNqEdUAf?p=preview",
+        "http://google.github.io/material-design-icons/#icon-font-for-the-web",
+        "http://plnkr.co/edit/VngosOWiaExEtbstDoix?p=preview",
+        "https://www.google.com/design/spec/components/selection-controls.html",
+        "http://userguide.icu-project.org/formatparse/messages",
+        "https://developer.mozilla.org/en-US/docs/Web/API/Console/profileEnd",
+        "http://plnkr.co/edit/1lXquqFfgduTFBWjNoRE?p=preview",
+        "https://tools.ietf.org/html/rfc3986.",
+        "http://www.w3.org/2000/svg\\",
+        "http://www.w3.org/TR/2007/WD-DOM-Level-3-Events-20071221/events.html#Events-KeyboardEvents-Interfaces",
+        "https://angular.io/license",
+        "http://127.0.0.1:",
+        "https://github.com/moment/moment/issues/2978",
+        "http://stackoverflow.com/questions/3561493/is-there-a-regexp-escape-function-in-javascript",
+        "http://marcysutton.com/button-focus-hell/",
+        "https://github.com/jhusain/observable-spec",
+        "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach",
+        "http://plnkr.co/edit/VhyfjN?p=preview",
+        "https://code.google.com/p/v8/issues/detail?id=687",
+        "https://lists.oasis-open.org/archives/xliff/201201/msg00028.html",
+        "https://bugs.webkit.org/show_bug.cgi?id=134364",
+        "http://dev.w3.org/html5/spec/Overview.html#void-elements",
+        "http://jsperf.com/instantiate-size-of-object",
+        "https://github.com/google/traceur-compiler/blob/9511c1dafa972bf0de1202a8a863bad02f0f95a8/src/runtime/url.js",
+        "http://csrc.nist.gov/publications/fips/fips180-4/fips-180-4.pdf",
+        "http://github.com/YuzuJS/setImmediate",
+        "http://docs.oasis-open.org/xliff/v1.2/os/xliff-core.html",
+        "https://www.owasp.org/index.php/Cross-Site_Request_Forgery_",
+        "https://developer.mozilla.org/en/DOM/window.postMessage",
+        "https://github.com/dordille/moment-isoduration/blob/master/moment.isoduration.js",
+        "https://github.com/moment/moment/issues/2166",
+        "https://angular.io/docs/ts/latest/api/core/EmbeddedViewRef-class.html",
+        "http://www.w3.org/TR/CSS2/box.html#margin-properties",
+        "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some",
+        "http://en.wikipedia.org/wiki/ISO_week_date#Calculating_a_date_given_the_year.2C_week_number_and_weekday",
+        "http://momentjs.com/guides/#/warnings/js-date/",
+        "http://plnkr.co/edit/fe0kgemFBtmQOY31b4tw?p=preview",
+        "http://plnkr.co/edit/KVuXxDp0qinGDyo307QW?p=preview",
+        "http://plnkr.co/edit/wYQdNos0Tzql3ei1EV9j?p=info",
+        "http://www.w3.org/2000/svg",
+        "https://fetch.spec.whatwg.org/#request-class",
+        "https://github.com/angular/zone.js/issues/150",
+        "http://www.w3.org/1999/xlink",
+        "http://momentjs.com/guides/#/warnings/define-locale/",
+        "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find",
+        "https://url.spec.whatwg.org/#urlsearchparams",
+        "https://bugs.chromium.org/p/chromium/issues/detail?id=489206#c4",
+        "https://fortawesome.github.io/Font-Awesome/examples/",
+        "https://www.w3.org/TR/NOTE-datetime",
+        "https://github.com/angular/angular/issues/3183",
+        "http://bugs.jquery.com/ticket/1450",
+        "http://jsperf.lnkit.com/fast-apply/5",
+        "http://plnkr.co/edit/YatCFbPAMCL0JSSQ4mvH?p=preview",
+        "http://myserver.com/",
+        "https://github.com/moment/moment/pull/1871",
+        "http://plnkr.co/edit/opB3T4?p=preview",
+        "http://plnkr.co/edit/rHnZtlNS7vJOPQ6pcVkm?p=preview",
+        "http://plnkr.co/edit/ptCImQ?p=preview",
+        "http://plnkr.co/edit/yvVXoB?p=preview",
+        "https://github.com/angular/zone.js/issues/190",
+        "http://stackoverflow.com/questions/23003278/svg-innerhtml-in-firefox-can-not-display",
+        "https://bugzilla.mozilla.org/show_bug.cgi?id=1024350",
+        "https://fetch.spec.whatwg.org/#response-class",
+        "https://developer.mozilla.org/en-US/docs/Web/API/Headers/Headers",
+        "http://dev.w3.org/html5/spec/Overview.html#semantics",
+        "https://w3c.github.io/webcomponents/spec/shadow/",
+        "https://github.com/Microsoft/TypeScript/issues/7271",
+        "https://goo.gl/X2J8zc.",
+        "https://www.google.com/design/spec/patterns/gestures.html#gestures-touch-mechanics",
+        "http://plnkr.co/edit/7Wvi3lfLq41aQPKlxB4O?p=preview",
+        "http://www.w3.org/TR/html51/syntax.html#named-character-references",
+        "https://github.com/google/tracing-framework/issues/555",
+        "https://fetch.spec.whatwg.org/#requestinit",
+        "http://caniuse.com/#search=performance.now",
+        "https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#styles",
+        "https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/4660045/",
+        "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce",
+        "http://plnkr.co/edit/Kez8XGWBxWue7qP7nNvF?p=preview",
+        "http://plnkr.co/edit/qv8DLT?p=preview",
+        "https://github.com/angular/angular/issues/7916",
+        "http://plnkr.co/edit/vq8D3FRB9aGbnWJqtEPE?p=preview",
+        "http://g.co/ng/security",
+        "http://momentjs.com/guides/#/warnings/add-inverted-param/",
+        "https://github.com/angular/angular/issues/6327",
+        "https://github.com/jquery/jquery/blob/master/src/css/hiddenVisibleSelectors.js#L12",
+        "http://www.w3.org/TR/html51/syntax.html#writing",
+        "http://plnkr.co/edit/AiXTHi?p=preview",
+        "https://github.com/angular/angular/issues/9419",
+        "https://en.wikipedia.org/wiki/ISO_4217",
+        "https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/replaceWith",
+        "https://fetch.spec.whatwg.org/#headers-class",
+        "http://www.w3.org/TR/html5/syntax.html#preprocessing-the-input-stream",
+        "https://timtaubert.de/blog/2012/09/css-transitions-for-dynamically-created-dom-elements/",
+        "http://www.w3.org/TR/XMLHttpRequest/#states",
+        "https://github.com/angular/angular/issues/3011",
+        "http://plnkr.co/edit/P9Jkk8e8cz6NVzbcxEsD?p=preview",
+        "https://github.com/moment/moment/issues/1423",
+        "https://bugs.webkit.org/show_bug.cgi?id=44721",
+        "http://docs.oasis-open.org/xliff/v1.2/xliff-profile-po/xliff-profile-po-1.2-cd02.html",
+        "http://docs.closure-library.googlecode.com/git/closure_goog_date_date.js.source.html",
+        "http://plnkr.co/edit/eosMGo?p=preview",
+        "https://code.google.com/p/dart/issues/detail?id=17406",
+        "https://material.google.com/components/tooltips.html#tooltips-interaction",
+        "http://www.w3.org/1999/xhtml",
+        "http://stackoverflow.com/a/26603875",
+        "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/hammerjs",
+        "http://$",
+        "https://github.com/angular/angular/pull/11846",
+        "http://google.github.io/tracing-framework/instrumenting-code.html#custom-events",
+        "http://plnkr.co/edit/6w8XA8YTkDRcPYpdB9dk?p=preview",
+        "https://github.com/zenparsing/es-observable",
+        "https://github.com/zloirock/core-js/issues/173",
+        "http://www.ics.uci.edu/pub/ietf/uri/#Related",
+        "https://mathiasbynens.be/notes/javascript-encoding#surrogate-formulae",
+        "http://g.co/ng/security#xss",
+        "http://www.w3.org/TR/html51/syntax.html#optional-tags",
+        "http://plnkr.co/edit/bRs0SX2OTQiJzqvjgl8P?p=preview",
+        "https://angular.io/docs/ts/latest/guide/router.html",
+        "http://momentjs.com/guides/#/warnings/zone/",
+        "https://www.google.com/design/spec/components/tabs.html",
+        "http://example.com/foo`",
+        "http://cldr.unicode.org/index/cldr-spec/plural-rules",
+        "http://www.w3.org/TR/css3-syntax/#string-token-diagram.",
+        "https://html.spec.whatwg.org/multipage/entities.json",
+        "https://code.google.com/p/chromium/issues/detail?id=155654",
+        "https://fetch.spec.whatwg.org/#responsetype",
+        "https://goo.gl/wIDDiL",
+        "http://stackoverflow.com/questions/181348/instantiating-a-javascript-object-by-calling-prototype-constructor-apply",
+        "https://nodejs.org/dist/latest/docs/api/util.html#util_custom_inspect_function_on_objects",
+        "http://google.github.io/material-design-icons/#icon-font-for-the-web.",
+        "https://material.google.com/components/tooltips.html",
+        "http://hammerjs.github.io/recognizer-pan/"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "query-side-blog",
+      "type": "maven",
+      "path": "query-side-blog",
+      "loc": {
+        "total": 296,
+        "code": 210,
+        "blank": 61,
+        "comment": 25
+      },
+      "classes_count": 4,
+      "methods_count": 26,
+      "constructors_count": 3,
+      "files_count": 4,
+      "stereotype_instances": [
+        "entity",
+        "component",
+        "repository"
+      ],
+      "stereotype_counts": {
+        "entity": 1,
+        "component": 1,
+        "repository": 1
+      },
+      "languages": {
+        "java": 4
+      },
+      "file_types": {
+        ".java": 4
+      },
+      "jpa_tables": [
+        "BlogPost"
+      ],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "query-side-blog-service",
+      "type": "maven",
+      "path": "query-side-blog-service",
+      "loc": {
+        "total": 159,
+        "code": 122,
+        "blank": 35,
+        "comment": 2
+      },
+      "classes_count": 4,
+      "methods_count": 8,
+      "constructors_count": 0,
+      "files_count": 4,
+      "stereotype_instances": [
+        "configuration"
+      ],
+      "stereotype_counts": {
+        "configuration": 2
+      },
+      "languages": {
+        "java": 4
+      },
+      "file_types": {
+        ".java": 4
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://configserver:8888",
+        "http://localhost:8888"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "query-side-project",
+      "type": "maven",
+      "path": "query-side-project",
+      "loc": {
+        "total": 192,
+        "code": 136,
+        "blank": 38,
+        "comment": 18
+      },
+      "classes_count": 4,
+      "methods_count": 17,
+      "constructors_count": 3,
+      "files_count": 4,
+      "stereotype_instances": [
+        "entity",
+        "component",
+        "repository"
+      ],
+      "stereotype_counts": {
+        "entity": 1,
+        "component": 1,
+        "repository": 1
+      },
+      "languages": {
+        "java": 4
+      },
+      "file_types": {
+        ".java": 4
+      },
+      "jpa_tables": [
+        "Project"
+      ],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "query-side-project-service",
+      "type": "maven",
+      "path": "query-side-project-service",
+      "loc": {
+        "total": 159,
+        "code": 122,
+        "blank": 35,
+        "comment": 2
+      },
+      "classes_count": 4,
+      "methods_count": 8,
+      "constructors_count": 0,
+      "files_count": 4,
+      "stereotype_instances": [
+        "configuration"
+      ],
+      "stereotype_counts": {
+        "configuration": 2
+      },
+      "languages": {
+        "java": 4
+      },
+      "file_types": {
+        ".java": 4
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://configserver:8888",
+        "http://localhost:8888"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "registry",
+      "type": "maven",
+      "path": "registry",
+      "loc": {
+        "total": 14,
+        "code": 11,
+        "blank": 3,
+        "comment": 0
+      },
+      "classes_count": 1,
+      "methods_count": 1,
+      "constructors_count": 0,
+      "files_count": 1,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://configserver:8888",
+        "http://localhost:8888"
+      ],
+      "feign_with_url": false
+    }
+  ],
+  "statistics": {
+    "total_services": 20,
+    "total_files": 127,
+    "total_loc_code": 83276,
+    "total_classes": 266,
+    "total_methods": 3151,
+    "total_constructors": 48
+  }
+}

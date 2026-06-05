@@ -1,0 +1,958 @@
+{
+  "metadata": {
+    "project_path": "D:\\Users\\Desktop\\microservices\\Peggiori\\usate\\ftgo-application-c028190295d64b5fad8993e2f3a6dd88270e9bf2",
+    "project_name": "ftgo-application-c028190295d64b5fad8993e2f3a6dd88270e9bf2",
+    "extraction_timestamp": "2026-02-16T16:46:28.092934",
+    "extractor_version": "2.1.0"
+  },
+  "microservices": [
+    {
+      "name": "buildSrc",
+      "type": "gradle",
+      "path": "buildSrc",
+      "loc": {
+        "total": 102,
+        "code": 79,
+        "blank": 23,
+        "comment": 0
+      },
+      "classes_count": 2,
+      "methods_count": 8,
+      "constructors_count": 0,
+      "files_count": 2,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 2
+      },
+      "file_types": {
+        ".java": 2
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "common-swagger",
+      "type": "gradle",
+      "path": "common-swagger",
+      "loc": {
+        "total": 45,
+        "code": 38,
+        "blank": 7,
+        "comment": 0
+      },
+      "classes_count": 1,
+      "methods_count": 1,
+      "constructors_count": 0,
+      "files_count": 1,
+      "stereotype_instances": [
+        "configuration"
+      ],
+      "stereotype_counts": {
+        "configuration": 1
+      },
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "dynamodblocal",
+      "type": "docker",
+      "path": "dynamodblocal",
+      "loc": {
+        "total": 0,
+        "code": 0,
+        "blank": 0,
+        "comment": 0
+      },
+      "classes_count": 0,
+      "methods_count": 0,
+      "constructors_count": 0,
+      "files_count": 0,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {},
+      "file_types": {},
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "dynamodblocal-init",
+      "type": "docker",
+      "path": "dynamodblocal-init",
+      "loc": {
+        "total": 0,
+        "code": 0,
+        "blank": 0,
+        "comment": 0
+      },
+      "classes_count": 0,
+      "methods_count": 0,
+      "constructors_count": 0,
+      "files_count": 0,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {},
+      "file_types": {},
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "ftgo-accounting-service",
+      "type": "docker",
+      "path": "ftgo-accounting-service",
+      "loc": {
+        "total": 678,
+        "code": 515,
+        "blank": 161,
+        "comment": 2
+      },
+      "classes_count": 24,
+      "methods_count": 58,
+      "constructors_count": 11,
+      "files_count": 23,
+      "stereotype_instances": [
+        "configuration",
+        "component",
+        "controller"
+      ],
+      "stereotype_counts": {
+        "configuration": 5,
+        "component": 1,
+        "controller": 1
+      },
+      "languages": {
+        "java": 23
+      },
+      "file_types": {
+        ".java": 23
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "ftgo-accounting-service-api",
+      "type": "gradle",
+      "path": "ftgo-accounting-service-api",
+      "loc": {
+        "total": 103,
+        "code": 73,
+        "blank": 30,
+        "comment": 0
+      },
+      "classes_count": 4,
+      "methods_count": 12,
+      "constructors_count": 4,
+      "files_count": 4,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 4
+      },
+      "file_types": {
+        ".java": 4
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "ftgo-accounting-service-contracts",
+      "type": "gradle",
+      "path": "ftgo-accounting-service-contracts",
+      "loc": {
+        "total": 0,
+        "code": 0,
+        "blank": 0,
+        "comment": 0
+      },
+      "classes_count": 0,
+      "methods_count": 0,
+      "constructors_count": 0,
+      "files_count": 0,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {},
+      "file_types": {},
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "ftgo-api-gateway",
+      "type": "docker",
+      "path": "ftgo-api-gateway",
+      "loc": {
+        "total": 606,
+        "code": 441,
+        "blank": 145,
+        "comment": 20
+      },
+      "classes_count": 20,
+      "methods_count": 36,
+      "constructors_count": 8,
+      "files_count": 20,
+      "stereotype_instances": [
+        "component",
+        "configuration",
+        "service"
+      ],
+      "stereotype_counts": {
+        "component": 2,
+        "configuration": 6,
+        "service": 4
+      },
+      "languages": {
+        "java": 20
+      },
+      "file_types": {
+        ".java": 20
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://ftgo-order-service:8080",
+        "http://localhost:",
+        "http://localhost:8083",
+        "http://localhost:$",
+        "http://ftgo-order-history-service:8080",
+        "http://localhost:9999",
+        "http://ftgo-consumer-service:8080"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "ftgo-api-gateway-graphql",
+      "type": "docker",
+      "path": "ftgo-api-gateway-graphql",
+      "loc": {
+        "total": 565,
+        "code": 424,
+        "blank": 120,
+        "comment": 21
+      },
+      "classes_count": 4,
+      "methods_count": 10,
+      "constructors_count": 0,
+      "files_count": 11,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "javascript": 10,
+        "typescript": 1
+      },
+      "file_types": {
+        ".js": 10,
+        ".ts": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://localhost:3000",
+        "http://localhost:8080",
+        "http://$"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "ftgo-common",
+      "type": "gradle",
+      "path": "ftgo-common",
+      "loc": {
+        "total": 464,
+        "code": 349,
+        "blank": 113,
+        "comment": 2
+      },
+      "classes_count": 14,
+      "methods_count": 49,
+      "constructors_count": 16,
+      "files_count": 11,
+      "stereotype_instances": [
+        "configuration"
+      ],
+      "stereotype_counts": {
+        "configuration": 1
+      },
+      "languages": {
+        "java": 11
+      },
+      "file_types": {
+        ".java": 11
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "ftgo-common-jpa",
+      "type": "gradle",
+      "path": "ftgo-common-jpa",
+      "loc": {
+        "total": 0,
+        "code": 0,
+        "blank": 0,
+        "comment": 0
+      },
+      "classes_count": 0,
+      "methods_count": 0,
+      "constructors_count": 0,
+      "files_count": 0,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {},
+      "file_types": {},
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "ftgo-consumer-service",
+      "type": "docker",
+      "path": "ftgo-consumer-service",
+      "loc": {
+        "total": 572,
+        "code": 436,
+        "blank": 135,
+        "comment": 1
+      },
+      "classes_count": 19,
+      "methods_count": 36,
+      "constructors_count": 10,
+      "files_count": 18,
+      "stereotype_instances": [
+        "configuration",
+        "entity",
+        "component",
+        "controller"
+      ],
+      "stereotype_counts": {
+        "configuration": 3,
+        "entity": 1,
+        "component": 2,
+        "controller": 1
+      },
+      "languages": {
+        "java": 18
+      },
+      "file_types": {
+        ".java": 18
+      },
+      "jpa_tables": [
+        "consumers"
+      ],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://localhost:"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "ftgo-consumer-service-api",
+      "type": "gradle",
+      "path": "ftgo-consumer-service-api",
+      "loc": {
+        "total": 5,
+        "code": 4,
+        "blank": 1,
+        "comment": 0
+      },
+      "classes_count": 1,
+      "methods_count": 0,
+      "constructors_count": 0,
+      "files_count": 1,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "ftgo-consumer-service-contracts",
+      "type": "gradle",
+      "path": "ftgo-consumer-service-contracts",
+      "loc": {
+        "total": 0,
+        "code": 0,
+        "blank": 0,
+        "comment": 0
+      },
+      "classes_count": 0,
+      "methods_count": 0,
+      "constructors_count": 0,
+      "files_count": 0,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {},
+      "file_types": {},
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "ftgo-delivery-service",
+      "type": "docker",
+      "path": "ftgo-delivery-service",
+      "loc": {
+        "total": 1186,
+        "code": 894,
+        "blank": 275,
+        "comment": 17
+      },
+      "classes_count": 31,
+      "methods_count": 73,
+      "constructors_count": 11,
+      "files_count": 26,
+      "stereotype_instances": [
+        "entity",
+        "configuration",
+        "controller",
+        "component"
+      ],
+      "stereotype_counts": {
+        "entity": 4,
+        "configuration": 9,
+        "controller": 1,
+        "component": 1
+      },
+      "languages": {
+        "java": 26
+      },
+      "file_types": {
+        ".java": 26
+      },
+      "jpa_tables": [
+        "Delivery",
+        "Courier",
+        "Restaurant",
+        "DeliveryServiceDomainConfiguration"
+      ],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "ftgo-delivery-service-api",
+      "type": "gradle",
+      "path": "ftgo-delivery-service-api",
+      "loc": {
+        "total": 124,
+        "code": 92,
+        "blank": 32,
+        "comment": 0
+      },
+      "classes_count": 6,
+      "methods_count": 14,
+      "constructors_count": 8,
+      "files_count": 6,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 6
+      },
+      "file_types": {
+        ".java": 6
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "ftgo-end-to-end-tests",
+      "type": "gradle",
+      "path": "ftgo-end-to-end-tests",
+      "loc": {
+        "total": 392,
+        "code": 316,
+        "blank": 75,
+        "comment": 1
+      },
+      "classes_count": 1,
+      "methods_count": 31,
+      "constructors_count": 0,
+      "files_count": 1,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "ftgo-kitchen-service",
+      "type": "docker",
+      "path": "ftgo-kitchen-service",
+      "loc": {
+        "total": 1102,
+        "code": 858,
+        "blank": 231,
+        "comment": 13
+      },
+      "classes_count": 35,
+      "methods_count": 74,
+      "constructors_count": 13,
+      "files_count": 32,
+      "stereotype_instances": [
+        "configuration",
+        "entity",
+        "component",
+        "controller"
+      ],
+      "stereotype_counts": {
+        "configuration": 6,
+        "entity": 3,
+        "component": 2,
+        "controller": 2
+      },
+      "languages": {
+        "java": 32
+      },
+      "file_types": {
+        ".java": 32
+      },
+      "jpa_tables": [
+        "KitchenDomainConfiguration",
+        "tickets",
+        "kitchen_service_restaurants"
+      ],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://localhost:",
+        "http://$"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "ftgo-kitchen-service-api",
+      "type": "gradle",
+      "path": "ftgo-kitchen-service-api",
+      "loc": {
+        "total": 511,
+        "code": 373,
+        "blank": 138,
+        "comment": 0
+      },
+      "classes_count": 18,
+      "methods_count": 57,
+      "constructors_count": 29,
+      "files_count": 18,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 18
+      },
+      "file_types": {
+        ".java": 18
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "ftgo-kitchen-service-contracts",
+      "type": "gradle",
+      "path": "ftgo-kitchen-service-contracts",
+      "loc": {
+        "total": 0,
+        "code": 0,
+        "blank": 0,
+        "comment": 0
+      },
+      "classes_count": 0,
+      "methods_count": 0,
+      "constructors_count": 0,
+      "files_count": 0,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {},
+      "file_types": {},
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "ftgo-order-history-service",
+      "type": "docker",
+      "path": "ftgo-order-history-service",
+      "loc": {
+        "total": 1494,
+        "code": 1092,
+        "blank": 279,
+        "comment": 123
+      },
+      "classes_count": 26,
+      "methods_count": 113,
+      "constructors_count": 13,
+      "files_count": 24,
+      "stereotype_instances": [
+        "configuration",
+        "controller",
+        "component"
+      ],
+      "stereotype_counts": {
+        "configuration": 5,
+        "controller": 1,
+        "component": 2
+      },
+      "languages": {
+        "java": 24
+      },
+      "file_types": {
+        ".java": 24
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://ftgo-dynamodb-local:8000",
+        "http://$"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "ftgo-order-service",
+      "type": "docker",
+      "path": "ftgo-order-service",
+      "loc": {
+        "total": 4263,
+        "code": 3306,
+        "blank": 941,
+        "comment": 16
+      },
+      "classes_count": 108,
+      "methods_count": 284,
+      "constructors_count": 62,
+      "files_count": 94,
+      "stereotype_instances": [
+        "configuration",
+        "entity",
+        "service",
+        "controller",
+        "component"
+      ],
+      "stereotype_counts": {
+        "configuration": 18,
+        "entity": 3,
+        "service": 1,
+        "controller": 2,
+        "component": 2
+      },
+      "languages": {
+        "java": 94
+      },
+      "file_types": {
+        ".java": 94
+      },
+      "jpa_tables": [
+        "orders",
+        "order_service_restaurants",
+        "OrderServiceComponentTestStepDefinitions"
+      ],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://localhost:8888/customers/",
+        "http://localhost:",
+        "http://%s:%s%s"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "ftgo-order-service-api",
+      "type": "gradle",
+      "path": "ftgo-order-service-api",
+      "loc": {
+        "total": 429,
+        "code": 315,
+        "blank": 114,
+        "comment": 0
+      },
+      "classes_count": 13,
+      "methods_count": 53,
+      "constructors_count": 14,
+      "files_count": 12,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 12
+      },
+      "file_types": {
+        ".java": 12
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "ftgo-order-service-contracts",
+      "type": "gradle",
+      "path": "ftgo-order-service-contracts",
+      "loc": {
+        "total": 0,
+        "code": 0,
+        "blank": 0,
+        "comment": 0
+      },
+      "classes_count": 0,
+      "methods_count": 0,
+      "constructors_count": 0,
+      "files_count": 0,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {},
+      "file_types": {},
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "ftgo-restaurant-service",
+      "type": "docker",
+      "path": "ftgo-restaurant-service",
+      "loc": {
+        "total": 579,
+        "code": 440,
+        "blank": 139,
+        "comment": 0
+      },
+      "classes_count": 19,
+      "methods_count": 50,
+      "constructors_count": 15,
+      "files_count": 18,
+      "stereotype_instances": [
+        "component",
+        "entity",
+        "configuration",
+        "controller"
+      ],
+      "stereotype_counts": {
+        "component": 1,
+        "entity": 2,
+        "configuration": 2,
+        "controller": 1
+      },
+      "languages": {
+        "java": 18
+      },
+      "file_types": {
+        ".java": 18
+      },
+      "jpa_tables": [
+        "restaurants",
+        "RestaurantServiceDomainConfiguration"
+      ],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "ftgo-restaurant-service-api",
+      "type": "gradle",
+      "path": "ftgo-restaurant-service-api",
+      "loc": {
+        "total": 6,
+        "code": 4,
+        "blank": 2,
+        "comment": 0
+      },
+      "classes_count": 1,
+      "methods_count": 0,
+      "constructors_count": 0,
+      "files_count": 1,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "ftgo-restaurant-service-aws-lambda",
+      "type": "gradle",
+      "path": "ftgo-restaurant-service-aws-lambda",
+      "loc": {
+        "total": 1045,
+        "code": 804,
+        "blank": 239,
+        "comment": 2
+      },
+      "classes_count": 24,
+      "methods_count": 127,
+      "constructors_count": 18,
+      "files_count": 23,
+      "stereotype_instances": [
+        "entity",
+        "configuration"
+      ],
+      "stereotype_counts": {
+        "entity": 2,
+        "configuration": 3
+      },
+      "languages": {
+        "java": 23
+      },
+      "file_types": {
+        ".java": 23
+      },
+      "jpa_tables": [
+        "restaurants",
+        "RestaurantServiceDomainConfiguration"
+      ],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://$"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "ftgo-restaurant-service-contracts",
+      "type": "gradle",
+      "path": "ftgo-restaurant-service-contracts",
+      "loc": {
+        "total": 0,
+        "code": 0,
+        "blank": 0,
+        "comment": 0
+      },
+      "classes_count": 0,
+      "methods_count": 0,
+      "constructors_count": 0,
+      "files_count": 0,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {},
+      "file_types": {},
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "ftgo-test-util",
+      "type": "gradle",
+      "path": "ftgo-test-util",
+      "loc": {
+        "total": 16,
+        "code": 11,
+        "blank": 5,
+        "comment": 0
+      },
+      "classes_count": 1,
+      "methods_count": 2,
+      "constructors_count": 0,
+      "files_count": 1,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "ftgo-test-util-json-schema",
+      "type": "gradle",
+      "path": "ftgo-test-util-json-schema",
+      "loc": {
+        "total": 72,
+        "code": 61,
+        "blank": 11,
+        "comment": 0
+      },
+      "classes_count": 1,
+      "methods_count": 5,
+      "constructors_count": 1,
+      "files_count": 1,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "mysql",
+      "type": "docker",
+      "path": "mysql",
+      "loc": {
+        "total": 0,
+        "code": 0,
+        "blank": 0,
+        "comment": 0
+      },
+      "classes_count": 0,
+      "methods_count": 0,
+      "constructors_count": 0,
+      "files_count": 0,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {},
+      "file_types": {},
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    }
+  ],
+  "statistics": {
+    "total_services": 31,
+    "total_files": 348,
+    "total_loc_code": 10925,
+    "total_classes": 373,
+    "total_methods": 1093,
+    "total_constructors": 233
+  }
+}

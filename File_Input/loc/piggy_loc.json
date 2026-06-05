@@ -1,0 +1,340 @@
+{
+  "metadata": {
+    "project_path": "D:\\Users\\Desktop\\microservices\\Peggiori\\usate\\piggymetrics-fd5ee3c555ea9cd6067eacf3f2a3e8b85fe4fe77",
+    "project_name": "piggymetrics-fd5ee3c555ea9cd6067eacf3f2a3e8b85fe4fe77",
+    "extraction_timestamp": "2026-02-16T11:39:37.509377",
+    "extractor_version": "2.0.0"
+  },
+  "microservices": [
+    {
+      "name": "account-service",
+      "type": "maven",
+      "path": "account-service",
+      "loc": {
+        "total": 1164,
+        "code": 859,
+        "blank": 258,
+        "comment": 47
+      },
+      "classes_count": 23,
+      "methods_count": 79,
+      "constructors_count": 2,
+      "files_count": 22,
+      "stereotype_instances": [
+        "feign_client",
+        "component",
+        "configuration",
+        "controller",
+        "repository",
+        "service"
+      ],
+      "stereotype_counts": {
+        "feign_client": 2,
+        "component": 1,
+        "configuration": 1,
+        "controller": 2,
+        "repository": 1,
+        "service": 1
+      },
+      "languages": {
+        "java": 22
+      },
+      "file_types": {
+        ".java": 22
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://config:8888"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "auth-service",
+      "type": "maven",
+      "path": "auth-service",
+      "loc": {
+        "total": 537,
+        "code": 408,
+        "blank": 118,
+        "comment": 11
+      },
+      "classes_count": 14,
+      "methods_count": 32,
+      "constructors_count": 0,
+      "files_count": 14,
+      "stereotype_instances": [
+        "configuration",
+        "controller",
+        "repository",
+        "service"
+      ],
+      "stereotype_counts": {
+        "configuration": 2,
+        "controller": 1,
+        "repository": 1,
+        "service": 2
+      },
+      "languages": {
+        "java": 14
+      },
+      "file_types": {
+        ".java": 14
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://config:8888"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "config",
+      "type": "maven",
+      "path": "config",
+      "loc": {
+        "total": 38,
+        "code": 22,
+        "blank": 6,
+        "comment": 10
+      },
+      "classes_count": 2,
+      "methods_count": 2,
+      "constructors_count": 0,
+      "files_count": 2,
+      "stereotype_instances": [
+        "configuration"
+      ],
+      "stereotype_counts": {
+        "configuration": 1
+      },
+      "languages": {
+        "java": 2
+      },
+      "file_types": {
+        ".java": 2
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://auth-service:5000/uaa/users/current",
+        "http://auth-service:5000",
+        "http://auth-service:5000/uaa/oauth/token",
+        "https://api.exchangeratesapi.io",
+        "http://registry:8761/eureka/"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "gateway",
+      "type": "maven",
+      "path": "gateway",
+      "loc": {
+        "total": 37,
+        "code": 28,
+        "blank": 9,
+        "comment": 0
+      },
+      "classes_count": 2,
+      "methods_count": 3,
+      "constructors_count": 0,
+      "files_count": 2,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 2
+      },
+      "file_types": {
+        ".java": 2
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://config:8888"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "monitoring",
+      "type": "maven",
+      "path": "monitoring",
+      "loc": {
+        "total": 30,
+        "code": 23,
+        "blank": 7,
+        "comment": 0
+      },
+      "classes_count": 2,
+      "methods_count": 2,
+      "constructors_count": 0,
+      "files_count": 2,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 2
+      },
+      "file_types": {
+        ".java": 2
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://config:8888"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "notification-service",
+      "type": "maven",
+      "path": "notification-service",
+      "loc": {
+        "total": 1132,
+        "code": 831,
+        "blank": 258,
+        "comment": 43
+      },
+      "classes_count": 24,
+      "methods_count": 57,
+      "constructors_count": 0,
+      "files_count": 23,
+      "stereotype_instances": [
+        "configuration",
+        "feign_client",
+        "controller",
+        "repository",
+        "service",
+        "component"
+      ],
+      "stereotype_counts": {
+        "configuration": 2,
+        "feign_client": 1,
+        "controller": 1,
+        "repository": 1,
+        "service": 3,
+        "component": 2
+      },
+      "languages": {
+        "java": 23
+      },
+      "file_types": {
+        ".java": 23
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://config:8888"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "registry",
+      "type": "maven",
+      "path": "registry",
+      "loc": {
+        "total": 14,
+        "code": 11,
+        "blank": 3,
+        "comment": 0
+      },
+      "classes_count": 1,
+      "methods_count": 1,
+      "constructors_count": 0,
+      "files_count": 1,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://config:8888"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "statistics-service",
+      "type": "maven",
+      "path": "statistics-service",
+      "loc": {
+        "total": 1499,
+        "code": 1078,
+        "blank": 347,
+        "comment": 74
+      },
+      "classes_count": 31,
+      "methods_count": 94,
+      "constructors_count": 3,
+      "files_count": 29,
+      "stereotype_instances": [
+        "configuration",
+        "feign_client",
+        "component",
+        "controller",
+        "repository",
+        "service"
+      ],
+      "stereotype_counts": {
+        "configuration": 2,
+        "feign_client": 1,
+        "component": 3,
+        "controller": 1,
+        "repository": 1,
+        "service": 2
+      },
+      "languages": {
+        "java": 29
+      },
+      "file_types": {
+        ".java": 29
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://config:8888",
+        "https://api.exchangeratesapi.io"
+      ],
+      "feign_with_url": true
+    },
+    {
+      "name": "turbine-stream-service",
+      "type": "maven",
+      "path": "turbine-stream-service",
+      "loc": {
+        "total": 32,
+        "code": 25,
+        "blank": 7,
+        "comment": 0
+      },
+      "classes_count": 2,
+      "methods_count": 2,
+      "constructors_count": 0,
+      "files_count": 2,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 2
+      },
+      "file_types": {
+        ".java": 2
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://config:8888"
+      ],
+      "feign_with_url": false
+    }
+  ],
+  "statistics": {
+    "total_services": 9,
+    "total_files": 97,
+    "total_loc_code": 3285,
+    "total_classes": 101,
+    "total_methods": 272,
+    "total_constructors": 5
+  }
+}

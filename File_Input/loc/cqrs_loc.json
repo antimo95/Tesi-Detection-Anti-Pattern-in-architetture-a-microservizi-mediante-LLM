@@ -1,0 +1,263 @@
+{
+  "metadata": {
+    "project_path": "D:\\Users\\Desktop\\microservices\\Peggiori\\usate\\cqrs-microservice-sampler-master",
+    "project_name": "cqrs-microservice-sampler-master",
+    "extraction_timestamp": "2026-02-18T11:37:00.082850",
+    "extractor_version": "2.1.0"
+  },
+  "microservices": [
+    {
+      "name": "command-side",
+      "type": "gradle",
+      "path": "command-side",
+      "loc": {
+        "total": 822,
+        "code": 548,
+        "blank": 142,
+        "comment": 132
+      },
+      "classes_count": 14,
+      "methods_count": 30,
+      "constructors_count": 6,
+      "files_count": 12,
+      "stereotype_instances": [
+        "controller",
+        "configuration",
+        "component"
+      ],
+      "stereotype_counts": {
+        "controller": 2,
+        "configuration": 2,
+        "component": 1
+      },
+      "languages": {
+        "java": 12
+      },
+      "file_types": {
+        ".java": 12
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://config:8888",
+        "http://localhost:8888"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "common-things",
+      "type": "gradle",
+      "path": "common-things",
+      "loc": {
+        "total": 233,
+        "code": 168,
+        "blank": 59,
+        "comment": 6
+      },
+      "classes_count": 6,
+      "methods_count": 13,
+      "constructors_count": 9,
+      "files_count": 6,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 6
+      },
+      "file_types": {
+        ".java": 6
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "config-service",
+      "type": "gradle",
+      "path": "config-service",
+      "loc": {
+        "total": 14,
+        "code": 11,
+        "blank": 3,
+        "comment": 0
+      },
+      "classes_count": 1,
+      "methods_count": 1,
+      "constructors_count": 0,
+      "files_count": 1,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "https://github.com/benwilcock/microservice-sampler-config"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "discovery-service",
+      "type": "gradle",
+      "path": "discovery-service",
+      "loc": {
+        "total": 14,
+        "code": 11,
+        "blank": 3,
+        "comment": 0
+      },
+      "classes_count": 1,
+      "methods_count": 1,
+      "constructors_count": 0,
+      "files_count": 1,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 1
+      },
+      "file_types": {
+        ".java": 1
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "docker",
+      "type": "docker",
+      "path": "command-side\\src\\main\\docker",
+      "loc": {
+        "total": 0,
+        "code": 0,
+        "blank": 0,
+        "comment": 0
+      },
+      "classes_count": 0,
+      "methods_count": 0,
+      "constructors_count": 0,
+      "files_count": 0,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {},
+      "file_types": {},
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "gateway-service",
+      "type": "gradle",
+      "path": "gateway-service",
+      "loc": {
+        "total": 60,
+        "code": 45,
+        "blank": 12,
+        "comment": 3
+      },
+      "classes_count": 2,
+      "methods_count": 6,
+      "constructors_count": 0,
+      "files_count": 2,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 2
+      },
+      "file_types": {
+        ".java": 2
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://config:8888"
+      ],
+      "feign_with_url": false
+    },
+    {
+      "name": "integration-test",
+      "type": "gradle",
+      "path": "integration-test",
+      "loc": {
+        "total": 325,
+        "code": 249,
+        "blank": 57,
+        "comment": 19
+      },
+      "classes_count": 4,
+      "methods_count": 14,
+      "constructors_count": 0,
+      "files_count": 4,
+      "stereotype_instances": [],
+      "stereotype_counts": {},
+      "languages": {
+        "java": 4
+      },
+      "file_types": {
+        ".java": 4
+      },
+      "jpa_tables": [],
+      "datasource_url": null,
+      "hardcoded_endpoints": [],
+      "feign_with_url": false
+    },
+    {
+      "name": "query-side",
+      "type": "gradle",
+      "path": "query-side",
+      "loc": {
+        "total": 441,
+        "code": 312,
+        "blank": 94,
+        "comment": 35
+      },
+      "classes_count": 10,
+      "methods_count": 19,
+      "constructors_count": 2,
+      "files_count": 8,
+      "stereotype_instances": [
+        "controller",
+        "entity",
+        "configuration",
+        "component",
+        "repository"
+      ],
+      "stereotype_counts": {
+        "controller": 1,
+        "entity": 2,
+        "configuration": 2,
+        "component": 2,
+        "repository": 1
+      },
+      "languages": {
+        "java": 8
+      },
+      "file_types": {
+        ".java": 8
+      },
+      "jpa_tables": [
+        "Application",
+        "Product"
+      ],
+      "datasource_url": null,
+      "hardcoded_endpoints": [
+        "http://config:8888",
+        "http://localhost:8888"
+      ],
+      "feign_with_url": false
+    }
+  ],
+  "statistics": {
+    "total_services": 8,
+    "total_files": 34,
+    "total_loc_code": 1344,
+    "total_classes": 38,
+    "total_methods": 84,
+    "total_constructors": 17
+  }
+}
