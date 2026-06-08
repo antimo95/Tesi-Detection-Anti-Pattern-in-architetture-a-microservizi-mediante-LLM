@@ -1,0 +1,13 @@
+\chapter{Abstract} 
+
+Le architetture a microservizi offrono modularità, scalabilità e indipendenza di deployment, ma introducono anche una maggiore complessità architetturale e il rischio di anti-pattern difficili da individuare con tecniche tradizionali. In questo contesto, la tesi analizza il potenziale dei Large Language Models (LLM) per la detection di anti-pattern in sistemi a microservizi, valutandone sia l’efficacia autonoma sia il confronto con MARS, uno strumento state-of-the-art basato su analisi statica rule-based e metamodello.
+
+L’esperimento è stato condotto su 13 repository open-source, considerando 16 anti-pattern e tre modelli linguistici di ultima generazione: ChatGPT, Gemini e Qwen. La procedura ha previsto 624 inferenze indipendenti, realizzate mediante una pipeline che combina aggregazione della codebase con Repomix, estrazione di metriche strutturali e prompt engineering controllato. Le prestazioni sono state valutate rispetto a una ground truth manuale, utilizzando Precision, Recall e F1-score.
+
+I risultati mostrano che gli LLM ottengono buone prestazioni quando l’anti-pattern lascia tracce relativamente esplicite nella repository, come nel caso di \textit{Hardcoded Endpoint}, \textit{No API Versioning}, \textit{No CI/CD} e \textit{No API Gateway}. Le prestazioni peggiorano invece nei casi che richiedono una ricostruzione relazionale esplicita, una validazione architetturale più profonda o la combinazione di segnali quantitativi e qualitativi, come \textit{Cyclic Dependency}, \textit{Shared Libraries}, \textit{Mega-Service} e \textit{Nano-Service}. Il confronto con MARS evidenzia una forte complementarità tra i due approcci: gli LLM risultano più efficaci nei casi che richiedono flessibilità interpretativa e generalizzazione, mentre MARS prevale quando il difetto può essere ricondotto a regole deterministiche su dipendenze, configurazioni o soglie numeriche.
+
+Nel complesso, la tesi mostra che gli LLM rappresentano uno strumento promettente per l’analisi architetturale dei microservizi, ma che la loro efficacia dipende in misura significativa dalla definizione operativa degli anti-pattern, dalla qualità del prompt e dalla costruzione del contesto di input. I risultati suggeriscono infine che la direzione più promettente sia un paradigma ibrido, capace di combinare la robustezza dell’analisi statica con la flessibilità interpretativa dei modelli linguistici.
+
+
+
+

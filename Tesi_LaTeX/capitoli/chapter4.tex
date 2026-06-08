@@ -1,0 +1,315 @@
+\chapter{Strumenti e approcci alla detection degli antipattern}
+\label{sec:capitolo4}
+\section{Strumenti di Detection}
+Come discusso nei capitoli precedenti, gli antipattern compromettono diverse qualità del software e, per questo motivo, è fondamentale individuarli tempestivamente così da poter intervenire con azioni correttive adeguate. Nel contesto delle architetture a microservizi, tuttavia, la loro identificazione risulta più complessa rispetto ai sistemi monolitici, poiché molte criticità emergono non solo all'interno del singolo servizio, ma soprattutto dalle relazioni e dalle dipendenze tra servizi distinti. Per questa ragione, gli strumenti tradizionali di detection, generalmente progettati per analizzare singoli moduli o repository, non risultano pienamente efficaci nell'individuare gli anti-pattern specifici dei microservizi \cite{CernyCatalogo, MSAnose}.
+
+Per affrontare tale complessità, gli strumenti di rilevazione dedicati ai microservizi adottano tecniche di analisi statica e dinamica, con l'obiettivo di raccogliere informazioni sul sistema, rappresentarle in una forma più strutturata e applicare successivamente strategie di identificazione mirate. In questo senso, il processo di rilevazione può essere descritto, secondo \cite{CernyCatalogo}, come articolato in tre fasi principali:
+\begin{itemize}
+    \item \textbf{Fase 1}: Informazione da estrarre.
+    \item \textbf{Fase 2}: Rappresentazione intermedia.
+    \item \textbf{Fase 3}: Strategia di identificazione.
+\end{itemize}
+
+
+Durante la fase 1, vengono raccolti i dati grezzi del sistema che si intende analizzare. Tale processo può essere effettuato mediante diversi approcci, tra cui l'analisi statica e l'analisi dinamica, utilizzabili singolarmente o in combinazione \cite{CernyCatalogo}:
+\begin{itemize}
+    \item \textbf{Analisi statica}: Gli strumenti di analisi statica forniscono informazioni sul sistema senza eseguirlo; esempi diffusi sono \textbf{SonarQube} \cite{SonarQubeServerDocs} e \textbf{PMD} \cite{PMDDocumentation}. Tuttavia, tali strumenti risultano spesso orientati all'analisi di singole codebase o moduli e non sono sempre adeguati a cogliere le interazioni inter-servizio tipiche delle architetture a microservizi \cite{CernyCatalogo, MSAnose}. Per colmare questa lacuna, esistono approcci come \textbf{Code2DFD}, che automatizza l'estrazione di \textit{Data Flow Diagram} arricchiti con annotazioni rilevanti per la sicurezza dal codice sorgente di applicazioni a microservizi \cite{Code2DFD23, Static_Tool}.
+    \item \textbf{Analisi dinamica}: Si basa sull'osservazione del sistema durante la sua esecuzione, raccogliendo dati runtime come log, metriche ed execution traces. Questo approccio consente di cogliere aspetti comportamentali e interazioni tra servizi che non emergono dalla sola analisi statica. Tra le tecniche più utilizzate rientrano il monitoraggio delle metriche, l'analisi dei log e il distributed tracing; quest'ultimo, ad esempio, può essere supportato da strumenti come \textbf{OpenTelemetry} \cite{OpenTelemetryDocs}, che consentono di correlare gli eventi appartenenti alla stessa richiesta e di ricostruire i flussi di interazione tra microservizi \cite{CernyCatalogo, Bushong2021}.
+\end{itemize}
+Dopo la raccolta, i dati grezzi vengono organizzati in un modello intermedio, così da ridurne la complessità. Lo schema principale che si adotta di solito è quello a grafo \cite{CernyCatalogo}.
+Nella fase 3, si definisce una strategia opportuna per analizzare la rappresentazione intermedia e ottenere risultati con un adeguato livello di accuratezza.
+Gli approcci principali sono due: 
+\begin{itemize}
+    \item \textbf{Ragionamento tecnico automatico}: prevede l'uso di algoritmi basati ad esempio su regole per rilevare in maniera automatica gli antipattern scansionando il modello intermedio \cite{CernyCatalogo}.
+    \item \textbf{Human-in-the-loop}: riconosciuto che alcuni antipattern richiedono un giudizio contestuale difficile da automatizzare, questo approccio sottopone il modello intermedio all'analisi diretta di un esperto. L'obiettivo è fornire visualizzazioni specifiche (come le viste di Dominio, Tecnologia o Servizio) che permettano all'umano di osservare le relazioni complesse e trarre conclusioni ragionate \cite{CernyCatalogo}.
+\end{itemize}
+
+Gli strumenti principali, presenti in letteratura, che integrano tutte e 3 le fasi sono i seguenti:
+
+\begin{itemize}
+    \item \textbf{MSANose}: Il tool utilizza tecniche di analisi statica per estrarre le informazioni rilevanti e, successivamente, applica un meccanismo di aggregazione e matching per individuare gli anti‑pattern, riuscendo a coprirne complessivamente 11 con risultati soddisfacenti. \cite{MSAnose}.
+    \item \textbf{Arcan}: è un tool open-source, nella cui versione aggiornata è in grado di rilevare antipattern nelle architetture a microservizi, nello specifico può rilevare: Cyclic Dependencies (dipendenze cicliche), Hard-Coded Endpoints e Shared Persistence (persistenza condivisa) \cite{Arcan, Arcan2}.
+    \item \textbf{MARS}: è un tool in grado di rilevare un totale di 16 anti-patterns con un ottima accuratezza, basandosi per la detection sull'utilizzo di regole statiche \cite{MARS}.
+\end{itemize}
+
+Tra gli strumenti citati, il più completo e aggiornato è senza dubbio MARS, che verrà analizzato in dettaglio nella sezione successiva.
+
+\section{MARS}
+MARS è un tool progettato per superare i limiti degli approcci manuali. Vedendolo come una black-box, riceve in ingresso la repository da analizzare e fornisce in output l'elenco degli antipattern rilevati.
+Il funzionamento del tool è schematizzato in figura~\ref{fig:architettura-mars},
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]
+    {architetturaMARS.png}
+    \caption{Microservice Antipatterns Research Software \cite{MARS}}
+    \label{fig:architettura-mars}
+\end{figure}
+
+Il tool rileva un totale di 16 anti-patterns ed è stato testato dai ricercatori su un totale di 24 repository, confrontando i risultati ottenuti con una Ground Truth ottenuta mediante analisi manuale \cite{MARS}.
+MARS è uno strumento totalmente automatizzato, il cui funzionamento si divide in tre fasi logiche e sequenziali: 
+\begin{itemize}
+    \item \textbf{Input}: Lo strumento riceve in input la repository Git o semplicemente la cartella locale nella sua interezza \cite{MARS}
+    \item \textbf{Estrazione e Astrazione}: Estrapola le informazioni e le trasforma in una struttura dati standardizzati che prende il nome di \textbf{Metamodello} \cite{MARS}.
+    \item \textbf{Rilevamento}: In questa fase, entrano in gioco gli algoritmi per la detection che lavorano sui dati forniti dal metamodello applicando delle regole statiche \cite{MARS}.
+\end{itemize}
+
+Il metamodello rappresenta il nucleo dell’intero tool: consente di “tradurre” tutte le informazioni raccolte in un linguaggio unico e uniforme, semplificando così la fase di rilevazione. In questo modo il tool interagisce direttamente con il metamodello, senza dover operare sul software analizzato \cite{MARS}.
+
+Il metamodello è organizzato in diversi componenti che si occupano di immagazzinare informazioni in base al loro ambito di appartenenza:
+\begin{itemize}
+    \item \textbf{System}: È la radice dove è presente la repository nella sua interezza \cite{MARS}.
+    Il System è costituito a sua volta da due elementi:
+        \begin{itemize}
+            \item \textit{Microservices}: Rappresenta un microservizio del sistema originale.
+            \item \textit{Dependency}: Contiene le dipendenze del sistema o del singolo microservizio.
+        \end{itemize}
+    \item \textbf{Configuration}: Raccoglie i dati relativi ai file di configurazione statica \cite{MARS}.
+    \item \textbf{Environment}: Memorizza i dati relativi alle variabili di ambiente \cite{MARS}.
+    \item \textbf{Deployment}: Astrae informazioni sui file che servono a lanciare il sistema (es. Dockerfile) \cite{MARS}.
+    \item \textbf{Code}: Contiene dati relativi al codice che viene scomposto in 5 parti: source files, imports, HTTP, database, call-graph (ottenuto mediante Understand \cite{scitools_understand}) \cite{MARS}.
+\end{itemize}
+
+\subsection{Funzionamento di MARS}
+
+Il tool MARS opera secondo una logica di tipo
+\textit{rule-based} \cite{MARS}. Una volta completata la fase di estrazione e costruito il metamodello, lo strumento non effettua inferenze semantiche sul dominio
+applicativo né adotta tecniche di apprendimento automatico o analisi contestuale;
+al contrario, applica un insieme di regole deterministiche predefinite che
+mettono in relazione le informazioni raccolte con specifici criteri di
+identificazione degli anti-pattern. Il comportamento del sistema è dunque
+interamente guidato da euristiche esplicite, basate su confronti lessicali,
+soglie numeriche, controlli strutturali e verifica della presenza o assenza
+di determinati artefatti tecnici.
+
+L'architettura osservata viene
+rappresentata nel metamodello, mentre il modulo di detection confronta tale
+rappresentazione con un insieme di condizioni considerate indicative di
+potenziali criticità architetturali \cite{MARS}. Ciò rende il processo di rilevamento
+trasparente e relativamente interpretabile, poiché ogni segnalazione può
+essere ricondotta a una regola precisa e a uno specifico insieme di evidenze
+estratte dal codice o dalla configurazione del sistema.
+
+Più nel dettaglio, il funzionamento di MARS si fonda su quattro meccanismi
+principali.
+
+\begin{enumerate}
+    \item \textbf{Analisi delle dipendenze.}  
+    Una parte rilevante degli anti-pattern viene rilevata attraverso il
+    confronto tra le dipendenze dichiarate dai microservizi e insiemi di
+    dipendenze note. In questo caso MARS sfrutta le informazioni raccolte
+    dall'Extractor nel metamodello, sia a livello di singolo servizio sia a
+    livello di sistema, e verifica la presenza di librerie o framework ritenuti
+    rappresentativi di determinate pratiche architetturali. Questo meccanismo
+    è utilizzato, ad esempio, per anti-pattern quali \textit{Shared Libraries},
+    \textit{No API Gateway}, \textit{No Health Check}, \textit{Local Logging},
+    \textit{Insufficient Monitoring}, \textit{Manual Configuration} e
+    \textit{Timeouts}. Nel caso di \textit{Shared Libraries},
+    ad esempio, la regola confronta le dipendenze dei servizi e costruisce una
+    mappa inversa dipendenza$\rightarrow$servizi, scartando preliminarmente
+    quelle ritenute fisiologicamente comuni attraverso una blacklist dedicata \cite{madern2024_mars, MARS}.
+
+    \item \textbf{Liste statiche di keyword e pattern.}  
+    Un secondo meccanismo fondamentale è l'impiego di file di supporto esterni,
+    costituiti da semplici liste testuali di token, estensioni, nomi di tool,
+    pattern di file o parole chiave ricorrenti. Tali liste fungono da
+    \textit{vocabolario operativo} della detection e vengono consultate dal
+    detector durante l'applicazione delle regole. In questo senso, MARS non
+    ``comprende'' semanticamente il significato architetturale di una libreria
+    o di un file, ma riconosce corrispondenze lessicali tramite operazioni di
+    \textit{pattern matching} o confronto per sottostringa. Questo approccio è
+    impiegato, ad esempio, per identificare strumenti di
+    \textit{service discovery}, gateway, framework di configurazione centralizzata,
+    strumenti di CI/CD, librerie di monitoring o healthcheck, ma anche per
+    filtrare nomi di servizi che non devono essere considerati ai fini di alcune
+    analisi. Le liste statiche costituiscono quindi un elemento essenziale del
+    comportamento di MARS, poiché definiscono in maniera esterna e configurabile
+    il perimetro lessicale su cui si basano molte delle sue decisioni.
+    La Tabella~\ref{tab:mars-txt-files} riassume i principali file di supporto utilizzati dal sistema per implementare le regole di detection descritte \cite{madern2024_mars}.
+
+    \item \textbf{Soglie numeriche e regole quantitative.}  
+    Alcuni anti-pattern sono rilevati non in base a parole chiave o dipendenze,
+    ma tramite il confronto di metriche numeriche estratte dal sistema con soglie
+    prefissate. In questa categoria rientrano soprattutto gli anti-pattern di
+    natura dimensionale, come \textit{Nano Service} e \textit{Mega Service}.
+    MARS calcola alcune grandezze aggregate a livello di sistema, come il numero
+    totale di microservizi, le linee di codice complessive e le medie di LOC e file
+    per servizio. Tali misure vengono poi utilizzate in modo euristico nelle regole
+    di detection degli anti-pattern dimensionali: nel caso di \textit{Nano Service}
+    il confronto avviene rispetto a soglie derivate dalla media di sistema, mentre
+    per \textit{Mega Service} viene adottata una soglia fissa proporzionale al numero
+    totale di LOC del sistema. Il vantaggio di questo approccio è la sua
+    immediatezza: il rilevamento si basa su criteri quantitativi chiari e
+    riproducibili. D'altra parte, si tratta di un'impostazione fortemente
+    euristica, che non tiene conto del ruolo architetturale effettivo del servizio
+    né della sua responsabilità funzionale \cite{madern2024_mars, MARS}.
+
+    \item \textbf{Controlli diretti su file, configurazioni e artefatti di deployment.}  
+    Un ulteriore meccanismo di detection consiste nell'ispezione diretta dei file
+    presenti nel progetto. In questo caso l'Extractor individua file di
+    configurazione, file sorgente (codice applicativo), file di ambiente, Dockerfile e altri artefatti
+    rilevanti, registrandone i path nel metamodello; successivamente il detector
+    utilizza tali informazioni per verificare condizioni specifiche. Questo avviene,
+    ad esempio, nel caso di \textit{Manual Configuration}, dove vengono cercati
+    file di configurazione locali e l'assenza di strumenti di configuration management riconosciuti tramite whitelist, oppure nel caso di \textit{Multiple Services per Host}, il detector utilizza indizi indiretti di deployment, come la presenza di file \texttt{docker-compose} a livello di sistema e l'assenza di Dockerfile dedicati per i singoli servizi.
+    Analogamente, per \textit{No API Versioning} il detector apre direttamente i
+    file di configurazione e cerca pattern lessicali nel loro contenuto testuale.
+    Questo meccanismo evidenzia come MARS non si limiti a osservare metadati
+    astratti, ma utilizzi anche evidenze concrete provenienti dal filesystem e
+    dagli artefatti infrastrutturali del progetto. 
+\end{enumerate}
+
+Nel complesso, il funzionamento di MARS si basa sull'integrazione di questi
+quattro meccanismi: le dipendenze descrivono l'ecosistema tecnologico del
+servizio, le liste statiche definiscono il lessico di riferimento, le soglie
+numeriche consentono di individuare anomalie dimensionali e i controlli su file
+e configurazioni permettono di intercettare indizi infrastrutturali o
+implementativi. L'approccio risultante è semplice, spiegabile e facilmente
+estensibile, poiché nuove regole possono essere introdotte aggiungendo ulteriori
+controlli e nuove liste di supporto. Al tempo stesso, esso rimane fortemente
+dipendente dalla qualità dell'estrazione iniziale e dalla completezza dei file
+statici utilizzati come base euristica per la detection.
+
+\vspace{1em}
+\begin{table}[H]
+    \centering
+    \scriptsize
+    \renewcommand{\arraystretch}{1.2}
+    \caption{File di configurazione utilizzati da MARS per la detection degli anti-pattern.}
+    \label{tab:mars-txt-files}
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{| c | l | l | p{6.5cm} |}
+        \hline
+        \textbf{Anti-Pattern} & \textbf{File (.txt)} & \textbf{Tipo} & \textbf{Descrizione} \\ \hline
+        
+        \textbf{Nano Service} 
+        & name\_ban\_for\_nano\_services & Blacklist nomi 
+        & Lista di sottostringhe utilizzata per escludere servizi dal controllo dimensionale; se il nome contiene uno dei token, la detection del Nano Service viene ignorata. \\ \hline
+        
+        \multirow{2}{*}{\textbf{Wrong Cuts}} 
+        & web\_extensions & Whitelist estensioni 
+        & Estensioni considerate rappresentative di componenti frontend; il numero di file con tali estensioni viene confrontato con il totale per individuare servizi con forte componente di presentazione. \\ 
+        & config\_extensions & Blacklist estensioni 
+        & Estensioni escluse dal conteggio dei file perché non rappresentative della logica applicativa (es. configurazione, script o documentazione). \\ \hline
+        
+        \multirow{2}{*}{\textbf{Hardcoded Endpoints}} 
+        & tlds & Lista TLD 
+        & Lista di stringhe utilizzata per filtrare gli URL estratti dal codice; gli URL contenenti tali token vengono scartati come non rilevanti. \\ 
+        & service\_discovery & Whitelist tool 
+        & Pattern di tecnologie di service discovery utilizzati per verificare se gli endpoint sono risolti dinamicamente; la loro assenza, combinata con URL hardcoded, attiva la detection. \\ \hline
+        
+        \textbf{Shared Libraries} 
+        & not\_shared\_dependencies & Blacklist dip. 
+        & Insieme di pattern usato per escludere dipendenze comuni (framework o utility) dal confronto tra servizi durante la rilevazione di librerie condivise. \\ \hline
+        
+        \textbf{Manual Configuration} 
+        & configuration & Whitelist tool 
+        & Pattern di strumenti di configuration management utilizzati per verificare se i file di configurazione locali sono gestiti tramite sistemi centralizzati. \\ \hline
+        
+        \multirow{2}{*}{\textbf{No CI/CD}} 
+        & cicd & Whitelist tool 
+        & Pattern di strumenti CI/CD ricercati nelle dipendenze dei servizi per identificare pipeline di integrazione e distribuzione automatizzate. \\ 
+        & cicd\_folders & Whitelist cartelle 
+        & Nomi di directory tipiche di sistemi CI/CD usati per verificare la presenza di pipeline a livello di repository. \\ \hline
+        
+        \textbf{No API Gateway} 
+        & gateway & Whitelist tool 
+        & Pattern di tecnologie gateway ricercati nelle dipendenze; la loro assenza indica la mancanza di un punto di ingresso centralizzato. \\ \hline
+        
+        \textbf{Timeouts} 
+        & circuit\_breaker & Whitelist tool 
+        & Pattern di librerie di resilienza utilizzati per verificare la presenza di circuit breaker; la loro assenza, combinata con indizi di timeout nel codice, attiva la detection. \\ \hline
+        
+        \textbf{No Health Check} 
+        & healthcheck & Whitelist tool 
+        & Pattern di librerie che forniscono endpoint o meccanismi di health check; la loro assenza indica mancanza di verifica dello stato dei servizi. \\ \hline
+        
+        \textbf{Local Logging} 
+        & logging & Whitelist tool 
+        & Pattern di librerie di logging ricercati nelle dipendenze; utilizzati per determinare se esistono meccanismi di logging oltre il livello locale. \\ \hline
+        
+        \textbf{Insuff. Monitoring} 
+        & monitoring & Whitelist tool 
+        & Pattern di strumenti di monitoring e observability utilizzati per verificare la presenza di raccolta metriche e sistemi di osservabilità. \\ \hline
+    \end{tabular}%
+    }
+\end{table}
+\vspace{1em}
+
+
+\subsection{Limitazioni di MARS}
+Gli autori riconoscono che MARS presenta delle limitazioni:
+\begin{itemize}
+    \item \textbf{Dipendenze circolari}: MARS attualmente è in grado di rilevare se due microservizi dipendono l'uno dall'altro creando un ciclo chiuso (es. A chiama B, e B chiama A). Il problema nasce se il ciclo coinvolge più di 2 microservizi, in questo caso MARS non riesce a rilevarlo, presentando oggettive limitazioni della rilevazione \cite{MARS}.
+    \item  \textbf{Logging e Monitoring}: MARS analizza il solo codice scritto dagli sviluppatori e non ha accesso alle infrastrutture su cui vengono fatte girare le applicazioni (come i cluster Kubernetes). Di conseguenza, se l'azienda gestisce i sistemi di monitoraggio e di log direttamente nell'infrastruttura senza scriverli nel codice, ciò genererà dei risultati errati \cite{MARS}.
+    \item \textbf{Dimensioni}: stabilire se un servizio sia \textit{Nano} o \textit{Mega} è complesso e costringe MARS a basarsi su soglie euristiche definite a priori, che non sempre producono risultati ottimali \cite{MARS}.
+    \item \textbf{Dipendenza da liste statiche}: 
+    Come descritto in precedenza, la detection si basa fortemente su whitelist e blacklist
+    definite manualmente. Sebbene tali liste rappresentino un meccanismo efficace,
+    la loro configurazione e manutenzione risultano complesse e soggette a incompletezza,
+    con il rischio di non riconoscere tecnologie non incluse o di generare falsi positivi
+    in presenza di pattern troppo generici. 
+    \item \textbf{Assenza di analisi semantica}: MARS si basa esclusivamente su regole e confronti lessicali, senza effettuare un'analisi semantica del codice o del comportamento del sistema. Di conseguenza,
+    non è in grado di cogliere vincoli qualitativi o il reale ruolo architetturale
+    dei servizi. Alcuni anti-pattern vengono quindi rilevati tramite euristiche
+    semplificate, come nel caso di Nano e Mega Service, basati unicamente su metriche
+    quantitative.
+
+\end{itemize}
+
+In conclusione, escludendo le problematiche relative ai singoli anti-pattern, MARS si configura come uno strumento che presenta limiti di utilizzabilità e richiede competenze adeguate per una corretta configurazione.
+
+\section{Large Language Model}
+
+I \textbf{Large Language Model (LLM)} sono dei modelli linguistici su larga scala, pre-addestrati su una grande mole di dati e basati su reti neurali \cite{llm_teoria}.
+Questi modelli si basano sull'architettura \textbf{transformer}, un sofisticato framework di reti neurali che comprende un encoder e un decoder dotati di meccanismi di self-attention \cite{llm_teoria, Ghaderi2022Transformers}. Tale architettura permette agli LLM di elaborare e generare testo in modo efficiente, concentrandosi su diverse parti della sequenza di dati in input durante la fase di previsione \cite{llm_teoria, Ghaderi2022Transformers}. 
+Tra i modelli più noti al grande pubblico rientrano GPT, Gemini, Claude e Qwen. In generale, gli LLM trovano applicazione in un ampio ventaglio di compiti, che spaziano dal recupero di informazioni alla comprensione e generazione del linguaggio naturale, configurandosi come strumenti avanzati in grado di rispondere a quesiti, sintetizzare contenuti e supportare processi decisionali in diversi contesti applicativi \cite{llm_teoria}.
+Gli LLM nonostante i tanti pregi presentano alcune limitazioni: 
+\begin{itemize}
+    \item \textbf{Cut-off Date}: Gli LLM dispongono di informazioni solo fino alla data in cui sono stati addestrati e non vengono aggiornati ai dati più recenti in automatico. Pertanto, se vengono richieste informazioni successive a tale data, la precisione dell'output potrebbe essere compromessa \cite{llm_teoria}.
+    \item \textbf{Hallucinations}: Si fa riferimento ad output, che pur sembrando corretti in termini grammaticali, sono di fatto errati in termini contenutistici, portando il modello a fornire risposte fuorvianti quando non dispone della risposta corretta \cite{llm_teoria}.
+    \item \textbf{Long Training Times For Updates}: Riaddestrare il modello non è sempre una soluzione ottimale, poiché risulta essere un'attività computazionalmente onerosa.
+\end{itemize}
+Soluzioni che possono attenuare queste limitazioni sono:
+\begin{itemize}
+    \item \textbf{RAG}: La Retrival Augmented Generation è una tecnica avanzata di AI che permette di fornire al modello una base di conoscenza esterne, alla quale il modello può attingere \cite{llm_teoria}. In tal modo, il modello aggira il limite derivato dalle sue conoscenze attingendo ad un database esterno \cite{prompteng}.
+    \item \textbf{Prompt Engineering}: Come vedremo nella Sezione~\ref{sec:prompteng}, ci sono una serie di tecniche mediante le quali possiamo guidare al meglio l'output dell'IA \cite{llm_teoria}.
+    \item \textbf{Dati Contesto strutturati}: Fornire dati in ingresso ben elaborati e chiaramente formattati, può migliorare la precisione del modello.
+\end{itemize}
+
+\subsection{LLM come strumento di detection}
+Come discusso in precedenza, i Large Language Models (LLM) eccellono nell'elaborazione e nell'estrazione di informazioni da testi complessi, rendendoli candidati promettenti anche come strumenti per il rilevamento di anomalie software. Tuttavia, l'attuale stato dell'arte evidenzia come il loro impiego sia fortemente sbilanciato verso l'identificazione di code smells a livello locale. Gli studi relativi al rilevamento di veri e propri anti-pattern architetturali, specialmente in ecosistemi a microservizi, risultano essere ancora in una fase nascente. Un esempio pionieristico in questa direzione è rappresentato dallo studio preliminare relativo a MicroPAD \cite{iac_llm}: in questa ricerca, gli autori propongono un approccio basato sugli LLM per analizzare artefatti di \textit{Infrastructure-as-Code} (IaC), come file Docker o configurazioni Terraform, al fine di individuare istanze di pattern architetturali a microservizi. Sebbene tale studio sia focalizzato sull'identificazione di pattern, piuttosto che di anti-pattern, esso dimostra concretamente la fattibilità di sfruttare i modelli linguistici e i file di configurazione per estrarre conoscenza architetturale da un sistema distribuito, suggerendo possibili sviluppi futuri anche verso la detection di difetti architetturali.
+
+
+Le difficoltà nell'individuare AP architetturali sono le seguenti:
+\begin{itemize}
+    \item \textbf{Prospettiva locale vs prospettiva sistemica}: Nel caso dei \textit{code smells}, l'LLM valuta singoli moduli o porzioni di codice circoscritte. Al contrario, per individuare gli anti-pattern architetturali è necessaria una profonda comprensione del sistema nel suo complesso e delle interazioni tra i vari servizi, il che aumenta drasticamente la complessità dell'analisi.
+    \item \textbf{Gestione della Context Window}: Sebbene i modelli di ultima generazione abbiano esteso notevolmente la propria finestra di contesto (arrivando a elaborare fino a milioni di token simultaneamente), saturare questa capacità comporta ancora delle criticità. Fornire in input moli di dati troppo ampie porta spesso a un degrado qualitativo dell'output e delle capacità di ragionamento del modello \cite{contextwindows_llm}. Nello specifico, si incorre nel noto fenomeno del "\textit{Lost in the Middle}" \cite{contextwindows_llm}, per cui l'LLM tende a ignorare o a recuperare con estrema difficoltà le informazioni posizionate nella parte centrale del prompt, privilegiando i dati all'inizio e alla fine.
+     %A noi non succede mi verrebbe da dire.
+    Di conseguenza, in compiti di \textit{detection} su interi repository, tale limitazione fisiologica comporta un inevitabile abbassamento della metrica di \textit{recall}.
+
+    \item \textbf{Ambiguità interpretativa}: alcuni anti-pattern richiedono una componente interpretativa difficilmente riconducibile a sole regole quantitative. Ad esempio, nel caso di un \textit{mega-service}, non è sufficiente considerare esclusivamente il numero di LOC o di file, ma occorre valutare anche il dominio applicativo e il ruolo architetturale del servizio, che possono giustificarne o meno la dimensione.
+\end{itemize}
+
+
+
+\subsection{Prompt Engineering}
+\label{sec:prompteng}
+È una tecnica utilizzata per gli LLM, mediante la quale si utilizzano istruzioni testuali specifiche definite come \textit{"prompt"} per guidare il comportamento del modello e indirizzarlo verso la soluzione desiderata. In generale, con questo approccio possiamo evitare di modificare l'architettura interna o i parametri del modello \cite{prompteng}.
+
+Possiamo definire alcune categorie di prompt:
+\begin{itemize}
+    \item \textit{Zero-Shot Prompting}: Il modello sfrutta unicamente la descrizione del prompt e fa affidamento sulle conoscenze acquisite in fase di pre-addestramento per generare una risposta \cite{prompteng}. Di conseguenza, il prompt non avrà a disposizione esempi o dimostrazioni \cite{prompteng_github}.
+
+    \item \textit{Few-Shot Prompting}: A differenza del caso precedente, qui vengono forniti alcuni esempi pratici (input-output) all'interno del prompt per aiutare il modello a comprendere il formato e la richiesta logica \cite{prompteng}. 
+
+    Questo tipo di approccio, migliora la risposta del modello ma utilizza molti più "token". Inoltre, si può condizionare il modello con pregiudizi presenti negli esempi scelti dall'utente \cite{prompteng}.
+
+    \item \textit{Chain-of-Thought (CoT)}: Obbliga il modello a creare una catena di passaggi logici intermedi prima di fornire una risposta finale. Questo metodo aiuta il modello a superare le difficoltà nei ragionamenti complessi \cite{prompteng}.
+
+    \item \textit{Auto CoT}: Risolve il problema del tempo necessario a creare manualmente esempi logici per il CoT. Utilizza frasi come "Pensiamo passo dopo passo" per spingere il modello a creare automaticamente le catene di ragionamento \cite{prompteng}.
+\end{itemize}
+
+
+Alla luce di queste limitazioni intrinseche e della mancanza di approcci consolidati in letteratura, risulta fondamentale definire una metodologia strutturata per la preparazione dei dati e l'interrogazione dei modelli. Il Capitolo successivo illustrerà nel dettaglio l'architettura 
+
+dell'esperimento condotto in questa tesi, mostrando le strategie adottate (quali l'impiego di strumenti di aggregazione del codice e di Prompt Engineering avanzato) per mitigare le sfide appena esposte e valutare l'effettiva capacità degli LLM nel rilevamento degli anti-pattern architetturali.

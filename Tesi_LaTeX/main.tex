@@ -1,0 +1,180 @@
+\documentclass[a4paper, 14pt, oneside]{extbook}
+\usepackage[italian]{babel} %Capitoli in italiano
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{geometry}
+\usepackage{courier}
+\usepackage[bookmarks]{hyperref}
+\newgeometry{
+left=   1.5 in,
+bottom= 1.5 in,
+right=  1 in,
+top=    1 in
+}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{ragged2e}
+\usepackage{needspace}
+\usepackage{fancyhdr}
+
+% Grafica
+\usepackage{graphicx,pstricks}
+\usepackage{graphics}
+\graphicspath{{img/}}
+
+% Package usati per il frontespizio
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{patterns}
+
+\usepackage{pgf-pie}
+\usepackage{pgfplots}
+\pgfplotsset{width=7cm,compat=1.8}
+
+\usepackage{listings}
+\usepackage{tcolorbox}
+\tcbuselibrary{listings,skins,breakable}
+
+\usepackage{enumitem}
+
+
+%Aggiunte
+\usepackage{float}
+
+%Algorithm
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+\setlength\headheight{44.2pt}
+
+%Page Style
+\usepackage{setspace}
+
+%\setstretch{2.5} 
+\doublespace
+
+%\cfoot{\thepage}
+\lhead[]{}
+\rhead[]{\leftmark}
+
+\pagestyle{fancy}{
+\lhead{\includegraphics[scale=0.3]{img/logo/hlogo.png}}
+\rhead{\footnotesize{Titolo abbreviato come intestazione}}
+}
+
+%Other
+\usepackage{comment}
+\usepackage{amsmath}
+
+%Testo riempitivo
+\usepackage{lipsum}
+
+\setlength{\parindent}{0pt} % Toglie il rientro all'inizio dei paragrafi
+
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{xurl} % permette di andare a capo ovunque nell'URL
+\usepackage{mdframed}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{fvextra}
+\usepackage{tocloft}
+\usepackage{comment}
+
+% Titoli delle liste
+\renewcommand{\listfigurename}{Lista delle figure}
+\renewcommand{\listtablename}{Lista delle tabelle}
+
+% Prefisso prima del numero
+\renewcommand{\cftfigpresnum}{Figura~}
+\renewcommand{\cfttabpresnum}{Tabella~}
+
+% Spazio dopo il numero
+\renewcommand{\cftfigaftersnum}{\quad}
+\renewcommand{\cfttabaftersnum}{\quad}
+
+% Larghezza riservata a "Figura 4.1" / "Tabella 5.3"
+\setlength{\cftfignumwidth}{5.5em}
+\setlength{\cfttabnumwidth}{6.5em}
+
+% Spazio verticale tra le voci
+\setlength{\cftbeforefigskip}{8pt}
+\setlength{\cftbeforetabskip}{8pt}
+
+\newboolean{showcomments}
+\setboolean{showcomments}{true}
+\ifthenelse{\boolean{showcomments}}
+{\newcommand{\nb}[2]{
+		\fcolorbox{black}{yellow}{\bfseries\sffamily\scriptsize#1}
+		{\sf\small$\blacktriangleright$\textit{#2}$\blacktriangleleft$}
+	}
+	\newcommand{\version}{\emph{\scriptsize$-$working$-$}}
+    \newcommand{\ugh}[1]{\textcolor{red}{\uwave{#1}}} % please rephrase
+   % \newcommand{\ins}[1]{\textcolor{blue}{#1}} % please insert
+   \newcommand{\ins}[1]{\textcolor{blue}{#1}} % please insert
+   \newcommand{\del}[1]{\textcolor{red}{\st{#1}}} % please delete
+   \newcommand{\chg}[2]{\textcolor{red}{\st{#1}}{$\rightarrow$}\textcolor{blue}{\uline{#2}}} % please change
+   %\newcommand{\inspar}[1]{\color{blue}{#1}\color{blue}}
+   \newcommand{\delpar}[1]{\textcolor{red}{#1}}
+   \newcommand{\inspar}[1]{\textcolor{blue}{#1}}
+   \newcommand{\insR}[1]{\textcolor{blue}{#1}} % please insert
+   \newcommand{\delR}[1]{\textcolor{red}{\st{#1}}} % please delete
+}
+{\newcommand{\nb}[2]{}
+	\newcommand{\version}{}
+}
+
+\newcommand\marco[1]{\nb{Marco}{\color{teal}#1}}
+\newcommand\domenico[1]{\nb{Mimmo}{\color{blue}#1}}
+\newcommand\annarita[1]{\nb{Anna Rita}{\color{magenta}#1}}
+\newcommand\tiziano[1]{\nb{Domenico}{\color{green}#1}}
+\newcommand\patrizio[1]{\nb{Pasquale}{\color{red}#1}}
+
+
+
+\begin{document}
+
+%\maketitle
+\input{0_frontespizio.tex}
+\frontmatter
+
+\input{citazione.tex}
+
+\input{abstract.tex}
+
+%\input{UNINA_MSc_Thesis_Project/lista figure}
+%\input{UNINA_MSc_Thesis_Project/lista tabelle}
+
+{\setstretch{1.5}
+\tableofcontents
+}
+
+\cleardoublepage
+\listoffigures
+
+\cleardoublepage
+\listoftables
+
+\cleardoublepage
+\input{UNINA_MSc_Thesis_Project/lista abbreviazioni}
+\mainmatter
+
+\include{UNINA_MSc_Thesis_Project/capitoli/chapter1}
+\include{UNINA_MSc_Thesis_Project/capitoli/chapter2}
+\include{UNINA_MSc_Thesis_Project/capitoli/chapter3}
+\include{UNINA_MSc_Thesis_Project/capitoli/chapter4}
+\include{UNINA_MSc_Thesis_Project/capitoli/chapter5}
+\include{UNINA_MSc_Thesis_Project/capitoli/chapter6}
+
+\include{UNINA_MSc_Thesis_Project/capitoli/conclusion}
+\include{UNINA_MSc_Thesis_Project/capitoli/dedica}
+
+\bibliography{bibliography}
+\bibliographystyle{plain}
+
+\end{document}

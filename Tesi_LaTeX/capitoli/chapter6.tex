@@ -1,0 +1,835 @@
+\chapter{Risultati dell'Esperimento}
+
+
+
+%    \item \textbf{RQ1: Quanto sono efficaci gli LLM nel rilevare gli anti-pattern nelle MSA?}
+%\item \textbf{RQ2: Come si confrontano gli LLM con gli strumenti di analisi statica allo stato dell’arte per il rilevamento degli anti-pattern nelle MSA?}
+    
+
+%\section{Research Question 1}
+
+\section{Risposta alla RQ1: Quanto sono efficaci gli LLM nel rilevare gli anti-pattern nelle MSA?}
+
+Nella prima Research Question (RQ1) puntiamo a valutare l'efficacia dei Large Language Models (LLM) nella detection di anti-pattern in architetture a microservizi. L'analisi dei risultati, riportati in Tabella~\ref{tab:risultati_completi_f1_senza_mars}, mostra come le \textit{performance} dei modelli (ChatGPT, Qwen e Gemini) variano a seconda dell'anti-pattern da individuare. 
+
+Per valutare le performance dei modelli sono state usate alcune metriche: \textit{Precision}, \textit{Recall} e \textit{F1-score}. La \textit{Precision} misura la proporzione di segnalazioni corrette rispetto al totale delle segnalazioni prodotte dal modello; un basso valore di \textit{Precision} indica un numero relativamente elevato di falsi positivi. 
+
+La \textit{Recall}, invece, esprime la capacità di individuare i casi effettivamente presenti nella \textit{ground truth} \cite{metriche}; di conseguenza un valore basso di \textit{Recall} indica un'alta presenza di falsi negativi. 
+
+L'\textit{F1-score}, calcolato come media armonica tra \textit{Precision} e \textit{Recall}, fornisce una misura sintetica del compromesso tra accuratezza e copertura \cite{metriche} ed è usata in questo elaborato per facilitare i confronti tra le performance degli LLM su vari AP.
+
+\begin{itemize}
+    \item \textit{Precision}: \( \frac{TP}{TP+FP} \)
+    \item \textit{Recall}: \( \frac{TP}{TP+FN} \)
+    \item \textit{F1-score}: \( \frac{2 \cdot \mathrm{Precision} \cdot \mathrm{Recall}}{\mathrm{Precision}+\mathrm{Recall}} \)
+\end{itemize}
+
+dove \(TP\) indica i \textit{true positives}, \(FP\) i \textit{false positives} e \(FN\) i \textit{false negatives}.
+
+
+\begin{table}[htbp]
+\centering
+\renewcommand{\arraystretch}{1.2}
+\caption{Risultati comparativi: ChatGPT, Qwen e Gemini con F1-Score}
+\label{tab:risultati_completi_f1_senza_mars}
+\vspace{2mm}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l||c|c|c|c|c||c|c|c|c|c||c|c|c|c|c|}
+\hline
+\multirow{3}{*}{\textbf{Categoria}} & \multicolumn{5}{c||}{\textbf{ChatGPT}} & \multicolumn{5}{c||}{\textbf{Qwen}} & \multicolumn{5}{c|}{\textbf{Gemini}} \\ \cline{2-16}
+ & \multicolumn{2}{c|}{\textbf{Precision}} & \multicolumn{2}{c|}{\textbf{Recall}} & \multirow{2}{*}{\textbf{F1}} & \multicolumn{2}{c|}{\textbf{Precision}} & \multicolumn{2}{c|}{\textbf{Recall}} & \multirow{2}{*}{\textbf{F1}} & \multicolumn{2}{c|}{\textbf{Precision}} & \multicolumn{2}{c|}{\textbf{Recall}} & \multirow{2}{*}{\textbf{F1}} \\ \cline{2-5} \cline{7-10} \cline{12-15}
+ & \textbf{Ratio} & \textbf{\%} & \textbf{Ratio} & \textbf{\%} & & \textbf{Ratio} & \textbf{\%} & \textbf{Ratio} & \textbf{\%} & & \textbf{Ratio} & \textbf{\%} & \textbf{Ratio} & \textbf{\%} & \\ \hline
+NS    & 1/3   & 33\%  & 1/3   & 33\%  & \textbf{0.333} & 1/1   & 100\% & 1/3  & 33\%  & \textbf{0.500} & 2/7   & 29\%  & 2/3   & 67\%  & \textbf{0.400} \\ \hline
+MS    & 1/2   & 50\%  & 1/4   & 25\%  & \textbf{0.333} & 2/2   & 100\% & 2/4  & 50\%  & \textbf{0.667} & 2/3   & 67\%  & 2/4   & 50\%  & \textbf{0.571} \\ \hline
+NAV   & 10/13 & 77\%  & 10/10 & 100\% & \textbf{0.870} & 9/12  & 75\%  & 9/10 & 90\%  & \textbf{0.818} & 10/12 & 83\%  & 10/10 & 100\% & \textbf{0.909} \\ \hline
+CD    & 0/1   & 0\%   & 0/5   & 0\%   & \textbf{0.000} & 0/1   & 0\%   & 0/5  & 0\%   & \textbf{0.000} & 0/1   & 0\%   & 0/5   & 0\%   & \textbf{0.000} \\ \hline
+SP    & 1/4   & 25\%  & 1/1   & 100\% & \textbf{0.400} & 1/3   & 33\%  & 1/1  & 100\% & \textbf{0.500} & 1/2   & 50\%  & 1/1   & 100\% & \textbf{0.667} \\ \hline
+SL    & 0/1   & 0\%   & 0/2   & 0\%   & \textbf{0.000} & 0/1   & 0\%   & 0/2  & 0\%   & \textbf{0.000} & 0/3   & 0\%   & 0/2   & 0\%   & \textbf{0.000} \\ \hline
+WC    & 4/4   & 100\% & 4/5   & 80\%  & \textbf{0.889} & 1/1   & 100\% & 1/5  & 20\%  & \textbf{0.333} & 5/12  & 42\%  & 5/5   & 100\% & \textbf{0.588} \\ \hline
+HE    & 14/19 & 74\%  & 14/15 & 93\%  & \textbf{0.824} & 9/16  & 56\%  & 9/15 & 60\%  & \textbf{0.581} & 10/16 & 63\%  & 10/15 & 67\%  & \textbf{0.645} \\ \hline
+NAG   & 3/3   & 100\% & 3/5   & 60\%  & \textbf{0.750} & 4/4   & 100\% & 4/5  & 80\%  & \textbf{0.889} & 4/4   & 100\% & 4/5   & 80\%  & \textbf{0.889} \\ \hline
+TO    & 2/4   & 50\%  & 2/4   & 50\%  & \textbf{0.500} & 2/2   & 100\% & 2/4  & 50\%  & \textbf{0.667} & 2/7   & 29\%  & 2/4   & 50\%  & \textbf{0.364} \\ \hline
+NHC   & 4/6   & 67\%  & 4/6   & 67\%  & \textbf{0.667} & 2/4   & 50\%  & 2/6  & 33\%  & \textbf{0.400} & 2/2   & 100\% & 2/6   & 33\%  & \textbf{0.500} \\ \hline
+MSIPH & 3/9   & 33\%  & 3/4   & 75\%  & \textbf{0.462} & 3/6   & 50\%  & 3/4  & 75\%  & \textbf{0.600} & 3/9   & 33\%  & 3/4   & 75\%  & \textbf{0.462} \\ \hline
+NCI   & 8/8   & 100\% & 8/11  & 73\%  & \textbf{0.842} & 7/7   & 100\% & 7/11 & 64\%  & \textbf{0.778} & 8/8   & 100\% & 8/11  & 73\%  & \textbf{0.842} \\ \hline
+MC    & 5/8   & 63\%  & 5/5   & 100\% & \textbf{0.769} & 3/3   & 100\% & 3/5  & 60\%  & \textbf{0.750} & 2/2   & 100\% & 2/5   & 40\%  & \textbf{0.571} \\ \hline
+IM    & 1/1   & 100\% & 1/3   & 33\%  & \textbf{0.500} & 1/1   & 100\% & 1/3  & 33\%  & \textbf{0.500} & 1/1   & 100\% & 1/3   & 33\%  & \textbf{0.500} \\ \hline
+LL    & 1/4   & 25\%  & 1/4   & 25\%  & \textbf{0.250} & 2/8   & 25\%  & 2/4  & 50\%  & \textbf{0.333} & 2/8   & 25\%  & 2/4   & 50\%  & \textbf{0.333} \\ \hline
+\end{tabular}
+}
+\end{table}
+
+A partire dai risultati aggregati riportati in Tabella~\ref{tab:risultati_completi_f1_senza_mars}, si procede d i seguito con un'analisi per ogni AP rilevato.
+
+\subsubsection*{Analisi di dettaglio per Anti-Pattern}
+
+\begin{itemize}
+    
+    % CHECK 
+    % Non li ho definiti Few Shot ma di fatto abbiamo comunque un prompt meglio costruito dal punto di vista del contenuto del contesto da usare come base di conoscenza a cui attingere 
+    % Ricordiamoci che abbiamo dei prompt ancorati alla definizione e agli esempi 
+    \item \textbf{Hardcoded Endpoint (HE):} Risulta uno degli anti-pattern più rilevabili e meglio gestiti dai modelli. ChatGPT ottiene le \textit{performance} migliori attestandosi su una F1 pari a 0.824, una ottima Recall del (93\%) e una buona Precision del (74\%). Qwen e Gemini si attestano su F1-score inferiori (0.581 e 0.645), ottenendo performance più moderate rispetto a ChatGPT.
+
+    È importante sottolineare come nei test preliminari una costruzione del prompt \textit{zero-shot} più semplice dal punto di vista degli esempi forniti, provocava dei risultati più instabili generando di fatto molti falsi-positivi; per questo motivo si è poi passati ad una versione contenente un maggior numero di esempi con indicatori osservabili concreti e di regole. 
+    Gli esempi servivano a fornire al modello maggiori informazioni in termini di contesto mentre le regole servivano a limitare la sua azione e a restringere di conseguenza il dominio di riferimento, portando di conseguenza ad una riduzione dei falsi-positivi.
+
+    La causa principale è da ricercare nella varietà di forme e di eccezioni che presenta l'AP. L'anti-pattern può manifestarsi mediante differenti forme sintattiche: URL completi hardcodati, IP a porte esplicite, valori di default concreti nelle variabili d'ambiente e così via. Questa grande varietà rende il confine dell'AP più complesso da interpretare. Di conseguenza, il modello riusciva a intuire indizi sintattici ma non riusciva a comprendere se potessero essere casi realmente accettabili oppure no.
+    
+    Rientrano nei casi limite e non considerabili, ad esempio, endpoint presenti esclusivamente nei file di test, URL dichiarati nella documentazione API (\textit{Swagger/OpenAPI}), placeholder privi di valore concreto nel repository (come riferimenti del tipo \texttt{\$\{ORDERS\_URL\}}), oppure endpoint associati a componenti infrastrutturali quali database, broker di messaggistica, sistemi di monitoring o discovery service. Si tratta quindi di configurazioni sintatticamente simili a un caso di \textit{Hardcoded Endpoint}, ma che non soddisfano la definizione operativa adottata nell'esperimento, poiché non introducono necessariamente un accoppiamento rigido tra microservizi applicativi.
+
+    In definitiva, l'introduzione di esempi  e l'aggiunta di alcune regole nel \textit{prompt} ha consentito di aiutare il modello a definire dei confini più rigidi per quanto concerne la detection, fornendogli di fatto un contesto informativo maggiormente dettagliato che lo ha aiutato a indicare le vere istanze di AP.
+    
+    % CHECK 
+    % NOTA: Valgono un pò le assunzioni fatte negli scorsi mesi ma resta di fatto molto solido 
+    \item \textbf{No API Versioning (NAV):} È una delle categorie migliori per quanto concerne i risultati ottenuti dagli LLM. Gemini arriva ad un F1 di 0.909, seguito poi da ChatGPT (0.870) e Qwen (0.818). I modelli riescono a rilevare senza grossi problemi l'assenza di versionamento, individuando anzitutto le REST API esposte dai microservizi per poi in termini lessicali controllarne il versionamento.
+
+    Di seguito si riportano due esempi dove viene mostrato la presenza e l'assenza di versionamento:
+    \begin{tcolorbox}[title=Esempio di NO API VERSIONING,
+                  colback=red!5!white,
+                  colframe=red!50!black,
+                  breakable]
+GET /orders
+{
+  "id": 1001,
+  "total": 49.90
+}
+\end{tcolorbox}
+
+\begin{tcolorbox}[title=Esempio di API VERSIONING,
+                  colback=green!5!white,
+                  colframe=green!50!black,
+                  breakable]
+GET /v1/orders
+{
+  "id": 1001,
+  "total": 49.90
+}
+\end{tcolorbox}
+
+
+    %Guardare qualche risultato positivo per capire meglio come opera il modello migliore
+    \item \textbf{Wrong Cuts (WC):} ChatGPT ottiene delle ottime performance con un F1 di 0.889, con una Precision del (100\%) e un Recall dell'80\%. Qwen, al contrario, presenta performance peggiori (Recall 20\%, F1 = 0.333), mentre Gemini si posiziona nel mezzo con un F1-score di (0.588\%). I modelli più efficaci sembrano riuscire a cogliere segnali coerenti con una decomposizione per layer tecnici, soprattutto quando emerge in modo esplicito dai nomi dei servizi, dagli artefatti di deployment e dall’organizzazione complessiva della repository.
+    
+
+    % CHECK
+    % NOTA: Esplicitate alcune problematiche di compresione (si suppone) del modello
+    \item \textbf{Cyclic Dependency (CD):} Questo anti-pattern rappresenta uno dei casi più complessi per tutti gli LLM analizzati, nel contesto dell'esperimento eseguito. Precision e Recall sono pari a 0\% per ChatGPT, Qwen e Gemini, con F1-score nullo in tutti i casi. Guardando più nello specifico il rapporto sulla Precision, abbiamo anche un falso-positivo. 
+   
+    Il limite sembra dato dalla difficoltà del ricostruire in maniera completa e precisa il grafo delle dipendenze o i cicli di chiamata complessi mediante la semplice lettura del codice pacchettizzato mediante repomix. 
+
+    L’analisi dei casi errati fa intuire inoltre che questa difficoltà sia accentuata dalla definizione riportata nel prompt, che definisce l’anti-pattern come una \textit{cyclic chain of calls} tra servizi che dipendono direttamente o indirettamente l’uno dall’altro, ma non fornisce a conti fatti indicazione operative sufficienti a guidare il modello nella detection, il modello tende infatti a considerare sufficiente uno scambio reciproco di messaggi o eventi tra due servizi per inferire la presenza di un ciclo. Nei falsi negativi, al contrario, adotta una lettura molto più restrittiva e richiede una prova esplicita della chiusura del ciclo, come una relazione del tipo A $\rightarrow$ B $\rightarrow$ A.
+
+    In generale, quindi, con questo assetto del prompt gli LLM non sembrano riuscire a identificare in modo affidabile i segnali necessari per rilevare correttamente l’anti-pattern. È plausibile che una maggiore esplicitazione operativa del concetto di \textit{cyclic chain of calls}, accompagnata da esempi concreti di evidenze osservabili nei repository, possa migliorare la capacità del modello di riconoscere le effettive dipendenze cicliche.
+
+    Infine, non è da escludere che il contenuto della codebase pacchettizzato mediante repomix, possa essere non semplice da analizzare per il modello che deve comunque ricostruire in maniera precisa tutte le relazioni tra i vari moduli, di conseguenza un input molto rumoroso potrebbe creare problemi. Potrebbe essere una soluzione seguire un approccio come quello di MARS e fornire in input direttamente il grafo delle dipendenze o delle chiamate mediante tool come \textit{Undestand}. 
+
+    % CHECK 
+    % NOTA: Va controllato il GT indubbiamente però restano delle criticità che sono state affrontate dando qualche esempio extra anche se non siamo ai livelli di HE
+    \item \textbf{Shared Libraries (SL):} Questo è uno degli AP più critici analizzati, insieme a \textit{Cyclic Dependency}. I nostri risultati per Precision, Recall e F1-score restano fermi allo 0\%. A differenza di \textit{Cyclic Dependency}, il problema non è tanto ricostruire strutture complesse, ma capire se una libreria condivisa contenga davvero logica di business o funzionalità di dominio. Non basta individuare il modulo che è usato da più servizi: bisogna capire se si tratti di codice applicativo condiviso oppure di semplici utility tecniche, DTO o contratti API. Infatti, se ci basassimo solo sulla condivisione del modulo, come requisito, da parte dei servizi, ci ritroveremmo ad avere molti falsi-positivi.
+    
+    Durante i test preliminari, i modelli tendevano a fare un \textit{matching lessicale}, associando nomi di moduli come \texttt{common}, \texttt{shared}, \texttt{core} o \texttt{domain} alla presenza effettiva dell'AP, tale riscontro non veniva interpretato come un indizio da utilizzare in combinazione ad altri artefatti ma come un indizio che da solo poteva dimostrare la presenza dell'AP.
+
+    In queste situazioni, quindi, il modello sfruttava il \textit{matching lessicale} per inferire il ruolo della libreria. Si è quindi reso il \textit{prompt} più preciso, aggiungendo alcuni esempi per impedirgli di giungere a conclusioni sbagliate, ma nonostante la diminuzione dei falsi-positivi non si è riuscito a ottenere dei buoni risultati per quanto riguarda la detection. 
+
+    Da questi risultati, si può dedurre, che il problema non era solo associabile al nome dei moduli ma anche alla capacità del modello di comprendere se il contenuto condiviso rappresentasse realmente una violazione tra servizi.
+
+    
+    Va inoltre precisato che per \textit{Shared Libraries}, il GT presenta soltanto due casi positivi associati entrambi alla stessa repository, rendendo di fatto i risultati ottenuti statisticamente poco rilevanti ai fini di identificare un reale problema o comportamento anomalo da parte dei modelli. 
+
+
+
+    % Controllare meglio alcune cose ma resta un anti-pattern che viene un pò invalidato dal GT attualmente 
+    \item \textbf{Shared Persistency (SP):} Gli LLM mostrano uno sbilanciamento marcato tra Recall e Precision. Tutti ottengono il 100\% di Recall, riuscendo a intercettare segnali compatibili con elementi di persistenza condivisa, come stringhe di connessione simili, credenziali comuni o riferimenti convergenti allo stesso database. Tuttavia, la Precision rimane bassa (25\% per ChatGPT, 33\% per Qwen e 50\% Gemini), segnalando una tendenza a sovrastimare gli AP.
+
+    L'analisi dei casi errati mostra che i falsi positivi dipendono soprattutto dal fatto che gli LLM trattano come evidenza sufficiente la presenza di più microservizi collegati allo stesso database service, schema o datasource. In pratica, il modello tende a seguire una logica del tipo: ``stesso database $\rightarrow$ shared persistency presente''. Tale inferenza è in linea con la definizione del prompt ma forse risulta essere poco restrittiva. 
+
+    In generale quindi, si potrebbe concludere che si potrebbe esplicitare una condizione più stretta per quanto concerne la definizione nel \textit{prompt} in iterazioni successive, poiché in quella attuale la condizione più stretta (condividere le stesse tabelle e non solo lo stesso database) risulta essere accessoria.
+    Specificando che, l'AP risulta comunque essere interpretabile e bisognerebbe capire quanto gli autori del GT sono stati severi nel rilevare l'AP.
+    
+    Infine, come nel caso di \textit{Shared Libraries}, anche qui la numerosità dei campioni è troppo ridotta per valutare in modo robusto il comportamento del modello, poiché il dataset presenta un solo caso positivo.
+    
+
+    % CHECK 
+    % Valgono tutte le cose dette gli scorsi mesi sulle difficoltà nel capire cosa è realmente mega o nano
+    \item \textbf{Mega-Service (MS) e Nano-Service (NS):} Nonostante nel \textit{prompt} venissero fornite metriche quantitative di supporto (come le Linee di Codice o il numero di files), gli LLM mostrano difficoltà nel comprendere quanto un servizio è "troppo grande" e quando "troppo piccolo". Su \textit{MS} i risultati oscillano tra F1 = 0.333 (ChatGPT) e F1 = 0.667 (Qwen), mentre su \textit{NS} le prestazioni sono ancora più basse (massimo F1 = 0.500 per Qwen). 
+
+    L’individuazione di questi anti-pattern richiede infatti l’incrocio di misurazioni quantitative (ad esempio LOC) con valutazioni qualitative, come la coerenza delle responsabilità del servizio o la sua coesione funzionale. Questo aspetto complica la detection, specialmente considerando la precisa scelta metodologica di non fornire al modello soglie numeriche fisse, costringendo l’LLM a dedurre dinamicamente che soglia usare in base alle dimensioni dell'architettura analizzata.
+    
+    Nel caso di \textit{Mega-Service}, i \textit{rationale} prodotti dai modelli ci mostrano che i valori parametri quantitativi viene considerato correttamente. Ad esempio, ChatGPT ha riconosciuto che \textit{apollo-portal} è il servizio, in termini di LOC, più grande, ma non lo classifica come anti-pattern poiché, non riesce a ricavare evidenze sugli aspetti qualitativi richiesti dall'AP e questo comporta un risultato di \textit{ABSENT}. Si torna, quindi al discorso di quanto il modello sia in grado di comprendere se un servizio è "troppo grande" o "troppo piccolo".
+    
+    A differenza del \textit{Wrong Cuts} (WC) la cui rilevazione si basa prevalentemente su segnali semantici e sintattici osservabili nella struttura del repository, i casi di \textit{Mega-Service} e \textit{Nano-Service} presentano una natura ibrida e multidimensionale.
+
+    %Ricontrollare
+    \item \textbf{No CI/CD (NCI):} I modelli ottengono risultati nel complesso elevati e piuttosto stabili. ChatGPT e Gemini raggiungono un F1-score pari a 0.842, con Precision del 100\% e Recall del 73\%, mentre Qwen arriva ad F1 pari a 0.778, mantenendo anch'esso Precision perfetta ma con Recall leggermente inferiore (64\%). Queste performance suggeriscono che i modelli riescano a escludere in modo affidabile l’anti-pattern quando la repository contiene segnali repository-level abbastanza espliciti di CI/CD, come workflow automatizzati, configurazioni di build, release automation o publishing di immagini Docker.
+
+    L’analisi dei casi errati mostra due dinamiche distinte. In alcuni casi, il modello conclude per l’assenza dell’anti-pattern sulla base della presenza di artefatti repository-level interpretati come evidenza sufficiente di CI/CD, come file di workflow, configurazioni di build automatizzata, release automation o publishing di immagini Docker. In questi casi, l’errore non deriva da una mancanza di evidenze, bensì dal fatto che il modello considera tali segnali sufficienti per escludere \textit{No CI/CD}.
+    
+    In altri casi, invece, il modello adotta una lettura più restrittiva e restituisce \textbf{ABSENT} sostenendo che, dal solo contenuto della repository, non sia possibile dimostrare con certezza che CI/CD non venga usato, poiché eventuali pipeline potrebbero trovarsi al di fuori degli artefatti osservati. Questa tendenza è coerente con quelli che sono i vincoli imposti dal prompt, che impediscono di indicare \textit{PRESENTE} in assenza di evidenze accettabili e verificabili. 
+    
+    Si precisa, infine, che è uno degli AP che ha beneficiato positivamente del cambio di definizione, rendendo la detection più accurata e riducendo falsi positivi e falsi negativi.
+
+    % CHECK
+    % Alcune osservazioni erano già evidenti in fase di esecuzione degli esperimenti quindi non c'è molto da aggiungere anche guardando i risultati nuovamente 
+    \item \textbf{No API Gateway (NAG):} I modelli mostrano performance molto buone su questo anti-pattern. Qwen e Gemini raggiungono i risultati migliori, con F1 = 0.889, Precision del 100\% e Recall dell'80\%, mentre ChatGPT arriva ad un F1 di 0.750. I risultati indicano che gli LLM riescono generalmente a riconoscere l'assenza di un API gateway quando essa emerge in modo abbastanza chiaro dagli artefatti della repository.
+
+    I falsi negativi osservati dipendono soprattutto dal modo in cui il prompt definisce l'anti-pattern. La definizione, infatti, non richiede solo l'assenza di un gateway, ma insiste anche sul fatto che i client debbano chiamare direttamente i microservizi. Di conseguenza, quando il modello trova un unico punto di ingresso pubblico, un frontend esposto verso l'esterno oppure un componente con funzioni di routing, tende a concludere che il difetto non sia presente o comunque non sia dimostrabile.
+    
+    Un esempio significativo è rappresentato dai casi in cui il modello osserva che solo il servizio \textit{webui} è pubblicato verso l'esterno, mentre gli altri servizi restano esposti solo internamente. In una situazione di questo tipo, l'LLM tende a interpretare la \textit{webui} come evidenza sufficiente di un punto di accesso centralizzato, escludendo così l'anti-pattern. Tuttavia, la presenza di un unico frontend pubblico non coincide necessariamente con l'esistenza di un vero API gateway dedicato.
+    Bisogna specificare, che la definizione porta il modello a ragionare in questo modo, quindi anche in questo caso migliorando la definizione a cui è ancorata il prompt, si potrebbero risolvere alcuni di questi falsi-negativi.
+
+
+
+    \item \textbf{No Health Check (NHC):} L'analisi dei risultati mostra che questo anti-pattern richiede di stabilire se i microservizi siano effettivamente sottoposti a controlli periodici di health checking. I modelli tendono quindi a cercare indicatori espliciti, come direttive \texttt{HEALTHCHECK}, sezioni \texttt{healthcheck}, probe Kubernetes, endpoint Actuator o configurazioni di monitoring. Quando sono presenti descrittori di deployment o runtime che avviano i servizi senza alcun meccanismo di health check, i modelli possono concludere correttamente che l'anti-pattern sia presente. In altri casi, invece, la sola assenza di tali configurazioni nei file disponibili non è sufficiente a dimostrare che i servizi non siano controllati periodicamente, portando i modelli a rispondere \textbf{ABSENT}.
+
+    La detection è quindi resa complessa dal fatto che l'anti-pattern dipende spesso dall'assenza di un meccanismo osservabile, più che dalla presenza di un indicatore positivo. Questo aspetto entra inoltre in tensione con il prompt sperimentale, che richiede di rispondere \textbf{ABSENT} quando non vi sono evidenze sufficienti a supporto della classificazione. In un anti-pattern basato sull'assenza di health checking, tale vincolo può favorire falsi negativi quando gli artefatti disponibili non permettono di verificare in modo esplicito il comportamento operativo del sistema.
+
+
+    Si precisa, infine, che è uno degli AP che ha beneficiato positivamente, durante i test preliminari, del cambio di definizione rendendo la detection più accurata, riducendo falsi positivi e falsi negativi. 
+
+    \begin{tcolorbox}[
+    title=\textbf{Indicatori tipici per escludere il No Health Check},
+    colback=blue!3!white,
+    colframe=blue!55!black,
+    coltitle=white,
+    fonttitle=\bfseries,
+    enhanced,
+    breakable,
+    arc=2mm,
+    boxrule=0.8pt
+]
+
+I modelli tendono a escludere l'anti-pattern quando trovano segnali espliciti di controllo dello stato dei servizi:
+
+\vspace{2mm}
+
+\begin{itemize}[leftmargin=*]
+    \item endpoint come \texttt{/health}, \texttt{/actuator/health}, \texttt{/ready} o \texttt{/readiness};
+    \item dipendenze come \texttt{spring-boot-starter-actuator};
+    \item classi o interfacce come \texttt{HealthIndicator};
+    \item \textit{liveness probe}, \textit{readiness probe} o \texttt{healthcheck} nei file di deployment.
+\end{itemize}
+
+\end{tcolorbox}
+
+    % CHECK 
+    % Rileggerlo 
+   \item \textbf{Timeouts (TO):} I risultati ottenuti su questo anti-pattern sono intermedi e piuttosto variabili tra i modelli. Qwen, tra i tre modelli, raggiunge le performance migliore con una F1 pari a 0.667, grazie a una Precision del 100\% ma con Recall limitata al 50\%. ChatGPT si colloca nel mezzo con una F1 di 0.500, mentre Gemini mosta estreme difficoltà con un F1 che crolla a 0.364, soprattutto per via di una Precision molto bassa (29\%).
+
+    L’analisi  dei casi errati suggerisce che, in questo caso, il problema non sia tanto trovare valori numerici associati a timeout hard-coded, quanto stabilire se tali configurazioni debbano davvero essere considerate manifestazioni dell’anti-pattern poiché ad esempio il timeout configurato su componenti come il gateway, Ribbon o Zuul può essere visto come una configurazione accettabile se accompagna da meccanismi di resilienza come Hystrix.
+    
+    Inoltre, si specifica che questo è uno di quei casi dove può palesarsi una discrepanza con il GT dovuta ad ipotetici errori o ambiguità in quest'ultimo.
+    
+    Infine, questo è uno degli anti-pattern che, durante i test preliminari, ha beneficiato positivamente della revisione della definizione, con un miglioramento della detection e una riduzione degli errori.
+
+    \begin{tcolorbox}[
+    title=\textbf{Indicatori tipici per rilevare l'anti-pattern Timeout},
+    colback=blue!3!white,
+    colframe=blue!55!black,
+    coltitle=white,
+    fonttitle=\bfseries,
+    enhanced,
+    breakable,
+    arc=2mm,
+    boxrule=0.8pt
+]
+
+I modelli tendono a segnalare l'anti-pattern quando trovano valori o configurazioni esplicite di timeout applicate alle chiamate tra microservizi:
+
+\vspace{2mm}
+
+\begin{itemize}[leftmargin=*]
+    \item configurazioni con valori fissi di timeout, ad esempio \texttt{timeout}, \texttt{connectTimeout}, \texttt{readTimeout} o \texttt{ReadTimeout};
+    \item configurazioni di retry o timeout nelle chiamate HTTP/RPC tra servizi;
+    \item script o wrapper di deployment che attendono una connessione per un tempo massimo, ad esempio con opzioni come \texttt{--timeout}.
+\end{itemize}
+
+\end{tcolorbox}
+
+    % CHECK 
+    % NOTA: I meccanismi di aggregazione esterna sono un elemento non valutato inizialmente 
+    \item \textbf{Local Logging (LL):}  Questo è un anti-pattern complesso da rilevare per tutti gli LLM. Le performance sono ottimali per tutti e tre i modelli. ChatGPT ottiene F1 = 0.250, mentre Qwen e Gemini raggiungono entrambi un F1 pari a 0.333. In tutti i casi la Precision rimane bassa (25\%) e anche il Recall non supera il 50\%.
+
+    L'analisi dei casi errati mostra che il problema principale risiede nell'ambiguità della definizione operativa. I modelli riescono generalmente a riconoscere segnali di logging locale o per-servizio, come file \texttt{logback.xml} separati, path locali di scrittura dei log o configurazioni dedicate per i singoli microservizi. Tuttavia, le evidenze di logging non bastano effettivamente a dimostrare che poi non esista un meccanismo di aggregazione e di analisi centralizzata. 
+    
+    Il problema è che i meccanismi di aggregazione non sono sempre individuabili all'interno della codebase e questo aspetto complica di conseguenza la detection dell'AP.
+
+    Si precisa, infine, che è uno degli AP che ha beneficiato positivamente del cambio definizione rendendo la detection più accurata, riducendo falsi positivi e falsi negativi.
+
+    \begin{tcolorbox}[
+    title=\textbf{Indicatori tipici per rilevare il Local Logging},
+    colback=blue!3!white,
+    colframe=blue!55!black,
+    coltitle=white,
+    fonttitle=\bfseries,
+    enhanced,
+    breakable,
+    arc=2mm,
+    boxrule=0.8pt
+]
+
+I modelli tendono a segnalare l'anti-pattern quando trovano evidenze esplicite di log scritti localmente dai singoli microservizi:
+
+\vspace{2mm}
+
+\begin{itemize}[leftmargin=*]
+    \item configurazioni con \textit{file appender} in \texttt{logback.xml}, \texttt{log4j.xml} o file simili;
+    \item proprietà come \texttt{logging.file}, \texttt{logging.file.name}, \texttt{logging.path} o \texttt{logging.file.path};
+    \item percorsi locali di scrittura dei log, ad esempio \texttt{/logs}, \texttt{/var/log}, \texttt{/opt/logs} o file \texttt{*.log};
+    \item assenza di evidenze di raccolta o aggregazione centralizzata dei log.
+\end{itemize}
+
+\end{tcolorbox}
+
+    \item \textbf{Insufficient Monitoring (IM):} I modelli mostrano in tutti e tre i casi le stesse performance. Si ottiene una Precision del 100\%, una Recall del 33\% e infine un F1 di 0.500. Questi dati ci mostrano un comportamento dei modelli molto conservativo: quando viene indicato un AP, vi è certezza che non sia errato ma in ogni caso si copre solo un sottoinsieme dei casi positivi rilevabili. 
+
+    L'analisi dei casi errati mostra che i falsi negativi dipendono soprattutto dal fatto che gli LLM attribuiscono un peso eccessivo alla presenza di strumenti o dipendenze riconducibili al monitoring. In pratica, il modello sembra seguire una logica del tipo: ``se nella repository compare almeno una libreria di observability, allora il sistema è monitorato''. Questa inferenza risulta però troppo forte, perché estende un indizio locale o parziale all'intera architettura.
+    
+    Un esempio significativo è rappresentato dai casi in cui il modello considera sufficiente la presenza di 
+    
+    \texttt{spring-boot-starter-actuator} in un singolo microservizio, come \textit{beer-catalog}, per concludere che il sistema non soffra di \textit{Insufficient Monitoring}. Tuttavia, la presenza di Actuator in un solo servizio non dimostra che performance e failure siano davvero tracciate in modo globale, coerente ed efficace per tutti i microservizi del sistema.
+    
+    Per questo motivo, gli LLM tendono a sottostimare \textit{Insufficient Monitoring}: colgono correttamente segnali tecnici plausibili, ma li trattano troppo facilmente come prova dell'assenza dell'AP, anche quando il monitoring osservato potrebbe essere soltanto parziale, locale o incompleto.
+
+    Bisogna comunque specificare che anche in questo caso, come accadeva per \textit{local logging} con il meccanismo di aggregazione, il tool di monitoraggio può essere esterno alla codebase e quindi non facilmente individuabile mediante gli indizi presenti.
+    
+    % CHECK: Rileggi 
+    \item \textbf{Manual Configuration (MC):} Le prestazioni risultano complessivamente buone, soprattutto per ChatGPT, che raggiunge F1 = 0.769 con Recall del 100\% e Precision del 63\%. Qwen si colloca su valori molto vicini (F1 = 0.750), mentre Gemini mostra una copertura più limitata (F1 = 0.571).
+    
+    L'analisi dei casi esaminati suggerisce che \textit{Manual Configuration} sia un anti-pattern relativamente accessibile agli LLM, poiché tende a manifestarsi attraverso segnali espliciti e facilmente osservabili nella repository: file \texttt{application.yml} o \texttt{bootstrap.yml} per singolo servizio, host e porte hardcodati, URL locali di infrastruttura e, in alcuni casi, configurazioni inserite direttamente nel codice.
+    Nei casi di vero positivo, la detection risultava essere corretta poiché il modello individuava un insieme sufficiente di artefatti che permettevano di giustificare il risultato positivo dell'analisi. 
+    Nei casi di falso positivo, invece, il modello tende a trattare come evidenza sufficiente anche un numero ristretto di artefatti, talvolta isolati o solo parzialmente informativi, che mostrano la presenza di configurazione concreta nel codice o nei file di servizio, ma non bastano sempre a dimostrare in modo pieno la presenza dell'anti-pattern.
+
+    Nel complesso, i risultati suggeriscono quindi che i modelli riescano a riconoscere bene i segnali osservabili associati a \textit{Manual Configuration}, ma tendano talvolta ad adottare una soglia troppo ampia nel classificare tali segnali come prova sufficiente dell’anti-pattern.
+
+    % CHECK
+    % NOTE: tiene proprio problemi a individuare gli indizi giusti a partire dagli artefatti sempre se il GT è giusto
+    \item \textbf{Multiple Service Instances Per Host (MSIPH):} I modelli mostrano risultati medi. Qwen ottiene il miglior F1-score (0.600), mentre ChatGPT e Gemini si fermano a 0.462. In tutti e tre i casi il Recall è pari al 75\%, ma la Precision resta contenuta, segnalando una tendenza a sovrastimare il difetto.
+
+    L'analisi qualitativa dei casi errati mostra che \textit{MSIPH} è un anti-pattern difficile da valutare in modo univoco a partire dai soli artefatti statici della repository. La definizione richiede infatti di dimostrare che più istanze di microservizi siano effettivamente deployate sullo stesso host, mentre negli artefatti questa condizione emerge solo indirettamente, attraverso indizi di deployment condiviso, come immagini aggregate, launcher unici o script centralizzati.
+    
+    In alcuni casi il modello adotta una lettura troppo permissiva e considera sufficienti indizi indiretti, come a esempio gli artefatti di deployment condiviso; in altri casi adotta invece una lettura troppo restrittiva e richiede una prova esplicita della co-locazione nello stesso container, VM o processo.
+    
+    Nel complesso, gli LLM non riescono a interpretare gli indizi di deployment in modo sempre coerente, né a stabilire con affidabilità quando essi siano sufficienti per concludere la presenza dell’anti-pattern.
+
+    Si precisa, infine, che è uno degli AP che ha beneficiato positivamente, durante i test preliminari, del cambio di definizione rendendo la detection più accurata, riducendo falsi positivi e falsi negativi. 
+   
+
+
+\end{itemize}
+    
+
+\subsubsection*{Nota interpretativa sui limiti del contesto fornito}
+
+Oltre alle problematiche emerse dall'analisi dei singoli AP in termini di detection, bisogna considerare un ulteriore problematica relativa ai modelli. In alcuni casi, gli errori osservati potrebbero non dipendere esclusivamente da problemi citati in precedenza (limiti nella definizione, nel prompt o mancanza di evidenze nella codebase) ma anche alle capacità del modello di analizzare correttamente l'input che può essere particolarmente grande, eterogeneo e anche potenzialmente rumoroso. 
+
+Di conseguenza, aspetti come la \textbf{capacità} del modello e la \textbf{qualità dell'input} sono comunque fattori da tenere in considerazione nel valutare il comportamento degli LLM.
+
+\subsubsection*{Nota sulla ground truth}
+
+Un ulteriore aspetto da considerare riguarda la ground truth adottata per la valutazione. Sebbene essa venga assunta come riferimento sperimentale, alcuni casi possono presentare margini di ambiguità interpretativa, soprattutto per anti-pattern la cui definizione dipende da soglie qualitative, da evidenze indirette o da aspetti non sempre pienamente osservabili negli artefatti della repository.
+
+In alcuni casi, la presenza di falsi positivi ricorrenti tra modelli diversi sulla stessa repository suggerisce che gli artefatti disponibili possano supportare interpretazioni differenti rispetto alla classificazione adottata nel riferimento. Questo non implica necessariamente un errore della ground truth, ma indica che alcune discrepanze tra modello e riferimento potrebbero derivare anche da differenze interpretative nella delimitazione dell'anti-pattern.
+
+Questa cautela risulta particolarmente rilevante per anti-pattern come \textit{Shared Libraries}, \textit{Shared Persistency}, \textit{Multiple Service Instances Per Host} e \textit{Local Logging}. 
+
+
+\vspace{1em}
+\subsubsection*{Nota sulle Repository di Grandi Dimensioni (> 400k Token)}
+Poiché i test sono stati condotti tramite l’interfaccia \textit{WebUI}, non è possibile osservare direttamente le modalità con cui OpenAI gestisce prompt di dimensioni eccedenti la finestra di contesto dichiarata. In particolare, non è noto se venga applicato un troncamento del testo, oppure se siano impiegati meccanismi interni di selezione, compressione o recupero dinamico delle informazioni.
+
+Si potrebbe ipotizzare un calo delle performance per quanto concerne tale modello nelle repositories che sforano la finestra di contesto. Tuttavia, l'analisi non conferma queste aspettative: come mostrato in Tabella~\ref{tab:large_repos_comparison_full}, i risultati dei tre modelli sono pressoché allineati, suggerendo che nel setup sperimentale attuale, le eventuali limitazioni legate alla gestione della finestra di contesto non risultino essere un fattore determinante per i risultati ottenuti. 
+
+L’unico caso in cui emerge una differenza riguarda l’individuazione di alcuni \textit{Hardcoded Endpoint} in \textit{LakesideMutual}, non rilevati da ChatGPT. Una possibile interpretazione è che tali informazioni, essendo localizzate e poco rilevanti, non siano state preservate o recuperate efficacemente dai meccanismi interni di gestione del contesto. Tuttavia, questa rimane un’ipotesi non verificabile direttamente nel presente studio.
+
+
+\vspace{1em}
+\begin{table}[H]
+    \centering
+    \scriptsize
+    \renewcommand{\arraystretch}{1.1}
+    \caption{Confronto completo delle performance (Precision e Recall) sulle tre repository > 400k Token.}
+    \label{tab:large_repos_comparison_full}
+    \begin{tabular}{| c | l | c c | c c | c c |}
+        \hline
+        \multirow{2}{*}{\textbf{Repository}} & \multirow{2}{*}{\textbf{Anti-Pattern}} & \multicolumn{2}{c|}{\textbf{ChatGPT}} & \multicolumn{2}{c|}{\textbf{Gemini}} & \multicolumn{2}{c|}{\textbf{Qwen}} \\
+        & & \textbf{P} & \textbf{R} & \textbf{P} & \textbf{R} & \textbf{P} & \textbf{R} \\ \hline
+        
+        \multirow{16}{*}{\textbf{APOLLO}} 
+        & Nano-Service (NS)           & - & - & - & - & - & - \\
+        & Mega-Service (MS)           & - & 0/1 & 1/1 & 1/1 & 1/1 & 1/1 \\
+        & No API Versioning (NAV)     & 0/1 & - & - & - & 0/1 & - \\
+        & Cyclic Dependency (CD)      & - & - & - & - & - & - \\
+        & Shared Persistency (SP)     & 0/1 & - & 0/1 & - & 0/1 & - \\
+        & Shared Libraries (SL)       & 0/1 & 0/2 & 0/1 & 0/2 & 0/1 & 0/2 \\
+        & Wrong Cuts (WC)             & - & - & - & - & - & - \\
+        & Hardcoded Endpoint (HE)     & - & - & - & - & - & - \\
+        & No API Gateway (NAG)        & 1/1 & 1/1 & 1/1 & 1/1 & 1/1 & 1/1 \\
+        & Timeouts (TO)               & 1/1 & 1/1 & - & 0/1 & 1/1 & 1/1 \\
+        & No Health Check (NHC)       & - & 0/1 & - & 0/1 & - & 0/1 \\
+        & Multiple Instances (MSIPH)  & 0/1 & - & 0/1 & - & - & - \\
+        & No CI/CD (NCI)              & - & - & - & - & - & - \\
+        & Manual Configuration (MC)   & - & - & - & - & - & - \\
+        & Insuff. Monitoring (IM)     & - & - & - & - & - & - \\
+        & Local Logging (LL)          & 0/1 & - & 0/1 & - & 0/1 & - \\ \hline
+        
+        \multirow{16}{*}{\textbf{LakesideMutual}} 
+        & Nano-Service (NS)           & - & - & 0/1 & - & - & - \\
+        & Mega-Service (MS)           & - & - & - & - & - & - \\
+        & No API Versioning (NAV)     & - & - & 0/1 & - & 0/1 & - \\
+        & Cyclic Dependency (CD)      & - & - & - & - & - & - \\
+        & Shared Persistency (SP)     & - & - & - & - & - & - \\
+        & Shared Libraries (SL)       & - & - & - & - & - & - \\
+        & Wrong Cuts (WC)             & 3/3 & 3/3 & 3/4 & 3/3 & - & 0/3 \\
+        & Hardcoded Endpoint (HE)     & 0/1 & 0/2 & 2/4 & 2/2 & 2/4 & 2/2 \\
+        & No API Gateway (NAG)        & 1/1 & 1/1 & 1/1 & 1/1 & 1/1 & 1/1 \\
+        & Timeouts (TO)               & - & - & - & - & - & - \\
+        & No Health Check (NHC)       & 0/1 & - & - & - & 0/1 & - \\
+        & Multiple Instances (MSIPH)  & - & - & - & - & - & - \\
+        & No CI/CD (NCI)              & - & 0/1 & 1/1 & 1/1 & - & 0/1 \\
+        & Manual Configuration (MC)   & - & - & - & - & - & - \\
+        & Insuff. Monitoring (IM)     & - & - & - & - & - & - \\
+        & Local Logging (LL)          & - & - & 0/1 & - & - & - \\ \hline
+        
+        \multirow{16}{*}{\textbf{MicroCompany}} 
+        & Nano-Service (NS)           & - & 0/1 & 0/4 & 0/1 & - & 0/1 \\
+        & Mega-Service (MS)           & 1/1 & 1/1 & 1/1 & 1/1 & 1/1 & 1/1 \\
+        & No API Versioning (NAV)     & 1/1 & 1/1 & 1/1 & 1/1 & - & 0/1 \\
+        & Cyclic Dependency (CD)      & - & - & - & - & - & - \\
+        & Shared Persistency (SP)     & 0/1 & - & - & - & - & - \\
+        & Shared Libraries (SL)       & - & - & - & - & - & - \\
+        & Wrong Cuts (WC)             & - & 0/1 & 1/2 & 1/1 & - & 0/1 \\
+        & Hardcoded Endpoint (HE)     & - & - & - & - & - & - \\
+        & No API Gateway (NAG)        & - & - & - & - & - & - \\
+        & Timeouts (TO)               & - & - & 0/1 & - & - & - \\
+        & No Health Check (NHC)       & - & - & - & - & - & - \\
+        & Multiple Instances (MSIPH)  & - & - & - & - & - & - \\
+        & No CI/CD (NCI)              & 1/1 & 1/1 & 1/1 & 1/1 & 1/1 & 1/1 \\
+        & Manual Configuration (MC)   & - & - & - & - & - & - \\
+        & Insuff. Monitoring (IM)     & - & - & - & - & - & - \\
+        & Local Logging (LL)          & - & - & 0/1 & - & 0/1 & - \\ \hline
+    \end{tabular}
+\end{table}
+\vspace{1em}
+
+\subsubsection*{Valutazione Comparativa tra i Modelli}
+
+Analizzando i risultati nel loro insieme, \textbf{ChatGPT} si conferma essere il modello più equilibrato, poiché dimostra una maggiore continuità per quanto riguarda Precision e Recall
+
+\textbf{Qwen} mostra invece un comportamento più conservativo. In diversi casi raggiunge Precision molto elevate, segno che tende a segnalare il difetto solo quando individua evidenze che ritiene particolarmente forti. Questo approccio riduce i falsi positivi, ma comporta spesso una Recall più bassa e quindi una maggiore quantità di falsi negativi.
+
+\textbf{Gemini}, infine, evidenzia buone prestazioni in alcuni task specifici, come \textit{No API Versioning} e \textit{No API Gateway}, ma nel complesso appare meno stabile. 
+
+Nel complesso, ChatGPT appare il modello più equilibrato e affidabile nel setup sperimentale considerato.
+
+\subsubsection*{Risposta alla RQ1}
+Nel complesso, i risultati mostrano che l’efficacia degli LLM nel rilevamento di anti-pattern in architetture a microservizi dipende fortemente dalla natura dell'AP e dal tipo di evidenza disponibile nella repository. Una sintesi qualitativa dei principali risultati per anti-pattern è riportata in Tabella~\ref{tab:rq1_summary_ap}.
+
+I modelli ottengono dei risultati ottimi nei casi in cui le repositories presentano evidenze particolarmente esplicite e facili da interpretare, come accade nel caso di \textit{Hardcoded Endpoint}, \textit{No API Versioning}, \textit{No API Gateway} e \textit{No CI/CD}.
+Risultati complessivamente buoni si osservano anche per \textit{Manual Configuration} e \textit{Wrong Cuts}. Nel caso di \textit{Manual Configuration}, i modelli riescono generalmente a riconoscere segnali osservabili come file di configurazione locali, host e porte espliciti, URL infrastrutturali e configurazioni distribuite nei singoli servizi. Tuttavia, la presenza di falsi positivi indica che tali segnali vengono talvolta considerati sufficienti anche quando non dimostrano pienamente la presenza dell’anti-pattern. Nel caso di \textit{Wrong Cuts}, invece, il modello più efficace riesce a sfruttare segnali leggibili nei nomi dei servizi, negli artefatti di deployment e nell’organizzazione complessiva della repository, ma le prestazioni risultano più variabili tra i tre modelli.
+
+Le prestazioni diventano invece più eterogenee quando il difetto non dipende solo dalla presenza di un indizio tecnico, ma dal capire se quell’indizio sia davvero sufficiente per parlare di anti-pattern. È il caso, ad esempio, di \textit{Shared Persistency}, \textit{Timeouts}, \textit{Local Logging}, \textit{Insufficient Monitoring}, \textit{Multiple Service Instances Per Host} e, in parte, di \textit{No Health Check}. 
+Nei casi elencati, i modelli riescono a individuare il segnale iniziale, ma fanno poi fatica a comprendere se è sufficiente per concludere che l'AP è presente. Inoltre, questo aspetto diventa ancora più complesso poiché alcuni elementi importanti per determinare la detection degli AP, come sistemi di monitoraggio o di aggregazione, non risultano sempre essere inclusi nella codebase e di conseguenza risultano difficili da individuare dagli artefatti analizzati.
+
+Risulta essere importante l'indizio tecnico ma bisogna valutare anche in contesto in cui quest'ultimo viene rilevato, per capire se è o meno l'indizio che porta alla conferma dell'AP. E ovviamente questa problematica vale per tutti gli AP, solo che in alcuni casi risulta essere più evidente rispetto ad altri.
+
+Un discorso specifico riguarda \textit{Mega-Service} e \textit{Nano-Service}, per i quali la detection richiede di combinare metriche quantitative e valutazioni qualitative sul ruolo architetturale del servizio. In questi casi, l’assenza di soglie statiche ha lasciato ai modelli un margine interpretativo molto ampio, con risultati complessivamente meno stabili rispetto agli anti-pattern più facilmente osservabili.
+
+I risultati peggiori si osservano infine negli anti-pattern che richiedono una ricostruzione più robusta della struttura relazionale del sistema oppure una comprensione più profonda del ruolo dei componenti condivisi, come \textit{Cyclic Dependency} e \textit{Shared Libraries}. In questi casi, gli LLM non riescono a costruire in modo affidabile la rappresentazione necessaria per distinguere tra semplici correlazioni superficiali e vere violazioni architetturali.
+
+Un ulteriore elemento emerso dall’esperimento riguarda il rapporto tra autonomia inferenziale del modello e qualità del prompt. L’approccio \textit{zero-shot} si è rivelato efficace in diversi casi, soprattutto quando l'AP era ben esprimibile tramite una definizione concettuale e segnali osservabili nella repository. Tuttavia, in presenza di anti-pattern con confini più ambigui, come \textit{Hardcoded Endpoint}, si è reso necessario introdurre esempi espliciti per restringere il perimetro decisionale del modello e ridurre i falsi positivi. Analogamente, nei casi multidimensionali come \textit{Mega-Service} e \textit{Nano-Service}, l’assenza di soglie statiche ha contribuito all’instabilità dei risultati.
+
+Va inoltre osservato che, in alcuni casi, i risultati non riflettono esclusivamente i limiti intrinseci dei modelli, ma anche imperfezioni nella formulazione del prompt e nella definizione operativa dell’anti-pattern. Nel corso dell’esperimento, infatti, per alcuni AP si è già reso necessario adattare formulazioni troppo rigide o poco operative derivate direttamente da Cerny. L’adozione di definizioni più pratiche e mirate ha permesso in diversi casi di ridurre sia i falsi positivi sia i falsi negativi, migliorando l’allineamento tra il compito richiesto e gli indizi effettivamente osservabili nella repository.
+
+Rimangono tuttavia ampi margini di miglioramento. Per anti-pattern come \textit{Timeouts}, \textit{No Health Check} o \textit{Multiple Service Instances Per Host}, una definizione operativa ancora più precisa, arricchita con esclusioni esplicite, criteri di delimitazione più chiari o esempi maggiormente vincolanti, avrebbe probabilmente ridotto parte delle ambiguità osservate. Questo suggerisce che il confine tra limite del modello e limite del prompt non sia sempre netto e che un raffinamento iterativo delle istruzioni rappresenti una direzione promettente per migliorare le prestazioni complessive.
+
+In conclusione, gli attuali Large Language Models rappresentano strumenti promettenti per la detection di AP in architetture a microservizi. Tuttavia, l’esperimento mostra che la loro efficacia non è uniforme: cresce quando il l'AP lascia evidenze osservabili e ben delimitate, mentre diminuisce quando la detection richiede una validazione architetturale più profonda, una ricostruzione relazionale esplicita o una definizione operativa meno chiara.
+
+\begin{tcolorbox}[
+    title=\textbf{Sintesi della risposta alla RQ1},
+    colback=blue!3!white,
+    colframe=blue!55!black,
+    coltitle=white,
+    fonttitle=\bfseries,
+    enhanced,
+    breakable,
+    arc=2mm,
+    boxrule=0.8pt
+]
+Gli LLM si sono dimostrati strumenti promettenti per la detection di anti-pattern nelle architetture a microservizi, ma la loro efficacia varia in base al tipo di difetto. Funzionano meglio quando l’anti-pattern lascia tracce chiare e osservabili nella repository, come endpoint, configurazioni o route. Le prestazioni diminuiscono invece quando è necessario ricostruire relazioni complesse tra servizi, valutare informazioni non direttamente presenti negli artefatti o stabilire se un indizio tecnico sia realmente sufficiente per confermare l’anti-pattern.
+\end{tcolorbox}
+
+\begin{table}[H]
+\centering
+\scriptsize
+\renewcommand{\arraystretch}{1.2}
+\caption{Sintesi qualitativa delle prestazioni degli LLM nella rilevazione degli anti-pattern.}
+\label{tab:rq1_summary_ap}
+\begin{tabular}{| >{\raggedright\arraybackslash}p{3.4cm} | c | c | >{\raggedright\arraybackslash}p{7.2cm} |}
+\hline
+\textbf{Anti-Pattern} & \textbf{Best F1} & \textbf{Prestazione} & \textbf{Principale difficoltà} \\ \hline
+
+No API Versioning & 0.909 & Alta & Individuare correttamente l’assenza di versionamento nelle API esposte e nelle route applicative. \\ \hline
+
+Wrong Cuts & 0.889 & Alta & Comprendere la suddivisione architetturale del dominio a partire dalla struttura del repository e dalle responsabilità dei servizi. \\ \hline
+
+No API Gateway & 0.889 & Alta & Differenziare un reale API gateway da semplici punti di ingresso unificati o frontend pubblici. \\ \hline
+
+No CI/CD & 0.842 & Alta & Presenza di casi ambigui o assenza totale di artefatti CI/CD che rende difficile la classificazione. \\ \hline
+
+Hardcoded Endpoint & 0.824 & Alta & Distinguere veri endpoint hardcoded da configurazioni solo apparentemente simili. \\ \hline
+
+Manual Configuration & 0.769 & Alta & Valutare correttamente scenari in cui coesistono configurazioni centralizzate e configurazioni locali residue. \\ \hline
+
+Mega-Service & 0.667 & Media & Stabilire quando dimensione e responsabilità di un servizio risultino realmente eccessive. \\ \hline
+
+No Health Check & 0.667 & Media & Inferire l’assenza di health check affidabili a partire da evidenze parziali o non esplicite. \\ \hline
+
+Timeouts & 0.667 & Media & Determinare quali timeout hardcoded siano effettivamente rilevanti rispetto alle comunicazioni distribuite. \\ \hline
+
+Shared Persistency & 0.667 & Media & Capire se la condivisione del database implichi anche una reale condivisione del modello dati tra servizi. \\ \hline
+
+Multiple Service Instances Per Host & 0.600 & Media & Stabilire quando indizi indiretti di co-deployment siano sufficienti a dimostrare una condivisione problematica dell’host. \\ \hline
+
+Nano-Service & 0.500 & Media & Valutare quando un servizio risulti eccessivamente piccolo rispetto alle responsabilità implementate. \\ \hline
+
+Insufficient Monitoring & 0.500 & Media & Comprendere se strumenti di observability locali siano sufficienti a garantire un monitoring globale del sistema. \\ \hline
+
+Local Logging & 0.333 & Bassa & Determinare se il logging locale impedisca realmente aggregazione e analisi centralizzata dei log. \\ \hline
+
+Cyclic Dependency & 0.000 & Bassa & Ricostruire correttamente il grafo delle dipendenze distinguendo dipendenze cicliche reali da semplici comunicazioni reciproche. \\ \hline
+
+Shared Libraries & 0.000 & Bassa & Comprendere se librerie condivise contengano reale logica di dominio invece di semplici utility tecniche. \\ \hline
+
+\end{tabular}
+
+\vspace{0.4em}
+\begin{minipage}{0.98\textwidth}
+\footnotesize
+\textit{Nota:} La classificazione qualitativa è basata sul miglior F1-score osservato tra i tre modelli. In particolare le soglie utilizzate sono: \textbf{Alta} ($F1 \geq 0.70$), \textbf{Media} ($0.50 \leq F1 < 0.70$), \textbf{Bassa} ($F1 < 0.50$). La tabella è ordinata per F1-score decrescente.
+\end{minipage}
+\end{table}
+
+
+
+%=========CHECK=============
+%=========RQ2===============
+%\section{Research Question 2}
+
+\section{Risposta alla RQ2: come si confrontano gli LLM con gli strumenti di analisi statica allo stato dell’arte per il rilevamento degli anti-pattern nelle MSA?}
+
+La seconda Research Question (RQ2) mira a confrontare i risultati ottenuti nella RQ1, inerenti all'efficienza del modelli, con quelli relativi con MARS, uno strumento di detection \textit{rule-based} basato su metamodello \cite{MARS}.
+
+L’analisi dei risultati, riportati in Tabella~\ref{tab:risultati_completi_f1}, non mostra un reale vincitore ma evidenzia una forte complementarità tra i due approcci. In particolare, le differenze osservate non dipendono soltanto dai valori finali di F1-score, ma anche dal diverso bilanciamento tra Precision e Recall e, soprattutto, dal diverso paradigma di detection adottato: da un lato, gli LLM analizzano la codebase in forma testuale, analizzando sia gli aspetti sintattici che semantici mediante apposite procedure logiche interne; dall’altro, MARS applica regole statiche su un metamodello strutturato del sistema, fondandosi su dipendenze, file di configurazione, soglie numeriche, whitelist e blacklist.
+
+Di seguito è riportata un'analisi nel dettaglio delle performance degli LLM e di MARS, dove si distinguono tre categorie di casi: quelli in cui MARS risulta chiaramente superiore, quelli in cui gli LLM ottengono risultati migliori e quelli in cui emerge una condizione di equilibrio o di debolezza condivisa tra i due approcci.
+
+\begin{table}[htbp]
+\centering
+\renewcommand{\arraystretch}{1.2}
+\caption{Risultati comparativi: ChatGPT, Qwen, Gemini e MARS con F1-Score}
+\label{tab:risultati_completi_f1}
+\vspace{2mm}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l||c|c|c|c|c||c|c|c|c|c||c|c|c|c|c||c|c|c|c|c|}
+\hline
+\multirow{3}{*}{\textbf{Categoria}} & \multicolumn{5}{c||}{\textbf{ChatGPT}} & \multicolumn{5}{c||}{\textbf{Qwen}} & \multicolumn{5}{c||}{\textbf{Gemini}} & \multicolumn{5}{c|}{\textbf{MARS}} \\ \cline{2-21}
+ & \multicolumn{2}{c|}{\textbf{Precision}} & \multicolumn{2}{c|}{\textbf{Recall}} & \multirow{2}{*}{\textbf{F1}} & \multicolumn{2}{c|}{\textbf{Precision}} & \multicolumn{2}{c|}{\textbf{Recall}} & \multirow{2}{*}{\textbf{F1}} & \multicolumn{2}{c|}{\textbf{Precision}} & \multicolumn{2}{c|}{\textbf{Recall}} & \multirow{2}{*}{\textbf{F1}} & \multicolumn{2}{c|}{\textbf{Precision}} & \multicolumn{2}{c|}{\textbf{Recall}} & \multirow{2}{*}{\textbf{F1}} \\ \cline{2-5} \cline{7-10} \cline{12-15} \cline{17-20}
+ & \textbf{Ratio} & \textbf{\%} & \textbf{Ratio} & \textbf{\%} & & \textbf{Ratio} & \textbf{\%} & \textbf{Ratio} & \textbf{\%} & & \textbf{Ratio} & \textbf{\%} & \textbf{Ratio} & \textbf{\%} & & \textbf{Ratio} & \textbf{\%} & \textbf{Ratio} & \textbf{\%} & \\ \hline
+NS    & 1/3   & 33\%  & 1/3   & 33\%  & \textbf{0.333} & 1/1   & 100\% & 1/3  & 33\%  & \textbf{0.500} & 2/7   & 29\%  & 2/3   & 67\%  & \textbf{0.400} & 0/5   & 0\%   & 0/3   & 0\%   & \textbf{0.000} \\ \hline
+MS    & 1/2   & 50\%  & 1/4   & 25\%  & \textbf{0.333} & 2/2   & 100\% & 2/4  & 50\%  & \textbf{0.667} & 2/3   & 67\%  & 2/4   & 50\%  & \textbf{0.571} & 4/6   & 67\%  & 4/4   & 100\% & \textbf{0.800} \\ \hline
+NAV   & 10/13 & 77\%  & 10/10 & 100\% & \textbf{0.870} & 9/12  & 75\%  & 9/10 & 90\%  & \textbf{0.818} & 10/12 & 83\%  & 10/10 & 100\% & \textbf{0.909} & 7/8   & 88\%  & 7/10  & 70\%  & \textbf{0.778} \\ \hline
+CD    & 0/1   & 0\%   & 0/5   & 0\%   & \textbf{0.000} & 0/1   & 0\%   & 0/4  & 0\%   & \textbf{0.000} & 0/1   & 0\%   & 0/4   & 0\%   & \textbf{0.000} & -     & -     & -     & -     & \textbf{-}\textsuperscript{*} \\ \hline
+SP    & 1/4   & 25\%  & 1/1   & 100\% & \textbf{0.400} & 1/3   & 33\%  & 1/1  & 100\% & \textbf{0.500} & 1/2   & 50\%  & 1/1   & 100\% & \textbf{0.667} & 1/2   & 50\%  & 1/1   & 100\% & \textbf{0.667} \\ \hline
+SL    & 0/1   & 0\%   & 0/2   & 0\%   & \textbf{0.000} & 0/1   & 0\%   & 0/2  & 0\%   & \textbf{0.000} & 0/3   & 0\%   & 0/2   & 0\%   & \textbf{0.000} & 2/2   & 100\% & 2/2   & 100\% & \textbf{1.000} \\ \hline
+WC    & 4/4   & 100\% & 4/5   & 80\%  & \textbf{0.889} & 1/1   & 100\% & 1/5  & 20\%  & \textbf{0.333} & 5/12  & 42\%  & 5/5   & 100\% & \textbf{0.588} & 3/3   & 100\% & 3/5   & 60\%  & \textbf{0.750} \\ \hline
+HE    & 14/19 & 74\%  & 14/15 & 93\%  & \textbf{0.824} & 9/16  & 56\%  & 9/15 & 60\%  & \textbf{0.581} & 10/16 & 63\%  & 10/15 & 67\%  & \textbf{0.645} & 6/10  & 60\%  & 6/15  & 40\%  & \textbf{0.480} \\ \hline
+NAG   & 3/3   & 100\% & 3/5   & 60\%  & \textbf{0.750} & 4/4   & 100\% & 4/5  & 80\%  & \textbf{0.889} & 4/4   & 100\% & 4/5   & 80\%  & \textbf{0.889} & 5/9   & 56\%  & 5/5   & 100\% & \textbf{0.714} \\ \hline
+TO    & 2/4   & 50\%  & 2/4   & 50\%  & \textbf{0.500} & 2/2   & 100\% & 2/4  & 50\%  & \textbf{0.667} & 2/7   & 29\%  & 2/4   & 50\%  & \textbf{0.364} & 3/3   & 100\% & 3/4   & 75\%  & \textbf{0.857} \\ \hline
+NHC   & 4/6   & 67\%  & 4/6   & 67\%  & \textbf{0.667} & 2/4   & 50\%  & 2/6  & 33\%  & \textbf{0.400} & 2/2   & 100\% & 2/6   & 33\%  & \textbf{0.500} & 3/5   & 60\%  & 3/6   & 50\%  & \textbf{0.545} \\ \hline
+MSIPH & 3/9   & 33\%  & 3/4   & 75\%  & \textbf{0.462} & 3/6   & 50\%  & 3/4  & 75\%  & \textbf{0.600} & 3/9   & 33\%  & 3/4   & 75\%  & \textbf{0.462} & 3/3   & 100\% & 3/4   & 75\%  & \textbf{0.857} \\ \hline
+NCI   & 8/8   & 100\% & 8/11  & 73\%  & \textbf{0.842} & 7/7   & 100\% & 7/11 & 64\%  & \textbf{0.778} & 8/8   & 100\% & 8/11  & 73\%  & \textbf{0.842} & 8/8   & 100\% & 8/11  & 73\%  & \textbf{0.842} \\ \hline
+MC    & 5/8   & 63\%  & 5/5   & 100\% & \textbf{0.769} & 3/3   & 100\% & 3/5  & 60\%  & \textbf{0.750} & 2/2   & 100\% & 2/5   & 40\%  & \textbf{0.571} & 5/8   & 63\%  & 5/5   & 100\% & \textbf{0.769} \\ \hline
+IM    & 1/1   & 100\% & 1/3   & 33\%  & \textbf{0.500} & 1/1   & 100\% & 1/3  & 33\%  & \textbf{0.500} & 1/1   & 100\% & 1/3   & 33\%  & \textbf{0.500} & 3/8   & 38\%  & 3/3   & 100\% & \textbf{0.545} \\ \hline
+LL    & 1/4   & 25\%  & 1/4   & 25\%  & \textbf{0.250} & 2/8   & 25\%  & 2/4  & 50\%  & \textbf{0.333} & 2/8   & 25\%  & 2/4   & 50\%  & \textbf{0.333} & 4/6   & 67\%  & 4/4   & 100\% & \textbf{0.800} \\ \hline
+\end{tabular}
+}
+
+\vspace{1mm}
+\begin{minipage}{0.98\textwidth}
+\footnotesize
+\textsuperscript{*} Il caso \textit{Cyclic Dependency} (CD) non viene considerato nel confronto quantitativo con MARS, poiché non è stato possibile replicarne i risultati sperimentali in assenza del tool \textit{Understand}, necessario per generare il call graph richiesto dal detector.
+\end{minipage}
+
+\end{table}
+
+
+
+
+\subsubsection*{Casi in cui MARS è chiaramente superiore}
+
+I risultati migliori di MARS si osservano soprattutto quando l’anti-pattern può essere espresso tramite proprietà esplicite del metamodello o tramite controlli deterministici su dipendenze, file e metriche.
+
+\paragraph{Shared Libraries (SL).}
+Come già discusso nella RQ1, il fallimento degli LLM su \textit{Shared Libraries} non dipende soltanto dalla difficoltà nel ricostruire relazioni tra servizi, ma anche dalla necessità di distinguere tra librerie tecniche fisiologicamente condivise e librerie contenenti effettiva logica di dominio. 
+
+MARS, invece, affronta il problema in modo molto più operativo, prendendo il metamodello ed estraendo la lista delle dipendenze per poi costruire una mappa del tipo "dipendenza$\rightarrow$servizi" ed escludendo le dipendenze considerate comuni tramite blacklist statica \cite{MARS, madern2024_mars}. 
+
+Di conseguenza se una dipendenza risulta essere associata ad più microservizi, scatta l'AP. Inoltre, filtrando la lista delle dipendenze con una lista apposita, MARS mitiga il problema che abbiamo evidenziato in RQ1 per quanto concerne SL e la problematica di identificare librerie condivise valide e non valide.
+
+
+Per quanto concerne i risultati sperimentali ottenuti: mentre tutti gli LLM ottengono una Precision e una Recall pari a 0\%, MARS raggiunge Precision 100\%, Recall 100\% e F1-score pari a 1. Il vantaggio del tool non sembra quindi derivare da una comprensione semantica più profonda del concetto di \textit{shared library}, bensì dal fatto che il problema viene ridotto a una regola deterministica ben allineata alla struttura del metamodello e alle liste statiche di supporto.
+
+\paragraph{Timeouts (TO).}
+MARS raggiunge Precision 100\%, Recall 75\% e F1 = 0.857, superando nettamente tutti gli LLM. Anche questo è coerente con la logica implementativa: \texttt{hasTimeouts()} combina più segnali espliciti, tra cui la presenza di keyword come \texttt{timeout} e \texttt{fallback} e il controllo di librerie di resilienza definite in 
+
+\texttt{circuit\_breaker.txt} \cite{MARS, madern2024_mars}. Per ogni microservizio guarda le dipendenze. Se trova una dipendenza che combacia con una libreria presente in \textit{circuit\_breaker.txt}, interpreta che esista un meccanismo di resilienza/circuit breaker. Quindi, a livello finale, tende a dire che l’anti-pattern non è presente. In seguito, controlla anche se nel codice del microservizio vi è presenza di timeout usando le keyword citate precedentemente.
+
+Il tool non comprende il comportamento dinamico del timeout, ma individua con efficacia alcuni pattern implementativi che il tool considera indizi rilevanti per l'anti-pattern. Gli LLM, invece, mostrano maggiore variabilità: Qwen ottiene Precision 100\% ma Recall solo 50\%, ChatGPT si ferma a 50\% su entrambe le metriche, mentre Gemini scende a Precision 29\% e Recall 50\%.
+
+\paragraph{Multiple Service Instances Per Host (MSIPH).}
+Anche qui MARS ottiene risultati molto superiori, con Precision 100\%, Recall 75\% e F1 = 0.857. Il vantaggio deriva dal fatto che il tool utilizza indizi statici di deployment registrati nel metamodello, controllando in particolare l'assenza di un file \texttt{docker-compose.yml} a livello di sistema e l'assenza di \texttt{Dockerfile} dedicati ai singoli microservizi \cite{MARS, madern2024_mars}. In generale l'AP scatta, se i microservizi indicati non hanno Dockerfile e non vi è un \textit{docker-compose}. Pur trattandosi di un’euristica e non di una verifica diretta del runtime, la regola è sufficientemente aderente ai casi presenti nel dataset. Gli LLM riescono a sospettare il problema, come mostra il Recall del 75\% per tutti e tre i modelli, ma non riescono a delimitare con precisione i veri positivi, producendo Precision molto più basse (33\% per ChatGPT e Gemini, 50\% per Qwen).
+
+\paragraph{Local Logging (LL).}
+MARS ottiene Recall 100\%, Precision 67\% e F1 = 0.800, molto meglio degli LLM, che si fermano tra 0.250 e 0.333. Il comportamento è coerente con la regola \texttt{hasLocalLogging()}, che verifica la presenza o assenza di dipendenze riconducibili a strumenti o librerie di logging elencate nella whitelist \texttt{logging.txt}, includendo sia strumenti più orientati al logging centralizzato/distribuito sia librerie generiche come \texttt{slf4j} e \texttt{log4j} \cite{MARS, madern2024_mars}.
+
+In termini operativi, MARS confronta le dipendenze di ciascun microservizio con le voci presenti in \texttt{logging.txt}: se trova una corrispondenza, indica il servizio come dotato di un meccanismo di logging riconosciuto; se non trova alcuna corrispondenza, marca il servizio come privo di logging tool. L'anti-pattern viene quindi rilevato quando tutti i microservizi risultano privi di strumenti di logging riconosciuti. Si tratta dunque di una regola statica e lessicale, che non verifica direttamente se il logging sia effettivamente centralizzato, configurato correttamente o usato a runtime.
+
+\paragraph{Mega-Service (MS).}
+MARS registra Precision 67\%, Recall 100\% e F1 = 0.800, superando tutti gli LLM. Il motivo risiede nella regola \texttt{hasMegaService()}, che usa una soglia quantitativa molto netta: \texttt{locs > totalLocs * 0.39}. Si tratta di una semplificazione forte della definizione teorica del difetto, ma proprio tale rigidità si rivela efficace nel dataset sperimentale. Gli LLM, pur ricevendo metriche quantitative nel prompt, devono inferire autonomamente cosa significhi “troppo grande” in rapporto al sistema, producendo risultati più variabili e complessivamente inferiori. Questo non implica che MARS comprenda meglio il concetto architetturale di mega-service, ma che la sua euristica quantitativa è fortemente allineata alla distribuzione dei casi osservati.
+
+Ovviamente una soglia ben definita non è sempre una buona soluzione come si potrà evincere successivamente nell'analisi di \textit{Nano-Service}.
+
+\paragraph{Insufficient Monitoring (IM).}
+Questo AP evidenzia in modo particolarmente chiaro la differenza di comportamento tra i due approcci. Tutti gli LLM ottengono Precision 100\%, Recall 33\% e F1 = 0.500, mostrando un atteggiamento estremamente conservativo: i casi segnalati sono corretti, ma la copertura è molto bassa. MARS, invece, raggiunge Recall 100\% ma con Precision 38\%, ottenendo F1 = 0.545, mostrando di fatto un atteggiamento opposto. 
+Quindi, anche se in termini di F1, possiamo collocare MARS sopra gli LLM, da un punto di vista relativo alla Recall e la Precision, entrambi gli approcci mostrano delle criticità.
+
+Il comportamento del tool è coerente con la funzione 
+
+\texttt{hasInsufficientMonitoring()}, che utilizza una checklist statica contenuta in \texttt{monitoring.txt}. Il detector confronta le voci della lista con le dipendenze presenti nel metamodello e, in alcuni casi, anche con i nomi dei microservizi. Se non trova strumenti riconosciuti come riconducibili al monitoring, segnala il possibile anti-pattern \cite{MARS, madern2024_mars}.
+
+Va inoltre osservato che il numero di casi positivi per questo anti-pattern è limitato, e ciò riduce la robustezza statistica del confronto.
+
+\subsubsection*{Casi in cui gli LLM risultano superiori}
+
+Gli LLM prevalgono soprattutto nei casi in cui l’anti-pattern non può essere ridotto in modo efficace a una regola statica univoca, ma richiede una combinazione di lettura sintattica, interpretazione semantica e capacità di generalizzazione rispetto a pattern implementativi variabili.
+
+\paragraph{No API Versioning (NAV).}
+Tutti gli LLM superano MARS, con Gemini al primo posto (Precision 83\%, Recall 100\%, F1 = 0.909), seguito da ChatGPT (0.870) e Qwen (0.818), mentre MARS si ferma a F1 = 0.778. Il risultato è in linea con il funzionamento interno del tool: \texttt{hasNoApiVersioning()} si basa essenzialmente sulla ricerca della stringa \texttt{apiVersion} nei file di configurazione, senza analizzare direttamente gli endpoint REST né le convenzioni di versionamento nel path. Gli LLM, invece, leggono direttamente controller, route e URI, riuscendo a identificare più efficacemente l’assenza di versionamento. Il vantaggio emerge soprattutto nel Recall, che per ChatGPT e Gemini arriva al 100\%, contro il 70\% di MARS.
+
+\paragraph{Hardcoded Endpoint (HE).}
+Questo è uno dei casi più significativi del vantaggio degli LLM. ChatGPT raggiunge Precision 74\%, Recall 93\% e F1 = 0.824, mentre MARS si ferma a Precision 60\%, Recall 40\% e F1 = 0.480. Il divario è particolarmente marcato sul Recall, segno che MARS perde molti casi reali. 
+In termini funzionali i dati possono essere assimilabili al seguente funzionamento:  
+una volta estratti gli URL e filtrati con \textit{tlds.txt} la funzione \texttt{hasHardcodedEndpoints()} controlla per ogni micro-servizio gli URL e se vi sono dipendenze con servizi di discovery mediante il file \texttt{service\_discovery.txt}. Una regola di questo tipo risulta inevitabilmente fragile rispetto alla varietà con cui l’anti-pattern può manifestarsi nel codice reale, ad esempio tramite concatenazioni, configurazioni indirette, valori di default o altre varianti sintattiche non previste.
+Gli LLM, al contrario, riescono a gestire meglio questa variabilità grazie alla combinazione di esempi espliciti nel prompt e capacità di generalizzazione, inferenza contestuale e interpretazione semantica (comprendere che ruolo ha l'indizio) del codice. In questo modo il modello non si limita a cercare una forma rigida di endpoint hardcodato, ma può utilizzare il contesto circostante per riconoscere implementazioni equivalenti dell'anti-pattern, ottenendo così una copertura sensibilmente superiore.
+
+\paragraph{Wrong Cuts (WC).}
+Anche in questo caso ChatGPT supera MARS: Precision 100\%, Recall 80\% e F1 = 0.889, contro Precision 100\%, Recall 60\% e F1 = 0.750 di MARS. Il tool ottiene comunque buoni risultati, ma perde alcuni casi perché la regola \texttt{hasWrongCuts()} si basa su un criterio sintattico piuttosto rigido: il servizio viene segnalato quando, dopo l'esclusione delle estensioni non rilevanti definite nella blacklist \texttt{config\_extensions.txt}, oltre l'80\% dei file rimanenti associati a uno specifico microservizio presenta estensioni riconducibili a tecnologie web/frontend, secondo la whitelist \texttt{web\_extensions.txt} \cite{MARS, madern2024_mars}.
+
+Un criterio di questo tipo riesce a individuare i casi in cui la decomposizione per layer tecnici emerge in modo molto evidente dagli artefatti del repository, ma tende a perdere situazioni meno esplicite. ChatGPT, al contrario, sembra riuscire a interpretare in modo più flessibile l’organizzazione del progetto, cogliendo anche casi in cui il taglio tecnico non è espresso unicamente attraverso le estensioni dei file, ma emerge dai nomi dei servizi, dagli artefatti di deployment e dall’organizzazione complessiva della repository.
+
+\paragraph{No Health Check (NHC).}
+Il vantaggio degli LLM è meno netto ma comunque presente. ChatGPT ottiene Precision 67\%, Recall 67\% e F1 = 0.667, contro i valori di MARS pari a Precision 60\%, Recall 50\%, F1 = 0.545. 
+
+Il limite di MARS è spiegabile mediante il funzionamento dato dalla funzione \texttt{hasHealthCheck()}, che cerca esclusivamente dipendenze presenti in \texttt{healthcheck.txt}. Questa logica funziona bene quando il progetto adotta tool standard riconosciuti dalla whitelist \cite{MARS, madern2024_mars}, ma può perdere casi in cui il controllo di health check è implementato in maniera non riconducibile alle dipendenze elencate nella whitelist del tool.
+
+\paragraph{No API Gateway (NAG).}
+Questo anti-pattern rappresenta un caso intermedio interessante. Qwen e Gemini ottengono i migliori risultati, con Precision 100\%, Recall 80\% e F1 = 0.889, mentre MARS si ferma a F1 = 0.714, pur raggiungendo Recall 100\%. Il comportamento del tool è riconducibile alla funzione \texttt{hasApiGateway()}, che verifica l’assenza di dipendenze riconducibili a gateway tramite la whitelist \texttt{gateway.txt} \cite{MARS, madern2024_mars}. 
+Di fatto, ci ritroviamo con un problema simile a \textit{No Health Check} considerando l'uso della whitelist.
+
+Questa regola consente a MARS di intercettare tutti i casi positivi del dataset, ma al prezzo di una Precision più bassa (56\%), segnalando anche casi che non costituiscono realmente l’anti-pattern. Gli LLM, al contrario, mostrano una migliore capacità di delimitare il difetto, probabilmente perché riescono a leggere in modo più contestuale la presenza o meno di un punto di ingresso centralizzato.
+
+\paragraph{Nano-Service (NS).}
+Pur rimanendo complessivamente difficile da rilevare, questo è un caso in cui gli LLM ottengono risultati comunque modesti, ma superiori al fallimento totale di MARS. Il tool fallisce completamente, con Precision 0\%, Recall 0\% e F1 = 0.000, mentre gli LLM riescono almeno a intercettare parte dei casi positivi: Qwen raggiunge F1 = 0.500, Gemini 0.400 e ChatGPT 0.333. 
+
+Il funzionamento del tool è riconducibile alla funzione \texttt{hasNanoService()}, che combina soglie statiche rispetto alla media di sistema con esclusioni lessicali basate su una blacklist di nomi di servizio \cite{MARS, madern2024_mars}. Se i casi positivi del dataset non sono ben allineati né alle soglie dimensionali né ai criteri di esclusione previsti, la detection può crollare completamente. Gli LLM, pur senza un criterio quantitativo stabile, riescono almeno a recuperare parzialmente gli AP, superando in questo caso le prestazioni del tool rule-based.
+
+\subsubsection*{Casi di equilibrio o di debolezza condivisa}
+
+\paragraph{No CI/CD (NCI).}
+In questo caso i due approcci sono in sostanziale parità: ChatGPT, Gemini e MARS ottengono tutti F1 = 0.842, mentre Qwen si ferma a 0.778. Questo è un caso in cui le evidenze repository-level di CI/CD, quando presenti, risultano abbastanza esplicite da essere catturate sia da un approccio rule-based sia da una lettura testuale della repository. MARS si basa su dipendenze e cartelle tipiche della CI/CD (\texttt{cicd.txt}, \texttt{cicd\_folders.txt}), mentre gli LLM riconoscono workflow, configurazioni di build, release automation o publishing di immagini Docker. Resta invece più difficile, per entrambi gli approcci, inferire con sicurezza la reale assenza di pratiche CI/CD quando tali artefatti non compaiono nel repository.
+
+
+\paragraph{Manual Configuration (MC).}
+Come nel caso precedente, ci ritroviamo in una condizione di sostanziale parità tra ChatGPT e MARS, entrambi con Precision 63\%, Recall 100\% e F1 = 0.769. Ciò suggerisce che l’anti-pattern sia sufficientemente visibile da poter essere catturato sia come regola strutturale sia come pattern testuale. 
+
+Nel caso di MARS, la funzione \texttt{hasManualConfiguration()} controlla se i microservizi presentano file di configurazione e verifica, tramite il file \texttt{configuration.txt}, se nelle dipendenze compaiano strumenti riconducibili a configuration management o configurazione centralizzata, come Spring Cloud Config, Archaius e Kubernetes. In assenza di tali strumenti, la presenza di file di configurazione viene interpretata come possibile evidenza di configurazione manuale \cite{MARS, madern2024_mars}.
+
+Allo stesso tempo, la Precision non elevata in entrambi i casi mostra che il concetto di “configurazione manuale” resta intrinsecamente ambiguo. Nel caso di MARS, si potrebbe associare a una mancanza di voci nella whitelist, idonee a coprire tutti i casi possibili.
+
+\paragraph{Shared Persistency (SP).}
+Questo caso evidenzia una debolezza condivisa tra i due approcci. Gemini e MARS raggiungono entrambi F1 = 0.667, con Recall 100\% ma Precision solo al 50\%, mentre ChatGPT e Qwen si fermano su valori inferiori. 
+
+Il comportamento di MARS 
+è spiegato mediante la funzione 
+
+\texttt{hasSharedPersistence()}, che segnala i datasource condivisi tra più servizi senza spingersi a verificare l'effettiva condivisione del modello dati \cite{MARS, madern2024_mars}. Il detector costruisce una mappa datasource$\rightarrow$microservizi e segnala l'anti-pattern quando lo stesso datasource risulta associato a più microservizi. La regola non verifica però se i servizi condividano effettivamente le stesse tabelle, entità o porzioni del modello dati.
+
+Anche gli LLM mostrano un limite analogo: riconoscono configurazioni simili o riferimenti convergenti al database, ma non riescono a stabilire con precisione se i servizi accedano davvero alle stesse entità o a porzioni condivise del modello dati. 
+
+
+
+
+
+\subsubsection*{Analisi del trade-off tra Precision e Recall}
+
+L’analisi congiunta di Precision e Recall evidenzia che i due approcci non differiscono solo per F1-score, ma anche per il modo in cui sbagliano.
+
+MARS mostra almeno due profili distinti. Quando la regola implementata è ben allineata al dataset, il tool ottiene valori molto elevati su entrambe le metriche, come in \textit{SL} (100\% / 100\%), \textit{TO} (100\% / 75\%), \textit{MSIPH} (100\% / 75\%) e \textit{MS} (67\% / 100\%). Quando invece la regola è troppo larga o troppo rigida, la performance si sbilancia: in \textit{IM} la Recall arriva al 100\%, ma con Precision pari al 38\%, segnale di numerosi falsi positivi; in \textit{HE} e \textit{NAV}, al contrario, la Precision resta discreta ma la Recall si abbassa sensibilmente, perché la regola perde molte varianti reali del difetto. Un comportamento intermedio si osserva anche in \textit{NAG}, dove MARS massimizza la copertura (Recall 100\%) ma con Precision pari solo al 56\%, segnalando più casi del necessario.
+
+Gli LLM mostrano invece comportamenti più differenziati per modello. ChatGPT appare il più bilanciato, come si vede in \textit{HE} (74\% / 93\%), \textit{WC} (100\% / 80\%) e \textit{NAV} (77\% / 100\%). Qwen adotta un comportamento più conservativo, con Precision spesso molto alta ma Recall più bassa, come in \textit{TO} (100\% / 50\%) o \textit{NS} (100\% / 33\%). Gemini tende in alcuni casi a massimizzare la copertura, ma a costo di una maggiore instabilità, come mostrano \textit{WC} (42\% / 100\%) e \textit{SP} (50\% / 100\%). In casi come \textit{IM}, tutti gli LLM mostrano invece una strategia molto prudente, con Precision 100\% ma Recall limitata al 33\%, segnale di una buona capacità di evitare falsi positivi a scapito della copertura.
+
+Questa analisi è stata effettuata più nel dettaglio poiché l'F1 risulta essere un valore sicuramente utile per effettuare un confronto immediato ma Recall e Precision ci fanno realmente capire che tipo di problemi si presentano per quanto concerne la detection.
+
+\subsubsection*{Risposta alla RQ2}
+
+I risultati mostrano che MARS e gli LLM adottano strategie di detection profondamente diverse e, in larga misura, complementari.
+
+MARS risulta superiore quando l’anti-pattern può essere ricondotto a proprietà esplicite e verificabili del metamodello, come dipendenze condivise, artefatti di deployment, file di configurazione o soglie quantitative. In questi casi, l’approccio \textit{rule-based} produce risultati elevati e ripetibili, come mostrano chiaramente \textit{SL}, \textit{TO}, \textit{MSIPH}, \textit{LL}, \textit{MS} e, seppur con margine più contenuto, anche \textit{IM}. Questo vantaggio, però, non è ottenuto mediante la comprensione semantica dell'architettura in base all'AP da individuare, ma dalla possibilità di analizzare gli "oggetti" raccolti nel metamodello mediante regole deterministiche ben allineata agli artefatti identificati. Tale approccio funziona meno nel momento in cui la regola è semplificata rispetto alle richieste dell'AP oppure non si riescono a identificare e raccogliere tutti gli artefatti nel metamodello. Tutto ciò comporta un degrado nelle performance, sopratutto per quanto riguarda la Recall in AP come \textit{NAV} e \textit{HE}. Inoltre, oltre ai due punti citati, l’efficacia di MARS dipende fortemente anche dalla qualità delle whitelist e blacklist utilizzate: liste statiche non compilate correttamente con tutte le voci necessaria a supportare l'estrazione e la rilevazione di MARS, portano alla generazioni di falsi positivi e negativi. Il riempimento di tali liste, dipende dall'utente che usa il tool e si rendono necessarie ottime conoscenze per quanto riguarda l'architettura del sistema e delle tecnologie usate. Questo rende di fatto MARS uno strumento meno immediato da utilizzare per utenti non esperti, i quali, pur interessati a verificare il rispetto di determinati indici qualitativi del software, potrebbero non riuscire a ottenere il massimo in termini di performance che il tool ha da offrire.
+
+Gli LLM, al contrario, risultano superiori quando la detection richiede flessibilità interpretativa, capacità di generalizzazione e integrazione di segnali sintattici e semantici nel contesto della codebase. Questo spiega i risultati migliori in \textit{HE}, \textit{NAV}, \textit{WC}, \textit{NAG} e, in misura minore, \textit{NHC} e \textit{NS}. In questi casi, i modelli linguistici non si limitano a cercare pattern rigidi, ma riescono a interpretare varianti implementative diverse dello stesso AP, specialmente quando guidati da prompt ben strutturati o da esempi espliciti. Tuttavia, l’assenza di una rappresentazione strutturale esplicita li rende fragili nei casi in cui è necessario ricostruire relazioni topologiche o verificare condizioni architetturali restrittive, come mostrano i fallimenti su \textit{SL} e \textit{CD}, nonché l’alta incidenza di falsi positivi o di copertura incompleta in casi più ambigui come \textit{SP} e \textit{IM}.
+
+Nel complesso, la risposta alla RQ2 è che nessuno dei due approcci risulta universalmente superiore. I risultati suggeriscono piuttosto l’opportunità di un paradigma ibrido: MARS per le verifiche strutturali rigorose e ripetibili su proprietà esplicite del sistema, e gli LLM come supporto nei casi più ambigui, variabili o semanticamente ricchi, in cui la rigidità delle regole statiche tende a diventare un limite.
+Inoltre, uno dei vantaggi dell'uso dell'LLM è la generazione di spiegazioni testuali che motivano la rilevazione dell'AP indicando non solo dove si trovano gli artefatti nella codebase ma anche i motivi per cui sono stati sfruttati per la detection. 
+Anche nel contesto dei falsi-positivi, dove la detection risultava errata, gli LLM indicavano comunque in maniera corretta gli artefatti che erano realmente presenti nella codebase, permettendo di fatto all'utente di poter verificare in prima persona eventuali risultati. Si è notato che il modello può allucinarsi nel giudicare se gli artefatti individuati costituiscano o meno un AP ma non sembra allucinarsi nell'individuare artefatti. 
+
+\clearpage
+\begin{tcolorbox}[
+    title=\textbf{Risposta sintetica alla RQ2},
+    colback=green!3!white,
+    colframe=green!50!black,
+    coltitle=white,
+    fonttitle=\bfseries,
+    enhanced,
+    breakable,
+    arc=2mm,
+    boxrule=0.8pt
+]
+Il confronto tra LLM e MARS mostra che nessuno dei due approcci è universalmente superiore.
+MARS è più efficace quando l’anti-pattern è rilevabile tramite regole statiche ben allineate agli artefatti della repository.
+Gli LLM risultano invece più adatti quando la detection richiede una lettura flessibile e contestuale della codebase.
+In questi casi, riescono a riconoscere varianti implementative diverse e a interpretare meglio gli indizi osservati.
+I risultati evidenziano quindi una complementarità tra i due approcci, suggerendo l’utilità di soluzioni ibride.
+\end{tcolorbox}
+
+
+\begin{table}[H]
+\centering
+\scriptsize
+\renewcommand{\arraystretch}{1.2}
+\caption{Sintesi comparativa del confronto tra LLM e MARS per anti-pattern.}
+\label{tab:rq2_summary_comparison}
+\begin{tabular}{| >{\raggedright\arraybackslash}p{3.4cm} | >{\raggedright\arraybackslash}p{3.0cm} | >{\raggedright\arraybackslash}p{7.8cm} |}
+\hline
+\textbf{Anti-Pattern} & \textbf{Esito del confronto} & \textbf{Motivo principale} \\ \hline
+
+Hardcoded Endpoint & LLM superiori & Gli LLM gestiscono meglio la varietà sintattica dell'anti-pattern e riescono a riconoscere più varianti implementative rispetto alla regola statiche basate su pattern, URL e filtri di MARS. \\ \hline
+
+No API Versioning & LLM superiori & I modelli leggono direttamente controller, route e URI, mentre MARS si basa su controlli più rigidi e indiretti nei file di configurazione. \\ \hline
+
+Wrong Cuts & LLM superiori & La detection richiede una lettura più flessibile della struttura del repository; ChatGPT coglie segnali semantici che la regola sintattica di MARS intercetta solo parzialmente. \\ \hline
+
+No API Gateway & LLM superiori & Gli LLM mantengono Precision molto più alta, delimitando meglio i veri casi positivi, mentre MARS massimizza la Recall ma al prezzo di numerosi falsi positivi. \\ \hline
+
+No Health Check & LLM leggermente superiori & Il vantaggio è contenuto, ma gli LLM risultano più efficaci quando i health check non dipendono solo da dipendenze standard riconosciute da whitelist. \\ \hline
+
+Nano-Service & LLM superiori & MARS fallisce completamente per via di soglie statiche e criteri lessicali troppo rigidi, mentre gli LLM recuperano almeno parte dei casi positivi. \\ \hline
+
+Shared Libraries & MARS superiore & L'AP è catturato da regole deterministiche su dipendenze condivise e blacklist; gli LLM non riescono a distinguere con affidabilità librerie di dominio da utility tecniche. \\ \hline
+
+Timeouts & MARS superiore & MARS sfrutta controlli statici ben allineati al dataset su keyword e librerie di resilienza, mentre gli LLM mostrano maggiore variabilità interpretativa. \\ \hline
+
+Multiple Service Instances Per Host & MARS superiore & Le euristiche di deployment basate sul metamodello risultano più efficaci degli LLM, che sospettano il problema ma non riescono a delimitarlo con precisione. \\ \hline
+
+Local Logging & MARS superiore & La checklist tecnica basata sull'assenza di dipendenze di logging distribuito copre meglio il dataset degli LLM, che faticano a valutare il significato architetturale del logging locale. \\ \hline
+
+Mega-Service & MARS superiore & La soglia quantitativa rigida usata dal tool si allinea bene ai casi del dataset, mentre gli LLM devono dedurre autonomamente la sproporzione architetturale. \\ \hline
+
+Insufficient Monitoring & MARS leggermente superiore & MARS ottiene F1 leggermente superiore grazie a Recall massima, ma al prezzo di molti falsi positivi; gli LLM sono più prudenti ma meno coprenti. \\ \hline
+
+No CI/CD & Equilibrio & Gli indizi dell'AP sono abbastanza espliciti da essere catturati sia da regole statiche sia da una lettura testuale della repository. \\ \hline
+
+Manual Configuration & Equilibrio & L'anti-pattern è visibile sia come struttura configurativa sia come pattern testuale; entrambi gli approcci intercettano bene i casi positivi ma soffrono di una Precision non elevata. \\ \hline
+
+Shared Persistency & Debolezza condivisa & Sia MARS sia gli LLM riconoscono facilmente segnali sospetti di persistenza condivisa, ma nessuno dei due valida con rigore la reale condivisione del modello dati. \\ \hline
+
+Cyclic Dependency & Non confrontabile & Il confronto con MARS non è stato possibile per l'assenza del tool \textit{Understand}, necessario alla generazione del call graph richiesto dal detector. \\ \hline
+
+\end{tabular}
+
+\begin{minipage}{0.98\textwidth}
+\footnotesize
+\textit{Nota:} Le righe sono ordinate per esito del confronto: casi favorevoli 
+agli LLM, casi favorevoli a MARS, casi di equilibrio o debolezza condivisa, 
+e infine il caso non confrontabile.
+\end{minipage}
+\end{table}
+
+
+\section{Lezioni Apprese}
+
+Dall’analisi congiunta dei risultati relativi a RQ1 e RQ2 emergono alcune lezioni apprese particolarmente rilevanti sul comportamento dei modelli, sulla costruzione del benchmark e sulle scelte metodologiche adottate nell’esperimento.
+
+\begin{itemize}
+    \item \textbf{L’efficacia della detection dipende fortemente dalla natura dell’anti-pattern.}  
+    I risultati mostrano che gli LLM tendono a ottenere performance migliori quando l’anti-pattern lascia tracce abbastanza esplicite nella repository, ad esempio sotto forma di endpoint, configurazioni, naming o struttura dei controller. Al contrario, i casi che richiedono una ricostruzione relazionale più robusta, una validazione architetturale più profonda o una valutazione combinata dei segnali quantitativi e qualitativi risultano più difficili da gestire. Questo conferma che non esiste una capacità uniforme di detection, ma una forte dipendenza dal tipo di ragionamento richiesto dall'AP.
+
+    \item \textbf{LLM e approcci \textit{rule-based} non sono alternativi, ma complementari.}  
+    Il confronto con MARS mostra che i due paradigmi eccellono su famiglie diverse di anti-pattern. MARS tende a risultare più efficace quando l'AP può essere ricondotto a proprietà strutturali ben definite, soglie quantitative o dipendenze esplicite del metamodello. Gli LLM tendono invece a risultare superiori nei casi in cui è richiesta maggiore flessibilità interpretativa, capacità di generalizzazione e lettura contestuale della codebase. La lezione non riguarda quindi la superiorità di un approccio sull'altro, bensì la possibilità di poterli usare entrambi in approcci ibridi.
+
+    \item \textbf{La qualità della definizione operativa dell’anti-pattern e del prompt influenza i risultati tanto quanto il modello.}  
+    Nel corso dell’esperimento è emerso chiaramente che le prestazioni non dipendono solo dalle capacità intrinseche dell’LLM, ma anche da come il compito viene tradotto in istruzioni operative. Le definizioni formali proposte in letteratura non si sono sempre rilevate ottimali, poiché potevano essere, in alcuni casi, troppo astratte, troppo restrittive o poco allineate agli artefatti effettivamente osservabili nella repository. Per questa ragione, durante l’esperimento sono stati effettuati test iterativi sia sulla definizione sia sul \textit{prompt engineering}, con l’obiettivo di migliorare le performance rendendo il task più chiaro al modello. In diversi casi è stato necessario adottare formulazioni alternative più dirette e operative, ad esempio quelle proposte nel paper di MARS, oppure aggiungere al \textit{prompt} esempi espliciti, positivi e negativi, per chiarire i confini dell’AP e ridurre l’ambiguità nella fase di classificazione. 
+    Ne deriva che una formulazione più operativa della definizione, così come la formulazione del prompt, rappresentano una fase metodologica non meno importante della scelta del modello stesso.
+
+    
+    \item \textbf{La convergenza degli errori tra modelli può segnalare anche criticità della ground truth.}  
+    In diversi casi, i tre LLM hanno prodotto gli stessi falsi positivi o giudizi molto simili su specifici elementi della repository. Questa convergenza non comporta automaticamente che la GT manuale sia errata, ma rappresenta un segnale metodologicamente importante: quando più modelli indipendenti tendono a classificare nello stesso modo un caso annotato diversamente, può emergere il dubbio che la validazione iniziale o la definizione operativa adottata non abbiano catturato pienamente l’ambiguità del caso. 
+    Da questa osservazione si deriva un'importante lezione che tornerà utile per le future iterazioni dell'esperimento: bisogna effettuare una rivalidazione interna della GT, sopratutto sui casi riguardanti i falsi-positivi. Tale operazione potrebbe portare ad un miglioramento significativo nei risultati ottenuti.
+    
+
+    \item \textbf{Gli anti-pattern multidimensionali restano particolarmente difficili da trattare.}  
+    Difetti come \textit{Mega-Service} e \textit{Nano-Service} richiedono di combinare metriche quantitative e valutazioni qualitative sul ruolo architetturale del servizio. In assenza di soglie statiche universalmente valide, gli LLM devono dedurre autonomamente la sproporzione del servizio nel contesto del sistema, mentre gli approcci \textit{rule-based} rischiano di semplificare eccessivamente il concetto attraverso euristiche troppo rigide. Questo mostra che, per alcune categorie di difetti, né la sola flessibilità interpretativa né la sola rigidità formale risultano pienamente soddisfacenti.
+
+    \item \textbf{La gestione del contesto tramite Repomix si è rivelata efficace, ma perfezionabile.}  
+    L’uso di Repomix ha permesso di fornire ai modelli la codebase in forma testuale aggregata, evitando dipendenze da tool statici esterni e mantenendo un approccio relativamente semplice da replicare. 
+    
+    Questa scelta ha permesso di offrire al modello il massimo in termini di contenuto informativo. Tuttavia, l’esperimento suggerisce che l’aggregazione completa della codebase non sia sempre la soluzione ottimale: per molti anti-pattern solo una parte degli artefatti è realmente rilevante. 
+    
+    In una futura iterazione, si potrebbe gestire il file di repomix in modo più preciso, gestendo ogni AP in maniera specifica. Un approccio di questo tipo, dove si generano input più piccoli e focalizzati sull'AP, ridurrebbe anche il rimore e limiterebbe anche fenomeni di dispersione delle informazioni nelle repository più grandi, inclusi effetti che posso essere ricordonti al \textit{lost in the middle}. 
+
+    \item \textbf{LLM come supporto interpretativo, non solo come classificatori.}
+    Anche quando il modello si allucina nel giudizio sull'AP, la rilevazione di artefatti risulta essere comunque reale e non allucinata, permettendo di fatto all'utente di controllarli nella codebase personalmente.
+    
+\end{itemize}
+
+Nel complesso, le lezioni apprese suggeriscono che il miglioramento della detection non passi da un singolo fattore isolato, ma da una combinazione di fattori: raffinamento progressivo delle definizioni operative, miglioramento del prompt, possibile rivalidazione della ground truth nei casi controversi, ottimizzazione della costruzione dell’input e integrazione tra analisi statica e modelli linguistici. In questa prospettiva, gli LLM non dovrebbero essere intesi come sostituti integrali degli strumenti di analisi architetturale, ma come componenti di supporto all’interno di una pipeline più ampia, capace di combinare rigore strutturale e flessibilità interpretativa.
+
+\section{Threats to Validity}
+
+Come ogni studio empirico, anche il presente esperimento presenta alcuni limiti che possono influenzare l’interpretazione dei risultati.
+
+\begin{itemize}
+    \item \textbf{La definizione operativa degli anti-pattern può influenzare direttamente i risultati.}  
+    I risultati vanno interpretati alla luce delle specifiche formulazioni adottate nell’esperimento, e non come valutazioni indipendenti da tali scelte di operazionalizzazione.
+
+
+    \item \textbf{Le prestazioni degli LLM dipendono anche dal prompt adottato.}  
+    I risultati vanno quindi considerati validi all’interno della specifica configurazione di prompt utilizzata, e non come proprietà assolute e invarianti dei modelli.
+
+    \item \textbf{La ground truth manuale può contenere casi intrinsecamente ambigui.}  
+    La rivalutazione del GT per casi ambigui, potrebbe poortare ad un cambiamento parziale dei risultati.
+
+    \item \textbf{Limitata numerosità dei campioni per alcuni anti-pattern.}  
+    Per alcuni anti-pattern il numero di campioni è relativamente basso e ciò comporta che le metriche siano ampiamente influenzate anche da un singolo falso positivo o negativo. 
+
+    Di conseguenza, i risultati di alcuni AP vanno interpretati con cautela.
+
+    \item \textbf{La costruzione dell’input può introdurre rumore contestuale.}  
+    L’uso di Repomix ha garantito uniformità e replicabilità, ma l’aggregazione completa della codebase può aver incluso nel prompt artefatti non pertinenti al singolo anti-pattern, influenzando la capacità del modello di focalizzarsi sugli elementi realmente rilevanti.
+
+    \item \textbf{Il confronto tra approcci non è stato perfettamente uniforme su tutti gli anti-pattern.}  
+    In particolare, nel caso di \textit{Cyclic Dependency} non è stato possibile replicare il detector di MARS in assenza del tool \textit{Understand}, rendendo il confronto incompleto per questa categoria.
+
+    \item \textbf{La variabilità interna degli LLM può influenzare parzialmente i risultati.}  
+    Sebbene ogni inferenza sia stata eseguita in un contesto isolato e privo di memoria conversazionale, i modelli linguistici non costituiscono sistemi perfettamente deterministici. Di conseguenza, una parte delle differenze osservate potrebbe dipendere anche da variabilità interna del modello o da aggiornamenti non pienamente osservabili della piattaforma di esecuzione.
+
+\end{itemize}

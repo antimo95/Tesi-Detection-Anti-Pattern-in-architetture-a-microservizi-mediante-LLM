@@ -1,0 +1,37 @@
+\chapter{Conclusioni}
+
+Questa tesi ha analizzato l’impiego dei Large Language Models per la detection di anti-pattern architetturali in sistemi a microservizi, con un duplice obiettivo: da un lato valutare l’efficacia degli LLM su un insieme eterogeneo di difetti architetturali, dall’altro confrontarne il comportamento con quello di MARS, uno strumento \textit{rule-based} basato su metamodello.
+
+I risultati ottenuti mostrano innanzitutto che gli LLM rappresentano strumenti promettenti per l’analisi architetturale della codebase, ma che la loro efficacia non è uniforme. La risposta alla RQ1 evidenzia infatti che le prestazioni dipendono fortemente dalla natura dell’anti-pattern. I modelli risultano particolarmente efficaci nei casi in cui il difetto lascia tracce relativamente esplicite nella repository, come configurazioni, endpoint, convenzioni di routing o segnali leggibili nella struttura del progetto. In questi scenari, la capacità di lettura contestuale e di generalizzazione degli LLM consente di ottenere risultati elevati, come mostrato per \textit{Hardcoded Endpoint}, \textit{No API Versioning}, \textit{No CI/CD} e, in parte, \textit{No API Gateway}, dove il giudizio può essere ricondotto a segnali testuali o strutturali abbastanza riconoscibili.
+
+Allo stesso tempo, l’esperimento conferma che i modelli linguistici incontrano difficoltà significative quando la detection richiede una validazione architetturale più profonda, una ricostruzione relazionale esplicita del sistema o una combinazione di segnali quantitativi e qualitativi. Ciò emerge con chiarezza in anti-pattern come \textit{Cyclic Dependency}, \textit{Shared Libraries}, \textit{Mega-Service} e \textit{Nano-Service}, ma anche in casi ibridi come \textit{Shared Persistency}, \textit{Insufficient Monitoring} e \textit{Local Logging}, in cui il problema non consiste soltanto nel riconoscere un indizio tecnico, ma nel determinarne con rigore il reale significato architetturale.
+
+Il confronto con MARS, affrontato nella RQ2, ha ulteriormente chiarito che gli LLM non sono universalmente superiori agli approcci tradizionali. Al contrario, i risultati mostrano una forte complementarità tra i due paradigmi. MARS risulta più efficace quando l’anti-pattern può essere espresso tramite regole deterministiche su dipendenze, metriche, file di configurazione o artefatti di deployment; gli LLM prevalgono invece quando il difetto richiede maggiore flessibilità interpretativa, capacità di leggere varianti implementative diverse e integrazione contestuale di segnali sintattici e semantici. La conclusione principale non è quindi che uno dei due approcci sostituisca l’altro, ma che entrambi colgano aspetti differenti del problema.
+
+Un ulteriore contributo della tesi riguarda il piano metodologico. L’esperimento ha mostrato che la qualità della detection non dipende soltanto dal modello scelto, ma anche dalla definizione operativa dell’anti-pattern, dal \textit{prompt engineering}, dalla costruzione della ground truth e dalla modalità con cui la codebase viene fornita in input. In più casi si è reso necessario adattare definizioni troppo astratte o poco operative, così come introdurre esempi espliciti per restringere il perimetro decisionale del modello. Inoltre, la convergenza di alcuni errori tra modelli differenti ha suggerito che una parte delle ambiguità osservate possa dipendere non solo dai limiti dei sistemi analizzati, ma anche dalla difficoltà di definire e validare in modo univoco certi casi borderline. In questo senso, la tesi non si limita a fornire una valutazione comparativa dei risultati, ma mette in evidenza anche la centralità del disegno sperimentale nella valutazione di strumenti basati su LLM.
+
+Nel complesso, il lavoro svolto suggerisce che gli attuali Large Language Models possano costituire un valido supporto per l’analisi architetturale dei microservizi, soprattutto nei casi in cui il difetto sia semanticamente leggibile nella codebase e non richieda una ricostruzione strutturale troppo rigorosa. Tuttavia, i risultati mostrano anche che il loro impiego efficace richiede ancora un forte inquadramento metodologico e non può prescindere da definizioni operative ben calibrate, prompt attentamente progettati e, nei casi più complessi, dall’integrazione con strumenti di analisi statica o \textit{rule-based}. La direzione più promettente emersa dallo studio è quindi quella di un paradigma ibrido, in cui la robustezza strutturale degli strumenti basati su metamodello e la flessibilità interpretativa degli LLM vengano combinate all’interno di una pipeline comune.
+
+\section*{Sviluppi Futuri}
+
+A partire dai risultati ottenuti, è possibile individuare diverse direzioni di sviluppo future.
+
+\begin{itemize}
+    \item \textbf{Raffinare ulteriormente le definizioni operative degli anti-pattern.}  
+    Alcuni difetti, come \textit{Timeouts}, \textit{No Health Check} o \textit{Multiple Service Instances Per Host}, potrebbero beneficiare di formulazioni ancora più precise, arricchite con esclusioni esplicite, criteri di delimitazione più chiari o esempi maggiormente vincolanti.
+
+    \item \textbf{Estendere e rivalidare la ground truth.}  
+    Una futura iterazione dello studio potrebbe includere una rivalidazione interna dei casi più controversi, nonché un ampliamento del dataset con un numero maggiore di repository e di esempi positivi per gli anti-pattern meno rappresentati.
+
+    \item \textbf{Ottimizzare la costruzione dell’input per i modelli.}  
+    L’utilizzo di Repomix si è dimostrato efficace, ma potrebbe essere ulteriormente migliorato selezionando in modo mirato, per ciascun anti-pattern, solo i file realmente rilevanti. Questo permetterebbe di ridurre il rumore contestuale e di contenere i possibili effetti di dispersione dell’informazione nelle repository di grandi dimensioni.
+
+    \item \textbf{Valutare modelli, interfacce e configurazioni differenti.}  
+    I risultati ottenuti sono legati alla specifica configurazione sperimentale adottata. Sarebbe quindi utile confrontare versioni diverse degli stessi modelli, altri LLM, uso via API e differenti strategie di prompting, per verificare la stabilità delle conclusioni.
+
+    \item \textbf{Progettare un approccio realmente ibrido tra LLM e analisi statica.}  
+    Un passo successivo naturale consiste nello sviluppo di una pipeline integrata tra strumenti di analisi statica e modelli linguistici. A titolo esemplificativo, una possibile architettura potrebbe prevedere l’utilizzo di MARS esclusivamente come strumento di estrazione e astrazione, producendo il metamodello strutturato del sistema, mentre gli LLM interverrebbero nella fase di detection, ragionando direttamente sulla rappresentazione intermedia anziché sul codice grezzo. Un approccio di questo tipo potrebbe permettere di combinare la robustezza strutturale del metamodello con la flessibilità interpretativa dei modelli linguistici, superando almeno in parte i limiti che i due paradigmi mostrano separatamente. Naturalmente, la fattibilità e l’efficacia di tale integrazione richiederebbero una validazione empirica dedicata.
+\end{itemize}
+
+In conclusione, questa tesi mostra che gli LLM non costituiscono una soluzione definitiva al problema della detection di anti-pattern architetturali nei microservizi, ma rappresentano già oggi uno strumento utile e promettente, soprattutto se impiegato in modo consapevole, metodologicamente controllato e integrato con tecniche più tradizionali di analisi del software.
+

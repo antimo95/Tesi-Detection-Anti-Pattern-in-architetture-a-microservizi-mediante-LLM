@@ -1,0 +1,56 @@
+\chapter{Introduzione}
+
+\section{Contesto e Motivazioni}
+
+Le architetture a microservizi si sono progressivamente affermate come uno dei paradigmi più rilevanti per la realizzazione di sistemi software distribuiti, grazie alla loro capacità di favorire modularità, scalabilità, indipendenza di deployment e maggiore flessibilità evolutiva \cite{CernyCatalogo, Dragoni2017}. Tuttavia, tali vantaggi si accompagnano a un aumento della complessità architetturale, poiché il comportamento complessivo del sistema non dipende più soltanto dalla qualità dei singoli moduli, ma anche dalle modalità con cui i servizi vengono decomposti, configurati e fatti interagire tra loro \cite{CernyCatalogo, Dragoni2017, Soldani2018PainsGains}.
+
+In questo contesto, gli anti-pattern architetturali assumono un ruolo particolarmente rilevante. Essi rappresentano soluzioni progettuali apparentemente accettabili, ma in grado di produrre nel tempo conseguenze negative sulla qualità del software, compromettendo manutenibilità, autonomia dei servizi, osservabilità e resilienza del sistema \cite{CernyCatalogo}. La loro individuazione tempestiva è quindi essenziale per supportare l’analisi architetturale e prevenire il consolidarsi di decisioni progettuali non ottimali.
+
+La rilevanza del tema emerge anche sul piano industriale. Alcuni report di mercato mostrano infatti una crescita significativa dell’interesse verso l’architettura a microservizi, trainata dalla diffusione del cloud, delle pratiche DevOps, dell’orchestrazione di container e dello sviluppo di applicazioni distribuite basate su API \cite{dati_micro}. Sebbene tali dati abbiano natura principalmente descrittiva e vadano interpretati con cautela, essi confermano la centralità pratica del paradigma e la conseguente importanza di strumenti efficaci per la comprensione e la valutazione della qualità architetturale.
+
+\section{Problemi di ricerca}
+
+Nonostante la crescente diffusione delle architetture a microservizi, la detection automatica dei relativi anti-pattern rimane un problema aperto. Gli strumenti tradizionali di analisi statica risultano spesso efficaci nell’individuare anomalie locali o dipendenze specifiche, ma incontrano maggiori difficoltà quando il difetto emerge dall’interazione tra più servizi o richiede una lettura sistemica dell’intera codebase \cite{CernyCatalogo, MSAnose}. Strumenti più evoluti, come MARS, hanno certamente ampliato la copertura del problema attraverso l’uso di metamodelli e regole statiche, ma presentano ancora limiti legati alla dipendenza da euristiche, whitelist, blacklist e soglie predefinite \cite{MARS}.
+
+Parallelamente, i Large Language Models hanno mostrato capacità promettenti in numerosi compiti di analisi del software, ma il loro impiego nella detection di anti-pattern architetturali in sistemi a microservizi è ancora poco esplorato. Gli studi esistenti si concentrano prevalentemente su code smells locali o su forme preliminari di analisi architetturale, come nel caso di approcci che utilizzano LLM per interpretare artefatti di Infrastructure-as-Code \cite{iac_llm}. Rimane quindi aperta la questione se tali modelli possano supportare efficacemente l’identificazione di difetti architetturali complessi, soprattutto nei casi in cui sia richiesta una lettura contestuale e inter-servizio della repository \cite{contextwindows_llm, prompteng}.
+
+\section{Obiettivi della tesi}
+
+Alla luce di queste considerazioni, la presente tesi si propone di valutare empiricamente l’impiego dei Large Language Models nella detection di anti-pattern in architetture a microservizi. L’obiettivo non è soltanto misurare le prestazioni dei modelli in termini quantitativi, ma anche comprendere in quali casi essi risultino più efficaci, quali limiti mostrino e in che misura possano costituire un’alternativa o un complemento rispetto agli strumenti di detection tradizionali.
+
+Il lavoro di tesi, quindi, punta a:
+\begin{itemize}
+    \item valutare l’efficacia di diversi LLM nell’individuazione di un insieme eterogeneo di anti-pattern in repository reali a microservizi;
+    \item confrontare i risultati ottenuti con quelli di MARS, uno degli strumenti per la detection di anti-pattern in questo dominio \cite{MARS};
+    \item analizzare qualitativamente i casi in cui i modelli riescono o falliscono, evidenziando il ruolo della definizione operativa dell’anti-pattern, del prompt e della costruzione dell’input;
+    \item discutere le implicazioni metodologiche emerse dall’esperimento, anche in vista di possibili approcci ibridi tra analisi statica e modelli linguistici.
+\end{itemize}
+
+Le prestazioni dei modelli sono state valutate mediante l'impiego di una \textit{ground truth} manuale resa disponibile dallo studio MARS \cite{MARS}.
+
+
+\section{Research Questions}
+
+Per raggiungere gli obiettivi citati precedentemente, la tesi si articola attorno alle seguenti domande di ricerca:
+
+\begin{itemize}
+    %\item \textbf{RQ1: How effective are LLMs at detecting anti-patterns in MSAs?}
+    \item \textbf{RQ1: Quanto sono efficaci gli LLM nel rilevare gli anti-pattern nelle MSA?}
+    
+    Questa domanda mira a valutare l’efficacia dei Large Language Models nell’identificazione di anti-pattern architetturali in sistemi a microservizi, considerando sia i risultati quantitativi sia la variabilità delle prestazioni in funzione della natura del difetto analizzato.
+    
+    %\item \textbf{RQ2: How do LLMs compare against state-of-the-art static analysis tools for anti-pattern detection in MSAs?}
+
+    \item \textbf{RQ2: Come si confrontano gli LLM con gli strumenti di analisi statica allo stato dell’arte per il rilevamento degli anti-pattern nelle MSA?}
+    
+    Questa domanda intende confrontare criticamente il comportamento degli LLM con quello di uno strumento \textit{rule-based} basato su metamodello, al fine di comprendere se i modelli linguistici possano eguagliare, superare oppure integrare gli approcci tradizionali di detection.
+\end{itemize}
+
+\section{Struttura della tesi}
+
+La tesi è organizzata come segue.
+
+Nel Capitolo 2 vengono introdotti i fondamenti teorici relativi alle architetture a microservizi e ai principali concetti utili per inquadrare il dominio applicativo. Nel Capitolo 3 viene presentato il tema degli anti-pattern nelle architetture a microservizi, con particolare attenzione al catalogo proposto in letteratura e alle categorie considerate nello studio. Nel Capitolo 4 vengono analizzati gli strumenti e gli approcci alla detection degli anti-pattern, approfondendo sia gli strumenti tradizionali, con particolare riferimento a MARS, sia il potenziale impiego dei Large Language Models e delle tecniche di \textit{prompt engineering}. Nel Capitolo 5 viene descritto nel dettaglio l’esperimento condotto, inclusi dataset, modelli, pipeline, costruzione dell’input e procedura di valutazione. Nel Capitolo 6 vengono presentati e discussi i risultati ottenuti, rispondendo alle Research Questions e analizzando anche le lezioni apprese e le principali minacce alla validità. Infine, il Capitolo 7 riassume le conclusioni del lavoro e propone alcune possibili direzioni di sviluppo futuro.
+
+
+

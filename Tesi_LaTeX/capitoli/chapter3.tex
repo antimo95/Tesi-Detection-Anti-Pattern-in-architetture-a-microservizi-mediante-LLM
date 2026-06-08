@@ -1,0 +1,509 @@
+\chapter{Antipattern nelle architetture a microservizi}
+
+\section{Antipatterns e code smells}
+Come già discusso nelle sezioni precedenti, i microservizi stanno guadagnando sempre più popolarità e importanza grazie alle loro caratteristiche. Per facilitare tale sviluppo, come riportato nel paragrafo~\ref{sec:par2_4}, sono state identificate delle soluzioni a problemi di progettazione ricorrenti, tali soluzioni prendono il nome di \textit{design patterns} \cite{CernyCatalogo}.
+
+Analogamente, gli \textbf{anti-patterns} sono identificabili come pratiche o scelte di progettazione a problemi ricorrenti che, pur sembrando efficienti in una prima fase, producono successivamente conseguenze negative e compromettono di conseguenza la qualità complessiva del sistema \cite{CernyCatalogo}.
+
+Potremmo quindi definirli, come soluzioni \textit{"non ottimali"} a problemi ricorrenti. Un bad smell (o code smell), invece, rappresenta un sospetto che qualcosa non sia corretto e si configura a tutti gli effetti come un segnale di allarme che fa trasparire eventuali problemi nel design, ma non fornisce soluzione specifica \cite{CernyCatalogo}.
+Citando Fowler, un code smell è "come un segnale superficiale che spesso indica un problema più profondo nel sistema" \cite{fowler_codesmell}.
+Potremmo quindi identificare gli anti-pattern come la causa profonda del problema mentre i bad smells indicano i sintomi osservabili. 
+
+L'origine degli anti-pattern è dovuta a varie cause che non sono solo vincolate ad aspetti tecnici ma anche a situazioni culturali e puramente organizzative:
+\begin{itemize}
+    \item Pressioni dovute a scadenze del progetto che portano a decisioni frettolose per concludere entro i termini previsti. 
+    \item Mancanza di esperienza e competenza da parte del team.
+    \item Mancanza di comunicazione tra i membri del team o tra stakeholder e sviluppatori. 
+    \item Requisiti poco chiari, incompleti o in continua evoluzione. 
+    \item Eccessiva fiducia in soluzioni adottate precedentemente con conseguente riutilizzo, ma come detto in precedenza le soluzioni vanno adottate in base al contesto di sviluppo che varia a seconda dei casi. 
+    \item Scarsa documentazione del sistema. 
+    \item Mancanza di test o testing inadeguato. 
+\end{itemize}
+
+Gli anti-pattern hanno ovviamente un impatto sul sistema. Le 
+
+conseguenze che possiamo riscontrare sono le seguenti:
+\begin{itemize}
+    \item Aumento dell'accoppiamento tra i servizi, 
+    
+    compromettendo l'indipendenza.
+    \item Aumento della complessità complessiva del sistema. 
+    \item Difficoltà nel mantenere e nel testare il sistema, dovuto alla presenza di dipendenze implicite e interazioni non gestite opportunamente. 
+    \item Degrado delle prestazioni, spesso causato da comunicazioni eccessive tra microservizi o da scelte architetturali inefficienti.
+    \item Perdita di scalabilità a causa dei servizi che diventano dei veri e propri colli di bottiglia  difficili da isolare e ottimizzare. 
+\end{itemize}
+
+Ad esempio, nel caso di \textit{cyclic dependency}, due microservizi finiscono per dipendere reciprocamente e il fallimento di uno si propaga inevitabilmente all’altro. Analogamente, con il \textit{shared database} più microservizi accedono allo stesso database, aumentando l’accoppiamento e riducendo l’autonomia dei servizi.
+
+In questo elaborato si fa riferimento alla convenzione terminologica adottata da Tomas Cerny e Davide Taibi, nella quale il termine anti-pattern è impiegato come categoria ombrello comprendente anche i bad smells, per ragioni di semplificazione concettuale \cite{CernyCatalogo}.
+
+\section{Catalogo degli anti-pattern}
+
+Lo studio condotto da Cerny e Taibi~\cite{CernyCatalogo} ha permesso di definire un catalogo composto da 58 anti-pattern, suddivisi in cinque macro-categorie:
+\begin{itemize}
+  \item \textbf{Intra-service design};
+  \item \textbf{Inter-service decomposition};
+  \item \textbf{Service interaction};
+  \item \textbf{Security};
+  \item \textbf{Team organization}.
+\end{itemize}
+
+Sono analizzate nel dettaglio nelle sezioni successive le singole categorie.
+
+\subsection{Intra-service design}
+
+Gli anti-pattern appartenenti a questa categoria fanno riferimento a difetti di progettazione interna di un singolo servizio. In particolare, riguardano aspetti come la granularità del servizio, la qualità dell’interfaccia esposta e la coesione funzionale delle responsabilità implementate.
+
+La categoria \textit{Intra-service design} è suddivisa, in generale, in tre sottocategorie: \textit{granularity}, \textit{service interface} e \textit{functional cohesion}~\cite{CernyCatalogo}.
+
+\begin{itemize}
+    \item \textit{Granularity}: riguarda la dimensione del servizio, includendo casi come \textit{Nano-service} e \textit{Mega-service}.
+    \item \textit{Service interface}: riguarda problemi relativi all’interfaccia del microservizio, come \textit{CRUDY service}, \textit{Nobody home}, \textit{Data service} e \textit{No API-versioning}.
+    \item \textit{Functional cohesion}: riguarda la chiarezza, la comprensibilità e la coesione funzionale del servizio, includendo casi come \textit{Low cohesive operation} e \textit{Ambiguous service}.
+\end{itemize}
+
+Gli anti-pattern appartenenti a questa categoria sono riportati in Tabella~\ref{tab:intra_service_design}.
+
+\Needspace{18\baselineskip}
+
+\begin{table}[H]
+\centering
+\caption{Anti-pattern della categoria \textit{Intra-service design}.}
+\label{tab:intra_service_design}
+\small
+\renewcommand{\arraystretch}{1.15}
+\setlength{\tabcolsep}{7pt}
+
+\begin{tabularx}{\textwidth}{
+>{\centering\arraybackslash}p{0.8cm}
+>{\RaggedRight\arraybackslash}p{3.8cm}
+>{\RaggedRight\arraybackslash}X
+}
+\toprule
+\textbf{Id} & \textbf{Anti-pattern} & \textbf{Descrizione} \\
+\midrule
+
+\multicolumn{3}{l}{\textit{Granularity}} \\
+\cmidrule(lr){1-3}
+
+1 & Nano-service
+& Servizio eccessivamente piccolo, il cui costo di comunicazione e manutenzione supera i benefici della separazione. \\
+
+\addlinespace[0.3em]
+
+2 & Mega-service
+& Servizio di dimensioni eccessive, con troppe responsabilità e ridotta manutenibilità. \\
+
+\addlinespace[0.6em]
+
+\multicolumn{3}{l}{\textit{Service interface}} \\
+\cmidrule(lr){1-3}
+
+3 & CRUDY service
+& Servizio che espone principalmente operazioni CRUD, senza una reale logica di business. \\
+
+\addlinespace[0.3em]
+
+4 & Nobody home
+& Servizio deployato e funzionante, ma non utilizzato o invocato da altri componenti. \\
+
+\addlinespace[0.3em]
+
+5 & Data service
+& Servizio semplice che espone principalmente metodi per l’accesso ai dati. \\
+
+\addlinespace[0.3em]
+
+6 & No API-versioning
+& Mancanza di versionamento delle API, con rischio di breaking changes per i client. \\
+
+\addlinespace[0.6em]
+
+\multicolumn{3}{l}{\textit{Functional cohesion}} \\
+\cmidrule(lr){1-3}
+
+7 & Whatever types
+& Uso di tipi di dati generici che rendono ambiguo il contratto dell’interfaccia. \\
+
+\addlinespace[0.3em]
+
+8 & Low cohesive operation
+& Operazioni con bassa coesione raggruppate nello stesso servizio. \\
+
+\addlinespace[0.3em]
+
+9 & Ambiguous service
+& Servizio con responsabilità non ben definite o funzionalità sovrapposte. \\
+
+\bottomrule
+\end{tabularx}
+\end{table}
+\normalsize
+
+\Needspace{20\baselineskip}
+\subsection{Inter-service decomposition}
+
+Gli anti-pattern appartenenti a questa categoria riguardano errori nella decomposizione del sistema in servizi e nelle relazioni strutturali tra essi. Nel dettaglio si basano su scelte errate nella suddivisione del sistema in microservizi, accoppiamenti stretti o violazione dei principi di modularità che caratterizzano architetture di questo genere.
+
+La categoria \textit{Inter-service decomposition} include quindi problematiche che emergono non tanto all’interno del singolo servizio, quanto nel modo in cui i servizi vengono separati, organizzati e integrati tra loro~\cite{CernyCatalogo}.
+
+
+Gli anti-pattern appartenenti a questa categoria sono riportati in Tabella~\ref{tab:inter_service_decomposition}.
+
+
+\begin{table}[H]
+\centering
+\caption{Anti-pattern della categoria \textit{Inter-service decomposition}.}
+\label{tab:inter_service_decomposition}
+\small
+\renewcommand{\arraystretch}{1.15}
+\setlength{\tabcolsep}{7pt}
+
+\begin{tabularx}{\textwidth}{
+>{\centering\arraybackslash}p{0.8cm}
+>{\RaggedRight\arraybackslash}p{3.8cm}
+>{\RaggedRight\arraybackslash}X
+}
+\toprule
+\textbf{Id} & \textbf{Anti-pattern} & \textbf{Descrizione} \\
+\midrule
+
+10 & Transactional integration
+& Transazioni che si estendono oltre i confini del singolo servizio, riducendone l’autonomia. \\
+
+\addlinespace[0.3em]
+
+11 & Co-change coupling
+& Servizi che devono essere modificati frequentemente insieme a causa di un forte accoppiamento. \\
+
+\addlinespace[0.3em]
+
+12 & Duplicated services
+& Servizi multipli che implementano funzionalità simili o sovrapposte. \\
+
+\addlinespace[0.3em]
+
+13 & Microservice greedy
+& Creazione eccessiva di microservizi senza chiari vantaggi misurabili. \\
+
+\addlinespace[0.3em]
+
+14 & Service chain
+& Lunga catena di chiamate tra servizi, con conseguente aumento di latenza e complessità. \\
+
+\addlinespace[0.3em]
+
+15 & Hub-like dependency
+& Servizio che diventa un punto centrale di dipendenza per molti altri servizi. \\
+
+\addlinespace[0.3em]
+
+16 & Cyclic dependency
+& Dipendenze circolari tra servizi, che creano problemi di deployment e manutenzione. \\
+
+\addlinespace[0.3em]
+
+17 & Chatty service
+& Comunicazione eccessiva e troppo fine-grained tra servizi, con effetti negativi sulle prestazioni. \\
+
+\addlinespace[0.3em]
+
+18 & Shared persistency
+& Più servizi accedono allo stesso database, generando accoppiamento a livello dei dati. \\
+
+\addlinespace[0.3em]
+
+19 & Sand pile
+& Sistema composto da molti nano-service che condividono dati comuni. \\
+
+\addlinespace[0.3em]
+
+20 & Shared libraries
+& Condivisione di librerie runtime tra microservizi, con possibile compromissione dell’indipendenza. \\
+
+\addlinespace[0.3em]
+
+21 & Wrong cuts
+& Decomposizione basata su layer tecnici invece che sul dominio di business. \\
+
+\addlinespace[0.3em]
+
+22 & Knot service
+& Servizi fortemente accoppiati tramite integrazioni point-to-point. \\
+
+\addlinespace[0.3em]
+
+23 & Scattered parasitic functionality
+& Funzionalità distribuite su più servizi, con responsabilità sovrapposte. \\
+
+\bottomrule
+\end{tabularx}
+\end{table}
+\normalsize
+
+\subsection{Service interaction}
+
+Gli anti-pattern appartenenti a questa categoria riguardano problemi nei meccanismi di comunicazione tra i servizi. Tale categoria di problemi può compromettere fattori importanti per il sistema come: la scalabilità, la manutenibilità e la capacità di evoluzione.
+
+La categoria \textit{Service interaction} include quindi difetti legati al modo in cui i servizi si invocano, scambiano messaggi, gestiscono endpoint, fallimenti e informazioni operative~\cite{CernyCatalogo}.
+
+Gli anti-pattern appartenenti a questa categoria sono riportati in Tabella~\ref{tab:service_interaction}.
+
+\begin{table}[H]
+\centering
+\caption{Anti-pattern della categoria \textit{Service interaction}.}
+\label{tab:service_interaction}
+\small
+\renewcommand{\arraystretch}{1.15}
+\setlength{\tabcolsep}{7pt}
+
+\begin{tabularx}{\textwidth}{
+>{\centering\arraybackslash}p{0.8cm}
+>{\RaggedRight\arraybackslash}p{3.8cm}
+>{\RaggedRight\arraybackslash}X
+}
+\toprule
+\textbf{Id} & \textbf{Anti-pattern} & \textbf{Descrizione} \\
+\midrule
+
+24 & ESB misuse
+& Uso improprio di un Enterprise Service Bus come punto centrale di integrazione, con rischio di bottleneck. \\
+
+\addlinespace[0.3em]
+
+25 & On-line only
+& Sistema che evita completamente l’elaborazione batch, anche quando questa sarebbe appropriata. \\
+
+\addlinespace[0.3em]
+
+26 & Empty messages
+& Scambio di messaggi vuoti, utilizzati come semplici segnali tra componenti. \\
+
+\addlinespace[0.3em]
+
+27 & Use of business logic in communication
+& Logica di business incorporata nello strato di comunicazione tra servizi. \\
+
+\addlinespace[0.3em]
+
+28 & Hardcoded endpoint
+& Indirizzi ed endpoint hardcodati nel codice invece dell’utilizzo di meccanismi come il service discovery. \\
+
+\addlinespace[0.3em]
+
+29 & No API-gateway
+& Mancanza di un gateway unificato, che costringe i client a chiamare direttamente i singoli servizi. \\
+
+\addlinespace[0.3em]
+
+30 & Wobbly service interactions
+& Interazioni tra servizi che non gestiscono adeguatamente i fallimenti, riducendo la resilienza del sistema. \\
+
+\addlinespace[0.3em]
+
+31 & Timeout
+& Timeout fissi che non considerano adeguatamente i diversi contesti operativi. \\
+
+\addlinespace[0.3em]
+
+32 & No health check
+& Mancanza di endpoint o meccanismi per verificare lo stato di salute dei servizi. \\
+
+\bottomrule
+\end{tabularx}
+\end{table}
+\normalsize
+
+\Needspace{20\baselineskip}
+\subsection{Security}
+
+Gli anti-pattern di questa categoria riguardano principalmente problematiche inerenti alla sicurezza dei microservizi.
+
+La categoria \textit{Security} riguarda, quindi, la protezione dei sistemi attraverso tre meccanismi fondamentali: autenticazione, autorizzazione e cifratura. L’autenticazione è il processo di verifica dell’identità di un utente; l’autorizzazione determina quali risorse o operazioni sono accessibili a un utente autenticato; la cifratura consente invece di trasformare un testo leggibile in un formato illeggibile, al fine di proteggerne il contenuto~\cite{CernyCatalogo}.
+
+Gli anti-pattern appartenenti a questa categoria sono riportati in Tabella~\ref{tab:security}.
+
+\begin{table}[H]
+\centering
+\caption{Anti-pattern della categoria \textit{Security}.}
+\label{tab:security}
+\small
+\renewcommand{\arraystretch}{1.15}
+\setlength{\tabcolsep}{7pt}
+
+\begin{tabularx}{\textwidth}{
+>{\centering\arraybackslash}p{0.8cm}
+>{\RaggedRight\arraybackslash}p{3.8cm}
+>{\RaggedRight\arraybackslash}X
+}
+\toprule
+\textbf{Id} & \textbf{Anti-pattern} & \textbf{Descrizione} \\
+\midrule
+
+33 & Unauthenticated traffic
+& Traffico API non autenticato tra servizi o da sistemi esterni. \\
+
+\addlinespace[0.3em]
+
+34 & Multiple user authentication
+& Presenza di molteplici punti di accesso per l’autenticazione utente, con aumento della superficie d’attacco. \\
+
+\addlinespace[0.3em]
+
+35 & Publicly accessible microservices
+& Microservizi direttamente accessibili da client esterni senza adeguata protezione. \\
+
+\addlinespace[0.3em]
+
+36 & Unnecessary privileges
+& Privilegi eccessivi concessi ai microservizi rispetto a quanto effettivamente necessario. \\
+
+\addlinespace[0.3em]
+
+37 & Insufficient access control
+& Controlli di accesso mancanti o inadeguati sui microservizi. \\
+
+\addlinespace[0.3em]
+
+38 & Centralized authorization
+& Autorizzazione centralizzata invece di una gestione più granulare a livello di singolo servizio. \\
+
+\addlinespace[0.3em]
+
+39 & Non-secured service communications
+& Comunicazioni tra servizi non cifrate o non autenticate. \\
+
+\addlinespace[0.3em]
+
+40 & Non-encrypted data exposure
+& Dati sensibili esposti in chiaro nello storage o durante il trasporto. \\
+
+\addlinespace[0.3em]
+
+41 & Own crypto code
+& Implementazione personalizzata di algoritmi crittografici invece dell’utilizzo di librerie standard. \\
+
+\addlinespace[0.3em]
+
+42 & Hardcoded secrets
+& Segreti, come password o API key, hardcodati nel codice o nelle configurazioni. \\
+
+\bottomrule
+\end{tabularx}
+\end{table}
+\normalsize
+
+\Needspace{20\baselineskip}
+\subsection{Team organization}
+
+Gli anti-pattern appartenenti a questa categoria riguardano problemi organizzativi e operativi legati al modo in cui i team progettano, sviluppano, rilasciano e gestiscono i microservizi. A differenza delle categorie precedenti, il focus non è solo sulla struttura tecnica del software, ma anche sulle pratiche adottate durante il ciclo di vita del sistema.
+
+La categoria \textit{Team organization} include quindi difetti legati sia alle scelte dei team di sviluppo sia alla gestione operativa del sistema, comprese eventuali violazioni delle pratiche DevOps~\cite{CernyCatalogo}.
+
+Gli anti-pattern appartenenti a questa categoria sono riportati in Tabella~\ref{tab:team_organization}.
+
+\begin{table}[H]
+\centering
+\caption{Anti-pattern della categoria \textit{Team organization}.}
+\label{tab:team_organization}
+\small
+\renewcommand{\arraystretch}{1.15}
+\setlength{\tabcolsep}{7pt}
+
+\begin{tabularx}{\textwidth}{
+>{\centering\arraybackslash}p{0.8cm}
+>{\RaggedRight\arraybackslash}p{3.8cm}
+>{\RaggedRight\arraybackslash}X
+}
+\toprule
+\textbf{Id} & \textbf{Anti-pattern} & \textbf{Descrizione} \\
+\midrule
+
+\multicolumn{3}{l}{\textit{Development}} \\
+\cmidrule(lr){1-3}
+
+43 & Shiny nickel
+& Adozione di nuove tecnologie solo perché di tendenza, senza reali benefici per il sistema. \\
+
+\addlinespace[0.3em]
+
+44 & Golden hammer
+& Uso della stessa tecnologia familiare per ogni problema, anche quando non appropriata. \\
+
+\addlinespace[0.3em]
+
+45 & Lack of communication standards
+& Assenza di standard comuni per API e formati di messaggio tra team. \\
+
+\addlinespace[0.3em]
+
+46 & Too many standards
+& Eccessiva eterogeneità di linguaggi, protocolli e framework nell’organizzazione. \\
+
+\addlinespace[0.3em]
+
+47 & Inadequate techniques support
+& Uso di tecniche inadeguate, che non supportano efficacemente lo sviluppo di microservizi. \\
+
+\addlinespace[0.3em]
+
+48 & Single layer team
+& Team organizzati per layer tecnici invece che per servizio o dominio. \\
+
+\addlinespace[0.3em]
+
+49 & No legacy
+& Tendenza a eliminare completamente i sistemi legacy invece di integrarli progressivamente. \\
+
+\addlinespace[0.3em]
+
+50 & Data-driven migration
+& Migrazione simultanea di dati e funzionalità durante la scomposizione del sistema. \\
+
+\addlinespace[0.3em]
+
+51 & Big bang
+& Riscrittura completa del sistema in una sola volta invece che tramite un processo incrementale. \\
+
+\addlinespace[0.3em]
+
+52 & Multiple service instances per host
+& Deployment di più istanze di servizi sullo stesso host, con conseguente condivisione delle risorse. \\
+
+\addlinespace[0.6em]
+
+\multicolumn{3}{l}{\textit{Operation}} \\
+\cmidrule(lr){1-3}
+
+53 & No CI/CD
+& Mancanza di integrazione e deployment continui, con processi prevalentemente manuali. \\
+
+\addlinespace[0.3em]
+
+54 & Manual configuration
+& Configurazione manuale invece di automazione e strumenti di configuration management. \\
+
+\addlinespace[0.3em]
+
+55 & Insufficient monitoring
+& Monitoraggio inadeguato delle prestazioni e dei failure dei servizi. \\
+
+\addlinespace[0.3em]
+
+56 & Dismiss documentation
+& Documentazione insufficiente delle API e dell’architettura. \\
+
+\addlinespace[0.3em]
+
+57 & Insufficient message traceability
+& Messaggi privi di metadati sufficienti per tracciarne origine e percorso. \\
+
+\addlinespace[0.3em]
+
+58 & Local logging
+& Log scritti solo in storage locale invece che inviati a sistemi centralizzati. \\
+
+\bottomrule
+\end{tabularx}
+\end{table}
+\normalsize

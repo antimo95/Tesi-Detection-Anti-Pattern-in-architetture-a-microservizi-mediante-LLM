@@ -1,0 +1,213 @@
+ \chapter{Background}
+
+\section[Dalle applicazioni monolitiche alle prime forme di modularità]%
+{Dalle applicazioni monolitiche \\ alle prime forme di modularità}
+Le applicazioni monolitiche hanno rappresentato a lungo un modello ampiamente utilizzato nello sviluppo software. Dragoni et al. definiscono il monolite come un’applicazione software i cui moduli non possono essere eseguiti in modo indipendente \cite{Dragoni2017}.
+Secondo Fowler, il monolite è costruito come un'unità logica singola, in cui tutta la logica per la gestione di una richiesta (dal recupero dati alla presentazione) risiede in un unico processo \cite{Fowler2014}.
+Nonostante la loro ampia diffusione, presentavano alcune problematiche: 
+\begin{itemize}
+    \item \textbf{Complessità e manutenzione}: Le dimensioni crescenti dei monoliti rendevano complessa la gestione e la manutenzione dei sistemi\cite{Dragoni2017}.
+    \item \textbf{Inferno delle dipendenze}: L’aggiunta o l’aggiornamento di librerie poteva generare sistemi inconsistenti o malfunzionanti \cite{Dragoni2017}.
+    \item \textbf{Redeploy totale}: Modificare un singolo modulo provocava di conseguenza il riavvio dell'intera applicazione, causando di fatto lunghi tempi di attesa per applicazioni di grandi dimensioni e ostacolando di conseguenza le fasi di sviluppo e di testing del progetto \cite{Dragoni2017, Newman2015}.
+    \item \textbf{Deployment non ottimale}. Il deployment di applicazioni monolitiche risulta spesso inefficiente perché i diversi moduli che le compongono presentano esigenze differenti per quanto riguarda le risorse: alcuni moduli richiedono molta memoria, altri sono fortemente computazionali, altri ancora necessitano di componenti specifici (ad esempio database SQL invece di soluzioni orientate ai grafi). Di conseguenza, bisognava definire nell'ambiente di esecuzione una configurazione unica che cercasse di coprire queste esigenze senza poi realmente riuscirci e creando di fatto delle configurazioni non ottimali per i singoli moduli \cite{Dragoni2017}.
+    \item \textbf{Scalabilità limitata}: I monoliti presentano limiti in termini di scalabilità. Una pratica diffusa per gestire un aumento del traffico consiste nel replicare l’intera applicazione e distribuire il carico tra più istanze. Questo approccio, però, non è sempre efficiente poiché l’incremento delle richieste riguarda solo alcuni moduli, mentre gli altri non vengono realmente coinvolti. In queste situazioni, scalare l’intero sistema porta ad un uso di risorse non ottimale \cite{Dragoni2017}.
+    \item \textbf{Lock‑in tecnologico}: si usano per l'intera applicazione gli stessi linguaggi e framework limitando di fatto lo sviluppatore nella scelta delle tecnologie più adeguate per i moduli \cite{Dragoni2017}.
+\end{itemize}
+
+% FTGO? 
+Questo approccio, dunque, ha rappresentato per anni una buona soluzione. Tuttavia, al crescere delle dimensioni dell'architettura venivano meno i pregi e diventavano sempre di più i difetti, citati precedentemente.
+Per superare tali limiti si sono sviluppate nuove soluzioni architetturali come i microservizi; prima di arrivare ai microservizi però, si è affermato un paradigma intermedio rappresentato dai \textit{Service-Oriented Architecture} (SOA).
+
+
+\section{SOA come passo intermedio}
+Nel quadro del Service-Oriented Computing, si afferma la Service-Oriented Architecture (SOA), orientata ad affrontare la complessità dei sistemi distribuiti e a favorire l’integrazione tra applicazioni differenti \cite{Dragoni2017}.
+Tra i vantaggi dell’orientamento ai servizi, Dragoni et al. \cite{Dragoni2017} evidenziano:
+\begin{itemize}
+    \item \textbf{Dinamismo}: si possono avviare più istanze dello stesso servizio per gestire al meglio il carico.
+    \item \textbf{Modularità e riuso}: i servizi più complessi sono composti da servizi più semplici e i singoli servizi possono essere riutilizzati in sistemi differenti.
+    \item \textbf{Sviluppo distribuito}: team differenti possono lavorare su parti diverse del sistema distribuito, purché concordino sulle interfacce.
+    \item \textbf{Integrazione di sistemi eterogenei e legacy}: i servizi comunicano tramite protocolli standard.
+\end{itemize}
+
+Una delle principali difficoltà nell’adozione di SOA riguarda l’impostazione di una governance centralizzata, incaricata di coordinare l’integrazione e la comunicazione tra i servizi \cite{Cerny2017SOAvsMicroservices}.
+La soluzione adottata in molte architetture SOA è l’\textbf{Enterprise Service Bus (ESB)}, che centralizza l’integrazione tra i servizi e ne supporta il coordinamento, ad esempio attraverso orchestrazione, instradamento dei messaggi ed elaborazione degli eventi \cite{Cerny2017SOAvsMicroservices}. In questo senso, può essere visto come un hub centrale della comunicazione tra i servizi.
+%[Note]
+%istrada i messaggi al servizio giusto 
+%trasforma i formati 
+%orchestra sequenze di chaimate tra servizi 
+%centralizza sicurezza, logging, policy e governance 
+Nonostante le promesse di flessibilità, SOA ha dovuto affrontare delle sfide significative. I problemi principali sono: 
+\begin{itemize}
+    \item \textbf{Complessità nascoste nell'ESB}: Fowler osserva che gli ESB possono concentrare numerose responsabilità, come routing, trasformazione dei messaggi e applicazione di regole di business; allo stesso tempo, molte implementazioni SOA hanno fatto affidamento su standard e meccanismi di integrazione particolarmente complessi. Questo insieme di fattori ha contribuito ad accrescere sia l’accentramento architetturale sia la complessità complessiva del sistema \cite{Fowler2014}.
+    \item \textbf{Governance centralizzata}: Da un punto di vista aziendale si tende ad avere un'unica unità di amministrazione centrale che gestisce tutti i cambiamenti nell'infrastruttura dei servizi che porta di conseguenza a limitazioni per lo sviluppo dei singoli servizi\cite{Cerny2017SOAvsMicroservices}.
+\end{itemize}
+
+Di conseguenza, per superare i limiti delle architetture SOA, in particolar modo la dipendenza da un'infrastruttura centralizzata
+come l'ESB e la complessità introdotta dalla governance centralizzata, è stato sviluppato un modello più leggero e decentralizzato: i microservizi.
+
+
+\section{Architetture a microservizi}
+Lewis e Fowler definiscono l’architettura a microservizi come un approccio allo sviluppo di una singola applicazione composta da piccoli servizi, ciascuno eseguito nel proprio processo e comunicante tramite meccanismi leggeri \cite{Fowler2014}. Per Dragoni, un microservizio può essere inteso come un processo coeso e indipendente che interagisce tramite messaggi \cite{Dragoni2017}.
+
+Di conseguenza, da queste definizioni possiamo capire che un sistema è suddiviso in servizi relativamente piccoli che risultano essere indipendenti, distribuibili e scalabili con un elevato grado di autonomia reciproca \cite{Fowler2014, Dragoni2017}. Tali caratteristiche consentono di rilasciare un servizio senza modificare gli altri, avendo di fatto cicli di sviluppo più rapidi e rollback più semplici. Inoltre, la separazione dei servizi permette di scalare solo le parti dell’applicazione che sono interessate dall'aumento di carico, migliorando di conseguenza l'efficienza del sistema. 
+I microservizi sono in genere progettati attorno a specifiche capacità di business \cite{Fowler2014, Richardson2018}. Questo principio è spesso modellato attraverso il concetto di \textbf{Bounded Context}, introdotto da Eric Evans nel \textit{Domain-Driven Design} \cite{evans2003domain}, che consente di definire confini funzionali ben delimitati e modelli di dati autonomi, evitando la condivisione globale degli schemi \cite{Cerny2017SOAvsMicroservices}. Sam Newman, richiamando il concetto elaborato da Evans, descrive il \textit{Bounded Context} come una responsabilità specifica definita da confini espliciti \cite{Newman2015}. Per illustrarne il funzionamento, viene utilizzata la metafora della cellula biologica: essa può esistere ed essere autonoma in quanto la sua membrana definisce rigorosamente cosa si trova all'interno e cosa all'esterno, determinando cosa può attraversarla \cite{Newman2015}. In quest’ottica, ciascun contesto delimitato include modelli e logiche che restano interni, mentre verso l’esterno espone solo ciò che decide di condividere tramite un’interfaccia esplicita \cite{Newman2015}.
+
+Un esempio di Bounded Context è il concetto di Patient, che varia tra contesti: in ambito clinico rappresenta dati medici, mentre in quello amministrativo informazioni anagrafiche e di fatturazione, mostrando modelli indipendenti.
+Inoltre, un principio ricorrente nelle architetture a microservizi è che ciascun servizio, quando necessita di persistenza, gestisca il proprio database \cite{Fowler2014, Soldani2018PainsGains}. Questa separazione è essenziale per garantire un \textbf{accoppiamento debole} (loose coupling), permettendo ai servizi di evolvere, scalare e essere distribuiti in modo indipendente.
+
+\subsection{Componenti Principali dell'Architettura a Microservizi}
+Molte architetture a microservizi includono componenti infrastrutturali ricorrenti che contribuiscono a flessibilità, scalabilità e affidabilità del sistema\cite{gfg_microservices} e di conseguenza a garantire le caratteristiche dei sistemi di questo tipo. Di seguito vengono descritti i componenti maggiormente ricorrenti:
+
+\begin{itemize}
+    \item \textbf{Microservizi}: costituiscono il nucleo dell’architettura. Sono servizi di piccole dimensioni, indipendenti e debolmente accoppiati, progettati attorno a specifiche funzionalità di business. Ciascun microservizio gestisce una responsabilità ben definita e può essere sviluppato, testato e rilasciato con un elevato grado di autonomia \cite{gfg_microservices, Dragoni2017, Richardson2018}.
+
+    \item \textbf{API Gateway}: funge da punto di accesso centralizzato per tutte le richieste provenienti da client esterni. Si occupa di gestire l'autenticazione degli utenti e di instradare correttamente le chiamate verso i microservizi di competenza \cite{gfg_microservices, Richardson2018}.
+
+    \item \textbf{Service Registry e Discovery}: un meccanismo che tiene traccia dei servizi operativi e della loro posizione all'interno della rete. Memorizzando gli indirizzi di rete delle istanze, permette ai servizi di localizzarsi reciprocamente e di comunicare in modo dinamico \cite{gfg_microservices, Richardson2018}.
+    Di conseguenza con il Registry indichiamo i servizi attivi mentre con il Discovery indichiamo dove trovare tali servizi. 
+
+    \item \textbf{Load Balancer}: ha il compito di distribuire il traffico di rete in ingresso tra le diverse istanze attive di un servizio. Questo previene il sovraccarico dei singoli nodi, migliorando l'affidabilità e la disponibilità complessiva del sistema \cite{gfg_microservices}.
+
+    \item \textbf{Containerizzazione}: consiste nell'incapsulare i microservizi e le loro dipendenze all'interno di \textit{container} \cite{gfg_microservices}. 
+    
+    Le tecnologie utilizzate possono essere varie, si riportano le principali: 
+    \begin{itemize}
+        \item \textit{Docker}: è una piattaforma open source, che consente di sviluppare, distribuire ed eseguire applicazioni in ambienti isolati (container). 
+        Docker "impacchetta" un'applicazione nella sua interezza e la inserisce in un container dove si può eseguire (in modo simile ad una virtual machine ma in maniera più rapida e leggera) \cite{DockerEngineDocs}.
+        \item \textit{Kubernetes}: è una piattaforma open source, portatile ed estensibile progettata per gestire applicazioni containerizzate e consente di automatizzare configurazione, distribuzione dei servizi, adottando un approccio di tipo dichiarativo: l'utente definisce lo stato desiderato e il sistema si occupa di mantenerlo nel tempo \cite{KubernetesDocs}.
+    \end{itemize}
+
+    \item \textbf{Event Bus e Message Broker}: componenti infrastrutturali che abilitano la comunicazione asincrona tra i servizi. Sfruttando paradigmi di messaggistica come il \textit{publish-subscribe}, permettono di disaccoppiare nettamente le interazioni tra i vari moduli \cite{gfg_microservices}.
+
+    \item \textbf{Database per Microservice}: un principio architetturale secondo cui ciascun microservizio possiede il proprio datastore. Questo approccio favorisce l’isolamento dei dati, il disaccoppiamento tra servizi e la possibilità di adottare, per ogni servizio, la tecnologia di persistenza più adatta. \cite{gfg_microservices, Richardson2018, Dragoni2017}.
+
+    \item \textbf{Caching}: tecnica volta a migliorare le prestazioni complessive memorizzando i dati ad accesso frequente in strati intermedi, riducendo così in modo significativo il carico sui database e la latenza delle risposte \cite{gfg_microservices}.
+
+    \item \textbf{Tolleranza ai guasti e Resilienza (\textit{Fault Tolerance and Resilience})}: un insieme di meccanismi progettati per consentire al sistema di continuare a operare anche qualora alcuni componenti subiscano dei guasti. Per preservare la stabilità generale, si fa uso di tecniche specifiche come i \textit{circuit breaker}, i tentativi ripetuti (\textit{retry}) e le procedure di ripiego (\textit{fallback}) \cite{gfg_microservices}.
+\end{itemize}
+
+% ========================
+%         CHECK 1 
+% ========================
+
+\subsection{Microservizi vs SOA}
+Nonostante i microservizi siano spesso considerati un'evoluzione della SOA \cite{Dragoni2017}, presentano comunque numerose differenze:
+
+\begin{itemize}
+\item \textbf{Smart Endpoints vs Smart Pipes}: Nella SOA tradizionale, la logica di integrazione è spesso lasciata a middleware intelligenti come l'\textit{Enterprise Service Bus} (ESB), che si occupa di traduzione di protocolli, instradamento e orchestrazione \cite{Cerny2017SOAvsMicroservices}. Al contrario, i microservizi seguono il principio degli "smart endpoints and dumb pipes" \cite{Fowler2014}: ogni microservizio incapsula completamente la propria logica, mentre la comunicazione avviene tramite canali basati su protocolli leggeri (es. HTTP/REST o messaging).
+\item \textbf{Orchestrazione vs Coreografia}: Nelle architetture a microservizi si tende a privilegiare forme di coordinamento decentralizzato, spesso basate su coreografia ed eventi, in cui i servizi reagiscono autonomamente alle interazioni con gli altri componenti \cite{Cerny2017SOAvsMicroservices}. In termini pratici, ciascun servizio “sa cosa fare” in risposta a un determinato messaggio o evento, senza dipendere da un elemento centrale che ne governi esplicitamente la sequenza operativa. Nella SOA, invece, abbiamo spesso un elemento centrale che coordina i servizi, tipicamente implementato mediante l'ESB che funge da "direttore di orchestra" decidendo l'ordine delle chiamate per completare un processo di business \cite{Cerny2017SOAvsMicroservices}.
+Quindi, ad esempio, in un processo di pagamento, una SOA prevede che l'ESB invochi in sequenza i servizi di validazione, pagamento e notifica mentre in un sistema a microservizi, il servizio di pagamento pubblica un evento \textit{PaymentCompleted}, al quale reagiscono autonomamente i servizi di notifica e spedizione.
+\item \textbf{Scope}: Nella SOA lo scope è a livello aziendale e il suo obiettivo è l'integrazione di sistemi eterogenei e preesistenti in tutta l'organizzazione \cite{Cerny2017SOAvsMicroservices}. Nei microservizi, invece, l’attenzione è generalmente rivolta al singolo progetto o applicazione, con un’enfasi maggiore sull’autonomia dei team e sulla rapidità di evoluzione del sistema \cite{Cerny2017SOAvsMicroservices}.
+\item \textbf{Governance e Decentralizzazione}: Mentre la SOA tende a favorire una governance centralizzata e, spesso, l’adozione di un modello di dati canonico condiviso, i microservizi promuovono una maggiore decentralizzazione sia tecnologica sia dei dati \cite{Cerny2017SOAvsMicroservices, Fowler2014}. Ogni microservizio è libero di adottare il proprio stack tecnologico e gestire il proprio schema di database, garantendo un isolamento che nella SOA è spesso compromesso dalla condivisione di risorse comuni \cite{Dragoni2017}.
+\item \textbf{Gestione del deploy}: Nei Microservizi, ogni servizio viene rilasciato in modo individuale. Questa indipendenza è la "regola d'oro" dell'approccio: se la modifica di un servizio richiede il rilascio simultaneo dei suoi consumatori, l'autonomia viene a mancare \cite{Newman2015}. Mentre nella SOA il rilascio risulta più spesso coordinato e meno indipendente, fino ad assumere in alcuni casi caratteristiche simili a un deploy monolitico \cite{Cerny2017SOAvsMicroservices}.
+\item \textbf{Scalabilità ed elasticità}: I microservizi sono progettati per essere \textbf{cloud-native} e grazie al loro isolamento possono scalare in modo elastico e orizzontale. Nella SOA, invece, la scalabilità è spesso limitata dall'infrastruttura di integrazione centrale (ESB) o dalla base dati condivisa che diventano facilmente dei colli di bottiglia per l'intero sistema \cite{Cerny2017SOAvsMicroservices}.
+Nella pratica, quindi se un servizio di ricerca prodotti riceve un picco di traffico, in un'architettura a microservizi è possibile scalare solo quel servizio mentre nella SOA il carico aggiuntivo attraversa comunque l'ESB, che può divenire un collo di bottiglia indipendentemente dal servizio coinvolto.
+\item \textbf{Gestione dei fallimenti (Resilienza)}: L’isolamento dei microservizi e il loro basso accoppiamento favoriscono una migliore gestione dei guasti; in questo senso, i confini tra servizi possono funzionare come \textit{bulkhead}, contribuendo a limitare la propagazione degli errori nel sistema \cite{Newman2015}. Nella SOA, a causa dell'accoppiamento più stretto e dell'uso di un elemento centralizzato come l'ESB, un errore può risultare fatale se colpisce l'ESB o un servizio critico, paralizzando l'intero sistema \cite{Cerny2017SOAvsMicroservices}.
+
+\end{itemize}
+
+\subsection{Vantaggi e sfide tecnologiche}
+L’uso di questo tipo di architettura può offrire ottimi vantaggi in termini di scalabilità \cite{Soldani2018PainsGains}, poiché consente di concentrare le risorse sui singoli servizi che ne hanno effettivamente bisogno, senza dover replicare o potenziare l’intera applicazione.
+La ridotta dimensione della codebase semplifica anche le operazioni di manutenzione \cite{Dragoni2017} ed eventuali modifiche localizzate richiedono il redeploy del solo servizio interessato e non di tutta l'applicazione. Inoltre, l’isolamento dei componenti, favorito dall’indipendenza dei servizi, contribuisce a migliorare la gestione dei guasti e a limitarne gli effetti sul resto del sistema \cite{Soldani2018PainsGains}, garantendo un funzionamento costante del resto del sistema. Un ulteriore vantaggio è dato dalla libertà di poter programmare ogni servizio con un linguaggio differente, scegliendo la tecnologia più adatta allo scopo \cite{Fowler2014}. 
+
+Dall'altro lato, l'adozione dei microservizi implica la gestione di un sistema distribuito, che introduce numerose difficoltà tecniche \cite{Soldani2018PainsGains, Richardson2018}. 
+La comunicazione tra servizi avviene tramite meccanismi di \textbf{interprocess communication}, più complessi rispetto alle chiamate locali, e comporta inevitabilmente un aumento della latenza dovuto alla comunicazione via rete \cite{Soldani2018PainsGains, Dragoni2017}, mediante protocolli API REST, gRPC o tramite message broker (ad esempio Kafka o RabbitMQ). Tuttavia, è interessante notare una discrepanza tra teoria e pratica: nello studio di Viggiato et al., il costo delle chiamate remote non emerge tra le criticità percepite come più rilevanti dalla maggioranza degli intervistati \cite{Viggiato2018Microservices}. I servizi devono inoltre essere progettati per gestire condizioni di errore parziale, ritardi elevati o l'indisponibilità di componenti remoti \cite{Richardson2018}. Ulteriori complicazioni emergono nella gestione dei dati: ogni servizio possiede il proprio database, rendendo più difficile garantire la coerenza delle informazioni \cite{Soldani2018PainsGains, Richardson2018}. In tale contesto, la coerenza dei dati immediata non è facilmente ottenibile e si ricorre a strategie specifiche di consistenza distribuite e tecniche alternative per l'accesso ai dati (come API composition o CQRS) \cite{Richardson2018}.
+Anche sviluppo e testing risultano più complessi, perché la natura distribuita del sistema richiede strategie e livelli di test più articolati rispetto a quelli tipici di un monolite \cite{Richardson2018}. A livello industriale, la gestione di transazioni distribuite complesse, il collaudo dell’intero sistema e la gestione dei \textit{service faults} emergono tra le sfide percepite come più rilevanti nello sviluppo di sistemi a microservizi \cite{Viggiato2018Microservices}. Diventa quindi importante adottare elevati livelli di automazione e piattaforme adeguate per il deployment e l’orchestrazione dei servizi containerizzati \cite{Richardson2018}.
+Dal punto di vista operativo, la presenza di numerosi servizi autonomi aumenta significativamente la complessità infrastrutturale. Diventa quindi importante adottare piattaforme di orchestrazione e deployment dei container, insieme a pipeline di automazione robuste, per sostenere affidabilità e scalabilità del sistema \cite{Richardson2018}.
+
+Decomporre un sistema in microservizi costituisce un ulteriore punto critico, poiché identificare confini di servizio efficaci richiede valutazioni progettuali complesse e non dispone di una procedura univoca valida in ogni contesto \cite{Richardson2018}. Una decomposizione non ottimale può portare alla creazione di un cosiddetto \textit{monolite distribuito} ovvero un sistema che apparentemente risulta essere distribuito ma che in realtà è caratterizzato da forti dipendenze tra servizi, che ne compromettono di conseguenza l'autonomia e i benefici attesi \cite{Richardson2018}.
+
+Un’ulteriore criticità riguarda la definizione della corretta granularità dei servizi. Una progettazione non bilanciata può portare, da un lato, alla realizzazione di servizi eccessivamente grandi, assimilabili a monoliti, e dall’altro alla creazione di servizi troppo piccoli, con conseguente aumento della complessità gestionale e comunicativa \cite{Soldani2018PainsGains}.
+
+%===============
+%   CHECK 2 
+%===============
+\section{Pattern nelle architetture a microservizi}
+
+\label{sec:par2_4}
+Le caratteristiche introdotte finora, che definiscono i microservizi e ne abilitano i principali vantaggi, comportano tuttavia una serie di problematiche ricorrenti tipiche dei sistemi distribuiti. Per affrontarle in modo sistematico, la letteratura e l’esperienza industriale hanno identificato un insieme di pratiche e soluzioni consolidate a problemi ricorrenti, note come pattern per i microservizi.
+Possiamo suddividere i pattern per i microservizi secondo le seguenti categorie: 
+\begin{itemize}
+\item \textbf{Decomposizione}: guidano la suddivisione di un’applicazione in servizi, ad esempio mediante decomposizione per \textit{business capability} o per \textit{subdomain}, seguendo i principi del \textit{Domain-Driven Design} \cite{Richardson2018}. Queste strategie servono per guidare la scelta delle responsabilità di ciascun servizio e aiutano ad evitare fenomeni come il \textit{monolita distribuito}.
+\item \textbf{Comunicazione}: come già detto in precedenza, la comunicazione tra microservizi ricopre un ruolo importante e introduce problematiche che possiamo gestire in vari modi \cite{Richardson2018}. Le decisioni architetturali che possiamo prendere in questo caso si dividono in varie categorie: 
+    \begin{itemize}
+      \item \textbf{Communication style}: definisce quale meccanismo IPC adottare per lo scambio di messaggi \cite{Richardson2018}.
+      \item \textbf{Discovery}: affronta il problema di come un client possa determinare l’indirizzo di rete di un’istanza di servizio per potergli inviare, ad esempio, una richiesta HTTP \cite{Richardson2018}.
+      \item \textbf{Reliability}: garantisce che le comunicazioni rimangano stabili anche in caso di indisponibilità temporanea di alcuni servizi \cite{Richardson2018}.
+      \item \textbf{Transactional messaging}: gestisce l'integrazione tra 
+      
+      l'invio di messaggi e la transazione sul database che aggiornano i dati di business \cite{Richardson2018}.
+      \item \textbf{External API}: stabilisce come i client esterni 
+      
+      comunichino 
+      con i servizi interni. Oltre al classico \textbf{API Gateway}, 
+      un’evoluzione comune è il pattern \textbf{Backend for Frontend (BFF)}, che prevede un gateway dedicato per ciascuna tipologia di client \cite{Richardson2018}.
+    \end{itemize}
+    \item \textbf{Transazioni e consistenza distribuita}: Per garantire il principio di \textit{loose coupling}, ogni microservizio possiede il proprio database o datastore dedicato \cite{Richardson2018}. Questa scelta, tuttavia, rende impraticabile l’uso delle tradizionali transazioni distribuite per mantenere allineati i dati tra servizi diversi. In questi casi, la consistenza viene gestita tramite pattern specifici, tra cui il \textit{Saga Pattern}, che coordina una sequenza di transazioni locali tra più servizi \cite{Richardson2018}.
+    \item \textbf{Query distribuite}: La frammentazione dei dati tra database distinti rende più complesso anche l’accesso in lettura, poiché non è possibile eseguire direttamente query distribuite tra servizi differenti; i dati di ciascun servizio sono infatti accessibili solo tramite la sua API \cite{Richardson2018}. Per affrontare questo problema si possono adottare, ad esempio, i seguenti pattern:
+        \begin{itemize}
+          \item \textit{API Composition}: prevede l’invocazione delle API di molteplici servizi per poi aggregarne i risultati \cite{Richardson2018}.
+          \item \textit{CQRS (Command Query Responsibility Segregation)}: prevede la separazione delle logiche di lettura da quelle di scrittura, mantenendo repliche dei dati ottimizzate per le interrogazioni \cite{gfg_microservices}. Come evidenziato da Martin Fowler \cite{fowler2011cqrs}, questo pattern supera il tradizionale approccio CRUD, proponendo modelli distinti per le operazioni di aggiornamento (\textit{Command}) e per quelle di consultazione (\textit{Query}). Sebbene offra vantaggi in termini di scalabilità e ottimizzazione delle query, il CQRS introduce una notevole complessità architetturale; in alcuni contesti viene combinato con l’Event Sourcing, che rappresenta lo stato del sistema come una sequenza di eventi immutabili.
+        \end{itemize}
+        
+    \item \textbf{Service deployment}: Come già detto in precedenza, il deployment di un'architettura a microservizi deve gestire decine o anche centinaia di servizi, spesso scritti con linguaggi e framework differenti. Di conseguenza, richiede un’infrastruttura altamente automatizzata e può basarsi su diversi modelli di deploy, tra cui macchine virtuali, container (ad es. Docker) e approcci serverless \cite{Richardson2018}.
+    \item \textbf{Osservabilità}: è importante nei sistemi, in generale, comprendere il loro comportamento a runtime e diagnosticare i problemi. Tutto ciò, diviene complesso nel caso dei microservizi, poiché una singola richiesta attraversa più componenti e non esiste un unico file di log sufficiente a ricostruirne il comportamento \cite{Richardson2018}.
+
+    I pattern più comuni per rendere i servizi osservabili includono \textit{Health Check API}, \textit{Log Aggregation}, \textit{Distributed Tracing}, \textit{Exception Tracking}, \textit{Application Metrics} e \textit{Audit Logging} \cite{Richardson2018}.
+    
+    \item \textbf{Testing automatizzato}: Sebbene la ridotta dimensione dei microservizi li renda maggiormente semplici da testare rispetto ad un monolita, è fondamentale verificare che interagiscano correttamente senza ricorrere a test \textit{end-to-end} completi, che risultano essere lenti e fragili \cite{Richardson2018}. 
+    I pattern suggeriti per gestire al meglio questo problemi sono: Consumer-driven contract test, consumer-side contract test e service component test.
+    
+    \item \textbf{Sicurezza}: l’autenticazione degli utenti è spesso demandata all’API gateway, che trasmette poi ai servizi interni le informazioni necessarie sull’identità dell’utente. In questo contesto, uno dei pattern più comuni è l’\textbf{Access Token}, che consente ai servizi di validare il token ricevuto e ricavare le informazioni necessarie per autorizzare la richiesta \cite{Richardson2018}.
+\end{itemize}
+
+
+In generale, come osserva Richardson, \textit{“microservice architecture is not a silver bullet”} \cite{Richardson2018}. L’adozione dei microservizi va quindi valutata alla luce dei trade-off specifici del contesto applicativo.
+
+Approfondiamo di seguito alcuni pattern utili per comprendere appieno alcuni aspetti relativi al lavoro di tesi e all’argomento in sé.
+
+\subsection*{API Gateway}
+L'API Gateway rientra nei \textbf{pattern di comunicazione}, nello specifico nel sottogruppo degli \textbf{External API}.
+L'API Gateway costituisce un unico punto di accesso per tutti i client \cite{richardson_sitoweb, medium_microservices_patterns_2020}. Tale componente, aiuta ad aggregare le risposte da più microservizi, riducendo di fatto il round trip tra client e servizi \cite{medium_microservices_patterns_2020}. Inoltre, può centralizzare funzioni di sicurezza (autenticazione, autorizzazione, rate limiting) prima di inoltrare la richiesta ai microservizi \cite{medium_microservices_patterns_2020, richardson_sitoweb}.
+Tra le soluzioni e gli strumenti più adottati in ambito industriale per l'implementazione di questo pattern si annoverano:
+\begin{itemize}
+  \item \textbf{Kong}: gateway open source estendibile tramite plugin; disponibile anche in versione enterprise e gestita \cite{intesys_kong_gateway_2026}.
+  \item \textbf{Amazon API Gateway}: soluzione gestita cloud, integrata con l'ecosistema AWS \cite{aws_apigateway_aws}.
+  \item \textbf{Spring Cloud Gateway}: evoluzione e successore di Netflix Zuul; scelta comune per stack Java/Spring Boot \cite{prometheanz_zuul_to_scg}.
+\end{itemize}
+
+\subsection*{Service Discovery}
+Il \textbf{Service Discovery} rientra tra i pattern di comunicazione e risolve uno dei problemi fondamentali delle architetture distribuite: l'individuazione dinamica dei servizi. All'aumentare della complessità del sistema e del numero di microservizi, la gestione manuale degli indirizzi di rete diventa impraticabile. Questo pattern consente ai servizi di rilevarsi reciprocamente in modo automatico, garantendo una comunicazione fluida e promuovendo l'agilità e la scalabilità dell'intera infrastruttura \cite{medium_microservices_patterns_2020}.
+
+Il fulcro di questo pattern è un componente centrale denominato \textit{Service Registry} (Registro dei Servizi). Come illustrato in letteratura \cite{bff_discovery}, ogni qualvolta un'istanza di un microservizio viene avviata, essa si registra autonomamente presso il \textit{Registry}, comunicando il proprio nome e la propria posizione fisica (indirizzo di rete). In questo modo, il registro mantiene una mappatura costantemente aggiornata di tutti i servizi attivi nel sistema.
+
+Per garantire l'affidabilità del routing, i servizi registrati devono inviare periodicamente dei segnali di vita, noti in gergo tecnico come \textit{heartbeat} \cite{bff_discovery}. Qualora un servizio smetta di trasmettere il proprio \textit{heartbeat}, il \textit{Service Registry} lo etichetta come non disponibile, consentendo al sistema di reindirizzare le richieste verso le istanze ancora funzionanti in modo trasparente.
+Dal punto di vista architetturale, l'implementazione del Service Discovery può avvenire attraverso due approcci principali \cite{medium_microservices_patterns_2020}:
+\begin{itemize}
+    \item \textbf{Client-side discovery} (rilevamento lato client): il client interroga direttamente il \textit{Service Registry} per ottenere l'indirizzo dell'istanza di destinazione e successivamente effettua la chiamata.
+    \item \textbf{Server-side discovery} (rilevamento lato server): un bilanciatore di carico (\textit{load balancer}) intercetta la richiesta del client, interroga il registro per scoprire la posizione reale del servizio e instrada la comunicazione \cite{bff_discovery, medium_microservices_patterns_2020}.
+\end{itemize}
+
+Tra le tecnologie e le piattaforme più diffuse nel panorama industriale che offrono soluzioni integrate per il Service Discovery spiccano strumenti come Netflix Eureka, HashiCorp Consul, i meccanismi nativi forniti da Kubernetes \cite{medium_microservices_patterns_2020} e Apache Zookeeper.
+
+\subsection*{Health Check API}
+\textbf{Health Check API} rientra nella categoria dei pattern di osservabilità. Nelle architetture a microservizi può capitare che un'istanza risulti “up” ma non sia in grado di servire richieste \cite{Richardson2018}. Ciò avviene tipicamente durante l'avvio, quando il servizio impiega tempo per inizializzare risorse (es. connessioni a DB o broker), oppure per errori a runtime (es. bug che esauriscono le connessioni) \cite{RichardsonHealthCheckAPI}.
+
+Il pattern \textbf{Health Check API} risolve questo problema. La soluzione prevede che il servizio esponga un \textit{endpoint} dedicato (come \texttt{GET /health}) incaricato di comunicare il proprio stato di salute all'infrastruttura \cite{Richardson2018}. 
+
+Librerie di riferimento come \textbf{Spring Boot Actuator} per Java o \textbf{HealthChecks} per .NET offrono implementazioni native (esponendo rispettivamente rotte come \texttt{/actuator/health} o \texttt{/hc}). L'\textit{endpoint} restituisce un codice HTTP \texttt{200} in caso di operatività, o codici d'errore come \texttt{500} o \texttt{503} qualora vengano rilevate anomalie \cite{Richardson2018}.
+
+Il gestore dell'\textit{health check} valuta l'operatività del servizio verificando l'accesso alle sue risorse esterne. Questo controllo può consistere in una semplice \textit{query} di prova al database o in operazioni più complesse che simulano le azioni di un \textit{client}. La risposta HTTP può limitarsi al codice di stato oppure mostrare i dettagli delle connessioni, opportunamente mascherabili per motivi di sicurezza \cite{Richardson2018}.
+
+A livello pratico, strumenti come \textit{Spring Boot Actuator} semplificano enormemente questo processo, configurando automaticamente i controlli in base alle tecnologie usate. Ad esempio, se il servizio utilizza un \textit{broker} di messaggi come RabbitMQ, il framework si assicurerà in autonomia che questo sia raggiungibile, pur lasciando agli sviluppatori la libertà di aggiungere controlli personalizzati \cite{Richardson2018}.
+
+Tuttavia, esporre l'\textit{endpoint} non è sufficiente. Affinché il pattern funzioni, l'infrastruttura di sistema (come Kubernetes, Docker o Netflix Eureka) deve essere configurata per interrogare periodicamente questo indirizzo. Solo in base alle risposte ricevute il sistema deciderà se inoltrare il traffico all'istanza o isolarla \cite{Richardson2018}.
+
+
+%=====================
+%     FINE CHECK
+%=====================
+
+%AGGIUNGERE FORSE: CIRCUIT BREAKER, BFF (attendi anti-pattern per capire se ti serve altro)
+%https://medium.com/finanza-tech/microservices-patterns-25da7fb85bd9
+%Forse meglio di no che sto a 120 pagine
