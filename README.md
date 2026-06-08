@@ -10,7 +10,8 @@
 ![Conference](https://img.shields.io/badge/Paper-ICSME%202025-informational)
 
 > **Tesi di Laurea Magistrale in Ingegneria Informatica**  
-> Università degli studi di Napoli Federico II 
+> Università degli studi di Napoli Federico II
+>                 
 > Anno Accademico 2025/2026
 
 **Candidato:** Antimo Barbato (matr. M63001079)  
