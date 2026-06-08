@@ -34,13 +34,13 @@ Il lavoro è stato condotto su un corpus di **13 repository Java open-source** e
 
 ```
 📦 root
-├── 📁 File_Input/              # Repository analizzate (input del processo di valutazione)
+├── 📁 File_Input/              # Input Forniti ai modelli
 ├── 📁 Output_LLM/              # Output grezzi e strutturati dei tre LLM
 ├── 📁 output_mars/             # Output dello strumento MARS per i progetti analizzati
 ├── 📁 Tesi_LaTeX/              # Sorgente LaTeX completo della tesi
 ├── 📄 prompts_antipattern.md   # Prompt utilizzati per l'interrogazione degli LLM
 ├── 📄 repomix.config.json      # Configurazione Repomix per il packaging dei repo
-├── 📄 extract_build_info.py    # Script per l'estrazione di metadati di build (usato in fase preliminare)
+├── 📄 extract_build_info.py    # Script per l'estrazione di metadati di build (usato in fase preliminare, inserito per completezza)
 └── 📄 loc2.py                  # Script per il conteggio delle linee di codice (LOC)
 ```
 
