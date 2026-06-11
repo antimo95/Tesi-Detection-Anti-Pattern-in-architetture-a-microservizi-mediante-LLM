@@ -173,7 +173,7 @@ Fornire l'output di Repomix come contesto all'LLM, utilizzando i prompt per cias
 - **Cerny & Taibi** — catalogo di 58 anti-pattern nelle architetture a microservizi (fonte del catalogo e della ground truth)
 - **MARS** (*Microservice Antipatterns Research Software*) — strumento di analisi statica rule-based basato su metamodello, utilizzato come baseline
 - **Repomix** — tool per il packaging di repository in formato LLM-friendly
-- Il paper derivato da questa tesi è stato accettato agli atti di **ICSME 2025**
+- Il paper derivato da questa tesi è stato accettato per l'**ICSME 2025**
 
 ---
 
