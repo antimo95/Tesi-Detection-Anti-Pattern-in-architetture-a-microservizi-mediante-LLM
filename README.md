@@ -7,7 +7,7 @@
 ![Anti--Patterns](https://img.shields.io/badge/Anti--Patterns-16-yellow)
 ![Inferences](https://img.shields.io/badge/Inferences-624-green)
 ![Status](https://img.shields.io/badge/Status-Academic%20Thesis-lightgrey)
-![Conference](https://img.shields.io/badge/Paper-ICSME%202025-informational)
+![Conference](https://img.shields.io/badge/Paper-ICSME%202026-informational)
 
 > **Tesi di Laurea Magistrale in Ingegneria Informatica**  
 > Università degli studi di Napoli Federico II
@@ -20,13 +20,36 @@
 
 ---
 
+## 📄 Paper Associato
+
+Un paper derivato da questo lavoro di tesi è stato accettato alla **ICSME 2026** (*IEEE International Conference on Software Maintenance and Evolution*):
+
+> M. De Luca, D. Amalfitano, P. Tramontana, A. R. Fasolino,  
+> **"Are LLMs Ready for Anti-Pattern Detection in Microservice Architectures?"**  
+> *42nd IEEE International Conference on Software Maintenance and Evolution (ICSME 2026)* — [arXiv:2606.26927](https://arxiv.org/abs/2606.26927)
+
+Il contributo di questa tesi alla definizione della pipeline sperimentale e all'esecuzione degli esperimenti è riconosciuto negli acknowledgment del paper.
+
+```bibtex
+@misc{deluca2026llms,
+  title={Are LLMs Ready for Anti-Pattern Detection in Microservice Architectures?},
+  author={De Luca, Marco and Amalfitano, Domenico and Tramontana, Porfirio and Fasolino, Anna Rita},
+  year={2026},
+  eprint={2606.26927},
+  archivePrefix={arXiv},
+  primaryClass={cs.SE},
+  url={https://arxiv.org/abs/2606.26927},
+  note={Accepted at ICSME 2026}
+}
+```
+
+---
+
 ## 📌 Panoramica
 
 Questo repository contiene il materiale relativo alla tesi magistrale incentrata sull'utilizzo di **Large Language Models (LLM)** per la rilevazione automatica di **anti-pattern architetturali** in sistemi a microservizi, con un confronto sistematico rispetto allo strumento di analisi statica **MARS** (*Microservice Antipatterns Research Software*).
 
 Il lavoro è stato condotto su un corpus di **13 repository Java open-source** e ha valutato le capacità di tre LLM — **ChatGPT 5.2**, **Gemini 3.0 Pro** e **Qwen Plus 3.5** — nel riconoscere **16 anti-pattern** selezionati da un catalogo di 58 proposto in letteratura da Cerny e Taibi. La procedura ha previsto **624 inferenze indipendenti**.
-
-> 📄 Un paper derivato da questa tesi è stato accettato alla **ICSME 2025** *(International Conference on Software Maintenance and Evolution)*.
 
 ---
 
@@ -170,10 +193,10 @@ Fornire l'output di Repomix come contesto all'LLM, utilizzando i prompt per cias
 
 ## 📚 Riferimenti Chiave
 
+- **De Luca, Amalfitano, Tramontana, Fasolino** — *Are LLMs Ready for Anti-Pattern Detection in Microservice Architectures?*, ICSME 2026 ([arXiv:2606.26927](https://arxiv.org/abs/2606.26927)) — il paper derivato da questo lavoro di tesi
 - **Cerny & Taibi** — catalogo di 58 anti-pattern nelle architetture a microservizi (fonte del catalogo e della ground truth)
 - **MARS** (*Microservice Antipatterns Research Software*) — strumento di analisi statica rule-based basato su metamodello, utilizzato come baseline
 - **Repomix** — tool per il packaging di repository in formato LLM-friendly
-- Il paper derivato da questa tesi è stato accettato per l'**ICSME 2025**
 
 ---
 
